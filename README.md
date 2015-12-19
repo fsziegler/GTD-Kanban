@@ -4,10 +4,10 @@
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the description of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry.
 
 ###Getting Things Done
-One thesis in "Getting Things Done" is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
+One thesis in "Getting Things Done" is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming tool for collecting all your thoughts is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
 ####GTD Workflow
-If an issue **is not** actionable, you classify it as one of the following:
+If an issue **is not** actionable, you place it into one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
 -  your **Reference** list
@@ -22,7 +22,7 @@ If an issue **is** actionable, the next question is whether it requires only a s
     - goes into your **Calendar**, to be done at a specific time, or
     - goes into your **Next Actions** list, to be done as soon as it can
 
-If an issue is a ***project***, then put it into your ***Projects to Plan*** list. When you do plan your projects, the results go into your ***Project Plans*** list and, from here you identify actionable **tasks** that can be moved into your **Next Actions** list.
+If an issue is a ***project***, then put it into your ***Projects to Plan*** list. When you do plan your projects, the results go into your ***Project Plans*** list and, from here you identify actionable **tasks** that can be moved into your **Next Actions** list. If a project contains many dependencies (i.e. multiple steps are dependent on other steps being completed), then a Gannt chart tool, such as the open-source [GanntProject](http://www.ganttproject.biz/) tool may be helpful.
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
 - your **Someday Maybe** list
@@ -33,21 +33,21 @@ Once you have processed your issues, you will have the following lists stored in
 - your **Projects to Plan** list
 - your **Project Plans** list
 
-Only your **Next Actions** and **Project Plans** lists can be worked on at this point.
+Only your **Next Actions** and **Project Plans** lists contain **tasks** to work on at this point.
 
 ###Kanban
 Your **Next Actions** and **Project Plans** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
 
-In order to **visualize your work**, *tasks* are tracked graphically on a **board** (this could be a whiteboard, piece of paper, or software UI). Generally, **projects** are too large to focus on, so **tasks** migrate first from the **Project Plans** list to the **Next Actions** list, and then onto the **board**. There are three columns to show the progress of *tasks*:
+In order to **visualize your work**, ***tasks*** are tracked graphically on a **board** (this could be a whiteboard, piece of paper, or software UI). Generally, ***projects*** are too large to focus on, so ***tasks*** migrate first from the **Project Plans** list to the **Next Actions** list, and then onto the **board**. There are three columns to show the progress of ***tasks***:
   - *Ready*
   - *Doing*
   - *Done*
 
-*Tasks* are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, it is moved from one column to the next.
+***Tasks*** are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, it is moved from one column to the next.
 
-Using GTD, you will likely have a large backlog of *tasks* and *projects*. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of *tasks* and *projects* until they are complete **before** starting in on another one. Once one *task* or *project* is *Done*, it is dropped off the board, and another one brought on.
+Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of ***tasks*** until they are complete **before** starting in on another one. Once one ***task*** is *Done*, it is dropped off the board, and another one brought on.
 
 ##Use Cases
 Some typical use cases that this tool are intended to address are:
