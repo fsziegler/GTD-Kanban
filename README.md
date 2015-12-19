@@ -11,32 +11,30 @@ If an issue **is not** actionable, you classify it as one of the following:
 -  "Someday Maybe" list
 -  "Reference" list
 
-at which point you ignore it until some later date.
+at which point you ignore it, at least until some later date.
 
-If an issue **is** actionable, the next question is whether it requires only single step to complete (a *task*), or not (a *project*). If it is a *task*
-- If it will take "two minutes", then do it now.
-- and it will take more time, then either
+If an issue **is** actionable, the next question is whether it requires only a single step to complete (a ***task***), or not (a ***project***). If it is a ***task***
+- if it will take "two minutes", then do it now
+- if it will take more time, then either
   - delegate it, in which case it goes into a "Waiting for" list
   - defer it, in which case it either
     - goes into your Calendar, to be done at a specific time, or
     - goes into "Next Actions" list, to be done as soon as it can
 
-If an issue is a *project*, then the next steps are
-  - put it into the "*Projects* to Plan" list, and
-  - once planned, review it for *tasks*, as outlined above
+If an issue is a ***project***, then put it into the "***Projects*** to Plan" list.
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
-- "Someday Maybe" list
-- "Reference" list
-- "Waiting for Another Person" list
+- a **Someday Maybe** list
+- a **Reference** list
+- a **Waiting for Another Person** list
 - Tasks in your Calendar on specific dates
-- A "Next Actions" list
-- A "Projects" list
+- a **Next Actions** list
+- a **Projects** list
 
 Only the latter two lists can be worked on at this point.
 
 ###Kanban
-The Next Actions and Projects lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
+The **Next Actions** and **Projects** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
 
