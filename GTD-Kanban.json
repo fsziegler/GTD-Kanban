@@ -1,0 +1,40 @@
+{
+	"GTD": {
+		"Someday Maybe": [
+			"Reference other JSON files",
+			"Load JSON into SQL database"
+		],
+		"Reference": [
+			"http://www.json.org/",
+			"https://en.wikipedia.org/wiki/Getting_Things_Done",
+			"http://www.personalkanban.com/",
+			"https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)",
+			"http://www.ganttproject.biz/",
+			"https://en.wikipedia.org/wiki/Standard_Template_Library"
+		],
+		"Waiting for Another Person": {},
+		"Calendar Tasks": {},
+		"Projects-to-Plan": {},
+		"Project Plans": {},
+		"Next Actions": [
+			"Top-down software design document"
+		]
+	},
+	"Kanban": {
+		"Track 1": {
+			"Ready": "",
+			"Doing": "",
+			"Done": ""
+		},
+		"Track 2": {
+			"Ready": "",
+			"Doing": "",
+			"Done": ""
+		},
+		"Track 3": {
+			"Ready": "",
+			"Doing": "",
+			"Done": ""
+		}
+	}
+}
