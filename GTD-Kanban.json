@@ -23,7 +23,7 @@
 	"Kanban": {
 		"Track 1": {
 			"Ready": "",
-			"Doing": "",
+			"Doing": "Write up README.md",
 			"Done": ""
 		},
 		"Track 2": {
