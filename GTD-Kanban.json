@@ -4,8 +4,9 @@
 			"Reference other JSON files",
 			"Load JSON into SQL database",
 			"Track JSON files using git",
-			"Allow associating every JSON object with a tag(s)",
-			"Allow viewing every JSON object associated with a tag(s)"
+			"Enable associating any JSON object with a tag(s)",
+			"Enable viewing any JSON object associated with a tag(s)",
+			"Enable associating files and URLs (URIs) with any JSON object"
 		],
 		"Reference": [
 			"http://www.json.org/",
