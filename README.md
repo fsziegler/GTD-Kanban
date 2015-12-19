@@ -8,29 +8,30 @@ One thesis in "Getting Things Done" is that if your mind has more than one probl
 
 If an issue **is not** actionable, you classify it as one of the following:
 -  Trash
--  Someday Maybe list
--  Reference list
+-  "Someday Maybe" list
+-  "Reference" list
+
 at which point you ignore it until some later date.
 
 If an issue **is** actionable, the next question is whether it requires only single step to complete (a *task*), or not (a *project*). If it is a *task*
 - If it will take "two minutes", then do it now.
 - and it will take more time, then either
-  - delegate it, in which case it goes into a "waiting for" list
+  - delegate it, in which case it goes into a "Waiting for" list
   - defer it, in which case it either
-    - goes into your calendar, to be done at a specific time, or
+    - goes into your Calendar, to be done at a specific time, or
     - goes into "Next Actions" list, to be done as soon as it can
 
 If an issue is a *project*, then the next steps are
-  - put it into the *projects* to plan list, and
+  - put it into the "*Projects* to Plan" list, and
   - once planned, review it for *tasks*, as outlined above
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
-- Someday Maybe list
-- Reference list
-- Waiting for another person to complete
-- Tasks in your calendar on specific dates
-- A Next Actions list
-- A Projects list
+- "Someday Maybe" list
+- "Reference" list
+- "Waiting for Another Person" list
+- Tasks in your Calendar on specific dates
+- A "Next Actions" list
+- A "Projects" list
 
 Only the latter two lists can be worked on at this point.
 
