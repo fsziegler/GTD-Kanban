@@ -51,7 +51,7 @@ Using GTD, you will likely have a large backlog of ***tasks*** and ***projects**
 
 ##Use Cases
 Some typical use cases that this tool are intended to address are:
-  - You have lots of ideas that you want to act on, you don't want to lose any of them, but can only focus on one at a time
+  - You have lots of ideas that you want to act on, you don't want to forget any of them, but can only focus on one at a time
   - You have multiple goals, and want to make incremental progress on all of them in an organized way
   - You are writing a complex piece of software
   - You are building something
@@ -65,6 +65,7 @@ Some typical use cases that this tool are intended to address are:
     - Filing a patent, where you need to complete multiple sections, do research, and act by certain dates
     - Fighting unjust parking and/or traffic tickets
     - Negotiating a legal agreement
+  - You are doing many/all of the above
 
 Once you have completed a project, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
 
