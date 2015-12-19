@@ -6,7 +6,8 @@
       "Track JSON files using git",
       "Enable associating any JSON object with a tag(s)",
       "Enable viewing any JSON object associated with a tag(s)",
-      "Enable associating files and URLs (URIs) with any JSON object"
+      "Enable associating files and URLs (URIs) with any JSON object",
+      "Enable multiple GTD systems; e.g., one for work, one for life"
     ],
     "Reference": [
       "http://www.json.org/",
