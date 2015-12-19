@@ -1,12 +1,17 @@
 # GTD-Kanban
-## Life Organizer, based on "Getting Things Done" and Kanban
+
+*"I must create a system or be enslaved by another mans; I will not reason and compare: my business is to create."* --William Blake
+
+##1 Life Organizer, based on "Getting Things Done" and Kanban
 
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry.
 
-###Getting Things Done
+###1.1 Getting Things Done
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming software tool for collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
-####GTD Workflow
+*"Plans are worthless, but planning is everything"* --Dwight D. Eisenhower
+
+####1.1.a GTD Workflow
 In GTD, you start by identifying and classifying all of your issues. If an issue **is not** actionable, you place it into one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
@@ -14,7 +19,7 @@ In GTD, you start by identifying and classifying all of your issues. If an issue
 
 at which point you ignore it, at least until some later date.
 
-If an issue **is** actionable, the next question is whether it requires only a single step to complete (a ***task***), or not (a ***project***). If it is a ***task***
+If an issue **is** actionable, the next question is whether it requires only a single step to complete (a ***task***), or not (a ***project***). If an issue is a ***task***
 - if it will take "two minutes", then do it now
 - if it will take more time, then either
   - delegate it, in which case it goes into your **Waiting for Another Person** list
@@ -35,10 +40,10 @@ Once you have processed your issues, you will have the following lists stored in
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
-#####Planning Projects
-How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably already have your own way of doing this. A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to projects in this list.
+#####1.1.a.i  Planning Projects
+How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably already have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to projects in this list.
 
-###Kanban
+###1.2 Kanban
 Your **Project Plans** and **Next Actions** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
@@ -52,7 +57,7 @@ In order to **visualize your work**, ***tasks*** are tracked graphically on a **
 
 Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once one ***task*** is *Done*, it is dropped off the board, and another one brought on.
 
-##Use Cases
+##2 Use Cases
 Some typical use cases that this tool are intended to address are:
   - You have lots of ideas that you want to act on, you don't want to forget any of them, but can only focus on one at a time
   - You have multiple goals, and want to make incremental progress on all of them in an organized way
@@ -76,7 +81,7 @@ Getting an overview that enables abstracting multiple issues such that a common 
 
 You may get satisfaction by keeping a record of the *Done* tasks.
 
-## Implementation Details
+##3. Implementation Details
 It is proposed to store the files created with this tool in [JSON format](http://www.json.org/). The intent of using the JSON format is make the work product as portable and accessible as possible. Also, the JSON format used should allow for one JSON file to reference another. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together. It is proposed to track changes in the JSON work product of the tool using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable user to view their historical progress tracking their lives.
 
 It is proposed to write the initial code in C++. This leaves open the question of how to implement the UI for presenting the information. Here there are several options, among them using the cross-platform Qt development tools, using [node.js](https://nodejs.org/en/about/) as an interface bewteen the C++ and a web UI front-end on a server, [exporting the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrating the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)).
