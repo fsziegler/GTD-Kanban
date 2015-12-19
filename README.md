@@ -10,6 +10,7 @@ If an issue **is not** actionable, you classify it as one of the following:
 -  Trash
 -  Someday Maybe list
 -  Reference list
+at which point you ignore it until some later date.
 
 If an issue **is** actionable, the next question is whether it requires only single step to complete (a *task*), or not (a *project*). If it is a *task*
 - If it will take "two minutes", then do it now.
@@ -23,19 +24,29 @@ If an issue is a *project*, then the next steps are
   - put it into the *projects* to plan list, and
   - once planned, review it for *tasks*, as outlined above
 
-###Kanban
-The *project* level is where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
-  - **visualize your work**, and
-  - **limit your work in progress**
+Once you have processed your issues, you will have the following lists stored in your trusted system:
+- Someday Maybe list
+- Reference list
+- Waiting for another person to complete
+- Tasks in your calendar on specific dates
+- A Next Actions list
+- A Projects list
 
-In order to **visualize your work**, *projects* are tracked on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
+Only the latter two lists can be worked on at this point.
+
+###Kanban
+The Next Actions and Projects lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
+  - **Visualize your work**, and
+  - **Limit your work in progress**
+
+In order to **visualize your work**, *projects* are tracked graphically on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
   - *Ready*
   - *Doing*
   - *Done*
 
 *Tasks* are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, it is moved from one column to the next.
 
-Using GTD, you will likely have a large backlog of *tasks* and *projects*. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on, and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of *tasks* and *projects* until they are complete **before** starting in on another one. Once one *task* or *project* is *Done*, it is dropped off the board, and another one brought on.
+Using GTD, you will likely have a large backlog of *tasks* and *projects*. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of *tasks* and *projects* until they are complete **before** starting in on another one. Once one *task* or *project* is *Done*, it is dropped off the board, and another one brought on.
 
 ##Use Cases
 Some typical use cases that this tool are intended to address are:
