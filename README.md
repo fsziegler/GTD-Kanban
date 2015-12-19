@@ -6,13 +6,13 @@
 
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry.
 
-###1.1 Getting Things Done
+### 1.1 Getting Things Done
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming software tool for collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
 *"Plans are worthless, but planning is everything"* --Dwight D. Eisenhower
 
 ####1.1.a GTD Workflow
-In GTD, you start by identifying and classifying all of your issues. If an issue **is not** actionable, you place it into one of the following:
+In GTD, you start by identifying and classifying all of your issues. These start in your **In-basket**. If an issue **is not** actionable, you place it into one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
 -  your **Reference** list
@@ -41,7 +41,7 @@ Once you have processed your issues, you will have the following lists stored in
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
 #####1.1.a.i  Planning Projects
-How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably already have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***.
+How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***.
 
 ###1.2 Kanban
 Your **Project Plans** and **Next Actions** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
@@ -66,6 +66,7 @@ Some typical use cases that this tool are intended to address are:
   - You are inventing something new
   - You are learning a new subject
   - You are writing a book
+  - You want to track your car maintenance plan (e.g., changing fluids regularly)
   - Small issues derail you from focusing on larger goals
   - You are researching a purchase, and are collecting disparate information that you wish to review
   - You are involved in a legal process that includes multiple steps that play out over time. Examples include:
@@ -84,4 +85,6 @@ You may get satisfaction by keeping a record of the *Done* tasks.
 ##3. Implementation Details
 Files created with this tool will be stored in [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
 
-It is proposed to write the initial code in C++. This leaves open the question of how to implement the UI for presenting the information. Here there are several options, among them using the cross-platform Qt development tools, using [node.js](https://nodejs.org/en/about/) as an interface bewteen the C++ and a web UI front-end on a server, [exporting the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrating the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)).
+A key UI feature will be the ability to hide and show information. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
+
+The base code will be written in C++. This leaves open the question of how to implement the UI for presenting the information. There are several options, among them using the cross-platform Qt development tools, using [node.js](https://nodejs.org/en/about/) as an interface bewteen the C++ and a web UI front-end on a server, [exporting the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrating the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
