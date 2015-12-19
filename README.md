@@ -4,8 +4,9 @@
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the description of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry.
 
 ###Getting Things Done
-One thesis in "Getting Things Done" is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "trusted system". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
+One thesis in "Getting Things Done" is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
 
+####GTD Workflow
 If an issue **is not** actionable, you classify it as one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
@@ -21,7 +22,7 @@ If an issue **is** actionable, the next question is whether it requires only a s
     - goes into your **Calendar**, to be done at a specific time, or
     - goes into your **Next Actions** list, to be done as soon as it can
 
-If an issue is a ***project***, then put it into your ***Projects to Plan*** list.
+If an issue is a ***project***, then put it into your ***Projects to Plan*** list. When you do plan your projects, the results go into your ***Project Plans*** list and, from here you identify actionable **tasks** that can be moved into your **Next Actions** list.
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
 - your **Someday Maybe** list
@@ -29,16 +30,17 @@ Once you have processed your issues, you will have the following lists stored in
 - your **Waiting for Another Person** list
 - Tasks in your **Calendar** on specific dates
 - your **Next Actions** list
-- your **Projects** list
+- your **Projects to Plan** list
+- your **Project Plans** list
 
-Only the latter two lists can be worked on at this point.
+Only your **Next Actions** and **Project Plans** lists can be worked on at this point.
 
 ###Kanban
-Your **Next Actions** and **Projects** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
+Your **Next Actions** and **Project Plans** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
 
-In order to **visualize your work**, *tasks* are tracked graphically on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
+In order to **visualize your work**, *tasks* are tracked graphically on a **board** (this could be a whiteboard, piece of paper, or software UI). Generally, **projects** are too large to focus on, so **tasks** migrate first from the **Project Plans** list to the **Next Actions** list, and then onto the **board**. There are three columns to show the progress of *tasks*:
   - *Ready*
   - *Doing*
   - *Done*
