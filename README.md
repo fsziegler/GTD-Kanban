@@ -35,6 +35,9 @@ Once you have processed your issues, you will have the following lists stored in
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
+#####Planning Projects
+How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably already have your own way of doing this. A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The tool will allow you to link files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to projects in this list.
+
 ###Kanban
 Your **Project Plans** and **Next Actions** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
