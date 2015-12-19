@@ -66,7 +66,7 @@ Some typical use cases that this tool are intended to address are:
     - Fighting unjust parking and/or traffic tickets
     - Negotiating a legal agreement
 
-Once you have completed a project once, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
+Once you have completed a project, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
 
 Getting an overview that enables abstracting multiple issues such that a common solution may move several issues forward. This is often true when writing software.
 
