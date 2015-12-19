@@ -28,14 +28,14 @@ The *project* level is where the GTD-Kanban system will transition from GTD to K
   - **visualize your work**, and
   - **limit your work in progress**
 
-*Projects* are tracked on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
+In order to **visualize your work**, *projects* are tracked on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
   - *Ready*
   - *Doing*
   - *Done*
 
 *Tasks* are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, it is moved from one column to the next.
 
-Using GTD, you will likely have a large backlog of *tasks* and *projects*. It is important to identify only a few of these that you can realistically be working on, and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of *tasks* and *projects* until they are complete **before** starting in on another one. Once on *task* or *project* is *Done*, it is dropped off the board, and another one brought on. 
+Using GTD, you will likely have a large backlog of *tasks* and *projects*. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on, and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of *tasks* and *projects* until they are complete **before** starting in on another one. Once one *task* or *project* is *Done*, it is dropped off the board, and another one brought on.
 
 ##Use Cases
 Some typical use cases that this tool are intended to address are:
