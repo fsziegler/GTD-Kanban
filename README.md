@@ -1,3 +1,5 @@
+Copyright (c) 2015 Frederick S. Ziegler
+
 # GTD-Kanban
 
 *"I must create a system or be enslaved by another man's; I will not reason and compare: my business is to create."* --William Blake
@@ -61,13 +63,16 @@ Using GTD, you will likely have a large backlog of ***tasks*** and ***projects**
 Some typical use cases that this tool are intended to address are:
   - You have lots of ideas that you want to act on, you don't want to forget any of them, but can only focus on one at a time
   - You have multiple goals, and want to make incremental progress on all of them in an organized way
+  - Small issues derail you from focusing on larger goals
   - You are writing a complex piece of software
   - You are building something
   - You are inventing something new
   - You are learning a new subject
   - You are writing a book
   - You want to track your car maintenance plan (e.g., changing fluids regularly)
-  - Small issues derail you from focusing on larger goals
+  - You want to clean out your garage or storage
+  - You want to give stuff you don't need to charity
+  - You want to repaint or remodel your home
   - You are researching a purchase, and are collecting disparate information that you wish to review
   - You are involved in a legal process that includes multiple steps that play out over time. Examples include:
     - Filing income taxes, where you need to pull together multiple pieces of information
@@ -88,5 +93,3 @@ Files created with this tool will be stored in [JSON format](http://www.json.org
 A key UI feature will be the ability to hide and show information. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
 
 The base code will be written in C++. This leaves open the question of how to implement the UI for presenting the information. There are several options, among them using the cross-platform Qt development tools, using [node.js](https://nodejs.org/en/about/) as an interface bewteen the C++ and a web UI front-end on a server, [exporting the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrating the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
-
-Copyright (c) 2015 Frederick S. Ziegler
