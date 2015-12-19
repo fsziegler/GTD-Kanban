@@ -3,7 +3,9 @@
 		"Someday Maybe": [
 			"Reference other JSON files",
 			"Load JSON into SQL database",
-			"Track JSON files using git"
+			"Track JSON files using git",
+			"Allow associating every JSON object with a tag(s)",
+			"Allow viewing every JSON object associated with a tag(s)"
 		],
 		"Reference": [
 			"http://www.json.org/",
