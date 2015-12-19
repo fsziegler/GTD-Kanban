@@ -7,38 +7,38 @@ Purpose: To create a software tool for creative people to organize and track var
 One thesis in "Getting Things Done" is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "trusted system". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
 
 If an issue **is not** actionable, you classify it as one of the following:
--  Trash
--  "Someday Maybe" list
--  "Reference" list
+-  **Trash**
+-  your **Someday Maybe** list
+-  your **Reference** list
 
 at which point you ignore it, at least until some later date.
 
 If an issue **is** actionable, the next question is whether it requires only a single step to complete (a ***task***), or not (a ***project***). If it is a ***task***
 - if it will take "two minutes", then do it now
 - if it will take more time, then either
-  - delegate it, in which case it goes into a "Waiting for" list
+  - delegate it, in which case it goes into your **Waiting for** list
   - defer it, in which case it either
-    - goes into your Calendar, to be done at a specific time, or
-    - goes into "Next Actions" list, to be done as soon as it can
+    - goes into your **Calendar**, to be done at a specific time, or
+    - goes into your **Next Actions** list, to be done as soon as it can
 
-If an issue is a ***project***, then put it into the "***Projects*** to Plan" list.
+If an issue is a ***project***, then put it into your ***Projects to Plan*** list.
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
-- a **Someday Maybe** list
-- a **Reference** list
-- a **Waiting for Another Person** list
-- Tasks in your Calendar on specific dates
-- a **Next Actions** list
-- a **Projects** list
+- your **Someday Maybe** list
+- your **Reference** list
+- your **Waiting for Another Person** list
+- Tasks in your **Calendar** on specific dates
+- your **Next Actions** list
+- your **Projects** list
 
 Only the latter two lists can be worked on at this point.
 
 ###Kanban
-The **Next Actions** and **Projects** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
+Your **Next Actions** and **Projects** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
 
-In order to **visualize your work**, *projects* are tracked graphically on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
+In order to **visualize your work**, *tasks* are tracked graphically on a board (this could be a whiteboard, piece of paper, or software UI). There are three columns to show the progress of *tasks*:
   - *Ready*
   - *Doing*
   - *Done*
