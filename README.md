@@ -1,6 +1,6 @@
 # GTD-Kanban
 
-*"I must create a system or be enslaved by another mans; I will not reason and compare: my business is to create."* --William Blake
+*"I must create a system or be enslaved by another man's; I will not reason and compare: my business is to create."* --William Blake
 
 ##1 Life Organizer, based on "Getting Things Done" and Kanban
 
