@@ -7,7 +7,7 @@ Purpose: To create a software tool for creative people to organize and track var
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". Once you have done this, your mind is clear to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming software tool for collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
 ####GTD Workflow
-In GTD, you start by workig identifying and classifying all of your issues. If an issue **is not** actionable, you place it into one of the following:
+In GTD, you start by identifying and classifying all of your issues. If an issue **is not** actionable, you place it into one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
 -  your **Reference** list
@@ -17,26 +17,26 @@ at which point you ignore it, at least until some later date.
 If an issue **is** actionable, the next question is whether it requires only a single step to complete (a ***task***), or not (a ***project***). If it is a ***task***
 - if it will take "two minutes", then do it now
 - if it will take more time, then either
-  - delegate it, in which case it goes into your **Waiting for** list
+  - delegate it, in which case it goes into your **Waiting for Another Person** list
   - defer it, in which case it either
     - goes into your **Calendar**, to be done at a specific time, or
     - goes into your **Next Actions** list, to be done as soon as it can
 
-If an issue is a ***project***, then put it into your ***Projects-to-Plan*** list. When you do plan your projects, the results go into your ***Project Plans*** list and, from here, you identify actionable **tasks** that can be moved into your **Next Actions** list. If a project contains many dependencies (i.e. multiple steps are dependent on other steps being completed), then a Gannt chart tool, such as the open-source [GanntProject](http://www.ganttproject.biz/) software tool may be helpful.
+If an issue is a ***project***, then put it into your **Projects-to-Plan** list. When you do plan your projects, the results go into your **Project Plans** list and, from here, you identify actionable **tasks** that can be moved into your **Next Actions** list. If a project contains many dependencies (i.e. multiple steps are dependent on other steps being completed), then a Gannt chart tool, such as the open-source [GanntProject](http://www.ganttproject.biz/) software tool may be helpful.
 
 Once you have processed your issues, you will have the following lists stored in your trusted system:
 - your **Someday Maybe** list
 - your **Reference** list
 - your **Waiting for Another Person** list
 - Tasks in your **Calendar** on specific dates
-- your **Next Actions** list
 - your **Projects-to-Plan** list
 - your **Project Plans** list
+- your **Next Actions** list
 
-Only your **Next Actions** and **Project Plans** lists contain **tasks** to work on at this point.
+Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
 ###Kanban
-Your **Next Actions** and **Project Plans** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
+Your **Project Plans** and **Next Actions** lists are where the GTD-Kanban system will transition from GTD to Kanban. Kanban operates on two principles:
   - **Visualize your work**, and
   - **Limit your work in progress**
 
@@ -54,6 +54,9 @@ Some typical use cases that this tool are intended to address are:
   - You have lots of ideas that you want to act on, you don't want to lose any of them, but can only focus on one at a time
   - You have multiple goals, and want to make incremental progress on all of them in an organized way
   - You are writing a complex piece of software
+  - You are building something
+  - You are inventing something new
+  - You are learning a new subject
   - You are writing a book
   - Small issues derail you from focusing on larger goals
   - You are researching a purchase, and are collecting disparate information that you wish to review
