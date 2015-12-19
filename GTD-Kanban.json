@@ -7,7 +7,9 @@
       "Enable associating any JSON object with a tag(s)",
       "Enable viewing any JSON object associated with a tag(s)",
       "Enable associating files and URLs (URIs) with any JSON object",
-      "Enable multiple GTD systems; e.g., one for work, one for life"
+      "Enable multiple GTD systems; e.g., one for work, one for life",
+      "Import the GTD In-basket from a Freemind file",
+      "Support dependency links"
     ],
     "Reference": [
       "http://www.json.org/",
