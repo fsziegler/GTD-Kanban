@@ -8,7 +8,7 @@ Copyright (c) 2015 Frederick S. Ziegler
 
 ##1 Life Organizer, based on "Getting Things Done" and Kanban
 
-Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual, not the collective.
+Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
 
 ### 1.1 Getting Things Done
 `"Plans are worthless, but planning is everything"`
@@ -87,11 +87,12 @@ Some typical use cases that this tool are intended to address are:
     - Filing a patent, where you need to complete multiple sections, do research, and act by certain dates
     - Fighting unjust parking and/or traffic tickets
     - Negotiating a legal agreement
+  - You are starting a business
   - You are doing many/all of the above
 
 Once you have completed a project, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
 
-Getting an overview that enables abstracting multiple issues such that a common solution may move several issues forward. This is often true when writing software.
+Getting an overview may enable you to boil multiple issues down to a single one, resulting in a common solution and moving all these issues forward at once. This is often true when writing software.
 
 You may get satisfaction by keeping a record of the *Done* tasks.
 
