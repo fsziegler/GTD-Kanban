@@ -39,7 +39,7 @@ If an issue **is** actionable, the next question is whether it requires only a s
 
 If an issue is a ***project***, then move it into your **Projects-to-Plan** list. When you do plan your projects, you move the results into your **Project Plans** list and, from here, you identify actionable **tasks** that you will move into your **Next Actions** list. If a project contains many dependencies (i.e. multiple steps are dependent on other steps being completed), then a Gannt chart tool, such as the open-source [GanntProject](http://www.ganttproject.biz/) software tool may be helpful.
 
-Once you have processed your issues, you will have the following lists stored in your trusted system:
+Once you have processed your issues, you will have the following lists stored in your **trusted system**:
 - your **Someday Maybe** list
 - your **Reference** list
 - your **Waiting for Another Person** list
