@@ -17,7 +17,7 @@ Purpose: To create a software tool for creative people to organize and track var
 
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming software tool for collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
-####1.1.a GTD Workflow
+####1.1.i GTD Workflow
 In GTD, you start by identifying and classifying all of your issues. These start in your **In-basket**. If an issue **is not** actionable, you place it into one of the following:
 -  **Trash**
 -  your **Someday Maybe** list
@@ -46,7 +46,7 @@ Once you have processed your issues, you will have the following lists stored in
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
-#####1.1.a.i  Planning Projects
+#####1.1.i.(a)  Planning Projects
 How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***.
 
 ###1.2 Kanban
@@ -66,6 +66,53 @@ In order to **visualize your work**, ***tasks*** are tracked graphically on a **
 ***Tasks*** are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, it is moved from one column to the next. Once a ***task*** is *Done*, it is removed and another placed in the *Ready* column.
 
 Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then represent these on the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. The benefit of this approach is that it keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once one ***task*** is *Done*, it is dropped off the board, and another one brought on.
+
+###1.3 Executing Engineering Projects
+####1.3.i Make It Work, Make It Right, Make It Fast
+`"Make it work, make it right, make it fast"`
+
+`--Kent Beck`
+
+#####Make It Work
+First, **make it work** by creating a prototype with end-to-end functionality that proves the concept is viable. This may be buggy and lack many refinements, but it has two advantages:
+ - once complete, the risk of not being able to build the product drops dramatically, and
+ - you have a skeleton of functionality upon which to build.
+
+#####Make It Right
+Second, **make it right** by
+ - adding all the refinements for a polished product,
+ - thoroughly debugging it, and
+ - implementing best practices to ensure robustness.
+
+#####Make It Fast
+Third, **make it fast** by
+ - identifying and eliminating bottlenecks, and 
+ - improving or replacing components that do not perform as fast as possible. 
+
+You may iterate through the second and third phases any number of times as your refine your product.
+
+####1.3.ii Reliable, Maintainable, Scalable
+Endeavour to make your products reliable, maintainable, and scalable. All three of these will result naturally from the following good design practices.
+
+#####Architecture
+First, explicitly implement an **architecture** - this is the skeleton in the "make it work" phase. Houses have frames, boats have keels, cars have a chassis or cage, and good software has an architecture. Architecture is a basic structure to which every component is attached in some way. You cannot have a good product with a bad architecture.
+
+#####Modularity
+Second, practice **modularity**. A module is component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, it is relatively easy to design a set of tests to validate that it works properly. Examples include door assemblies for houses, winches for boats, transmissions for cars, and objects in software.
+
+Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has two benefits:
+  - you only have to build and maintain a single module, and
+  - if your design changes, 
+    - you only have to change a single module, and
+    - you cannot make the error of changing the functionality in one place and not in others.
+
+For example, it makes sense to have one design (a module) for both front wheels on a car rather than a separate design for each one.
+
+#####Neat and Clean
+Third, keep your work product **neat and clean**. Your desk may be messy, but your work tools, factory floor, and code base should be well organized and structured. Your output, be it machined parts, electronic diagrams, or software should look ready for sale. Better yet, it should have an identifiable "look and feel". All of your code should be well-formatted and follow a uniform coding style.
+
+#####Best Practices
+Finally, develop and enforce **best practices**. With experience, technologists discover that certain ways of doing things work really well, and that others are risky. The housing construction, boat-building, automobile, and other industries all have standards that manufacturers adhere to, and many are written into law. The software industry is younger and less mature than these other industries, but good standards exist and can prevent hard-to-find bugs. A good example of software design guidelines are the [Basics of the Unix Philosophy](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
 
 ##2 Use Cases
 Some typical use cases that this tool are intended to address are:
@@ -96,7 +143,7 @@ Getting an overview may enable you to boil multiple issues down to a single one,
 
 You may get satisfaction by keeping a record of the *Done* tasks.
 
-##3. Implementation Details
+##3. GTD-Kanban Implementation Details
 Files created with this tool will be stored in [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
 
 A key UI feature will be the ability to hide and show information. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
