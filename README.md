@@ -15,7 +15,9 @@ Purpose: To create a software tool for creative people to organize and track var
 
 `--Dwight D. Eisenhower`
 
-One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind. A useful open-source brain-storming software tool for collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
+One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
+
+A useful open-source brain-storming software tool for initially collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page).
 
 ####GTD Workflow
 In GTD, you start by identifying and classifying all of your issues. You initially create these in your **In-basket** and work through them one by one.
