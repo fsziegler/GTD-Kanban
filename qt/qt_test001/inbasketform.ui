@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InBasketForm</class>
+ <widget class="QWidget" name="InBasketForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>501</width>
+    <height>471</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1. In Basket - Start by entering issues here, separated by carriage return (&lt;Enter&gt;)</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Text entered in the edit box above will be moved to the list box below, where it can be selected and acted upon.</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="NonActionableBtn">
+   <property name="geometry">
+    <rect>
+     <x>311</x>
+     <y>40</y>
+     <width>151</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You can't do anything about this now</string>
+   </property>
+   <property name="text">
+    <string>Not Actionable Now</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ActionableBtn">
+   <property name="geometry">
+    <rect>
+     <x>311</x>
+     <y>160</y>
+     <width>151</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You can take action on this</string>
+   </property>
+   <property name="text">
+    <string>Actionable</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>70</y>
+     <width>111</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Tickler file; hold for review</string>
+   </property>
+   <property name="text">
+    <string>Someday Maybe</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>100</y>
+     <width>111</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Retrievable when required</string>
+   </property>
+   <property name="text">
+    <string>Reference</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>130</y>
+     <width>111</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Throw this away!</string>
+   </property>
+   <property name="text">
+    <string>Trash</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>250</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You have or will delegate this to someone else</string>
+   </property>
+   <property name="text">
+    <string>Waiting on someone</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>280</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You will do this at a specific time</string>
+   </property>
+   <property name="text">
+    <string>Calendar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>380</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You need to plan this project before taking action</string>
+   </property>
+   <property name="text">
+    <string>Projects-to-Plan</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_7">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>410</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You need to review this plan for Next Actions</string>
+   </property>
+   <property name="text">
+    <string>Project Plans</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_8">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>310</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>This is one of your next actions</string>
+   </property>
+   <property name="text">
+    <string>Next Actions</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>230</y>
+     <width>261</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>10</y>
+     <width>181</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Actions</string>
+   </property>
+   <widget class="QPushButton" name="pushButton_9">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>210</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>You can take care of this right now</string>
+    </property>
+    <property name="text">
+     <string>Do It!</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>151</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Tasks</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>340</y>
+      <width>151</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Projects</string>
+    </property>
+   </widget>
+   <zorder>groupBox_3</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>pushButton_9</zorder>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>261</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::TabFocus</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>groupBox</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>NonActionableBtn</zorder>
+  <zorder>ActionableBtn</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>pushButton_5</zorder>
+  <zorder>pushButton_6</zorder>
+  <zorder>pushButton_7</zorder>
+  <zorder>pushButton_8</zorder>
+  <zorder>listWidget</zorder>
+  <zorder>textEdit</zorder>
+  <zorder>label_3</zorder>
+ </widget>
+ <tabstops>
+  <tabstop>listWidget</tabstop>
+  <tabstop>NonActionableBtn</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>ActionableBtn</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>textEdit</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
