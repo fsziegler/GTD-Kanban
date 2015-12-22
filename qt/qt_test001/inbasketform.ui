@@ -42,7 +42,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Text entered in the edit box above will be moved to the list box below, where it can be selected and acted upon.</string>
+    <string>Text entered in the edit box above will automatically move to the list box below, where you can select and act upon it.</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -208,7 +208,7 @@
     <string>Next Actions</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget">
+  <widget class="QListWidget" name="InBasketListWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -224,7 +224,7 @@
     <enum>QAbstractItemView::MultiSelection</enum>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="actionsGroupBox">
    <property name="geometry">
     <rect>
      <x>299</x>
@@ -252,7 +252,7 @@
      <string>Do It!</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="tasksGroupBox">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -265,7 +265,7 @@
      <string>Tasks</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="ProjectsGroupBox">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -278,11 +278,11 @@
      <string>Projects</string>
     </property>
    </widget>
-   <zorder>groupBox_3</zorder>
-   <zorder>groupBox_2</zorder>
+   <zorder>ProjectsGroupBox</zorder>
+   <zorder>tasksGroupBox</zorder>
    <zorder>pushButton_9</zorder>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="inBasketTextEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -293,6 +293,9 @@
    </property>
    <property name="focusPolicy">
     <enum>Qt::TabFocus</enum>
+   </property>
+   <property name="tabChangesFocus">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -311,7 +314,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <zorder>groupBox</zorder>
+  <zorder>actionsGroupBox</zorder>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
   <zorder>NonActionableBtn</zorder>
@@ -324,12 +327,12 @@
   <zorder>pushButton_6</zorder>
   <zorder>pushButton_7</zorder>
   <zorder>pushButton_8</zorder>
-  <zorder>listWidget</zorder>
-  <zorder>textEdit</zorder>
+  <zorder>InBasketListWidget</zorder>
+  <zorder>inBasketTextEdit</zorder>
   <zorder>label_3</zorder>
  </widget>
  <tabstops>
-  <tabstop>listWidget</tabstop>
+  <tabstop>InBasketListWidget</tabstop>
   <tabstop>NonActionableBtn</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>pushButton_2</tabstop>
@@ -341,7 +344,7 @@
   <tabstop>pushButton_8</tabstop>
   <tabstop>pushButton_6</tabstop>
   <tabstop>pushButton_7</tabstop>
-  <tabstop>textEdit</tabstop>
+  <tabstop>inBasketTextEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>

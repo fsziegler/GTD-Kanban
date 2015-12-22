@@ -20,6 +20,8 @@ private slots:
 
     void on_actionableBtn_clicked();
 
+    void on_inBasketTextEdit_textChanged();
+
 private:
     Ui::InBasketForm *ui;
 };
