@@ -22,6 +22,8 @@ private slots:
 
     void on_inBasketTextEdit_textChanged();
 
+    void on_pushButton_10_clicked();
+
 private:
     Ui::InBasketForm *ui;
 };

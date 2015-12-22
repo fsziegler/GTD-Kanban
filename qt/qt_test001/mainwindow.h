@@ -7,6 +7,7 @@
 #include <QSplitter>
 #include <QPointer>
 #include <QTextEdit>
+#include <QTreeWidget>
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +33,8 @@ private:
     QPointer<InBasketForm> mp_inBasketForm;
     QPointer<QSplitter> mp_gtdSplitter;
     QPointer<QSplitter> mp_lrSplitter;
-    QTextEdit mp_gtdEditor;
-    QTextEdit mp_kanbanEditor;
+    QTextEdit m_gtdEditor;
+    QTreeWidget m_gtdTree;
+    QTextEdit m_kanbanEditor;
 };
 #endif // MAINWINDOW_H

@@ -10,6 +10,9 @@
     <height>471</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
   <property name="acceptDrops">
    <bool>true</bool>
   </property>
@@ -212,16 +215,19 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>230</y>
+     <y>260</y>
      <width>261</width>
-     <height>221</height>
+     <height>191</height>
     </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="alternatingRowColors">
     <bool>true</bool>
    </property>
    <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
+    <enum>QAbstractItemView::ExtendedSelection</enum>
    </property>
   </widget>
   <widget class="QGroupBox" name="actionsGroupBox">
@@ -292,7 +298,7 @@
     </rect>
    </property>
    <property name="focusPolicy">
-    <enum>Qt::TabFocus</enum>
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="tabChangesFocus">
     <bool>true</bool>
@@ -314,6 +320,19 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_10">
+   <property name="geometry">
+    <rect>
+     <x>179</x>
+     <y>230</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Re-edit selection</string>
+   </property>
+  </widget>
   <zorder>actionsGroupBox</zorder>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
@@ -330,8 +349,11 @@
   <zorder>InBasketListWidget</zorder>
   <zorder>inBasketTextEdit</zorder>
   <zorder>label_3</zorder>
+  <zorder>pushButton_10</zorder>
  </widget>
  <tabstops>
+  <tabstop>inBasketTextEdit</tabstop>
+  <tabstop>pushButton_10</tabstop>
   <tabstop>InBasketListWidget</tabstop>
   <tabstop>NonActionableBtn</tabstop>
   <tabstop>pushButton</tabstop>
@@ -344,7 +366,6 @@
   <tabstop>pushButton_8</tabstop>
   <tabstop>pushButton_6</tabstop>
   <tabstop>pushButton_7</tabstop>
-  <tabstop>inBasketTextEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -16,15 +16,43 @@ MainWindow::MainWindow(QWidget *parent) :
     mp_gtdSplitter = new QSplitter(Qt::Vertical);
     mp_inBasketForm = new InBasketForm();
     mp_gtdSplitter->addWidget(mp_inBasketForm);
-    mp_gtdSplitter->addWidget(&mp_gtdEditor);
+    mp_gtdSplitter->addWidget(&m_gtdTree);
+    mp_gtdSplitter->setChildrenCollapsible(true);
+//    mp_gtdSplitter->setFixedHeight(471);
+    mp_inBasketForm->setFixedHeight(471);
+    mp_inBasketForm->setFixedWidth(501);
+
+    m_gtdTree.setColumnCount(1);
+    m_gtdTree.setHeaderLabel(QString("GTD Tree"));
+    m_gtdTree.setSortingEnabled(false);
+    QTreeWidgetItem* nonActionableTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Non-Actionable")));
+//    m_gtdTree.insertTopLevelItem(0, nonActionableTI);
+    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Someday Maybe"))));
+    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Reference"))));
+    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Trash"))));
+    QTreeWidgetItem* actionableTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Actionable")));
+    QTreeWidgetItem* tasksTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Tasks")));
+    actionableTI->addChild(tasksTI);
+    m_gtdTree.insertTopLevelItem(0, actionableTI);
+    m_gtdTree.insertTopLevelItem(0, nonActionableTI);
+    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Do It!"))));
+    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Waiting on someone"))));
+    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Calendar"))));
+    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Next Actions"))));
+    QTreeWidgetItem* projectsTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Projects")));
+    actionableTI->addChild(projectsTI);
+    projectsTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Projects-to-Plan"))));
+    projectsTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Project Plans"))));
+    m_gtdTree.expandAll();
+    //    m_gtdTree.ins
 
     mp_lrSplitter = new QSplitter(Qt::Horizontal);
     mp_lrSplitter->addWidget(mp_gtdSplitter);
 //    mp_gtdEditor.setDocumentTitle(QString("GTD"));
-    mp_lrSplitter->addWidget(&mp_kanbanEditor);
+    mp_lrSplitter->addWidget(&m_kanbanEditor);
     setCentralWidget(mp_lrSplitter);
 
-    ScaleAndCenterWindow(0.7);
+    ScaleAndCenterWindow(0.8);
 }
 
 MainWindow::~MainWindow()
@@ -44,8 +72,8 @@ void MainWindow::on_actionOpen_triggered()
     QFile file(fileName);
     file.open(QFile::ReadOnly | QFile::Text);
     QTextStream ReadFile(&file);
-    mp_gtdEditor.setText(ReadFile.readAll());
-    mp_gtdEditor.parentWidget()->setWindowTitle(fileName);
+    m_gtdEditor.setText(ReadFile.readAll());
+    m_gtdEditor.parentWidget()->setWindowTitle(fileName);
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)
