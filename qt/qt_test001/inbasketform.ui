@@ -83,7 +83,7 @@
     <string>Actionable</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="somedayMaybeButton">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -99,7 +99,7 @@
     <string>Someday Maybe</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="referenceButton">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -115,7 +115,7 @@
     <string>Reference</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="trashButton">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -131,7 +131,7 @@
     <string>Trash</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="waitingOnSomeoneButton">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -147,7 +147,7 @@
     <string>Waiting on someone</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="calendarButton">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -163,7 +163,7 @@
     <string>Calendar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="projectsToPlanButton">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -179,7 +179,7 @@
     <string>Projects-to-Plan</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
+  <widget class="QPushButton" name="projectPlansButton">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -195,7 +195,7 @@
     <string>Project Plans</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_8">
+  <widget class="QPushButton" name="nextActionsButton">
    <property name="geometry">
     <rect>
      <x>340</x>
@@ -242,7 +242,7 @@
    <property name="title">
     <string>Actions</string>
    </property>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="doItButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -286,7 +286,7 @@
    </widget>
    <zorder>ProjectsGroupBox</zorder>
    <zorder>tasksGroupBox</zorder>
-   <zorder>pushButton_9</zorder>
+   <zorder>doItButton</zorder>
   </widget>
   <widget class="QTextEdit" name="inBasketTextEdit">
    <property name="geometry">
@@ -320,17 +320,17 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_10">
+  <widget class="QPushButton" name="reEditSelectionButton">
    <property name="geometry">
     <rect>
-     <x>179</x>
+     <x>149</x>
      <y>230</y>
-     <width>101</width>
+     <width>131</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Re-edit selection</string>
+    <string>&amp;Re-edit Selection</string>
    </property>
   </widget>
   <zorder>actionsGroupBox</zorder>
@@ -338,34 +338,33 @@
   <zorder>label_2</zorder>
   <zorder>NonActionableBtn</zorder>
   <zorder>ActionableBtn</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_3</zorder>
-  <zorder>pushButton_4</zorder>
-  <zorder>pushButton_5</zorder>
-  <zorder>pushButton_6</zorder>
-  <zorder>pushButton_7</zorder>
-  <zorder>pushButton_8</zorder>
+  <zorder>somedayMaybeButton</zorder>
+  <zorder>referenceButton</zorder>
+  <zorder>trashButton</zorder>
+  <zorder>waitingOnSomeoneButton</zorder>
+  <zorder>calendarButton</zorder>
+  <zorder>projectsToPlanButton</zorder>
+  <zorder>projectPlansButton</zorder>
+  <zorder>nextActionsButton</zorder>
   <zorder>InBasketListWidget</zorder>
   <zorder>inBasketTextEdit</zorder>
   <zorder>label_3</zorder>
-  <zorder>pushButton_10</zorder>
+  <zorder>reEditSelectionButton</zorder>
  </widget>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
-  <tabstop>pushButton_10</tabstop>
   <tabstop>InBasketListWidget</tabstop>
   <tabstop>NonActionableBtn</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_3</tabstop>
+  <tabstop>somedayMaybeButton</tabstop>
+  <tabstop>referenceButton</tabstop>
+  <tabstop>trashButton</tabstop>
   <tabstop>ActionableBtn</tabstop>
-  <tabstop>pushButton_9</tabstop>
-  <tabstop>pushButton_4</tabstop>
-  <tabstop>pushButton_5</tabstop>
-  <tabstop>pushButton_8</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_7</tabstop>
+  <tabstop>doItButton</tabstop>
+  <tabstop>waitingOnSomeoneButton</tabstop>
+  <tabstop>calendarButton</tabstop>
+  <tabstop>nextActionsButton</tabstop>
+  <tabstop>projectsToPlanButton</tabstop>
+  <tabstop>projectPlansButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

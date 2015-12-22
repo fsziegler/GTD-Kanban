@@ -22,7 +22,29 @@ private slots:
 
     void on_inBasketTextEdit_textChanged();
 
-    void on_pushButton_10_clicked();
+    void on_NonActionableBtn_clicked();
+
+    void on_somedayMaybeButton_clicked();
+
+    void on_referenceButton_clicked();
+
+    void on_trashButton_clicked();
+
+    void on_ActionableBtn_clicked();
+
+    void on_doItButton_clicked();
+
+    void on_waitingOnSomeoneButton_clicked();
+
+    void on_calendarButton_clicked();
+
+    void on_nextActionsButton_clicked();
+
+    void on_projectsToPlanButton_clicked();
+
+    void on_projectPlansButton_clicked();
+
+    void on_reEditSelectionButton_clicked();
 
 private:
     Ui::InBasketForm *ui;
