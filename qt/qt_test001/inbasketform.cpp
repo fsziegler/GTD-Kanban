@@ -34,6 +34,32 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(QList<QListWidgetItem*>& itemS
     }
 }
 
+void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
+{
+    if(nullptr == mp_gtdTree)
+    {
+        return;
+    }
+    QList<QTreeWidgetItem*> list = mp_gtdTree->findItems(nodeNameStr, Qt::MatchExactly|Qt::MatchRecursive, 0);
+    if(0 == list.size())
+    {
+        QString errMsg(nodeNameStr);
+        errMsg.append(QString(" not found!"));
+        QMessageBox msg(QMessageBox::Warning, "Error:", errMsg, QMessageBox::Ok);
+        msg.exec();
+        return;
+    }
+    QTreeWidgetItem* nonActTree = list.front();
+
+    QList<QListWidgetItem*> itemSelectionList;
+    GetSelectionOutOfGTDBasketList(itemSelectionList);
+    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end(); ++itr)
+    {
+        const QListWidgetItem* qwi = (*itr);
+        nonActTree->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(qwi->text())));
+    }
+}
+
 void InBasketForm::on_inBasketTextEdit_textChanged()
 {
     if(0 == ui->inBasketTextEdit->toPlainText().size())
@@ -85,64 +111,45 @@ void InBasketForm::on_reEditSelectionButton_clicked()
 
 void InBasketForm::on_somedayMaybeButton_clicked()
 {
-    if(nullptr == mp_gtdTree)
-    {
-        return;
-    }
-    QList<QTreeWidgetItem*> list = mp_gtdTree->findItems(QString("Someday Maybe"), Qt::MatchExactly|Qt::MatchRecursive, 0);
-    if(0 == list.size())
-    {
-        QMessageBox msg(QMessageBox::Warning, "Error:", "Someday Maybe not found!", QMessageBox::Ok);
-        msg.exec();
-        return;
-    }
-    QTreeWidgetItem* nonActTree = list.front();
-
-    QList<QListWidgetItem*> itemSelectionList;
-    GetSelectionOutOfGTDBasketList(itemSelectionList);
-    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end(); ++itr)
-    {
-        const QListWidgetItem* qwi = (*itr);
-        nonActTree->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(qwi->text())));
-    }
+    MoveFromGTDBasketListToTree(QString("Someday Maybe"));
 }
 
 void InBasketForm::on_referenceButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Reference"));
 }
 
 void InBasketForm::on_trashButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Trash"));
 }
 
 void InBasketForm::on_doItButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Do It!"));
 }
 
 void InBasketForm::on_waitingOnSomeoneButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Waiting on someone"));
 }
 
 void InBasketForm::on_calendarButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Calendar"));
 }
 
 void InBasketForm::on_nextActionsButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Next Actions"));
 }
 
 void InBasketForm::on_projectsToPlanButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Projects-to-Plan"));
 }
 
 void InBasketForm::on_projectPlansButton_clicked()
 {
-
+    MoveFromGTDBasketListToTree(QString("Project Plans"));
 }

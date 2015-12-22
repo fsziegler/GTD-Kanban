@@ -19,6 +19,7 @@ public:
 
     void SetGTDTreeWidget(QTreeWidget* gtdTree);
     void GetSelectionOutOfGTDBasketList(QList<QListWidgetItem*>& itemSelectionList);
+    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
 
 private slots:
     void on_inBasketTextEdit_textChanged();
