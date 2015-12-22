@@ -2,6 +2,8 @@
 #define INBASKETFORM_H
 
 #include <QWidget>
+#include <QTreeWidget>
+#include <QListWidgetItem>
 
 namespace Ui {
 class InBasketForm;
@@ -15,22 +17,19 @@ public:
     explicit InBasketForm(QWidget *parent = 0);
     ~InBasketForm();
 
+    void SetGTDTreeWidget(QTreeWidget* gtdTree);
+    void GetSelectionOutOfGTDBasketList(QList<QListWidgetItem*>& itemSelectionList);
+
 private slots:
-    void on_nonActionableBtn_clicked();
-
-    void on_actionableBtn_clicked();
-
     void on_inBasketTextEdit_textChanged();
 
-    void on_NonActionableBtn_clicked();
+    void on_reEditSelectionButton_clicked();
 
     void on_somedayMaybeButton_clicked();
 
     void on_referenceButton_clicked();
 
     void on_trashButton_clicked();
-
-    void on_ActionableBtn_clicked();
 
     void on_doItButton_clicked();
 
@@ -44,10 +43,9 @@ private slots:
 
     void on_projectPlansButton_clicked();
 
-    void on_reEditSelectionButton_clicked();
-
 private:
     Ui::InBasketForm *ui;
+    QTreeWidget* mp_gtdTree;
 };
 
 #endif // INBASKETFORM_H

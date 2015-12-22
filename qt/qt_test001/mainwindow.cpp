@@ -13,20 +13,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
 
+    // Create GTD splitter window & add in-basket and tree windows to it
     mp_gtdSplitter = new QSplitter(Qt::Vertical);
     mp_inBasketForm = new InBasketForm();
+    mp_inBasketForm->SetGTDTreeWidget(&m_gtdTree);
     mp_gtdSplitter->addWidget(mp_inBasketForm);
     mp_gtdSplitter->addWidget(&m_gtdTree);
     mp_gtdSplitter->setChildrenCollapsible(true);
-//    mp_gtdSplitter->setFixedHeight(471);
     mp_inBasketForm->setFixedHeight(471);
     mp_inBasketForm->setFixedWidth(501);
 
+    // Set up the tree window
     m_gtdTree.setColumnCount(1);
     m_gtdTree.setHeaderLabel(QString("GTD Tree"));
     m_gtdTree.setSortingEnabled(false);
     QTreeWidgetItem* nonActionableTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Non-Actionable")));
-//    m_gtdTree.insertTopLevelItem(0, nonActionableTI);
     nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Someday Maybe"))));
     nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Reference"))));
     nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Trash"))));
@@ -46,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_gtdTree.expandAll();
     //    m_gtdTree.ins
 
+    // Create main splitter window & add GTD and Kanban windows to it
     mp_lrSplitter = new QSplitter(Qt::Horizontal);
     mp_lrSplitter->addWidget(mp_gtdSplitter);
-//    mp_gtdEditor.setDocumentTitle(QString("GTD"));
     mp_lrSplitter->addWidget(&m_kanbanEditor);
     setCentralWidget(mp_lrSplitter);
 

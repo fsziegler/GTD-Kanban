@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>471</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -51,44 +51,12 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="NonActionableBtn">
-   <property name="geometry">
-    <rect>
-     <x>311</x>
-     <y>40</y>
-     <width>151</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>You can't do anything about this now</string>
-   </property>
-   <property name="text">
-    <string>Not Actionable Now</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ActionableBtn">
-   <property name="geometry">
-    <rect>
-     <x>311</x>
-     <y>160</y>
-     <width>151</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>You can take action on this</string>
-   </property>
-   <property name="text">
-    <string>Actionable</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="somedayMaybeButton">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>330</x>
      <y>70</y>
-     <width>111</width>
+     <width>121</width>
      <height>23</height>
     </rect>
    </property>
@@ -102,9 +70,9 @@
   <widget class="QPushButton" name="referenceButton">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>330</x>
      <y>100</y>
-     <width>111</width>
+     <width>121</width>
      <height>23</height>
     </rect>
    </property>
@@ -118,9 +86,9 @@
   <widget class="QPushButton" name="trashButton">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>330</x>
      <y>130</y>
-     <width>111</width>
+     <width>121</width>
      <height>23</height>
     </rect>
    </property>
@@ -134,8 +102,8 @@
   <widget class="QPushButton" name="waitingOnSomeoneButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>250</y>
+     <x>330</x>
+     <y>260</y>
      <width>121</width>
      <height>23</height>
     </rect>
@@ -150,8 +118,8 @@
   <widget class="QPushButton" name="calendarButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>280</y>
+     <x>330</x>
+     <y>290</y>
      <width>121</width>
      <height>23</height>
     </rect>
@@ -166,8 +134,8 @@
   <widget class="QPushButton" name="projectsToPlanButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>380</y>
+     <x>330</x>
+     <y>390</y>
      <width>121</width>
      <height>23</height>
     </rect>
@@ -182,8 +150,8 @@
   <widget class="QPushButton" name="projectPlansButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>410</y>
+     <x>330</x>
+     <y>420</y>
      <width>121</width>
      <height>23</height>
     </rect>
@@ -198,8 +166,8 @@
   <widget class="QPushButton" name="nextActionsButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>310</y>
+     <x>330</x>
+     <y>320</y>
      <width>121</width>
      <height>23</height>
     </rect>
@@ -217,7 +185,7 @@
      <x>20</x>
      <y>260</y>
      <width>261</width>
-     <height>191</height>
+     <height>201</height>
     </rect>
    </property>
    <property name="focusPolicy">
@@ -229,64 +197,6 @@
    <property name="selectionMode">
     <enum>QAbstractItemView::ExtendedSelection</enum>
    </property>
-  </widget>
-  <widget class="QGroupBox" name="actionsGroupBox">
-   <property name="geometry">
-    <rect>
-     <x>299</x>
-     <y>10</y>
-     <width>181</width>
-     <height>441</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Actions</string>
-   </property>
-   <widget class="QPushButton" name="doItButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>121</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>You can take care of this right now</string>
-    </property>
-    <property name="text">
-     <string>Do It!</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="tasksGroupBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>151</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Tasks</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="ProjectsGroupBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>340</y>
-      <width>151</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Projects</string>
-    </property>
-   </widget>
-   <zorder>ProjectsGroupBox</zorder>
-   <zorder>tasksGroupBox</zorder>
-   <zorder>doItButton</zorder>
   </widget>
   <widget class="QTextEdit" name="inBasketTextEdit">
    <property name="geometry">
@@ -333,11 +243,79 @@
     <string>&amp;Re-edit Selection</string>
    </property>
   </widget>
-  <zorder>actionsGroupBox</zorder>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>40</y>
+     <width>161</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Non-Actionable</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>170</y>
+     <width>161</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Actionable</string>
+   </property>
+   <widget class="QGroupBox" name="tasksGroupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>141</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Tasks</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="doItButton">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>230</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>You can take care of this right now</string>
+   </property>
+   <property name="text">
+    <string>Do It!</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="ProjectsGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>360</y>
+     <width>141</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Projects</string>
+   </property>
+  </widget>
+  <zorder>groupBox</zorder>
+  <zorder>ProjectsGroupBox</zorder>
+  <zorder>groupBox_2</zorder>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
-  <zorder>NonActionableBtn</zorder>
-  <zorder>ActionableBtn</zorder>
   <zorder>somedayMaybeButton</zorder>
   <zorder>referenceButton</zorder>
   <zorder>trashButton</zorder>
@@ -350,15 +328,15 @@
   <zorder>inBasketTextEdit</zorder>
   <zorder>label_3</zorder>
   <zorder>reEditSelectionButton</zorder>
+  <zorder>doItButton</zorder>
  </widget>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
+  <tabstop>reEditSelectionButton</tabstop>
   <tabstop>InBasketListWidget</tabstop>
-  <tabstop>NonActionableBtn</tabstop>
   <tabstop>somedayMaybeButton</tabstop>
   <tabstop>referenceButton</tabstop>
   <tabstop>trashButton</tabstop>
-  <tabstop>ActionableBtn</tabstop>
   <tabstop>doItButton</tabstop>
   <tabstop>waitingOnSomeoneButton</tabstop>
   <tabstop>calendarButton</tabstop>
