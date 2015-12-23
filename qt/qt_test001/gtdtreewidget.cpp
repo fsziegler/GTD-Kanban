@@ -16,24 +16,22 @@ GTDTreeWidget::GTDTreeWidget()
       m_projectsToPlanTWI((QTreeWidget*)0, QStringList(QString("Projects-to-Plan"))),
       m_projectPlansTWI((QTreeWidget*)0, QStringList(QString("Project Plans")))
 {
-    const Qt::ItemFlags flags(Qt::ItemIsSelectable | Qt::ItemIsDropEnabled
-                              | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
-    m_nonActionableTWI.setFlags(flags);
-    m_SomedayMaybeTWI.setFlags(flags);
-    m_ReferenceTWI.setFlags(flags);
-    m_TrashTWI.setFlags(flags);
-    m_actionableTWI.setFlags(flags);
-    m_tasksTWI.setFlags(flags);
-    m_DoItTWI.setFlags(flags);
-    m_WaitingOnSomeoneTWI.setFlags(flags);
-    m_CalendarTWI.setFlags(flags);
-    m_NextActionsTWI.setFlags(flags);
-    m_projectsTWI.setFlags(flags);
-    m_projectsToPlanTWI.setFlags(flags);
-    m_projectPlansTWI.setFlags(flags);
+    SetTreeItemProperties(m_nonActionableTWI);
+    SetTreeItemProperties(m_SomedayMaybeTWI);
+    SetTreeItemProperties(m_ReferenceTWI);
+    SetTreeItemProperties(m_TrashTWI);
+    SetTreeItemProperties(m_actionableTWI);
+    SetTreeItemProperties(m_tasksTWI);
+    SetTreeItemProperties(m_DoItTWI);
+    SetTreeItemProperties(m_WaitingOnSomeoneTWI);
+    SetTreeItemProperties(m_CalendarTWI);
+    SetTreeItemProperties(m_NextActionsTWI);
+    SetTreeItemProperties(m_projectsTWI);
+    SetTreeItemProperties(m_projectsToPlanTWI);
+    SetTreeItemProperties(m_projectPlansTWI);
 
     setColumnCount(1);
-    setHeaderLabel(QString("GTD Tree"));
+    setHeaderLabel(QString("2. GTD Tree"));
     setSortingEnabled(false);
     setAcceptDrops(true);
     setDragEnabled(true);
@@ -57,4 +55,39 @@ GTDTreeWidget::GTDTreeWidget()
 
 GTDTreeWidget::~GTDTreeWidget()
 {
+}
+
+void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
+{
+    static const Qt::ItemFlags flags(Qt::ItemIsSelectable
+                                     | Qt::ItemIsDropEnabled
+                                     | Qt::ItemIsUserCheckable
+                                     | Qt::ItemIsEnabled);
+    QFont font(treeItem.font(0).family() , 9 , QFont::Bold );
+    static const QBrush b (QColor (0, 49, 83));
+    treeItem.setFlags(flags);
+    treeItem.setForeground(0, b);
+    treeItem.setFont(0, font);
+}
+
+bool GTDTreeWidget::IsPosInMemberHdrTWI(const QPoint& pos) const
+{
+    bool retVal(false);
+    retVal = retVal || visualItemRect(&m_nonActionableTWI).contains(pos);
+    retVal = retVal || visualItemRect(&m_actionableTWI).contains(pos);
+    retVal = retVal || visualItemRect(&m_tasksTWI).contains(pos);
+    retVal = retVal || visualItemRect(&m_projectsTWI).contains(pos);
+    return retVal;
+}
+
+void GTDTreeWidget::dropEvent(QDropEvent * event)
+{
+    bool move(Qt::MoveAction == event->proposedAction());
+    if(move && IsPosInMemberHdrTWI(event->pos()))
+    {
+        setVisible(false);
+        setVisible(true);
+        return;
+    }
+    QTreeWidget::dropEvent(event);
 }

@@ -10,6 +10,11 @@ public:
     GTDTreeWidget();
     virtual ~GTDTreeWidget();
 
+protected:
+    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
+    bool IsPosInMemberHdrTWI(const QPoint& pos) const;
+    void dropEvent(QDropEvent * event);
+
 private:
     QTreeWidgetItem m_nonActionableTWI;
     QTreeWidgetItem m_SomedayMaybeTWI;
