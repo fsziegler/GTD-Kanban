@@ -8,6 +8,7 @@
 #include <QSplitter>
 #include <QPointer>
 #include <QTextEdit>
+#include <QCalendarWidget>
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,9 @@ private:
     QPointer<QSplitter> mp_lrSplitter;
     QTextEdit m_gtdEditor;
     GTDTreeWidget m_gtdTree;
+
+    QPointer<QSplitter> mp_kanbanSplitter;
+    QCalendarWidget m_kanbanCalendar;
     QTextEdit m_kanbanEditor;
 };
 #endif // MAINWINDOW_H

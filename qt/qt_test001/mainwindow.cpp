@@ -27,7 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // Create main splitter window & add GTD and Kanban windows to it
     mp_lrSplitter = new QSplitter(Qt::Horizontal);
     mp_lrSplitter->addWidget(mp_gtdSplitter);
-    mp_lrSplitter->addWidget(&m_kanbanEditor);
+
+    mp_kanbanSplitter = new QSplitter(Qt::Vertical);
+    mp_kanbanSplitter->addWidget(&m_kanbanCalendar);
+    mp_kanbanSplitter->addWidget(&m_kanbanEditor);
+    mp_lrSplitter->addWidget(mp_kanbanSplitter);
     setCentralWidget(mp_lrSplitter);
 
     ScaleAndCenterWindow(0.8);
