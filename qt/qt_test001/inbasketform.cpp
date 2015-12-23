@@ -71,16 +71,16 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
         msg.exec();
         return;
     }
-    QTreeWidgetItem* nonActTree = list.front();
+    QTreeWidgetItem* gtdTree = list.front();
 
     QList<QListWidgetItem*> itemSelectionList;
     GetSelectionOutOfGTDBasketList(itemSelectionList);
     for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end(); ++itr)
     {
-        QListWidgetItem* qwi = (*itr);
-        qwi->setTextColor(QColor(255,64,64));
-        qwi->setBackgroundColor(QColor(32,32,32));
-        nonActTree->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(qwi->text())));
+        QTreeWidgetItem* qti = new QTreeWidgetItem((QTreeWidget*)0, QStringList((*itr)->text()));
+        static const QBrush b (QColor (255, 255, 128));
+        qti->setBackground(0, b);
+        gtdTree->addChild(qti);
     }
 }
 

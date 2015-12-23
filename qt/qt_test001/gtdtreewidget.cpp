@@ -31,7 +31,7 @@ GTDTreeWidget::GTDTreeWidget()
     SetTreeItemProperties(m_projectPlansTWI);
 
     setColumnCount(1);
-    setHeaderLabel(QString("2. GTD Tree"));
+    setHeaderLabel(QString("      2. GTD Tree"));
     setSortingEnabled(false);
     setAcceptDrops(true);
     setDragEnabled(true);
