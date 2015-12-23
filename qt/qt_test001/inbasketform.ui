@@ -24,12 +24,12 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>251</width>
+     <width>261</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>1. In Basket - Start by entering issues here, separated by carriage return (&lt;Enter&gt;)</string>
+    <string>1. GTD In Basket - Start by entering issues here, separated by carriage return (&lt;Enter&gt;)</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -191,6 +191,9 @@
    <property name="focusPolicy">
     <enum>Qt::StrongFocus</enum>
    </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
    <property name="alternatingRowColors">
     <bool>true</bool>
    </property>
@@ -311,6 +314,22 @@
     <string>Projects</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="gtdMinMaxButton">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>10</y>
+     <width>23</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+   <property name="arrowType">
+    <enum>Qt::UpArrow</enum>
+   </property>
+  </widget>
   <zorder>groupBox</zorder>
   <zorder>ProjectsGroupBox</zorder>
   <zorder>groupBox_2</zorder>
@@ -329,6 +348,7 @@
   <zorder>label_3</zorder>
   <zorder>reEditSelectionButton</zorder>
   <zorder>doItButton</zorder>
+  <zorder>gtdMinMaxButton</zorder>
  </widget>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>

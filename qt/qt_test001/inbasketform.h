@@ -44,6 +44,8 @@ private slots:
 
     void on_projectPlansButton_clicked();
 
+    void on_gtdMinMaxButton_clicked();
+
 private:
     Ui::InBasketForm *ui;
     QTreeWidget* mp_gtdTree;

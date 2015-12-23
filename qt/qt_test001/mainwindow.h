@@ -2,12 +2,12 @@
 #define MAINWINDOW_H
 
 #include "inbasketform.h"
+#include "gtdtreewidget.h"
 
 #include <QMainWindow>
 #include <QSplitter>
 #include <QPointer>
 #include <QTextEdit>
-#include <QTreeWidget>
 
 namespace Ui {
 class MainWindow;
@@ -34,7 +34,7 @@ private:
     QPointer<QSplitter> mp_gtdSplitter;
     QPointer<QSplitter> mp_lrSplitter;
     QTextEdit m_gtdEditor;
-    QTreeWidget m_gtdTree;
+    GTDTreeWidget m_gtdTree;
     QTextEdit m_kanbanEditor;
 };
 #endif // MAINWINDOW_H

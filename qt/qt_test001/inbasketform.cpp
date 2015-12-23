@@ -12,7 +12,29 @@ InBasketForm::InBasketForm(QWidget *parent) :
     ui->setupUi(this);
     ui->InBasketListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
     // TEMPORARY FOR QUICK TESTING
-    ui->inBasketTextEdit->setText(QString("doctor\nlawyer\ntinker\ntaylor\nsoldier spy"));
+    QString inBasket("Call Fred re tel. # for the garage he recommended.\nDraft"
+                     " thoughts for the budget-meeting agenda.\nTalk to Angela "
+                     "about the filing system we need to set up.\nResearch "
+                     "database-management software on the Web.\nGet new staff "
+                     "person on board August\nvacation Staff off-site retreat\n"
+                     "Publish book\nFinalize computer upgrades\nUpdate will\n"
+                     "Finalize budgets\nFinalize new product line\nGet "
+                     "comfortable with new contact-management software\nGet "
+                     "reprints of Fortune article\nGet a publicist\nFinish new "
+                     "orchard planting\nR&D joint-venture video project\n"
+                     "Produce new training compact disk\nEstablish next year’s "
+                     "seminar schedule\nOrchestrate a one-hour keynote "
+                     "presentation\nGet proficient with videoconferencing "
+                     "access\nFinalize employment agreements\nInstall new "
+                     "backyard lights");
+//    Allen, David (2002-12-31). Getting Things Done: The Art of Stress-Free Productivity (p. 34). Penguin Group. Kindle Edition.
+
+    ui->inBasketTextEdit->setText(inBasket);
+    ui->inBasketTextEdit->setAcceptDrops(true);
+//    ui->inBasketTextEdit->set
+//    m_gtdTree.setAcceptDrops(true);
+//    m_gtdTree.setDragEnabled(true);
+//    m_gtdTree.setDragDropMode(QTreeWidget::InternalMove);
 }
 
 InBasketForm::~InBasketForm()
@@ -55,7 +77,9 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
     GetSelectionOutOfGTDBasketList(itemSelectionList);
     for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end(); ++itr)
     {
-        const QListWidgetItem* qwi = (*itr);
+        QListWidgetItem* qwi = (*itr);
+        qwi->setTextColor(QColor(255,64,64));
+        qwi->setBackgroundColor(QColor(32,32,32));
         nonActTree->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(qwi->text())));
     }
 }
@@ -152,4 +176,18 @@ void InBasketForm::on_projectsToPlanButton_clicked()
 void InBasketForm::on_projectPlansButton_clicked()
 {
     MoveFromGTDBasketListToTree(QString("Project Plans"));
+}
+
+void InBasketForm::on_gtdMinMaxButton_clicked()
+{
+    if(100 < height())
+    {
+        setFixedHeight(40);
+        ui->gtdMinMaxButton->setArrowType(Qt::DownArrow);
+    }
+    else
+    {
+        setFixedHeight(471);
+        ui->gtdMinMaxButton->setArrowType(Qt::UpArrow);
+    }
 }

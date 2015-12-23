@@ -17,35 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     mp_gtdSplitter = new QSplitter(Qt::Vertical);
     mp_inBasketForm = new InBasketForm();
     mp_inBasketForm->SetGTDTreeWidget(&m_gtdTree);
+    mp_inBasketForm->setAcceptDrops(true);
     mp_gtdSplitter->addWidget(mp_inBasketForm);
     mp_gtdSplitter->addWidget(&m_gtdTree);
     mp_gtdSplitter->setChildrenCollapsible(true);
     mp_inBasketForm->setFixedHeight(471);
     mp_inBasketForm->setFixedWidth(501);
-
-    // Set up the tree window
-    m_gtdTree.setColumnCount(1);
-    m_gtdTree.setHeaderLabel(QString("GTD Tree"));
-    m_gtdTree.setSortingEnabled(false);
-    QTreeWidgetItem* nonActionableTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Non-Actionable")));
-    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Someday Maybe"))));
-    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Reference"))));
-    nonActionableTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Trash"))));
-    QTreeWidgetItem* actionableTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Actionable")));
-    QTreeWidgetItem* tasksTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Tasks")));
-    actionableTI->addChild(tasksTI);
-    m_gtdTree.insertTopLevelItem(0, actionableTI);
-    m_gtdTree.insertTopLevelItem(0, nonActionableTI);
-    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Do It!"))));
-    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Waiting on someone"))));
-    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Calendar"))));
-    tasksTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Next Actions"))));
-    QTreeWidgetItem* projectsTI = new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Projects")));
-    actionableTI->addChild(projectsTI);
-    projectsTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Projects-to-Plan"))));
-    projectsTI->addChild(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("Project Plans"))));
-    m_gtdTree.expandAll();
-    //    m_gtdTree.ins
 
     // Create main splitter window & add GTD and Kanban windows to it
     mp_lrSplitter = new QSplitter(Qt::Horizontal);

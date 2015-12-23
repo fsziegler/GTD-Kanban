@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    inbasketform.cpp
+    inbasketform.cpp \
+    gtdtreewidget.cpp
 
 HEADERS  += mainwindow.h \
-    inbasketform.h
+    inbasketform.h \
+    gtdtreewidget.h
 
 FORMS    += mainwindow.ui \
     inbasketform.ui
