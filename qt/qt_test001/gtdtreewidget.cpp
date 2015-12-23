@@ -16,6 +16,22 @@ GTDTreeWidget::GTDTreeWidget()
       m_projectsToPlanTWI((QTreeWidget*)0, QStringList(QString("Projects-to-Plan"))),
       m_projectPlansTWI((QTreeWidget*)0, QStringList(QString("Project Plans")))
 {
+    const Qt::ItemFlags flags(Qt::ItemIsSelectable | Qt::ItemIsDropEnabled
+                              | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+    m_nonActionableTWI.setFlags(flags);
+    m_SomedayMaybeTWI.setFlags(flags);
+    m_ReferenceTWI.setFlags(flags);
+    m_TrashTWI.setFlags(flags);
+    m_actionableTWI.setFlags(flags);
+    m_tasksTWI.setFlags(flags);
+    m_DoItTWI.setFlags(flags);
+    m_WaitingOnSomeoneTWI.setFlags(flags);
+    m_CalendarTWI.setFlags(flags);
+    m_NextActionsTWI.setFlags(flags);
+    m_projectsTWI.setFlags(flags);
+    m_projectsToPlanTWI.setFlags(flags);
+    m_projectPlansTWI.setFlags(flags);
+
     setColumnCount(1);
     setHeaderLabel(QString("GTD Tree"));
     setSortingEnabled(false);
@@ -42,34 +58,3 @@ GTDTreeWidget::GTDTreeWidget()
 GTDTreeWidget::~GTDTreeWidget()
 {
 }
-
-bool GTDTreeWidget::IsPosInMemberTWI(const QPoint& pos) const
-{
-    bool retVal(false);
-    retVal = retVal || visualItemRect(&m_SomedayMaybeTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_ReferenceTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_TrashTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_actionableTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_tasksTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_DoItTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_WaitingOnSomeoneTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_CalendarTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_NextActionsTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_projectsTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_projectsToPlanTWI).contains(pos);
-    retVal = retVal || visualItemRect(&m_projectPlansTWI).contains(pos);
-    return retVal;
-}
-
-void GTDTreeWidget::dropEvent(QDropEvent * event)
-{
-    bool copy(Qt::CopyAction == event->proposedAction());
-    bool move(Qt::MoveAction == event->proposedAction());
-    if(move && IsPosInMemberTWI(event->pos()))
-    {
-        repaint();
-        return;
-    }
-    QTreeWidget::dropEvent(event);
-}
-

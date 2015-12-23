@@ -9,9 +9,7 @@ class GTDTreeWidget : public QTreeWidget
 public:
     GTDTreeWidget();
     virtual ~GTDTreeWidget();
-protected:
-    bool IsPosInMemberTWI(const QPoint& pos) const;
-    virtual void dropEvent(QDropEvent * event);
+
 private:
     QTreeWidgetItem m_nonActionableTWI;
     QTreeWidgetItem m_SomedayMaybeTWI;
