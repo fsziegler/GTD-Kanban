@@ -40,7 +40,7 @@
     <rect>
      <x>20</x>
      <y>130</y>
-     <width>261</width>
+     <width>271</width>
      <height>41</height>
     </rect>
    </property>
@@ -184,7 +184,7 @@
     <rect>
      <x>20</x>
      <y>260</y>
-     <width>261</width>
+     <width>271</width>
      <height>201</height>
     </rect>
    </property>
@@ -206,7 +206,7 @@
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>261</width>
+     <width>271</width>
      <height>70</height>
     </rect>
    </property>
@@ -222,7 +222,7 @@
     <rect>
      <x>20</x>
      <y>180</y>
-     <width>261</width>
+     <width>271</width>
      <height>41</height>
     </rect>
    </property>
@@ -236,11 +236,20 @@
   <widget class="QPushButton" name="reEditSelectionButton">
    <property name="geometry">
     <rect>
-     <x>149</x>
+     <x>160</x>
      <y>230</y>
      <width>131</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="toolTip">
+    <string>Move selected issue below to In-Basket for editing</string>
    </property>
    <property name="text">
     <string>&amp;Re-edit Selection</string>

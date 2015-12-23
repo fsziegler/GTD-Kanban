@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDesktopWidget>
 #include <QTextStream>
+#include <QDockWidget>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,12 +28,33 @@ MainWindow::MainWindow(QWidget *parent) :
     // Create main splitter window & add GTD and Kanban windows to it
     mp_lrSplitter = new QSplitter(Qt::Horizontal);
     mp_lrSplitter->addWidget(mp_gtdSplitter);
+//    mp_lrSplitter->addWidget(dock);
 
     mp_kanbanSplitter = new QSplitter(Qt::Vertical);
-    mp_kanbanSplitter->addWidget(&m_kanbanCalendar);
+    mp_kanbanSplitter->setWindowTitle(QString("Kanban Calendar"));
+//    QDockWidget *dock = new QDockWidget(QString("Kanban"), this);
+    QToolBar *toolBar = new QToolBar(QString("Kanban"), this);
+//    toolBar->addAction(QIcon(QPixmap(QSize(22, 22))), QString("Actionsss"));
+//    QList<QAction*> actions;
+//    actions.append(new QAction(QString("Day"), (QObject*)0));
+//    actions.append(new QAction(QString("Week"), (QObject*)0));
+//    toolBar->setWindowTitle(QString("Kanban Calendar"));
+////    toolBar->
+//    toolBar->addActions(actions);
+//    toolBar->addAction(QString("Day"));
+//    toolBar->addAction(QString("Week"));
+//    toolBar->addAction(QString("Month"));
+//    toolBar->addAction(QString("Year"));
+//    toolBar->setOrientation(Qt::Vertical);
+    m_kanbanCalendar.setDateEditEnabled(true);
+    m_kanbanCalendar.setDateEditEnabled(true);
+    toolBar->addWidget(&m_kanbanCalendar);
+//    mp_kanbanSplitter->addWidget(&m_kanbanCalendar);
+    mp_kanbanSplitter->addWidget(toolBar);
     mp_kanbanSplitter->addWidget(&m_kanbanEditor);
     mp_lrSplitter->addWidget(mp_kanbanSplitter);
     setCentralWidget(mp_lrSplitter);
+//    setCentralWidget(dock);
 
     ScaleAndCenterWindow(0.8);
 }

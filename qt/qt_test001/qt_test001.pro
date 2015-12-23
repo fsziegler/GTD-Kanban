@@ -22,7 +22,8 @@ HEADERS  += mainwindow.h \
     gtdtreewidget.h
 
 FORMS    += mainwindow.ui \
-    inbasketform.ui
+    inbasketform.ui \
+    calendarbtndialog.ui
 
 # Added 2015-12-21 by Fred
 CONFIG += c++14

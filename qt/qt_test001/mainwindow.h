@@ -3,6 +3,7 @@
 
 #include "inbasketform.h"
 #include "gtdtreewidget.h"
+//#include "qgtdcalendarwidget.h"
 
 #include <QMainWindow>
 #include <QSplitter>
@@ -38,6 +39,7 @@ private:
     GTDTreeWidget m_gtdTree;
 
     QPointer<QSplitter> mp_kanbanSplitter;
+//    QGTDCalendarWidget m_kanbanCalendar;
     QCalendarWidget m_kanbanCalendar;
     QTextEdit m_kanbanEditor;
 };
