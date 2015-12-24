@@ -3,7 +3,7 @@
 
 #include "inbasketform.h"
 #include "gtdtreewidget.h"
-//#include "qgtdcalendarwidget.h"
+#include "gtdcalendarwidget.h"
 
 #include <QMainWindow>
 #include <QSplitter>
@@ -23,6 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+   void mouseMoveEvent(QMouseEvent *event);
+
 private slots:
     void on_actionExit_triggered();
 
@@ -40,8 +42,9 @@ private:
     GTDTreeWidget m_gtdTree;
 
     QPointer<QSplitter> mp_kanbanSplitter;
-//    QGTDCalendarWidget m_kanbanCalendar;
-    QCalendarWidget m_gtdCalendar;
+    GTDCalendarWidget m_gtdCalendar;
+//    QCalendarWidget m_gtdCalendar;
+
     QTextEdit m_kanbanEditor;
 };
 #endif // MAINWINDOW_H

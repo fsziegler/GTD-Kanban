@@ -6,48 +6,56 @@
 #include <QDesktopWidget>
 #include <QTextStream>
 #include <QDockWidget>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+   QMainWindow(parent),
+   m_gtdCalendar(parent),
+   ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
+   ui->setupUi(this);
+   setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
+   setMouseTracking(true);
 
-    // Set up In-Basket form
-    m_inBasketForm.SetGTDTreeWidget(&m_gtdTree);
-    m_inBasketForm.setAcceptDrops(true);
-    m_inBasketForm.setFixedHeight(471);
-    m_inBasketForm.setFixedWidth(501);
+   // Set up In-Basket form
+   m_inBasketForm.SetGTDTreeWidget(&m_gtdTree);
+   m_inBasketForm.setAcceptDrops(true);
+   m_inBasketForm.setFixedHeight(471);
+   m_inBasketForm.setFixedWidth(501);
 
-    // Create GTD splitter window & add in-basket and tree windows to it
-    mp_gtdSplitter = new QSplitter(Qt::Vertical);
-    mp_gtdSplitter->addWidget(&m_inBasketForm);
-    mp_gtdSplitter->addWidget(&m_gtdTree);
-    mp_gtdSplitter->setChildrenCollapsible(true);
+   // Create GTD splitter window & add in-basket and tree windows to it
+   mp_gtdSplitter = new QSplitter(Qt::Vertical);
+   mp_gtdSplitter->addWidget(&m_inBasketForm);
+   mp_gtdSplitter->addWidget(&m_gtdTree);
+   mp_gtdSplitter->setChildrenCollapsible(true);
 
-    // Create main splitter window & add GTD splitter window to it
-    mp_mainLRSplitter = new QSplitter(Qt::Horizontal);
-    mp_mainLRSplitter->addWidget(mp_gtdSplitter);
+   // Create main splitter window & add GTD splitter window to it
+   mp_mainLRSplitter = new QSplitter(Qt::Horizontal);
+   mp_mainLRSplitter->addWidget(mp_gtdSplitter);
 
-    // Set up Kanban calendar & editor and add to Kanban splitter window
-    m_gtdCalendar.setDateEditEnabled(true);
-    m_gtdCalendar.setDateEditEnabled(true);
-    mp_kanbanSplitter = new QSplitter(Qt::Vertical);
-    mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
-    mp_kanbanSplitter->addWidget(&m_gtdCalendar);
-    mp_kanbanSplitter->addWidget(&m_kanbanEditor);
+   // Set up Kanban calendar & editor and add to Kanban splitter window
+   m_gtdCalendar.setDateEditEnabled(true);
+   m_gtdCalendar.setDateEditEnabled(true);
+   mp_kanbanSplitter = new QSplitter(Qt::Vertical);
+   mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
+   mp_kanbanSplitter->addWidget(&m_gtdCalendar);
+   mp_kanbanSplitter->addWidget(&m_kanbanEditor);
 
-    // Add Kanban splitter window to main splitter window & set as central widget
-    mp_mainLRSplitter->addWidget(mp_kanbanSplitter);
-    setCentralWidget(mp_mainLRSplitter);
+   // Add Kanban splitter window to main splitter window & set as central widget
+   mp_mainLRSplitter->addWidget(mp_kanbanSplitter);
+   setCentralWidget(mp_mainLRSplitter);
 
-    ScaleAndCenterWindow(0.8);
+   ScaleAndCenterWindow(0.8);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    qDebug() << event->pos();
 }
 
 void MainWindow::on_actionExit_triggered()

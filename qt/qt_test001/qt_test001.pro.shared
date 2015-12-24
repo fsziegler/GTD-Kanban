@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.4.1, 2015-12-23T18:50:17. -->
+<!-- Written by QtCreator 3.4.1, 2015-12-23T18:32:03. -->
 <qtcreator>
- <data>
-  <variable>EnvironmentId</variable>
-  <value type="QByteArray">{b28677ed-4cd4-4f32-a4f7-e0d25c70f96a}</value>
- </data>
- <data>
-  <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">0</value>
- </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
   <valuemap type="QVariantMap">
