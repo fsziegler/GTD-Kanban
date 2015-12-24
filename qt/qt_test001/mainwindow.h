@@ -32,15 +32,16 @@ private:
     void ScaleAndCenterWindow(float scale);
 
     Ui::MainWindow *ui;
-    QPointer<InBasketForm> mp_inBasketForm;
+
+    InBasketForm m_inBasketForm;
     QPointer<QSplitter> mp_gtdSplitter;
-    QPointer<QSplitter> mp_lrSplitter;
+    QPointer<QSplitter> mp_mainLRSplitter;
     QTextEdit m_gtdEditor;
     GTDTreeWidget m_gtdTree;
 
     QPointer<QSplitter> mp_kanbanSplitter;
 //    QGTDCalendarWidget m_kanbanCalendar;
-    QCalendarWidget m_kanbanCalendar;
+    QCalendarWidget m_gtdCalendar;
     QTextEdit m_kanbanEditor;
 };
 #endif // MAINWINDOW_H

@@ -1,5 +1,6 @@
 #include "inbasketform.h"
 #include "ui_inbasketform.h"
+#include "kanbancalendardialog.h"
 #include <QMessageBox>
 #include <set>
 #include <vector>
@@ -160,7 +161,20 @@ void InBasketForm::on_waitingOnSomeoneButton_clicked()
 
 void InBasketForm::on_calendarButton_clicked()
 {
-    MoveFromGTDBasketListToTree(QString("Calendar"));
+    KanbanCalendarDialog kbcalDlg;
+    int rslt = kbcalDlg.exec();
+    switch(kbcalDlg.GetResult())
+    {
+    case kbcd_ScheduleNow:
+        break;
+    case kbcd_ScheduleLater:
+        MoveFromGTDBasketListToTree(QString("Calendar"));
+        break;
+    case kbcd_Cancel:
+        break;
+    case kbcd_UNKNOWN:
+        break;
+    }
 }
 
 void InBasketForm::on_nextActionsButton_clicked()

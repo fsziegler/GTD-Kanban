@@ -14,47 +14,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
 
+    // Set up In-Basket form
+    m_inBasketForm.SetGTDTreeWidget(&m_gtdTree);
+    m_inBasketForm.setAcceptDrops(true);
+    m_inBasketForm.setFixedHeight(471);
+    m_inBasketForm.setFixedWidth(501);
+
     // Create GTD splitter window & add in-basket and tree windows to it
     mp_gtdSplitter = new QSplitter(Qt::Vertical);
-    mp_inBasketForm = new InBasketForm();
-    mp_inBasketForm->SetGTDTreeWidget(&m_gtdTree);
-    mp_inBasketForm->setAcceptDrops(true);
-    mp_gtdSplitter->addWidget(mp_inBasketForm);
+    mp_gtdSplitter->addWidget(&m_inBasketForm);
     mp_gtdSplitter->addWidget(&m_gtdTree);
     mp_gtdSplitter->setChildrenCollapsible(true);
-    mp_inBasketForm->setFixedHeight(471);
-    mp_inBasketForm->setFixedWidth(501);
 
-    // Create main splitter window & add GTD and Kanban windows to it
-    mp_lrSplitter = new QSplitter(Qt::Horizontal);
-    mp_lrSplitter->addWidget(mp_gtdSplitter);
-//    mp_lrSplitter->addWidget(dock);
+    // Create main splitter window & add GTD splitter window to it
+    mp_mainLRSplitter = new QSplitter(Qt::Horizontal);
+    mp_mainLRSplitter->addWidget(mp_gtdSplitter);
 
+    // Set up Kanban calendar & editor and add to Kanban splitter window
+    m_gtdCalendar.setDateEditEnabled(true);
+    m_gtdCalendar.setDateEditEnabled(true);
     mp_kanbanSplitter = new QSplitter(Qt::Vertical);
-    mp_kanbanSplitter->setWindowTitle(QString("Kanban Calendar"));
-//    QDockWidget *dock = new QDockWidget(QString("Kanban"), this);
-    QToolBar *toolBar = new QToolBar(QString("Kanban"), this);
-//    toolBar->addAction(QIcon(QPixmap(QSize(22, 22))), QString("Actionsss"));
-//    QList<QAction*> actions;
-//    actions.append(new QAction(QString("Day"), (QObject*)0));
-//    actions.append(new QAction(QString("Week"), (QObject*)0));
-//    toolBar->setWindowTitle(QString("Kanban Calendar"));
-////    toolBar->
-//    toolBar->addActions(actions);
-//    toolBar->addAction(QString("Day"));
-//    toolBar->addAction(QString("Week"));
-//    toolBar->addAction(QString("Month"));
-//    toolBar->addAction(QString("Year"));
-//    toolBar->setOrientation(Qt::Vertical);
-    m_kanbanCalendar.setDateEditEnabled(true);
-    m_kanbanCalendar.setDateEditEnabled(true);
-    toolBar->addWidget(&m_kanbanCalendar);
-//    mp_kanbanSplitter->addWidget(&m_kanbanCalendar);
-    mp_kanbanSplitter->addWidget(toolBar);
+    mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
+    mp_kanbanSplitter->addWidget(&m_gtdCalendar);
     mp_kanbanSplitter->addWidget(&m_kanbanEditor);
-    mp_lrSplitter->addWidget(mp_kanbanSplitter);
-    setCentralWidget(mp_lrSplitter);
-//    setCentralWidget(dock);
+
+    // Add Kanban splitter window to main splitter window & set as central widget
+    mp_mainLRSplitter->addWidget(mp_kanbanSplitter);
+    setCentralWidget(mp_mainLRSplitter);
 
     ScaleAndCenterWindow(0.8);
 }

@@ -15,15 +15,19 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     inbasketform.cpp \
-    gtdtreewidget.cpp
+    gtdtreewidget.cpp \
+    kanbancalendardialog.cpp \
+    gtdcalendarwidget.cpp
 
 HEADERS  += mainwindow.h \
     inbasketform.h \
-    gtdtreewidget.h
+    gtdtreewidget.h \
+    kanbancalendardialog.h \
+    gtdcalendarwidget.h
 
 FORMS    += mainwindow.ui \
     inbasketform.ui \
-    calendarbtndialog.ui
+    kanbancalendardialog.ui
 
 # Added 2015-12-21 by Fred
 CONFIG += c++14
