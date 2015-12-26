@@ -11,9 +11,9 @@ Copyright (c) 2015 Frederick S. Ziegler
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
 
 ### 1.1 Getting Things Done
-`"Plans are worthless, but planning is everything."`
+`"Rational behavior requires theory. Reactive behavior requires only reflex reaction"`
 
-`--Dwight D. Eisenhower`
+`--Edward Deming`
 
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
 
@@ -51,6 +51,10 @@ Once you have processed your issues, you will have the following lists stored in
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
 #####Planning Projects
+`"Plans are worthless, but planning is everything."`
+
+`--Dwight D. Eisenhower`
+
 How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***. A more in-depth approach is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
 
 ###1.2 Kanban
