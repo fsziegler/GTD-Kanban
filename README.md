@@ -11,9 +11,10 @@ Copyright (c) 2015 Frederick S. Ziegler
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
 
 ### 1.1 Getting Things Done
-`"Rational behavior requires theory. Reactive behavior requires only reflex reaction"`
 
-`--Edward Deming`
+`"The prevailing system of management has crushed fun out of the workplace"`
+
+`--W. Edwards Deming`
 
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
 
@@ -100,6 +101,10 @@ Third, **make it fast** by
 You may iterate through the second and third phases any number of times as your refine your product.
 
 ####Reliable, Maintainable, Scalable
+`"Rational behavior requires theory. Reactive behavior requires only reflex reaction"`
+
+`--W. Edwards Deming`
+
 Endeavour to make your products reliable, maintainable, and scalable. All three of these will result naturally from the following good design practices.
 
 #####Architecture
