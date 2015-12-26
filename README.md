@@ -111,7 +111,7 @@ Endeavour to make your products reliable, maintainable, and scalable. All three 
 First, explicitly implement an **architecture** - this is the skeleton in the "make it work" phase. Houses have frames, boats have keels, cars have a chassis or cage, and good software has an architecture. Architecture is a basic structure to which every component is attached in some way. You cannot have a good product with a bad architecture.
 
 #####Modularity
-Second, practice **modularity**. A module is component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and [objects](https://en.wikipedia.org/wiki/Object-oriented_programming) in software.
+Second, practice **modularity**. A module is a component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and [objects](https://en.wikipedia.org/wiki/Object-oriented_programming) in software.
 
 Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has two benefits:
   - you only have to build and maintain a single module, and
@@ -148,7 +148,7 @@ Some typical use cases that this tool are intended to address are:
     - Fighting unjust parking and/or traffic tickets
     - Negotiating a legal agreement
   - You are starting a business
-  - You are doing many/all of the above
+  - You are doing some/many/all of the above
 
 Once you have completed a project, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
 
@@ -157,8 +157,8 @@ Getting an overview may enable you to boil multiple issues down to a single one,
 You may get satisfaction by keeping a record of the *Done* tasks.
 
 ##3. GTD-Kanban Implementation Details
-Files created with this tool will be stored in [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking on both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
+Files created with this tool will be stored in the [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking on both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
 
-A key UI feature will be the ability to hide and show information. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
+A key UI feature will be the ability to hide and show information in order to focus on specific issues. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
 
 The base code is being written in C++. The UI is being developed using the cross-platform Qt development tools. Future development may leverage [node.js](https://nodejs.org/en/about/) as an interface between the C++ and a web UI front-end on a server, [export the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrate the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
