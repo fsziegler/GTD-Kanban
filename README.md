@@ -111,7 +111,7 @@ Endeavour to make your products reliable, maintainable, and scalable. All three 
 First, explicitly implement an **architecture** - this is the skeleton in the "make it work" phase. Houses have frames, boats have keels, cars have a chassis or cage, and good software has an architecture. Architecture is a basic structure to which every component is attached in some way. You cannot have a good product with a bad architecture.
 
 #####Modularity
-Second, practice **modularity**. A module is component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and objects in software.
+Second, practice **modularity**. A module is component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and [objects](https://en.wikipedia.org/wiki/Object-oriented_programming) in software.
 
 Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has two benefits:
   - you only have to build and maintain a single module, and
