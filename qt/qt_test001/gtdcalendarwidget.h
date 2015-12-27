@@ -3,17 +3,30 @@
 
 #include <QCalendarWidget>
 #include <QTime>
+#include <QMouseEvent>
+#include <QPoint>
+#include <QPen>
+#include <QBrush>
 
-class GTDCalendarWidget : public QCalendarWidget
+class GTDCalendarWidget: public QCalendarWidget
 {
+   Q_OBJECT
 public:
-    GTDCalendarWidget(QWidget *parent = 0);
-    ~GTDCalendarWidget();
+   GTDCalendarWidget(QWidget *parent = 0);
+   virtual ~GTDCalendarWidget();
 
-protected:
-    virtual void paintCell(QPainter *painter, const QRect &rect, const QDate &date) const;
+//protected:
+   virtual void mousePressEvent(QMouseEvent * event)
+   Q_DECL_OVERRIDE;
+   virtual void paintCell(QPainter *painter, const QRect &rect,
+         const QDate &date) const;
 private:
-    QTime m_inited;
+   QTime m_timer;
+   Qt::MouseButtons m_mouseBtns;
+   QPoint m_leftClickPoint;
+
+   QPen m_outlinePen;
+   QBrush m_transparentBrush;
 };
 
 #endif // QKANBANCALENDARWIDGET_H

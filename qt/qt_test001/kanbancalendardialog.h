@@ -2,36 +2,39 @@
 #define KANBANCALENDARDIALOG_H
 
 #include <QDialog>
+#include <QListWidgetItem>
 
-namespace Ui {
+namespace Ui
+{
 class KanbanCalendarDialog;
 }
 
 enum KanbanCalendarDialogResult
 {
-    kbcd_ScheduleNow,
-    kbcd_ScheduleLater,
-    kbcd_Cancel,
-    kbcd_UNKNOWN,
+   kbcd_ScheduleNow,
+   kbcd_ScheduleLater,
+   kbcd_Cancel,
+   kbcd_UNKNOWN,
 };
 
-class KanbanCalendarDialog : public QDialog
+class KanbanCalendarDialog: public QDialog
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    explicit KanbanCalendarDialog(QWidget *parent = 0);
-    ~KanbanCalendarDialog();
+   explicit KanbanCalendarDialog(QWidget *parent = 0);
+   ~KanbanCalendarDialog();
 
-    KanbanCalendarDialogResult GetResult() const;
+   void PopulateList(const QList<QListWidgetItem*>& itemSelectionList);
+   KanbanCalendarDialogResult GetResult() const;
 private slots:
-    void on_scheduleNowButton_clicked();
+   void on_scheduleNowButton_clicked();
 
-    void on_scheduleLaterButton_clicked();
+   void on_scheduleLaterButton_clicked();
 
 private:
-    Ui::KanbanCalendarDialog *ui;
-    KanbanCalendarDialogResult m_rslt;
+   Ui::KanbanCalendarDialog *ui;
+   KanbanCalendarDialogResult m_rslt;
 };
 
 #endif // KANBANCALENDARDIALOG_H
