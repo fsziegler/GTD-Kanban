@@ -64,7 +64,7 @@
     <string>Tickler file; hold for review</string>
    </property>
    <property name="text">
-    <string>Someday Maybe</string>
+    <string>Someday &amp;Maybe</string>
    </property>
   </widget>
   <widget class="QPushButton" name="referenceButton">
@@ -80,7 +80,7 @@
     <string>Retrievable when required</string>
    </property>
    <property name="text">
-    <string>Reference</string>
+    <string>&amp;Reference</string>
    </property>
   </widget>
   <widget class="QPushButton" name="trashButton">
@@ -96,7 +96,7 @@
     <string>Throw this away!</string>
    </property>
    <property name="text">
-    <string>Trash</string>
+    <string>&amp;Trash</string>
    </property>
   </widget>
   <widget class="QPushButton" name="waitingOnSomeoneButton">
@@ -112,7 +112,7 @@
     <string>You have or will delegate this to someone else</string>
    </property>
    <property name="text">
-    <string>Waiting on someone</string>
+    <string>&amp;Waiting on someone</string>
    </property>
   </widget>
   <widget class="QPushButton" name="calendarButton">
@@ -128,7 +128,7 @@
     <string>You will do this at a specific time</string>
    </property>
    <property name="text">
-    <string>Calendar</string>
+    <string>&amp;Calendar</string>
    </property>
   </widget>
   <widget class="QPushButton" name="projectsToPlanButton">
@@ -144,7 +144,7 @@
     <string>You need to plan this project before taking action</string>
    </property>
    <property name="text">
-    <string>Projects-to-Plan</string>
+    <string>Projects-&amp;to-Plan</string>
    </property>
   </widget>
   <widget class="QPushButton" name="projectPlansButton">
@@ -160,7 +160,7 @@
     <string>You need to review this plan for Next Actions</string>
    </property>
    <property name="text">
-    <string>Project Plans</string>
+    <string>Project &amp;Plans</string>
    </property>
   </widget>
   <widget class="QPushButton" name="nextActionsButton">
@@ -176,7 +176,7 @@
     <string>This is one of your next actions</string>
    </property>
    <property name="text">
-    <string>Next Actions</string>
+    <string>Next &amp;Actions</string>
    </property>
   </widget>
   <widget class="QListWidget" name="InBasketListWidget">
@@ -192,7 +192,7 @@
     <enum>Qt::StrongFocus</enum>
    </property>
    <property name="acceptDrops">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="alternatingRowColors">
     <bool>true</bool>

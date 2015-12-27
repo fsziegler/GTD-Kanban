@@ -91,7 +91,7 @@ public:
         InBasketListWidget->setObjectName(QStringLiteral("InBasketListWidget"));
         InBasketListWidget->setGeometry(QRect(20, 260, 271, 201));
         InBasketListWidget->setFocusPolicy(Qt::StrongFocus);
-        InBasketListWidget->setAcceptDrops(true);
+        InBasketListWidget->setAcceptDrops(false);
         InBasketListWidget->setAlternatingRowColors(true);
         InBasketListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
         inBasketTextEdit = new QTextEdit(InBasketForm);
@@ -170,35 +170,35 @@ public:
 #ifndef QT_NO_TOOLTIP
         somedayMaybeButton->setToolTip(QApplication::translate("InBasketForm", "Tickler file; hold for review", 0));
 #endif // QT_NO_TOOLTIP
-        somedayMaybeButton->setText(QApplication::translate("InBasketForm", "Someday Maybe", 0));
+        somedayMaybeButton->setText(QApplication::translate("InBasketForm", "Someday &Maybe", 0));
 #ifndef QT_NO_TOOLTIP
         referenceButton->setToolTip(QApplication::translate("InBasketForm", "Retrievable when required", 0));
 #endif // QT_NO_TOOLTIP
-        referenceButton->setText(QApplication::translate("InBasketForm", "Reference", 0));
+        referenceButton->setText(QApplication::translate("InBasketForm", "&Reference", 0));
 #ifndef QT_NO_TOOLTIP
         trashButton->setToolTip(QApplication::translate("InBasketForm", "Throw this away!", 0));
 #endif // QT_NO_TOOLTIP
-        trashButton->setText(QApplication::translate("InBasketForm", "Trash", 0));
+        trashButton->setText(QApplication::translate("InBasketForm", "&Trash", 0));
 #ifndef QT_NO_TOOLTIP
         waitingOnSomeoneButton->setToolTip(QApplication::translate("InBasketForm", "You have or will delegate this to someone else", 0));
 #endif // QT_NO_TOOLTIP
-        waitingOnSomeoneButton->setText(QApplication::translate("InBasketForm", "Waiting on someone", 0));
+        waitingOnSomeoneButton->setText(QApplication::translate("InBasketForm", "&Waiting on someone", 0));
 #ifndef QT_NO_TOOLTIP
         calendarButton->setToolTip(QApplication::translate("InBasketForm", "You will do this at a specific time", 0));
 #endif // QT_NO_TOOLTIP
-        calendarButton->setText(QApplication::translate("InBasketForm", "Calendar", 0));
+        calendarButton->setText(QApplication::translate("InBasketForm", "&Calendar", 0));
 #ifndef QT_NO_TOOLTIP
         projectsToPlanButton->setToolTip(QApplication::translate("InBasketForm", "You need to plan this project before taking action", 0));
 #endif // QT_NO_TOOLTIP
-        projectsToPlanButton->setText(QApplication::translate("InBasketForm", "Projects-to-Plan", 0));
+        projectsToPlanButton->setText(QApplication::translate("InBasketForm", "Projects-&to-Plan", 0));
 #ifndef QT_NO_TOOLTIP
         projectPlansButton->setToolTip(QApplication::translate("InBasketForm", "You need to review this plan for Next Actions", 0));
 #endif // QT_NO_TOOLTIP
-        projectPlansButton->setText(QApplication::translate("InBasketForm", "Project Plans", 0));
+        projectPlansButton->setText(QApplication::translate("InBasketForm", "Project &Plans", 0));
 #ifndef QT_NO_TOOLTIP
         nextActionsButton->setToolTip(QApplication::translate("InBasketForm", "This is one of your next actions", 0));
 #endif // QT_NO_TOOLTIP
-        nextActionsButton->setText(QApplication::translate("InBasketForm", "Next Actions", 0));
+        nextActionsButton->setText(QApplication::translate("InBasketForm", "Next &Actions", 0));
         label_3->setText(QApplication::translate("InBasketForm", "Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.", 0));
 #ifndef QT_NO_TOOLTIP
         reEditSelectionButton->setToolTip(QApplication::translate("InBasketForm", "Move selected issue below to In-Basket for editing", 0));

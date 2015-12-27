@@ -30,24 +30,39 @@ void KanbanCalendarDialog::PopulateList(
 }
 
 void KanbanCalendarDialog::GetSelectedItemsList(
-        QList<QListWidgetItem*>& selectedItemsList) const
+      QList<QListWidgetItem*>& selectedItemsList) const
 {
    selectedItemsList = ui->listWidget->selectedItems();
 }
 
+void KanbanCalendarDialog::RemoveSelectedItem(QListWidgetItem* itemToRemove)
+{
+   QList<QListWidgetItem*> itemSelectionList(ui->listWidget->selectedItems());
+   for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
+         ++itr)
+   {
+      if (itemToRemove->text() == (*itr)->text())
+      {
+         int row = ui->listWidget->row((*itr));
+         QListWidgetItem* itemRemoved = ui->listWidget->takeItem(row);
+         return;
+      }
+   }
+}
+
 const QDate& KanbanCalendarDialog::GetSelectedDate() const
 {
-    return ui->calendarWidget->selectedDate();
+   return ui->calendarWidget->selectedDate();
 }
 
 bool KanbanCalendarDialog::GetSelectedTime(QTime& time) const
 {
-    if(ui->specifyTimeCheckBox->isChecked())
-    {
-        time = ui->timeEdit->time();
-        return true;
-    }
-    return false;
+   if (ui->specifyTimeCheckBox->isChecked())
+   {
+      time = ui->timeEdit->time();
+      return true;
+   }
+   return false;
 }
 
 KanbanCalendarDialogResult KanbanCalendarDialog::GetResult() const
@@ -69,5 +84,5 @@ void KanbanCalendarDialog::on_scheduleLaterButton_clicked()
 
 void KanbanCalendarDialog::on_specifyTimeCheckBox_clicked()
 {
-    ui->timeEdit->setEnabled(ui->specifyTimeCheckBox->isChecked());
+   ui->timeEdit->setEnabled(ui->specifyTimeCheckBox->isChecked());
 }

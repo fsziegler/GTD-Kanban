@@ -43,6 +43,7 @@ public:
         if (KanbanCalendarDialog->objectName().isEmpty())
             KanbanCalendarDialog->setObjectName(QStringLiteral("KanbanCalendarDialog"));
         KanbanCalendarDialog->resize(401, 410);
+        KanbanCalendarDialog->setAcceptDrops(true);
         buttonBox = new QDialogButtonBox(KanbanCalendarDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setGeometry(QRect(279, 376, 81, 32));
@@ -55,6 +56,9 @@ public:
         listWidget = new QListWidget(KanbanCalendarDialog);
         listWidget->setObjectName(QStringLiteral("listWidget"));
         listWidget->setGeometry(QRect(10, 210, 241, 192));
+        listWidget->setFocusPolicy(Qt::StrongFocus);
+        listWidget->setAlternatingRowColors(true);
+        listWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
         label_2 = new QLabel(KanbanCalendarDialog);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(260, 250, 131, 41));

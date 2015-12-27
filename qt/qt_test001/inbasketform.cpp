@@ -65,6 +65,23 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
    }
 }
 
+void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
+      const QString& nodeNameStr)
+{
+   QList<QTreeWidgetItem*> gtdTreeList = mp_gtdTree->findItems(nodeNameStr,
+         Qt::MatchExactly | Qt::MatchRecursive, 0);
+   QTreeWidgetItem* gtdTreeItem = gtdTreeList.front();
+   for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
+         ++itr)
+   {
+      QTreeWidgetItem* qti = new QTreeWidgetItem((QTreeWidget*) 0,
+            QStringList((*itr)->text()));
+      static const QBrush b(QColor(255, 255, 128));
+      qti->setBackground(0, b);
+      gtdTreeItem->addChild(qti);
+   }
+}
+
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
 {
    // Cursory check - should never fail
@@ -85,17 +102,23 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
    }
 
    // Find category in target tree
-   QTreeWidgetItem* gtdTreeItem = gtdTreeList.front();
    QList<QListWidgetItem*> itemSelectionList;
    GetSelectionOutOfGTDBasketList(itemSelectionList);
+   MoveFromListToTree(itemSelectionList, nodeNameStr);
+}
+
+void InBasketForm::RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove)
+{
+   QList<QListWidgetItem*> itemSelectionList(
+         ui->InBasketListWidget->selectedItems());
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)
    {
-      QTreeWidgetItem* qti = new QTreeWidgetItem((QTreeWidget*) 0,
-            QStringList((*itr)->text()));
-      static const QBrush b(QColor(255, 255, 128));
-      qti->setBackground(0, b);
-      gtdTreeItem->addChild(qti);
+      if (itemToRemove->text() == (*itr)->text())
+      {
+         ui->InBasketListWidget->takeItem(ui->InBasketListWidget->row((*itr)));
+         return;
+      }
    }
 }
 
@@ -176,57 +199,82 @@ void InBasketForm::on_waitingOnSomeoneButton_clicked()
 
 void InBasketForm::on_calendarButton_clicked()
 {
-   QList<QListWidgetItem*> itemSelectionList;
-   GetSelectionOutOfGTDBasketList(itemSelectionList, false);
+   QList<QListWidgetItem*> itemList, removeItemList, tmpItemList;
+   GetSelectionOutOfGTDBasketList(itemList, false);
 
-   KanbanCalendarDialog kbcalDlg;
-   kbcalDlg.PopulateList(itemSelectionList);
-   kbcalDlg.exec();
-
-   switch (kbcalDlg.GetResult())
+   bool exit(false);
+   while (!exit)
    {
-   case kbcd_ScheduleNow:
-   {
-      QList<QListWidgetItem*> dlgItemSelectionList;
-      kbcalDlg.GetSelectedItemsList(dlgItemSelectionList);
-      for (auto itr = dlgItemSelectionList.begin();
-            dlgItemSelectionList.end() != itr; ++itr)
       {
-         QMessageBox msgBox;
-         msgBox.setWindowTitle("Schedule Item");
-         const QDate date(kbcalDlg.GetSelectedDate());
-//         QString dateText(date.toString("yyyy/MM/dd"));
-         QString dateText(date.toString("MMM dd, yyyy"));
-         cout << dateText.toStdString() << endl;
-         QString text("\"");
-         text.append((*itr)->text()).append("\" on ").append(dateText);
-         QTime time;
-         if(kbcalDlg.GetSelectedTime(time))
+         KanbanCalendarDialog kbcalDlg;
+         kbcalDlg.PopulateList(itemList);
+         kbcalDlg.exec();
+
+         switch (kbcalDlg.GetResult())
          {
-            text.append(" @ ").append(time.toString());
+         case kbcd_ScheduleNow:
+         {
+            QList<QListWidgetItem*> dlgItemSelectionList;
+            kbcalDlg.GetSelectedItemsList(dlgItemSelectionList);
+            for (auto itr = dlgItemSelectionList.begin();
+                  dlgItemSelectionList.end() != itr; ++itr)
+            {
+               QMessageBox msgBox;
+               msgBox.setWindowTitle("Schedule Item");
+               const QDate date(kbcalDlg.GetSelectedDate());
+               QString dateText(date.toString("MMM dd, yyyy"));
+               cout << dateText.toStdString() << endl;
+               QString text("\"");
+               text.append((*itr)->text()).append("\" on ").append(dateText);
+               QTime time;
+               if (kbcalDlg.GetSelectedTime(time))
+               {
+                  text.append(" @ ").append(time.toString());
+               }
+               msgBox.setText(text);
+               msgBox.setStandardButtons(QMessageBox::Yes);
+               msgBox.addButton(QMessageBox::No);
+               msgBox.setDefaultButton(QMessageBox::No);
+               if (msgBox.exec() == QMessageBox::Yes)
+               {
+                  kbcalDlg.RemoveSelectedItem(*itr);
+                  removeItemList.append(*itr);
+               }
+               else
+               {
+                  // do something else
+               }
+            }
          }
-         msgBox.setText(text);
-         msgBox.setStandardButtons(QMessageBox::Yes);
-         msgBox.addButton(QMessageBox::No);
-         msgBox.setDefaultButton(QMessageBox::No);
-         if (msgBox.exec() == QMessageBox::Yes)
-         {
-            // do something
-         }
-         else
-         {
-            // do something else
+            break;
+         case kbcd_ScheduleLater:
+            GetSelectionOutOfGTDBasketList(tmpItemList);
+            MoveFromListToTree(itemList, "Calendar");
+//            MoveFromGTDBasketListToTree(QString("Calendar"));
+            exit = true;
+            break;
+         case kbcd_Cancel:
+            exit = true;
+            break;
+         case kbcd_UNKNOWN:
+            exit = true;
+            break;
          }
       }
-   }
-      break;
-   case kbcd_ScheduleLater:
-      MoveFromGTDBasketListToTree(QString("Calendar"));
-      break;
-   case kbcd_Cancel:
-      break;
-   case kbcd_UNKNOWN:
-      break;
+      for (auto itr = removeItemList.begin(); removeItemList.end() != itr;
+            ++itr)
+      {
+         for (auto itr2 = itemList.begin(); itemList.end() != itr2; ++itr2)
+         {
+            if ((*itr)->text() == (*itr2)->text())
+            {
+               itemList.erase(itr2);
+               ui->InBasketListWidget->takeItem(
+                     ui->InBasketListWidget->row((*itr2)));
+               break;
+            }
+         }
+      }
    }
 }
 

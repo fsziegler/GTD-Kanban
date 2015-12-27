@@ -657,6 +657,9 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -669,7 +672,6 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		../qt_test001/mainwindow.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/mainwindow.h -o moc_mainwindow.cpp
 
@@ -905,6 +907,26 @@ moc_kanbancalendardialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvalidator.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qregularexpression.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qicon.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qslider.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstyle.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
 		../qt_test001/kanbancalendardialog.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbancalendardialog.h -o moc_kanbancalendardialog.cpp
 
@@ -1015,6 +1037,9 @@ moc_gtdcalendarwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidge
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/gtdcalendarwidget.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/gtdcalendarwidget.h -o moc_gtdcalendarwidget.cpp
 
@@ -1179,6 +1204,9 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -1191,7 +1219,6 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
@@ -1338,6 +1365,9 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -1350,7 +1380,6 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		ui_mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QVariant \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QAction \
@@ -1553,7 +1582,9 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMessageBox \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QDate \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inbasketform.o ../qt_test001/inbasketform.cpp
 
 gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
@@ -1789,25 +1820,9 @@ kanbancalendardialog.o: ../qt_test001/kanbancalendardialog.cpp ../qt_test001/kan
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
-		ui_kanbancalendardialog.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QVariant \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QAction \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qaction.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qicon.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qactiongroup.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qeventloop.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qguiapplication.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QButtonGroup \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qbuttongroup.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialogButtonBox \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialogbuttonbox.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QHeaderView \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qheaderview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
@@ -1818,20 +1833,44 @@ kanbancalendardialog.o: ../qt_test001/kanbancalendardialog.cpp ../qt_test001/kan
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractspinbox.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvalidator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qregularexpression.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qicon.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qslider.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractslider.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstyle.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		ui_kanbancalendardialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QVariant \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QAction \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qaction.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qactiongroup.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qeventloop.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qguiapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QButtonGroup \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qbuttongroup.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdatetime.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCheckBox \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcheckbox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractbutton.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialogButtonBox \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialogbuttonbox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QHeaderView \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qheaderview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QLabel \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlabel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QPushButton \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qpushbutton.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractbutton.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTimeEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdatetimeedit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kanbancalendardialog.o ../qt_test001/kanbancalendardialog.cpp
 
 gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalendarwidget.h \
@@ -1942,9 +1981,15 @@ gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalend
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMessageBox \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gtdcalendarwidget.o ../qt_test001/gtdcalendarwidget.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
