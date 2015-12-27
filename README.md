@@ -11,9 +11,10 @@ Copyright (c) 2015 Frederick S. Ziegler
 Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
 
 ### 1.1 Getting Things Done
-`"Plans are worthless, but planning is everything."`
 
-`--Dwight D. Eisenhower`
+`"The prevailing system of management has crushed fun out of the workplace"`
+
+`--W. Edwards Deming`
 
 One thesis in "Getting Things Done" ("GTD") is that if your mind has more than one problem to solve, you will not be effective at solving any of them until you have put them into a "**trusted system**". This clears your mind to focus on one problem at a time. GTD has a [workflow](https://en.wikipedia.org/wiki/Getting_Things_Done#/media/File:GTDcanonical.png) for processing all of the tasks, ideas, problems, and goals ("issues") in your mind.
 
@@ -51,6 +52,10 @@ Once you have processed your issues, you will have the following lists stored in
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
 #####Planning Projects
+`"Plans are worthless, but planning is everything."`
+
+`--Dwight D. Eisenhower`
+
 How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***. A more in-depth approach is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
 
 ###1.2 Kanban
@@ -96,13 +101,17 @@ Third, **make it fast** by
 You may iterate through the second and third phases any number of times as your refine your product.
 
 ####Reliable, Maintainable, Scalable
+`"Rational behavior requires theory. Reactive behavior requires only reflex reaction"`
+
+`--W. Edwards Deming`
+
 Endeavour to make your products reliable, maintainable, and scalable. All three of these will result naturally from the following good design practices.
 
 #####Architecture
 First, explicitly implement an **architecture** - this is the skeleton in the "make it work" phase. Houses have frames, boats have keels, cars have a chassis or cage, and good software has an architecture. Architecture is a basic structure to which every component is attached in some way. You cannot have a good product with a bad architecture.
 
 #####Modularity
-Second, practice **modularity**. A module is component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and objects in software.
+Second, practice **modularity**. A module is a component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and [objects](https://en.wikipedia.org/wiki/Object-oriented_programming) in software.
 
 Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has two benefits:
   - you only have to build and maintain a single module, and
@@ -139,7 +148,7 @@ Some typical use cases that this tool are intended to address are:
     - Fighting unjust parking and/or traffic tickets
     - Negotiating a legal agreement
   - You are starting a business
-  - You are doing many/all of the above
+  - You are doing some/many/all of the above
 
 Once you have completed a project, if you developed a useful technique (e.g. a flow diagram or standard operating procedure), the tool should allow you to describe and store this. This is often true for legal processes.
 
@@ -148,8 +157,8 @@ Getting an overview may enable you to boil multiple issues down to a single one,
 You may get satisfaction by keeping a record of the *Done* tasks.
 
 ##3. GTD-Kanban Implementation Details
-Files created with this tool will be stored in [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking on both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
+Files created with this tool will be stored in the [JSON format](http://www.json.org/). The intent of using JSON is to make the work product as portable and accessible as possible. The JSON format used will allow for one JSON file to reference another. Changes in the tool's JSON work product may be tracked using the Git version control tool, as this supports both local and server based tracking. Such tracking will enable users to view their historical progress. Users will have access to their tracking on both local machines and servers; they may choose to have it accessible from multiple devices, or localized on a single machine. A later version should enable the JSON to be loaded into a database for advanced querying. It should be possible to associate tags with all JSON objects so that disparate objects can be recalled together.
 
-A key UI feature will be the ability to hide and show information. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
+A key UI feature will be the ability to hide and show information in order to focus on specific issues. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
 
-The base code will be written in C++. This leaves open the question of how to implement the UI for presenting the information. There are several options, among them using the cross-platform Qt development tools, using [node.js](https://nodejs.org/en/about/) as an interface between the C++ and a web UI front-end on a server, [exporting the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrating the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
+The base code is being written in C++. The UI is being developed using the cross-platform Qt development tools. Future development may leverage [node.js](https://nodejs.org/en/about/) as an interface between the C++ and a web UI front-end on a server, [export the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrate the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
