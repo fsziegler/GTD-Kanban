@@ -122,7 +122,7 @@ Practicing modularity may allow you to identify duplicated functionality, which 
 For example, it makes sense to have one design (a module) for both front wheels on a car rather than a separate design for each one.
 
 #####Neat and Clean
-Third, keep your work product **neat and clean**. Your desk may be messy, but your work tools, factory floor, and code base should be well organized and structured. Your output, be it machined parts, electronic diagrams, or software should look ready for sale. Better yet, it should have an identifiable "look and feel". All of your code should be well-formatted and follow a uniform coding style.
+Third, keep your work product **neat and clean**. Your desk may be messy, but you should periodically organize and restructure your work tools, factory floor, and code base. Your output, be it machined parts, electronic diagrams, or software should look ready for sale. Better yet, it should have an identifiable "look and feel". All of your code should be well-formatted and follow a uniform coding style.
 
 #####Best Practices
 Finally, develop and enforce **best practices**. With experience, technologists discover that certain ways of doing things work really well, and that others are risky. The housing construction, boat-building, automobile, and other industries all have standards that manufacturers adhere to, and many are written into law. The software industry is younger and less mature than these other industries, but good standards exist and can prevent hard-to-find bugs. A good example of software design guidelines are the [Basics of the Unix Philosophy](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
