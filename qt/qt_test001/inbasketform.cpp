@@ -2,8 +2,12 @@
 #include "ui_inbasketform.h"
 #include "kanbancalendardialog.h"
 #include <QMessageBox>
+#include <QDate>
 #include <set>
 #include <vector>
+#include <iostream>
+
+using namespace std;
 
 InBasketForm::InBasketForm(QWidget *parent)
       : QWidget(parent),
@@ -48,10 +52,10 @@ void InBasketForm::SetGTDTreeWidget(QTreeWidget* gtdTree)
 }
 
 void InBasketForm::GetSelectionOutOfGTDBasketList(
-      QList<QListWidgetItem*>& itemSelectionList, bool copy)
+      QList<QListWidgetItem*>& itemSelectionList, bool move)
 {
    itemSelectionList = ui->InBasketListWidget->selectedItems();
-   if (!copy)
+   if (move)
    {
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
@@ -173,15 +177,48 @@ void InBasketForm::on_waitingOnSomeoneButton_clicked()
 void InBasketForm::on_calendarButton_clicked()
 {
    QList<QListWidgetItem*> itemSelectionList;
-   GetSelectionOutOfGTDBasketList(itemSelectionList, true);
+   GetSelectionOutOfGTDBasketList(itemSelectionList, false);
+
    KanbanCalendarDialog kbcalDlg;
    kbcalDlg.PopulateList(itemSelectionList);
-//   void KanbanCalendarDialog::PopulateList(
-//           const QList<QListWidgetItem*>& itemSelectionList)
-   int rslt = kbcalDlg.exec();
+   kbcalDlg.exec();
+
    switch (kbcalDlg.GetResult())
    {
    case kbcd_ScheduleNow:
+   {
+      QList<QListWidgetItem*> dlgItemSelectionList;
+      kbcalDlg.GetSelectedItemsList(dlgItemSelectionList);
+      for (auto itr = dlgItemSelectionList.begin();
+            dlgItemSelectionList.end() != itr; ++itr)
+      {
+         QMessageBox msgBox;
+         msgBox.setWindowTitle("Schedule Item");
+         const QDate date(kbcalDlg.GetSelectedDate());
+//         QString dateText(date.toString("yyyy/MM/dd"));
+         QString dateText(date.toString("MMM dd, yyyy"));
+         cout << dateText.toStdString() << endl;
+         QString text("\"");
+         text.append((*itr)->text()).append("\" on ").append(dateText);
+         QTime time;
+         if(kbcalDlg.GetSelectedTime(time))
+         {
+            text.append(" @ ").append(time.toString());
+         }
+         msgBox.setText(text);
+         msgBox.setStandardButtons(QMessageBox::Yes);
+         msgBox.addButton(QMessageBox::No);
+         msgBox.setDefaultButton(QMessageBox::No);
+         if (msgBox.exec() == QMessageBox::Yes)
+         {
+            // do something
+         }
+         else
+         {
+            // do something else
+         }
+      }
+   }
       break;
    case kbcd_ScheduleLater:
       MoveFromGTDBasketListToTree(QString("Calendar"));

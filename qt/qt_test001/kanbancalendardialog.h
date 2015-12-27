@@ -26,11 +26,17 @@ public:
    ~KanbanCalendarDialog();
 
    void PopulateList(const QList<QListWidgetItem*>& itemSelectionList);
+   void GetSelectedItemsList(QList<QListWidgetItem*>& selectedItemsList) const;
+   const QDate& GetSelectedDate() const;
+   bool GetSelectedTime(QTime& time) const;
    KanbanCalendarDialogResult GetResult() const;
+
 private slots:
    void on_scheduleNowButton_clicked();
 
    void on_scheduleLaterButton_clicked();
+
+   void on_specifyTimeCheckBox_clicked();
 
 private:
    Ui::KanbanCalendarDialog *ui;

@@ -1,5 +1,8 @@
 #include "kanbancalendardialog.h"
 #include "ui_kanbancalendardialog.h"
+#include<iostream>
+
+using namespace std;
 
 KanbanCalendarDialog::KanbanCalendarDialog(QWidget *parent)
       : QDialog(parent),
@@ -7,6 +10,8 @@ KanbanCalendarDialog::KanbanCalendarDialog(QWidget *parent)
         m_rslt(kbcd_Cancel)
 {
    ui->setupUi(this);
+   ui->listWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+   ui->timeEdit->setEnabled(false);
 }
 
 KanbanCalendarDialog::~KanbanCalendarDialog()
@@ -15,13 +20,34 @@ KanbanCalendarDialog::~KanbanCalendarDialog()
 }
 
 void KanbanCalendarDialog::PopulateList(
-        const QList<QListWidgetItem*>& itemSelectionList)
+      const QList<QListWidgetItem*>& itemSelectionList)
 {
-    for(auto itr = itemSelectionList.begin(); itemSelectionList.end() != itr;
-        ++itr)
+   for (auto itr = itemSelectionList.begin(); itemSelectionList.end() != itr;
+         ++itr)
+   {
+      ui->listWidget->addItem((*itr)->text());
+   }
+}
+
+void KanbanCalendarDialog::GetSelectedItemsList(
+        QList<QListWidgetItem*>& selectedItemsList) const
+{
+   selectedItemsList = ui->listWidget->selectedItems();
+}
+
+const QDate& KanbanCalendarDialog::GetSelectedDate() const
+{
+    return ui->calendarWidget->selectedDate();
+}
+
+bool KanbanCalendarDialog::GetSelectedTime(QTime& time) const
+{
+    if(ui->specifyTimeCheckBox->isChecked())
     {
-        ui->listWidget->addItem((*itr)->text());
+        time = ui->timeEdit->time();
+        return true;
     }
+    return false;
 }
 
 KanbanCalendarDialogResult KanbanCalendarDialog::GetResult() const
@@ -39,4 +65,9 @@ void KanbanCalendarDialog::on_scheduleLaterButton_clicked()
 {
    m_rslt = kbcd_ScheduleLater;
    done(kbcd_ScheduleLater);
+}
+
+void KanbanCalendarDialog::on_specifyTimeCheckBox_clicked()
+{
+    ui->timeEdit->setEnabled(ui->specifyTimeCheckBox->isChecked());
 }

@@ -20,7 +20,7 @@ public:
 
    void SetGTDTreeWidget(QTreeWidget* gtdTree);
    void GetSelectionOutOfGTDBasketList(
-         QList<QListWidgetItem*>& itemSelectionList, bool copy = false);
+         QList<QListWidgetItem*>& itemSelectionList, bool move = true);
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
 
 private slots:
