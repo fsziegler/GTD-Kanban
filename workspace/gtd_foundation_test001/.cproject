@@ -26,6 +26,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.383271366" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.2012126778" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.963622854" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -36,6 +37,7 @@
 								<option id="gnu.c.compiler.option.include.paths.16803753" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<option id="gnu.c.compiler.option.misc.other.1534564606" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1089844470" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -52,6 +54,7 @@
 								<option id="gnu.both.asm.option.include.paths.1337283182" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.564084589" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -90,6 +93,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.836194416" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1274970029" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2018721247" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -100,6 +104,7 @@
 								<option id="gnu.c.compiler.option.include.paths.1921750476" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<option id="gnu.c.compiler.option.misc.other.1233362961" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1780059761" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -116,6 +121,7 @@
 								<option id="gnu.both.asm.option.include.paths.163888801" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include/qt5/QtCore"/>
 									<listOptionValue builtIn="false" value="/usr/include/qt5"/>
+									<listOptionValue builtIn="false" value="../../../code"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.380442525" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

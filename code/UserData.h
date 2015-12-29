@@ -44,7 +44,7 @@ namespace ZiegGTDKanban
 {
 
 // Enums
-enum EnumGTDCategory
+enum class EnumGTDCategory
 {
    kInBasket,
    kSomedayMaybe,
@@ -54,6 +54,7 @@ enum EnumGTDCategory
    kProjectsToPlan,
    kProjectPlans,
    kNextActions,
+   kGTDCategoryUNKNOWN,
 };
 
 // Typedefs
@@ -108,6 +109,7 @@ public:
    // ACTIONS
    // AddItemToInBasket() adds newItemStr to the in-basket.
    void AddItemToInBasket(const string& newItemStr);
+   void AddItemsToInBasket(const string& newItemsStr, char delim = '\n');
    // MoveNthInBasketItemToGTD() moves the n-th itemStr in the In-basket to the
    // category, returning false if there is no n-th itemStr.
    bool MoveNthInBasketItemToGTD(const string& itemStr,
@@ -117,12 +119,17 @@ public:
    bool MoveNthInBasketItemToGTD(const string& itemStr,
          EnumGTDCategory category, const date& newDate, const ptime& newTime,
          size_t n = 0);
+   void DumpInBasket() const;
+   void DumpGTDCategory(EnumGTDCategory category) const;
+   void DumpAllGTD() const;
 
 private:
    void InitNode(const string& itemStr, TreeNode& node) const;
    TTreeNodeVect& GetTreeNodeVect(EnumGTDCategory category);
    void PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
          TCStrPtrSet& strPtrSet) const;
+   void DumpIndent(int indent) const;
+   void DumpTreeNode(const TreeNode& treeNode, int indent = 0) const;
    size_t CleanUpRepoSet();
 
    UserData(const UserData&);

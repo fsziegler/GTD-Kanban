@@ -34,17 +34,24 @@ namespace ZiegGTDKanban
 TStrSet UserData::ms_itemRepoSet;
 UserData::UserData()
 {
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kInBasket, "In Basket"));
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kSomedayMaybe, "Someday Maybe"));
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kReference, "Reference"));
    m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(kWaitingForAnotherPerson,
+         TGTDCategoryPair(EnumGTDCategory::kInBasket, "In Basket"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kSomedayMaybe, "Someday Maybe"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kWaitingForAnotherPerson,
                "Waiting for Another Person"));
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kCalendar, "Calendar"));
    m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(kProjectsToPlan, "Projects-to-Plan"));
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kProjectPlans, "Project Plans"));
-   m_gtdFixedCatMap.insert(TGTDCategoryPair(kNextActions, "Next Actions"));
+         TGTDCategoryPair(EnumGTDCategory::kCalendar, "Calendar"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kProjectsToPlan,
+               "Projects-to-Plan"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kProjectPlans, "Project Plans"));
+   m_gtdFixedCatMap.insert(
+         TGTDCategoryPair(EnumGTDCategory::kNextActions, "Next Actions"));
 }
 
 UserData::~UserData()
@@ -104,8 +111,37 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
 
 void UserData::AddItemToInBasket(const string& newItemStr)
 {
-   auto setStrItr(ms_itemRepoSet.insert(newItemStr).first);
-   m_inBasketVect.push_back(&(*setStrItr));
+   if(0 < newItemStr.size())
+   {
+      auto setStrItr(ms_itemRepoSet.insert(newItemStr).first);
+      m_inBasketVect.push_back(&(*setStrItr));
+   }
+}
+
+void UserData::AddItemsToInBasket(const string& newItemsStr, char delim)
+{
+   size_t pos = newItemsStr.find_first_of(delim);
+   // Case of no delimiter in string
+   if (string::npos == pos)
+   {
+      AddItemToInBasket(newItemsStr);
+      return;
+   }
+   string workingStr(newItemsStr);
+   while (string::npos != pos)
+   {
+      const string currStr = workingStr.substr(0, pos);
+      AddItemToInBasket(currStr);
+      {
+         string newSrcStr(workingStr.substr(pos + 1));
+         workingStr = newSrcStr;
+      }
+      pos = workingStr.find_first_of(delim);
+   }
+   if (0 < workingStr.size())
+   {
+      AddItemToInBasket(workingStr);
+   }
 }
 
 bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
@@ -167,6 +203,31 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    return true;
 }
 
+void UserData::DumpInBasket() const
+{
+   cout << "In-basket:" << endl;
+   for(auto itr: m_inBasketVect)
+   {
+      cout << "  " << *itr << endl;
+   }
+}
+
+void UserData::DumpGTDCategory(EnumGTDCategory category) const
+{
+   cout << (*m_gtdFixedCatMap.find(category)).second << endl;
+   for(auto itr: (*m_gtdNodeTree.find(category)).second)
+   {
+      DumpTreeNode(itr, 1);
+   }
+}
+
+void UserData::DumpAllGTD() const
+{
+   for(auto itr: m_gtdFixedCatMap)
+   {
+      DumpGTDCategory(itr.first);
+   }
+}
 
 void UserData::InitNode(const string& itemStr, TreeNode& node) const
 {
@@ -192,10 +253,27 @@ void UserData::PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
       TCStrPtrSet& strPtrSet) const
 {
    strPtrSet.insert(treeNode.mp_nodeNameStrPtr);
-   for (auto itr = treeNode.m_children.begin();
-         treeNode.m_children.end() != itr; ++itr)
+   for(auto itr: treeNode.m_children)
    {
-      PopulateCStrPtrSetFromTreeNode(*itr, strPtrSet);
+      PopulateCStrPtrSetFromTreeNode(itr, strPtrSet);
+   }
+}
+
+void UserData::DumpIndent(int indent) const
+{
+   for(int i = 0; indent > i; ++i)
+   {
+      cout << "  ";
+   }
+}
+
+void UserData::DumpTreeNode(const TreeNode& treeNode, int indent) const
+{
+   DumpIndent(indent);
+   cout << treeNode.mp_nodeNameStrPtr << endl;
+   for(auto itr: treeNode.m_children)
+   {
+      DumpTreeNode(itr, indent+1);
    }
 }
 
@@ -203,19 +281,17 @@ size_t UserData::CleanUpRepoSet()
 {
    // Add in-basket contents to newRepoSet
    TCStrPtrSet newRepoSet;
-   for(auto itr = m_inBasketVect.begin(); m_inBasketVect.end() != itr; ++itr)
+   for(auto itr: m_inBasketVect)
    {
-      newRepoSet.insert(*itr);
+      newRepoSet.insert(itr);
    }
    // Add GTD tree contents to newRepoSet
-   for(auto itr = m_gtdNodeTree.begin(); m_gtdNodeTree.end() != itr; ++itr)
+   for(auto itr: m_gtdNodeTree)
    {
-      const TTreeNodeVect& nodeVect = (*itr).second;
-      for (auto treeNodeItr = nodeVect.begin(); nodeVect.end() != treeNodeItr;
-            ++treeNodeItr)
+      const TTreeNodeVect& nodeVect = itr.second;
+      for (auto treeNodeItr: nodeVect)
       {
-         const TreeNode& treeNode = *treeNodeItr;
-         PopulateCStrPtrSetFromTreeNode(treeNode, newRepoSet);
+         PopulateCStrPtrSetFromTreeNode(treeNodeItr, newRepoSet);
       }
    }
    // Remove all strings not in newSet from ms_itemRepoSet
@@ -223,16 +299,16 @@ size_t UserData::CleanUpRepoSet()
    if(0 != diff)
    {
       TCStrPtrSet removeSet;
-      for(auto itr = ms_itemRepoSet.begin(); ms_itemRepoSet.end() != itr; ++itr)
+      for(auto itr: ms_itemRepoSet)
       {
-         if(newRepoSet.end() == newRepoSet.find(&(*itr)))
+         if(newRepoSet.end() == newRepoSet.find(&itr))
          {
-            removeSet.insert(&(*itr));
+            removeSet.insert(&itr);
          }
       }
-      for(auto itr = removeSet.begin(); removeSet.end() != itr; ++itr)
+      for(auto itr: removeSet)
       {
-         string removeStr(*(*itr));
+         string removeStr(*itr);
          ms_itemRepoSet.erase(ms_itemRepoSet.find(removeStr));
       }
    }
