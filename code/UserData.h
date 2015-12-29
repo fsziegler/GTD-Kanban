@@ -33,10 +33,13 @@
 #include <vector>
 #include <map>
 #include <set>
-#include "boost/date_time/gregorian/gregorian.hpp"
-#include "boost/date_time/posix_time/posix_time.hpp"
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/thread/mutex.hpp>
+//#include <boost/property_tree/ptree.hpp>
 
 using namespace std;
+using namespace boost;
 using namespace boost::gregorian;
 using namespace boost::posix_time;
 
@@ -94,7 +97,7 @@ public:
    const string& GetGTDCatStr(EnumGTDCategory category) const;
    // GetRepoSetStrPtr() returns a pointer to newItemStr in the set of added
    // item names, inserting it if it is not already there.
-   static const string* GetRepoSetStrPtr(const string& newItemStr);
+   const string* GetRepoSetStrPtr(const string& newItemStr) const;
    // IsItemInSystem() returns true iff newItemStr is in the set of added item
    // names.
    bool IsItemInSystem(const string& newItemStr) const;
@@ -105,6 +108,14 @@ public:
    // least n times, returning the index in m_inBasketVect iff true.
    bool FindNthInBasketItem(const string& itemStr, const size_t n,
          size_t& index) const;
+   void DumpInBasket() const;
+   void DumpGTDCategory(EnumGTDCategory category) const;
+   void DumpAllGTD() const;
+
+   // ACCESSORS
+   const TStrPtrVect& getInBasketVect() const;
+   const TCatTreeNodeVectMap& getGtdNodeTree() const;
+   const TTreeNodeVect& GetCTreeNodeVect(EnumGTDCategory category) const;
 
    // ACTIONS
    // AddItemToInBasket() adds newItemStr to the in-basket.
@@ -114,14 +125,15 @@ public:
    // category, returning false if there is no n-th itemStr.
    bool MoveNthInBasketItemToGTD(const string& itemStr,
          EnumGTDCategory category, size_t n = 0);
-   bool MoveNthInBasketItemToGTD(const string& itemStr,
-         EnumGTDCategory category, const date& newDate, size_t n = 0);
-   bool MoveNthInBasketItemToGTD(const string& itemStr,
-         EnumGTDCategory category, const date& newDate, const ptime& newTime,
-         size_t n = 0);
-   void DumpInBasket() const;
-   void DumpGTDCategory(EnumGTDCategory category) const;
-   void DumpAllGTD() const;
+   // This version of MoveNthInBasketItemToGTD() sets the date of the n-th
+   // itemStr, and moves it into the Calendar category by default.
+   bool MoveNthInBasketItemToGTD(const string& itemStr, const date& newDate,
+         EnumGTDCategory category = EnumGTDCategory::kCalendar, size_t n = 0);
+   // This version of MoveNthInBasketItemToGTD() sets the date and time of the
+   // n-th itemStr, and moves it into the Calendar category by default.
+   bool MoveNthInBasketItemToGTD(const string& itemStr, const date& newDate,
+         const ptime& newTime, EnumGTDCategory category =
+               EnumGTDCategory::kCalendar, size_t n = 0);
 
 private:
    void InitNode(const string& itemStr, TreeNode& node) const;
@@ -137,11 +149,12 @@ private:
    bool operator==(const UserData&);
    bool operator!=(const UserData&);
 
-   TGTDCategoryMap      m_gtdFixedCatMap; // Fixed map of category enum-string
-                                          // pairs
+   static TGTDCategoryMap  ms_gtdFixedCatMap;   // Fixed map of category
+                                                // enum-string pairs
    static TStrSet       ms_itemRepoSet;   // Set of all added user item names
    TStrPtrVect          m_inBasketVect;   // In-basket collection
    TCatTreeNodeVectMap  m_gtdNodeTree;    // Tree of structured GTD items
+   static mutex         m_mutex;
 };
 
 } /* namespace ZiegGTDKanban */

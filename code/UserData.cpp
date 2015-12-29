@@ -27,31 +27,39 @@
 
  */
 #include "UserData.h"
+#include <boost/thread/lock_guard.hpp>
 
 namespace ZiegGTDKanban
 {
 
-TStrSet UserData::ms_itemRepoSet;
+TGTDCategoryMap   UserData::ms_gtdFixedCatMap;
+TStrSet           UserData::ms_itemRepoSet;
+mutex             UserData::m_mutex;
+
 UserData::UserData()
 {
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kInBasket, "In Basket"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kSomedayMaybe, "Someday Maybe"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kWaitingForAnotherPerson,
-               "Waiting for Another Person"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kCalendar, "Calendar"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kProjectsToPlan,
-               "Projects-to-Plan"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kProjectPlans, "Project Plans"));
-   m_gtdFixedCatMap.insert(
-         TGTDCategoryPair(EnumGTDCategory::kNextActions, "Next Actions"));
+   lock_guard<mutex> guard(m_mutex);
+   if(0 == ms_gtdFixedCatMap.size())
+   {
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kInBasket, "In Basket"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kSomedayMaybe, "Someday Maybe"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kWaitingForAnotherPerson,
+                  "Waiting for Another Person"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kCalendar, "Calendar"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kProjectsToPlan,
+                  "Projects-to-Plan"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kProjectPlans, "Project Plans"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kNextActions, "Next Actions"));
+   }
 }
 
 UserData::~UserData()
@@ -60,21 +68,25 @@ UserData::~UserData()
 
 const string &UserData::GetGTDCatStr(EnumGTDCategory category) const
 {
-   return (*m_gtdFixedCatMap.find(category)).second;
+   lock_guard<mutex> guard(m_mutex);
+   return (*ms_gtdFixedCatMap.find(category)).second;
 }
 
-const string* UserData::GetRepoSetStrPtr(const string& newItemStr)
+const string* UserData::GetRepoSetStrPtr(const string& newItemStr) const
 {
+   lock_guard<mutex> guard(m_mutex);
    return &(*ms_itemRepoSet.insert(newItemStr).first);
 }
 
 bool UserData::IsItemInSystem(const string& newItemStr) const
 {
+   lock_guard<mutex> guard(m_mutex);
    return (ms_itemRepoSet.end() != ms_itemRepoSet.find(newItemStr));
 }
 
 int UserData::GetItemCountInBasket(const string& itemStr) const
 {
+   lock_guard<mutex> guard(m_mutex);
    int nCnt(0);
    size_t tmpIndex(0);
    while(m_inBasketVect.size() > tmpIndex)
@@ -91,6 +103,7 @@ int UserData::GetItemCountInBasket(const string& itemStr) const
 bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
       size_t& index) const
 {
+   lock_guard<mutex> guard(m_mutex);
    size_t nCnt(0);
    size_t tmpIndex(0);
    while(m_inBasketVect.size() > tmpIndex)
@@ -109,8 +122,61 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
    return false;
 }
 
+void UserData::DumpInBasket() const
+{
+   lock_guard<mutex> guard(m_mutex);
+   cout << "In-basket:" << endl;
+   for(auto itr: m_inBasketVect)
+   {
+      cout << "  " << *itr << endl;
+   }
+}
+
+void UserData::DumpGTDCategory(EnumGTDCategory category) const
+{
+   lock_guard<mutex> guard(m_mutex);
+   cout << (*ms_gtdFixedCatMap.find(category)).second << endl;
+   for(auto itr: (*m_gtdNodeTree.find(category)).second)
+   {
+      DumpTreeNode(itr, 1);
+   }
+}
+
+void UserData::DumpAllGTD() const
+{
+   lock_guard<mutex> guard(m_mutex);
+   for(auto itr: ms_gtdFixedCatMap)
+   {
+      DumpGTDCategory(itr.first);
+   }
+}
+
+const TStrPtrVect& UserData::getInBasketVect() const
+{
+   lock_guard<mutex> guard(m_mutex);
+   return m_inBasketVect;
+}
+
+const TCatTreeNodeVectMap& UserData::getGtdNodeTree() const
+{
+   lock_guard<mutex> guard(m_mutex);
+   return m_gtdNodeTree;
+}
+
+const TTreeNodeVect& UserData::GetCTreeNodeVect(EnumGTDCategory category) const
+{
+   lock_guard<mutex> guard(m_mutex);
+   auto itr(m_gtdNodeTree.find(category));
+   if(m_gtdNodeTree.end() == itr)
+   {
+      throw;
+   }
+   return (*itr).second;
+}
+
 void UserData::AddItemToInBasket(const string& newItemStr)
 {
+   lock_guard<mutex> guard(m_mutex);
    if(0 < newItemStr.size())
    {
       auto setStrItr(ms_itemRepoSet.insert(newItemStr).first);
@@ -120,6 +186,7 @@ void UserData::AddItemToInBasket(const string& newItemStr)
 
 void UserData::AddItemsToInBasket(const string& newItemsStr, char delim)
 {
+   lock_guard<mutex> guard(m_mutex);
    size_t pos = newItemsStr.find_first_of(delim);
    // Case of no delimiter in string
    if (string::npos == pos)
@@ -147,6 +214,7 @@ void UserData::AddItemsToInBasket(const string& newItemsStr, char delim)
 bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
       EnumGTDCategory category, size_t n)
 {
+   lock_guard<mutex> guard(m_mutex);
    if(!IsItemInSystem(itemStr))
    {
       return false;
@@ -178,8 +246,9 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
 }
 
 bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
-      EnumGTDCategory category, const date& newDate, size_t n)
+      const date& newDate, EnumGTDCategory category, size_t n)
 {
+   lock_guard<mutex> guard(m_mutex);
    if(!MoveNthInBasketItemToGTD(itemStr, category, n))
    {
       return false;
@@ -190,9 +259,10 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
 }
 
 bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
-      EnumGTDCategory category, const date& newDate, const ptime& newTime,
+      const date& newDate, const ptime& newTime, EnumGTDCategory category,
       size_t n)
 {
+   lock_guard<mutex> guard(m_mutex);
    if(!MoveNthInBasketItemToGTD(itemStr, category, n))
    {
       return false;
@@ -203,34 +273,9 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    return true;
 }
 
-void UserData::DumpInBasket() const
-{
-   cout << "In-basket:" << endl;
-   for(auto itr: m_inBasketVect)
-   {
-      cout << "  " << *itr << endl;
-   }
-}
-
-void UserData::DumpGTDCategory(EnumGTDCategory category) const
-{
-   cout << (*m_gtdFixedCatMap.find(category)).second << endl;
-   for(auto itr: (*m_gtdNodeTree.find(category)).second)
-   {
-      DumpTreeNode(itr, 1);
-   }
-}
-
-void UserData::DumpAllGTD() const
-{
-   for(auto itr: m_gtdFixedCatMap)
-   {
-      DumpGTDCategory(itr.first);
-   }
-}
-
 void UserData::InitNode(const string& itemStr, TreeNode& node) const
 {
+   lock_guard<mutex> guard(m_mutex);
    node.mp_nodeNameStrPtr = GetRepoSetStrPtr(itemStr);
    if(!node.m_date.is_not_a_date())
    {
@@ -241,6 +286,7 @@ void UserData::InitNode(const string& itemStr, TreeNode& node) const
 
 TTreeNodeVect& UserData::GetTreeNodeVect(EnumGTDCategory category)
 {
+   lock_guard<mutex> guard(m_mutex);
    auto itr(m_gtdNodeTree.find(category));
    if(m_gtdNodeTree.end() == itr)
    {
@@ -252,6 +298,7 @@ TTreeNodeVect& UserData::GetTreeNodeVect(EnumGTDCategory category)
 void UserData::PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
       TCStrPtrSet& strPtrSet) const
 {
+   lock_guard<mutex> guard(m_mutex);
    strPtrSet.insert(treeNode.mp_nodeNameStrPtr);
    for(auto itr: treeNode.m_children)
    {
@@ -269,6 +316,7 @@ void UserData::DumpIndent(int indent) const
 
 void UserData::DumpTreeNode(const TreeNode& treeNode, int indent) const
 {
+   lock_guard<mutex> guard(m_mutex);
    DumpIndent(indent);
    cout << treeNode.mp_nodeNameStrPtr << endl;
    for(auto itr: treeNode.m_children)
