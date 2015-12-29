@@ -97,9 +97,9 @@ int UserData::GetItemCountInBasket(const string& itemStr) const
    lock_guard<mutex> guard(m_mutex);
    int nCnt(0);
    size_t tmpIndex(0);
-   while(m_inBasketVect.size() > tmpIndex)
+   while(getInBasketCTreeNodeVect().size() > tmpIndex)
    {
-      if(itemStr == *m_inBasketVect[tmpIndex])
+      if(itemStr == GetNodeNameStr(getInBasketCTreeNodeVect(), tmpIndex))
       {
          ++nCnt;
       }
@@ -114,9 +114,9 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
    lock_guard<mutex> guard(m_mutex);
    size_t nCnt(0);
    size_t tmpIndex(0);
-   while(m_inBasketVect.size() > tmpIndex)
+   while(getInBasketCTreeNodeVect().size() > tmpIndex)
    {
-      if(itemStr == *m_inBasketVect[tmpIndex])
+      if(itemStr == GetNodeNameStr(getInBasketCTreeNodeVect(), tmpIndex))
       {
          if(n == nCnt)
          {
@@ -133,11 +133,11 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
 bool UserData::GetNthInBasketItem(const size_t& index, string& itemStr) const
 {
    lock_guard<mutex> guard(m_mutex);
-   if(m_inBasketVect.size() <= index)
+   if(getInBasketCTreeNodeVect().size() <= index)
    {
       return false;
    }
-   itemStr = (*m_inBasketVect[index]);
+   itemStr = GetNodeNameStr(getInBasketCTreeNodeVect(), index);
    return true;
 }
 
@@ -145,9 +145,9 @@ void UserData::DumpInBasket() const
 {
    lock_guard<mutex> guard(m_mutex);
    cout << "In-basket:" << endl;
-   for(auto itr: m_inBasketVect)
+   for(auto itr: getInBasketCTreeNodeVect())
    {
-      cout << "  " << *itr << endl;
+      cout << "  " << itr.mp_nodeNameStrPtr << endl;
    }
 }
 
@@ -180,10 +180,10 @@ void UserData::DumpAllGTD() const
    }
 }
 
-const TStrPtrVect& UserData::getInBasketVect() const
+const TTreeNodeVect& UserData::getInBasketCTreeNodeVect() const
 {
    lock_guard<mutex> guard(m_mutex);
-   return m_inBasketVect;
+   return (*m_gtdNodeTree.find(EnumGTDCategory::kInBasket)).second.m_children;
 }
 
 const TCatTreeNodeVectMap& UserData::getGtdNodeTree() const
@@ -208,8 +208,9 @@ void UserData::AddItemToInBasket(const string& newItemStr)
    lock_guard<mutex> guard(m_mutex);
    if(0 < newItemStr.size())
    {
-      auto setStrItr(ms_itemRepoSet.insert(newItemStr).first);
-      m_inBasketVect.push_back(&(*setStrItr));
+      TreeNode node;
+      InitNode(newItemStr, node);
+      getInBasketTreeNodeVect().push_back(node);
    }
 }
 
@@ -262,15 +263,17 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
 
    // Remove item from in-basket
    // TODO Rework this to move all items after n forward on and delete last item
-   TStrPtrVect tmpVect;
-   for (size_t i = 0; m_inBasketVect.size() > i; ++i)
+   TTreeNodeVect tmpVect;
+   for (size_t i = 0; getInBasketTreeNodeVect().size() > i; ++i)
    {
       if(n != i)
       {
-         tmpVect.push_back(m_inBasketVect[i]);
+         TreeNode node;
+         InitNode(*getInBasketTreeNodeVect()[i].mp_nodeNameStrPtr, node);
+         tmpVect.push_back(node);
       }
    }
-   m_inBasketVect = tmpVect;
+   getInBasketTreeNodeVect() = tmpVect;
    return true;
 }
 
@@ -324,6 +327,19 @@ TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
    return (*itr).second;
 }
 
+TTreeNodeVect& UserData::getInBasketTreeNodeVect()
+{
+   lock_guard<mutex> guard(m_mutex);
+   return (*m_gtdNodeTree.find(EnumGTDCategory::kInBasket)).second.m_children;
+}
+
+const string& UserData::GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
+      size_t index) const
+{
+   lock_guard<mutex> guard(m_mutex);
+   return *treeNodeVect[index].mp_nodeNameStrPtr;
+}
+
 void UserData::PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
       TCStrPtrSet& strPtrSet) const
 {
@@ -358,9 +374,9 @@ size_t UserData::CleanUpRepoSet()
 {
    // Add in-basket contents to newRepoSet
    TCStrPtrSet newRepoSet;
-   for(auto itr: m_inBasketVect)
+   for(auto itr: getInBasketTreeNodeVect())
    {
-      newRepoSet.insert(itr);
+      newRepoSet.insert(itr.mp_nodeNameStrPtr);
    }
    // Add GTD tree contents to newRepoSet
    for(auto itr: m_gtdNodeTree)

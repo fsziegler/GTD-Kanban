@@ -116,7 +116,7 @@ public:
    void DumpAllGTD() const;
 
    // ACCESSORS
-   const TStrPtrVect& getInBasketVect() const;
+   const TTreeNodeVect& getInBasketCTreeNodeVect() const;
    const TCatTreeNodeVectMap& getGtdNodeTree() const;
    const TreeNode& GetCTreeNode(EnumGTDCategory category) const;
 
@@ -143,6 +143,9 @@ public:
 private:
    void InitNode(const string& itemStr, TreeNode& node) const;
    TreeNode& GetTreeNode(EnumGTDCategory category);
+   TTreeNodeVect& getInBasketTreeNodeVect();
+   const string& GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
+         size_t index) const;
    void PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
          TCStrPtrSet& strPtrSet) const;
    void DumpIndent(int indent) const;
@@ -157,7 +160,6 @@ private:
    static TGTDCategoryMap  ms_gtdFixedCatMap;   // Fixed map of category
                                                 // enum-string pairs
    static TStrSet       ms_itemRepoSet;   // Set of all added user item names
-   TStrPtrVect          m_inBasketVect;   // In-basket collection
    TCatTreeNodeVectMap  m_gtdNodeTree;    // Tree of structured GTD items
    static mutex         m_mutex;
 };
