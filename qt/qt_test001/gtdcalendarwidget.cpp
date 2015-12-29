@@ -14,6 +14,7 @@ GTDCalendarWidget::GTDCalendarWidget(QWidget *parent)
    setMouseTracking(true);
    m_outlinePen.setColor(Qt::red);
    m_transparentBrush.setColor(Qt::transparent);
+   setGridVisible(true);
 }
 
 GTDCalendarWidget::~GTDCalendarWidget()
@@ -64,15 +65,14 @@ void GTDCalendarWidget::paintCell(QPainter *painter, const QRect &rect,
 {
 //    ToggleMouseClick();
    QCalendarWidget::paintCell(painter, rect, date);
+
    painter->save();
-//   if(selectedDate() == date)
-//   if(kMouseClick::Up == mouseClick)
-//   cout << abs(lastElapsed - m_timer.elapsed()) << endl;
-   if ((date == selectedDate()) && (2 > abs(lastElapsed - m_timer.elapsed())))
-   {
-      std::cout << mouseClick << "paint " << ++cnt << " "
-            << date.toString(Qt::ISODate).toUtf8().constData();
-      if ((3000 < m_timer.elapsed()) /*&& (m_mouseBtns && Qt::LeftButton) && (rect.contains(m_leftClickPoint))*/)
+   painter->setPen(Qt::blue);
+   painter->setFont(QFont("Arial", 12));
+   painter->drawText(rect, Qt::AlignRight, "Qt");
+   painter->restore();
+
+/*
       {
          painter->setPen(m_outlinePen);
          painter->setBrush(m_transparentBrush);
@@ -90,5 +90,5 @@ void GTDCalendarWidget::paintCell(QPainter *painter, const QRect &rect,
    }
    lastdate = date;
    lastElapsed = m_timer.elapsed();
-   painter->restore();
+   */
 }

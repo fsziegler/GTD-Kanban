@@ -223,7 +223,6 @@ void InBasketForm::on_calendarButton_clicked()
                msgBox.setWindowTitle("Schedule Item");
                const QDate date(kbcalDlg.GetSelectedDate());
                QString dateText(date.toString("MMM dd, yyyy"));
-               cout << dateText.toStdString() << endl;
                QString text("\"");
                text.append((*itr)->text()).append("\" on ").append(dateText);
                QTime time;
@@ -232,25 +231,18 @@ void InBasketForm::on_calendarButton_clicked()
                   text.append(" @ ").append(time.toString());
                }
                msgBox.setText(text);
-               msgBox.setStandardButtons(QMessageBox::Yes);
-               msgBox.addButton(QMessageBox::No);
-               msgBox.setDefaultButton(QMessageBox::No);
+               msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
                if (msgBox.exec() == QMessageBox::Yes)
                {
                   kbcalDlg.RemoveSelectedItem(*itr);
                   removeItemList.append(*itr);
                }
-               else
-               {
-                  // do something else
-               }
             }
-         }
             break;
+         }
          case kbcd_ScheduleLater:
             GetSelectionOutOfGTDBasketList(tmpItemList);
             MoveFromListToTree(itemList, "Calendar");
-//            MoveFromGTDBasketListToTree(QString("Calendar"));
             exit = true;
             break;
          case kbcd_Cancel:
