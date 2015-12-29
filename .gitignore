@@ -41,3 +41,5 @@ workspace/RemoteSystemsTempFiles
 *~
 *.*~
 
+# CCCC files
+.cccc
