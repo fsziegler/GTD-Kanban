@@ -33,6 +33,13 @@ int main() {
    UserData data;
    data.AddItemsToInBasket(inBasketStr);
    data.DumpInBasket();
+   int cnt(0);
+   string str;
+   while (data.GetNthInBasketItem(cnt++, str))
+   {
+      data.MoveNthInBasketItemToGTD(str, EnumGTDCategory::kSomedayMaybe);
+   }
+   data.DumpAllGTD();
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 	return 0;
 }

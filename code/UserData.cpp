@@ -38,6 +38,7 @@ mutex             UserData::m_mutex;
 
 UserData::UserData()
 {
+
    lock_guard<mutex> guard(m_mutex);
    if(0 == ms_gtdFixedCatMap.size())
    {
@@ -59,6 +60,13 @@ UserData::UserData()
             TGTDCategoryPair(EnumGTDCategory::kProjectPlans, "Project Plans"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kNextActions, "Next Actions"));
+      for(auto itr: ms_gtdFixedCatMap)
+      {
+         TreeNode node;
+         InitNode(itr.second, node);
+         m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
+//         ms_gtdFixedCatMap
+      }
    }
 }
 
@@ -122,6 +130,17 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
    return false;
 }
 
+bool UserData::GetNthInBasketItem(const size_t& index, string& itemStr) const
+{
+   lock_guard<mutex> guard(m_mutex);
+   if(m_inBasketVect.size() <= index)
+   {
+      return false;
+   }
+   itemStr = (*m_inBasketVect[index]);
+   return true;
+}
+
 void UserData::DumpInBasket() const
 {
    lock_guard<mutex> guard(m_mutex);
@@ -135,10 +154,20 @@ void UserData::DumpInBasket() const
 void UserData::DumpGTDCategory(EnumGTDCategory category) const
 {
    lock_guard<mutex> guard(m_mutex);
-   cout << (*ms_gtdFixedCatMap.find(category)).second << endl;
-   for(auto itr: (*m_gtdNodeTree.find(category)).second)
+//   cout << (*ms_gtdFixedCatMap.find(category)).second << ":" << endl;
+//   DumpIndent(1);
+   cout << *(*m_gtdNodeTree.find(category)).second.mp_nodeNameStrPtr << ":"
+         << endl;
+   if((*m_gtdNodeTree.find(category)).second.m_children.empty())
    {
-      DumpTreeNode(itr, 1);
+      cout << "  (empty)" << endl;
+   }
+   else
+   {
+      for(auto itr: (*m_gtdNodeTree.find(category)).second.m_children)
+      {
+         DumpTreeNode(itr, 1);
+      }
    }
 }
 
@@ -163,7 +192,7 @@ const TCatTreeNodeVectMap& UserData::getGtdNodeTree() const
    return m_gtdNodeTree;
 }
 
-const TTreeNodeVect& UserData::GetCTreeNodeVect(EnumGTDCategory category) const
+const TreeNode& UserData::GetCTreeNode(EnumGTDCategory category) const
 {
    lock_guard<mutex> guard(m_mutex);
    auto itr(m_gtdNodeTree.find(category));
@@ -228,8 +257,8 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    // Add item to GTD category
    TreeNode node;
    InitNode(itemStr, node);
-   TTreeNodeVect& catNodeVect = GetTreeNodeVect(category);
-   catNodeVect.push_back(node);
+   TreeNode& catNode = GetTreeNode(category);
+   catNode.m_children.push_back(node);
 
    // Remove item from in-basket
    // TODO Rework this to move all items after n forward on and delete last item
@@ -253,8 +282,8 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    {
       return false;
    }
-   TTreeNodeVect& catNodeVect = GetTreeNodeVect(category);
-   catNodeVect.back().m_date = newDate;
+   TreeNode& catNode = GetTreeNode(category);
+   catNode.m_children.back().m_date = newDate;
    return true;
 }
 
@@ -267,9 +296,9 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    {
       return false;
    }
-   TTreeNodeVect& catNodeVect = GetTreeNodeVect(category);
-   catNodeVect.back().m_date = newDate;
-   catNodeVect.back().m_time = newTime;
+   TreeNode& catNode = GetTreeNode(category);
+   catNode.m_children.back().m_date = newDate;
+   catNode.m_children.back().m_time = newTime;
    return true;
 }
 
@@ -284,7 +313,7 @@ void UserData::InitNode(const string& itemStr, TreeNode& node) const
    node.m_time = special_values::not_a_date_time;
 }
 
-TTreeNodeVect& UserData::GetTreeNodeVect(EnumGTDCategory category)
+TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
 {
    lock_guard<mutex> guard(m_mutex);
    auto itr(m_gtdNodeTree.find(category));
@@ -318,7 +347,7 @@ void UserData::DumpTreeNode(const TreeNode& treeNode, int indent) const
 {
    lock_guard<mutex> guard(m_mutex);
    DumpIndent(indent);
-   cout << treeNode.mp_nodeNameStrPtr << endl;
+   cout << *treeNode.mp_nodeNameStrPtr << endl;
    for(auto itr: treeNode.m_children)
    {
       DumpTreeNode(itr, indent+1);
@@ -336,11 +365,7 @@ size_t UserData::CleanUpRepoSet()
    // Add GTD tree contents to newRepoSet
    for(auto itr: m_gtdNodeTree)
    {
-      const TTreeNodeVect& nodeVect = itr.second;
-      for (auto treeNodeItr: nodeVect)
-      {
-         PopulateCStrPtrSetFromTreeNode(treeNodeItr, newRepoSet);
-      }
+      PopulateCStrPtrSetFromTreeNode(itr.second, newRepoSet);
    }
    // Remove all strings not in newSet from ms_itemRepoSet
    const size_t diff(ms_itemRepoSet.size() - newRepoSet.size());

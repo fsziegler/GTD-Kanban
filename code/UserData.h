@@ -80,9 +80,8 @@ struct TreeNode
    TTreeNodeVect  m_children;
 };
 
-typedef vector<TreeNode> TTreeNodeVect;
-typedef pair<EnumGTDCategory, TTreeNodeVect> TCatTreeNodeVectPair;
-typedef map<EnumGTDCategory, TTreeNodeVect> TCatTreeNodeVectMap;
+typedef pair<EnumGTDCategory, TreeNode> TCatTreeNodeVectPair;
+typedef map<EnumGTDCategory, TreeNode> TCatTreeNodeVectMap;
 
 // Class UserData holds all of the user's GTD-Kanban data, including the
 // In-Basket, GTD, and Kanban data, as well as its state.
@@ -108,18 +107,24 @@ public:
    // least n times, returning the index in m_inBasketVect iff true.
    bool FindNthInBasketItem(const string& itemStr, const size_t n,
          size_t& index) const;
+   bool GetNthInBasketItem(const size_t& index, string& itemStr) const;
+   // DumpInBasket() dumps the in-basket contents to the console.
    void DumpInBasket() const;
+   // DumpGTDCategory() dumps the GTD category contents to the console.
    void DumpGTDCategory(EnumGTDCategory category) const;
+   // DumpAllGTD() dumps all GTD contents to the console.
    void DumpAllGTD() const;
 
    // ACCESSORS
    const TStrPtrVect& getInBasketVect() const;
    const TCatTreeNodeVectMap& getGtdNodeTree() const;
-   const TTreeNodeVect& GetCTreeNodeVect(EnumGTDCategory category) const;
+   const TreeNode& GetCTreeNode(EnumGTDCategory category) const;
 
    // ACTIONS
    // AddItemToInBasket() adds newItemStr to the in-basket.
    void AddItemToInBasket(const string& newItemStr);
+   // AddItemsToInBasket() adds multiple items in newItemStr, delimited by
+   // delim, to the in-basket.
    void AddItemsToInBasket(const string& newItemsStr, char delim = '\n');
    // MoveNthInBasketItemToGTD() moves the n-th itemStr in the In-basket to the
    // category, returning false if there is no n-th itemStr.
@@ -137,7 +142,7 @@ public:
 
 private:
    void InitNode(const string& itemStr, TreeNode& node) const;
-   TTreeNodeVect& GetTreeNodeVect(EnumGTDCategory category);
+   TreeNode& GetTreeNode(EnumGTDCategory category);
    void PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
          TCStrPtrSet& strPtrSet) const;
    void DumpIndent(int indent) const;
