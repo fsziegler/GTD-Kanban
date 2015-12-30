@@ -11,19 +11,23 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = qt_test001
 TEMPLATE = app
 
+INCLUDEPATH += /usr/include/boost/
+LIBS += -lboost_system
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     inbasketform.cpp \
     gtdtreewidget.cpp \
     kanbancalendardialog.cpp \
-    gtdcalendarwidget.cpp
+    gtdcalendarwidget.cpp \
+    ../../code/UserData.cpp
 
 HEADERS  += mainwindow.h \
     inbasketform.h \
     gtdtreewidget.h \
     kanbancalendardialog.h \
-    gtdcalendarwidget.h
+    gtdcalendarwidget.h \
+    ../../code/UserData.h
 
 FORMS    += mainwindow.ui \
     inbasketform.ui \
