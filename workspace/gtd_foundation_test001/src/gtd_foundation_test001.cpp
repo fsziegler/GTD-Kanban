@@ -18,7 +18,7 @@ using namespace ZiegGTDKanban;
 const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
       "Draft thoughts for the budget-meeting agenda.\nTalk to Angela about "
       "the filing system we need to set up.\nResearch database-management "
-      "software on the Web.\nGet new staff person on board August\nvacation "
+      "software on the Web.\nGet new staff person on board\nAugust vacation\n"
       "Staff off-site retreat\nPublish book\nFinalize computer upgrades\n"
       "Update will\nFinalize budgets\nFinalize new product line\nGet "
       "comfortable with new contact-management software\nGet reprints of "
@@ -28,20 +28,30 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
       "keynote presentation\nGet proficient with videoconferencing access\n"
       "Finalize employment agreements\nInstall new backyard lights");
 
-
 int main() {
    UserData data;
-   data.AddItemsToInBasket(inBasketStr);
+   data.AddItemsToCategory(inBasketStr);
    cout << "data.DumpInBasket()" << endl;
-   data.DumpInBasket();
+   data.DumpGTDCategory(EnumGTDCategory::kInBasket);
    int cnt(0);
    string str;
-   while (data.GetNthInBasketItem(cnt++, str))
+   while (data.GetNthCategoryItemStr(EnumGTDCategory::kInBasket, cnt++, str))
    {
-      data.MoveNthInBasketItemToGTD(str, EnumGTDCategory::kSomedayMaybe);
+      data.MoveNthItemBetweenCategories(str, EnumGTDCategory::kInBasket,
+            EnumGTDCategory::kSomedayMaybe);
    }
    cout << "data.DumpAllGTD()" << endl;
    data.DumpAllGTD();
-	cout << "Done!!!" << endl; // prints !!!Hello World!!!
+   for(auto itr: UserData::getGtdFixedCatMap())
+   {
+      if(data.GetNthCategoryItemStr(EnumGTDCategory::kInBasket, 0, str))
+      {
+         data.MoveNthItemBetweenCategories(str, EnumGTDCategory::kInBasket,
+               itr.first);
+      }
+   }
+   cout << "data.DumpAllGTD()" << endl;
+   data.DumpAllGTD();
+   cout << "Done!!!" << endl; // prints !!!Hello World!!!
 	return 0;
 }

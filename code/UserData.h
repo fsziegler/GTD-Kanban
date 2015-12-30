@@ -100,58 +100,76 @@ public:
    // IsItemInSystem() returns true iff newItemStr is in the set of added item
    // names.
    bool IsItemInSystem(const string& newItemStr) const;
-   // GetItemCountInBasket() returns the number of instances of itemStr in the
-   // in-basket.
-   int GetItemCountInBasket(const string& itemStr) const;
-   // FindNthInBasketItem() returns true iff itemStr appears in the in-basket at
-   // least n times, returning the index in m_inBasketVect iff true.
-   bool FindNthInBasketItem(const string& itemStr, const size_t n,
-         size_t& index) const;
-   bool GetNthInBasketItem(const size_t& index, string& itemStr) const;
-   // DumpInBasket() dumps the in-basket contents to the console.
-   void DumpInBasket() const;
+   // GetCategoryItemCount() returns the number of instances of itemStr in the
+   // category.
+   int GetCategoryItemCount(EnumGTDCategory category,
+         const string& itemStr) const;
+   // FindNthCategoryItemIndex() returns true iff itemStr appears in the
+   // category at least n times, returning the index in the category iff true.
+   bool FindNthCategoryItemIndex(EnumGTDCategory category,
+         const string& itemStr, const size_t n, size_t& index) const;
+   // GetNthCategoryItemStr() returns true iff the category contains at least
+   // index items, setting itemStr to this value iff true.
+   bool GetNthCategoryItemStr(EnumGTDCategory category, const size_t& index,
+         string& itemStr) const;
    // DumpGTDCategory() dumps the GTD category contents to the console.
    void DumpGTDCategory(EnumGTDCategory category) const;
    // DumpAllGTD() dumps all GTD contents to the console.
    void DumpAllGTD() const;
 
    // ACCESSORS
-   const TTreeNodeVect& getInBasketCTreeNodeVect() const;
+   const TTreeNodeVect& getCategoryCTreeNodeVect(
+         EnumGTDCategory category) const;
    const TCatTreeNodeVectMap& getGtdNodeTree() const;
-   const TreeNode& GetCTreeNode(EnumGTDCategory category) const;
+   const TreeNode& GetCTreeNode(EnumGTDCategory category =
+         EnumGTDCategory::kInBasket) const;
+   static const TGTDCategoryMap& getGtdFixedCatMap();
 
-   // ACTIONS
-   // AddItemToInBasket() adds newItemStr to the in-basket.
-   void AddItemToInBasket(const string& newItemStr);
-   // AddItemsToInBasket() adds multiple items in newItemStr, delimited by
-   // delim, to the in-basket.
-   void AddItemsToInBasket(const string& newItemsStr, char delim = '\n');
-   // MoveNthInBasketItemToGTD() moves the n-th itemStr in the In-basket to the
-   // category, returning false if there is no n-th itemStr.
-   bool MoveNthInBasketItemToGTD(const string& itemStr,
-         EnumGTDCategory category, size_t n = 0);
-   // This version of MoveNthInBasketItemToGTD() sets the date of the n-th
-   // itemStr, and moves it into the Calendar category by default.
-   bool MoveNthInBasketItemToGTD(const string& itemStr, const date& newDate,
-         EnumGTDCategory category = EnumGTDCategory::kCalendar, size_t n = 0);
-   // This version of MoveNthInBasketItemToGTD() sets the date and time of the
-   // n-th itemStr, and moves it into the Calendar category by default.
-   bool MoveNthInBasketItemToGTD(const string& itemStr, const date& newDate,
-         const ptime& newTime, EnumGTDCategory category =
+   // ADDING ACTIONS
+   // AddItemToCategory() adds newItemStr to the category.
+   size_t AddItemToCategory(const string& newItemStr, EnumGTDCategory category =
+         EnumGTDCategory::kInBasket);
+   // AddItemsToCategory() adds multiple items in newItemStr, delimited by
+   // delim, to the category.
+   size_t AddItemsToCategory(const string& newItemsStr,
+         EnumGTDCategory category = EnumGTDCategory::kInBasket, char delim =
+               '\n');
+
+   // MOVING ACTIONS
+   // MoveNthItemBetweenCategories() moves the n-th itemStr in the fromCat
+   // category to the toCat category, returning false if there is no n-th
+   // itemStr.
+   bool MoveNthItemBetweenCategories(const string& itemStr,
+         EnumGTDCategory fromCat, EnumGTDCategory toCat, size_t n = 0);
+   // This version of MoveNthItemBetweenCategories() sets the date of the n-th
+   // itemStr after moving it, and moves it into the Calendar category by
+   // default.
+   bool MoveNthItemBetweenCategories(const string& itemStr, const date& newDate,
+         EnumGTDCategory fromCat, EnumGTDCategory toCat =
                EnumGTDCategory::kCalendar, size_t n = 0);
+   // This version of MoveNthItemBetweenCategories() sets the date and time of
+   // the n-th itemStr after moving it, and moves it into the Calendar category
+   // by default.
+   bool MoveNthItemBetweenCategories(const string& itemStr, const date& newDate,
+         const ptime& newTime, EnumGTDCategory fromCat,
+         EnumGTDCategory toCat = EnumGTDCategory::kCalendar, size_t n = 0);
 
 private:
    void InitNode(const string& itemStr, TreeNode& node) const;
    TreeNode& GetTreeNode(EnumGTDCategory category);
-   TTreeNodeVect& getInBasketTreeNodeVect();
+   const TTreeNodeVect& getCategoryCTreeNodeVect(EnumGTDCategory category =
+         EnumGTDCategory::kInBasket);
+   TTreeNodeVect& getCategoryTreeNodeVect(EnumGTDCategory category =
+         EnumGTDCategory::kInBasket);
    const string& GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
          size_t index) const;
    void PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
          TCStrPtrSet& strPtrSet) const;
    void DumpIndent(int indent) const;
-   void DumpTreeNode(const TreeNode& treeNode, int indent = 0) const;
+   void DumpTreeNode(const TreeNode& treeNode, int& cnt, int indent = 0) const;
    size_t CleanUpRepoSet();
 
+   // NOT IMPLEMENTED
    UserData(const UserData&);
    UserData& operator=(const UserData&);
    bool operator==(const UserData&);
@@ -160,8 +178,8 @@ private:
    static TGTDCategoryMap  ms_gtdFixedCatMap;   // Fixed map of category
                                                 // enum-string pairs
    static TStrSet       ms_itemRepoSet;   // Set of all added user item names
+   static mutex         m_mutex;          // Mutex to keep class thread safe
    TCatTreeNodeVectMap  m_gtdNodeTree;    // Tree of structured GTD items
-   static mutex         m_mutex;
 };
 
 } /* namespace ZiegGTDKanban */

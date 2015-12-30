@@ -65,7 +65,6 @@ UserData::UserData()
          TreeNode node;
          InitNode(itr.second, node);
          m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
-//         ms_gtdFixedCatMap
       }
    }
 }
@@ -92,14 +91,16 @@ bool UserData::IsItemInSystem(const string& newItemStr) const
    return (ms_itemRepoSet.end() != ms_itemRepoSet.find(newItemStr));
 }
 
-int UserData::GetItemCountInBasket(const string& itemStr) const
+int UserData::GetCategoryItemCount(EnumGTDCategory category,
+      const string& itemStr) const
 {
    lock_guard<mutex> guard(m_mutex);
    int nCnt(0);
    size_t tmpIndex(0);
-   while(getInBasketCTreeNodeVect().size() > tmpIndex)
+   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
    {
-      if(itemStr == GetNodeNameStr(getInBasketCTreeNodeVect(), tmpIndex))
+      if (itemStr
+            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
       {
          ++nCnt;
       }
@@ -108,15 +109,16 @@ int UserData::GetItemCountInBasket(const string& itemStr) const
    return nCnt;
 }
 
-bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
-      size_t& index) const
+bool UserData::FindNthCategoryItemIndex(EnumGTDCategory category,
+      const string& itemStr, const size_t n, size_t& index) const
 {
    lock_guard<mutex> guard(m_mutex);
    size_t nCnt(0);
    size_t tmpIndex(0);
-   while(getInBasketCTreeNodeVect().size() > tmpIndex)
+   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
    {
-      if(itemStr == GetNodeNameStr(getInBasketCTreeNodeVect(), tmpIndex))
+      if (itemStr
+            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
       {
          if(n == nCnt)
          {
@@ -130,43 +132,34 @@ bool UserData::FindNthInBasketItem(const string& itemStr, const size_t n,
    return false;
 }
 
-bool UserData::GetNthInBasketItem(const size_t& index, string& itemStr) const
+bool UserData::GetNthCategoryItemStr(EnumGTDCategory category,
+      const size_t& index, string& itemStr) const
 {
    lock_guard<mutex> guard(m_mutex);
-   if(getInBasketCTreeNodeVect().size() <= index)
+   if(getCategoryCTreeNodeVect(category).size() <= index)
    {
       return false;
    }
-   itemStr = GetNodeNameStr(getInBasketCTreeNodeVect(), index);
+   itemStr = GetNodeNameStr(
+         getCategoryCTreeNodeVect(category), index);
    return true;
-}
-
-void UserData::DumpInBasket() const
-{
-   lock_guard<mutex> guard(m_mutex);
-   cout << "In-basket:" << endl;
-   for(auto itr: getInBasketCTreeNodeVect())
-   {
-      cout << "  " << *itr.mp_nodeNameStrPtr << endl;
-   }
 }
 
 void UserData::DumpGTDCategory(EnumGTDCategory category) const
 {
    lock_guard<mutex> guard(m_mutex);
-//   cout << (*ms_gtdFixedCatMap.find(category)).second << ":" << endl;
-//   DumpIndent(1);
-   cout << *(*m_gtdNodeTree.find(category)).second.mp_nodeNameStrPtr << ":"
+   cout << *GetCTreeNode(category).mp_nodeNameStrPtr << ":"
          << endl;
-   if((*m_gtdNodeTree.find(category)).second.m_children.empty())
+   if(getCategoryCTreeNodeVect(category).empty())
    {
       cout << "  (empty)" << endl;
    }
    else
    {
-      for(auto itr: (*m_gtdNodeTree.find(category)).second.m_children)
+      int cnt(1);
+      for(auto itr: getCategoryCTreeNodeVect(category))
       {
-         DumpTreeNode(itr, 1);
+         DumpTreeNode(itr, cnt, 1);
       }
    }
 }
@@ -180,10 +173,11 @@ void UserData::DumpAllGTD() const
    }
 }
 
-const TTreeNodeVect& UserData::getInBasketCTreeNodeVect() const
+const TTreeNodeVect& UserData::getCategoryCTreeNodeVect(
+      EnumGTDCategory category) const
 {
    lock_guard<mutex> guard(m_mutex);
-   return (*m_gtdNodeTree.find(EnumGTDCategory::kInBasket)).second.m_children;
+   return (*m_gtdNodeTree.find(category)).second.m_children;
 }
 
 const TCatTreeNodeVectMap& UserData::getGtdNodeTree() const
@@ -203,32 +197,41 @@ const TreeNode& UserData::GetCTreeNode(EnumGTDCategory category) const
    return (*itr).second;
 }
 
-void UserData::AddItemToInBasket(const string& newItemStr)
+const TGTDCategoryMap& UserData::getGtdFixedCatMap()
+{
+   return ms_gtdFixedCatMap;
+}
+
+size_t UserData::AddItemToCategory(const string& newItemStr,
+      EnumGTDCategory category)
 {
    lock_guard<mutex> guard(m_mutex);
+   TTreeNodeVect& catNodeVect = getCategoryTreeNodeVect(category);
    if(0 < newItemStr.size())
    {
       TreeNode node;
       InitNode(newItemStr, node);
-      getInBasketTreeNodeVect().push_back(node);
+      catNodeVect.push_back(node);
    }
+   return catNodeVect.size();
 }
 
-void UserData::AddItemsToInBasket(const string& newItemsStr, char delim)
+size_t UserData::AddItemsToCategory(const string& newItemsStr,
+      EnumGTDCategory category, char delim)
 {
    lock_guard<mutex> guard(m_mutex);
    size_t pos = newItemsStr.find_first_of(delim);
    // Case of no delimiter in string
    if (string::npos == pos)
    {
-      AddItemToInBasket(newItemsStr);
-      return;
+      AddItemToCategory(newItemsStr);
+      return getCategoryTreeNodeVect(category).size();
    }
    string workingStr(newItemsStr);
    while (string::npos != pos)
    {
       const string currStr = workingStr.substr(0, pos);
-      AddItemToInBasket(currStr);
+      AddItemToCategory(currStr);
       {
          string newSrcStr(workingStr.substr(pos + 1));
          workingStr = newSrcStr;
@@ -237,12 +240,13 @@ void UserData::AddItemsToInBasket(const string& newItemsStr, char delim)
    }
    if (0 < workingStr.size())
    {
-      AddItemToInBasket(workingStr);
+      AddItemToCategory(workingStr);
    }
+   return getCategoryTreeNodeVect(category).size();
 }
 
-bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
-      EnumGTDCategory category, size_t n)
+bool UserData::MoveNthItemBetweenCategories(const string& itemStr,
+      EnumGTDCategory fromCat, EnumGTDCategory toCat, size_t n)
 {
    lock_guard<mutex> guard(m_mutex);
    if(!IsItemInSystem(itemStr))
@@ -250,7 +254,7 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
       return false;
    }
    size_t index;
-   if(!FindNthInBasketItem(itemStr, n, index))
+   if(!FindNthCategoryItemIndex(fromCat, itemStr, n, index))
    {
       return false;
    }
@@ -258,48 +262,44 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    // Add item to GTD category
    TreeNode node;
    InitNode(itemStr, node);
-   TreeNode& catNode = GetTreeNode(category);
+   TreeNode& catNode = GetTreeNode(toCat);
    catNode.m_children.push_back(node);
 
-   // Remove item from in-basket
-   // TODO Rework this to move all items after n forward on and delete last item
+   // Remove item from fromCat category
    TTreeNodeVect tmpVect;
-   for (size_t i = 0; getInBasketTreeNodeVect().size() > i; ++i)
+   for (size_t i = index; getCategoryTreeNodeVect(fromCat).size() > i; ++i)
    {
-      if(index != i)
-      {
-         TreeNode node;
-         InitNode(*getInBasketTreeNodeVect()[i].mp_nodeNameStrPtr, node);
-         tmpVect.push_back(node);
-      }
+      getCategoryTreeNodeVect(fromCat)[i] = getCategoryTreeNodeVect(fromCat)[i
+            + 1];
    }
-   getInBasketTreeNodeVect() = tmpVect;
+   getCategoryTreeNodeVect(fromCat).pop_back();
    return true;
 }
 
-bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
-      const date& newDate, EnumGTDCategory category, size_t n)
+bool UserData::MoveNthItemBetweenCategories(const string& itemStr,
+      const date& newDate, EnumGTDCategory fromCat, EnumGTDCategory toCat,
+      size_t n)
 {
    lock_guard<mutex> guard(m_mutex);
-   if(!MoveNthInBasketItemToGTD(itemStr, category, n))
+   if(!MoveNthItemBetweenCategories(itemStr, fromCat, toCat, n))
    {
       return false;
    }
-   TreeNode& catNode = GetTreeNode(category);
+   TreeNode& catNode = GetTreeNode(toCat);
    catNode.m_children.back().m_date = newDate;
    return true;
 }
 
-bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
-      const date& newDate, const ptime& newTime, EnumGTDCategory category,
-      size_t n)
+bool UserData::MoveNthItemBetweenCategories(const string& itemStr,
+      const date& newDate, const ptime& newTime, EnumGTDCategory fromCat,
+      EnumGTDCategory toCat, size_t n)
 {
    lock_guard<mutex> guard(m_mutex);
-   if(!MoveNthInBasketItemToGTD(itemStr, category, n))
+   if(!MoveNthItemBetweenCategories(itemStr, fromCat, toCat, n))
    {
       return false;
    }
-   TreeNode& catNode = GetTreeNode(category);
+   TreeNode& catNode = GetTreeNode(toCat);
    catNode.m_children.back().m_date = newDate;
    catNode.m_children.back().m_time = newTime;
    return true;
@@ -327,10 +327,17 @@ TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
    return (*itr).second;
 }
 
-TTreeNodeVect& UserData::getInBasketTreeNodeVect()
+const TTreeNodeVect& UserData::getCategoryCTreeNodeVect(
+      EnumGTDCategory category)
 {
    lock_guard<mutex> guard(m_mutex);
-   return (*m_gtdNodeTree.find(EnumGTDCategory::kInBasket)).second.m_children;
+   return (*m_gtdNodeTree.find(category)).second.m_children;
+}
+
+TTreeNodeVect& UserData::getCategoryTreeNodeVect(EnumGTDCategory category)
+{
+   lock_guard<mutex> guard(m_mutex);
+   return (*m_gtdNodeTree.find(category)).second.m_children;
 }
 
 const string& UserData::GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
@@ -359,14 +366,15 @@ void UserData::DumpIndent(int indent) const
    }
 }
 
-void UserData::DumpTreeNode(const TreeNode& treeNode, int indent) const
+void UserData::DumpTreeNode(const TreeNode& treeNode, int& cnt,
+      int indent) const
 {
    lock_guard<mutex> guard(m_mutex);
    DumpIndent(indent);
-   cout << *treeNode.mp_nodeNameStrPtr << endl;
+   cout << cnt++ << ") "<< *treeNode.mp_nodeNameStrPtr << endl;
    for(auto itr: treeNode.m_children)
    {
-      DumpTreeNode(itr, indent+1);
+      DumpTreeNode(itr, cnt, indent+1);
    }
 }
 
@@ -374,7 +382,7 @@ size_t UserData::CleanUpRepoSet()
 {
    // Add in-basket contents to newRepoSet
    TCStrPtrSet newRepoSet;
-   for(auto itr: getInBasketTreeNodeVect())
+   for(auto itr: getCategoryTreeNodeVect())
    {
       newRepoSet.insert(itr.mp_nodeNameStrPtr);
    }
