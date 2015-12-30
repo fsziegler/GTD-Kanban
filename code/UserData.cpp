@@ -147,7 +147,7 @@ void UserData::DumpInBasket() const
    cout << "In-basket:" << endl;
    for(auto itr: getInBasketCTreeNodeVect())
    {
-      cout << "  " << itr.mp_nodeNameStrPtr << endl;
+      cout << "  " << *itr.mp_nodeNameStrPtr << endl;
    }
 }
 
@@ -266,7 +266,7 @@ bool UserData::MoveNthInBasketItemToGTD(const string& itemStr,
    TTreeNodeVect tmpVect;
    for (size_t i = 0; getInBasketTreeNodeVect().size() > i; ++i)
    {
-      if(n != i)
+      if(index != i)
       {
          TreeNode node;
          InitNode(*getInBasketTreeNodeVect()[i].mp_nodeNameStrPtr, node);

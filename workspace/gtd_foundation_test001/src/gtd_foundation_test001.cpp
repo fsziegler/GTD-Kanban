@@ -32,6 +32,7 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
 int main() {
    UserData data;
    data.AddItemsToInBasket(inBasketStr);
+   cout << "data.DumpInBasket()" << endl;
    data.DumpInBasket();
    int cnt(0);
    string str;
@@ -39,7 +40,8 @@ int main() {
    {
       data.MoveNthInBasketItemToGTD(str, EnumGTDCategory::kSomedayMaybe);
    }
+   cout << "data.DumpAllGTD()" << endl;
    data.DumpAllGTD();
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	cout << "Done!!!" << endl; // prints !!!Hello World!!!
 	return 0;
 }
