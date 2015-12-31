@@ -29,19 +29,14 @@
 #ifndef USERDATA_H_
 #define USERDATA_H_
 
+#include <TreeNode.h>
 #include <string>
-#include <vector>
 #include <map>
 #include <set>
-#include <boost/date_time/gregorian/gregorian.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 //#include <boost/property_tree/ptree.hpp>
 
-using namespace std;
 using namespace boost;
-using namespace boost::gregorian;
-using namespace boost::posix_time;
 
 namespace ZiegGTDKanban
 {
@@ -68,17 +63,6 @@ typedef vector<const string*> TStrPtrVect;
 
 typedef set<string> TStrSet;
 typedef set<const string*> TCStrPtrSet;
-
-struct TreeNode;
-
-typedef vector<TreeNode> TTreeNodeVect;
-struct TreeNode
-{
-   const string*  mp_nodeNameStrPtr;
-   date           m_date;
-   ptime          m_time;
-   TTreeNodeVect  m_children;
-};
 
 typedef pair<EnumGTDCategory, TreeNode> TCatTreeNodeVectPair;
 typedef map<EnumGTDCategory, TreeNode> TCatTreeNodeVectMap;
@@ -144,22 +128,19 @@ public:
    // This version of MoveNthItemBetweenCategories() sets the date of the n-th
    // itemStr after moving it, and moves it into the Calendar category by
    // default.
-   bool MoveNthStrBetweenCategories(const string& itemStr, const date& newDate,
+   bool MoveNthStrBetweenCategories(const string& itemStr, date newDate,
          EnumGTDCategory fromCat, EnumGTDCategory toCat =
                EnumGTDCategory::kCalendar, size_t n = 0);
    // This version of MoveNthItemBetweenCategories() sets the date and time of
    // the n-th itemStr after moving it, and moves it into the Calendar category
    // by default.
-   bool MoveNthStrBetweenCategories(const string& itemStr, const date& newDate,
-         const ptime& newTime, EnumGTDCategory fromCat,
+   bool MoveNthStrBetweenCategories(const string& itemStr, date newDate,
+         ptime newTime, EnumGTDCategory fromCat,
          EnumGTDCategory toCat = EnumGTDCategory::kCalendar, size_t n = 0);
 
 private:
-   void InitNode(const string& itemStr, TreeNode& node) const;
    TreeNode& GetTreeNode(EnumGTDCategory category);
    const TTreeNodeVect& getCategoryCTreeNodeVect(EnumGTDCategory category =
-         EnumGTDCategory::kInBasket);
-   TTreeNodeVect& getCategoryTreeNodeVect(EnumGTDCategory category =
          EnumGTDCategory::kInBasket);
    const string& GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
          size_t index) const;
