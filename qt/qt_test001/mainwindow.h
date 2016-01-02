@@ -18,15 +18,14 @@ class MainWindow;
 
 class MainWindow: public QMainWindow
 {
-   Q_OBJECT
+Q_OBJECT
 
 public:
    explicit MainWindow(QWidget *parent = 0);
    ~MainWindow();
 
 protected:
-   void mousePressEvent(QMouseEvent *event)
-   Q_DECL_OVERRIDE;
+   void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
    void mouseMoveEvent(QMouseEvent *event);
 
 private slots:

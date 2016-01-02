@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=c++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../qt_test001 -I. -I/usr/include/boost -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. -I. -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++
+INCPATH       = -I../qt_test001 -I. -I/usr/include/boost -I../../code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. -I. -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++
 QMAKE         = /opt/Qt5.4.2/5.4/gcc/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -54,7 +54,8 @@ SOURCES       = ../qt_test001/main.cpp \
 		../qt_test001/gtdtreewidget.cpp \
 		../qt_test001/kanbancalendardialog.cpp \
 		../qt_test001/gtdcalendarwidget.cpp \
-		../../code/UserData.cpp moc_mainwindow.cpp \
+		../../code/UserData.cpp \
+		../../code/TreeNode.cpp moc_mainwindow.cpp \
 		moc_inbasketform.cpp \
 		moc_kanbancalendardialog.cpp \
 		moc_gtdcalendarwidget.cpp
@@ -65,6 +66,7 @@ OBJECTS       = main.o \
 		kanbancalendardialog.o \
 		gtdcalendarwidget.o \
 		UserData.o \
+		TreeNode.o \
 		moc_mainwindow.o \
 		moc_inbasketform.o \
 		moc_kanbancalendardialog.o \
@@ -195,13 +197,15 @@ DIST          = /opt/Qt5.4.2/5.4/gcc/mkspecs/features/spec_pre.prf \
 		../qt_test001/gtdtreewidget.h \
 		../qt_test001/kanbancalendardialog.h \
 		../qt_test001/gtdcalendarwidget.h \
-		../../code/UserData.h ../qt_test001/main.cpp \
+		../../code/UserData.h \
+		../../code/TreeNode.h ../qt_test001/main.cpp \
 		../qt_test001/mainwindow.cpp \
 		../qt_test001/inbasketform.cpp \
 		../qt_test001/gtdtreewidget.cpp \
 		../qt_test001/kanbancalendardialog.cpp \
 		../qt_test001/gtdcalendarwidget.cpp \
-		../../code/UserData.cpp
+		../../code/UserData.cpp \
+		../../code/TreeNode.cpp
 QMAKE_TARGET  = qt_test001
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = qt_test001
@@ -497,8 +501,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt_test001/mainwindow.h ../qt_test001/inbasketform.h ../qt_test001/gtdtreewidget.h ../qt_test001/kanbancalendardialog.h ../qt_test001/gtdcalendarwidget.h ../../code/UserData.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt_test001/main.cpp ../qt_test001/mainwindow.cpp ../qt_test001/inbasketform.cpp ../qt_test001/gtdtreewidget.cpp ../qt_test001/kanbancalendardialog.cpp ../qt_test001/gtdcalendarwidget.cpp ../../code/UserData.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt_test001/mainwindow.h ../qt_test001/inbasketform.h ../qt_test001/gtdtreewidget.h ../qt_test001/kanbancalendardialog.h ../qt_test001/gtdcalendarwidget.h ../../code/UserData.h ../../code/TreeNode.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt_test001/main.cpp ../qt_test001/mainwindow.cpp ../qt_test001/inbasketform.cpp ../qt_test001/gtdtreewidget.cpp ../qt_test001/kanbancalendardialog.cpp ../qt_test001/gtdcalendarwidget.cpp ../../code/UserData.cpp ../../code/TreeNode.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt_test001/mainwindow.ui ../qt_test001/inbasketform.ui ../qt_test001/kanbancalendardialog.ui $(DISTDIR)/
 
 
@@ -526,6 +530,8 @@ compiler_moc_header_make_all: moc_mainwindow.cpp moc_inbasketform.cpp moc_kanban
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_inbasketform.cpp moc_kanbancalendardialog.cpp moc_gtdcalendarwidget.cpp
 moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
@@ -677,9 +683,11 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
 		../qt_test001/mainwindow.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/mainwindow.h -o moc_mainwindow.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/mainwindow.h -o moc_mainwindow.cpp
 
-moc_inbasketform.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
+moc_inbasketform.cpp: ../../code/UserData.h \
+		../../code/TreeNode.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qglobal.h \
@@ -806,7 +814,7 @@ moc_inbasketform.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/inbasketform.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/inbasketform.h -o moc_inbasketform.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/inbasketform.h -o moc_inbasketform.cpp
 
 moc_kanbancalendardialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
@@ -932,7 +940,7 @@ moc_kanbancalendardialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
 		../qt_test001/kanbancalendardialog.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbancalendardialog.h -o moc_kanbancalendardialog.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbancalendardialog.h -o moc_kanbancalendardialog.cpp
 
 moc_gtdcalendarwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -1045,7 +1053,7 @@ moc_gtdcalendarwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidge
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/gtdcalendarwidget.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/gtdcalendarwidget.h -o moc_gtdcalendarwidget.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/gtdcalendarwidget.h -o moc_gtdcalendarwidget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1073,6 +1081,8 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		../qt_test001/inbasketform.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
@@ -1234,6 +1244,8 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 
 mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		../qt_test001/inbasketform.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
@@ -1423,6 +1435,8 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../qt_test001/mainwindow.cpp
 
 inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
@@ -1996,8 +2010,12 @@ gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalend
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gtdcalendarwidget.o ../qt_test001/gtdcalendarwidget.cpp
 
-UserData.o: ../../code/UserData.cpp ../../code/UserData.h
+UserData.o: ../../code/UserData.cpp ../../code/UserData.h \
+		../../code/TreeNode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UserData.o ../../code/UserData.cpp
+
+TreeNode.o: ../../code/TreeNode.cpp ../../code/TreeNode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TreeNode.o ../../code/TreeNode.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

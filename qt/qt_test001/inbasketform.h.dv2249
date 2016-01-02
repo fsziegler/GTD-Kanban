@@ -6,8 +6,6 @@
 #include <QTreeWidget>
 #include <QListWidgetItem>
 
-using namespace ZiegGTDKanban;
-
 namespace Ui
 {
 class InBasketForm;
@@ -25,7 +23,7 @@ public:
    void GetSelectionOutOfGTDBasketList(
          QList<QListWidgetItem*>& itemSelectionList, bool move = true);
    void MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
-         const QString& nodeNameStr);
+                                         const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
    void RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove);
 
@@ -55,9 +53,8 @@ private slots:
    void on_gtdMinMaxButton_clicked();
 
 private:
-   Ui::InBasketForm* mp_ui;
+   Ui::InBasketForm *ui;
    QTreeWidget* mp_gtdTree;
-   UserData m_userData;
 };
 
 #endif // INBASKETFORM_H

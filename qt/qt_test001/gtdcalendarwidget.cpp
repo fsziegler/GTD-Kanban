@@ -72,23 +72,23 @@ void GTDCalendarWidget::paintCell(QPainter *painter, const QRect &rect,
    painter->drawText(rect, Qt::AlignRight, "Qt");
    painter->restore();
 
-/*
-      {
-         painter->setPen(m_outlinePen);
-         painter->setBrush(m_transparentBrush);
-         painter->drawRect(rect.adjusted(0, 0, -1, -1));
-      }
-      //   else
-      {
-         cout << "[" << m_mouseBtns
-               << (m_mouseBtns & Qt::NoButton ? "NoButton" : "")
-               << (m_mouseBtns & Qt::LeftButton ? "LeftButton" : "")
-               << (m_mouseBtns & Qt::RightButton ? "RightButton" : "") << "]";
-      }
-      CoutRect(rect);
-      cout << m_timer.elapsed() << std::endl;
-   }
-   lastdate = date;
-   lastElapsed = m_timer.elapsed();
-   */
+   /*
+    {
+    painter->setPen(m_outlinePen);
+    painter->setBrush(m_transparentBrush);
+    painter->drawRect(rect.adjusted(0, 0, -1, -1));
+    }
+    //   else
+    {
+    cout << "[" << m_mouseBtns
+    << (m_mouseBtns & Qt::NoButton ? "NoButton" : "")
+    << (m_mouseBtns & Qt::LeftButton ? "LeftButton" : "")
+    << (m_mouseBtns & Qt::RightButton ? "RightButton" : "") << "]";
+    }
+    CoutRect(rect);
+    cout << m_timer.elapsed() << std::endl;
+    }
+    lastdate = date;
+    lastElapsed = m_timer.elapsed();
+    */
 }

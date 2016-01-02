@@ -10,14 +10,13 @@
 
 class GTDCalendarWidget: public QCalendarWidget
 {
-   Q_OBJECT
+Q_OBJECT
 public:
    GTDCalendarWidget(QWidget *parent = 0);
    virtual ~GTDCalendarWidget();
 
 //protected:
-   virtual void mousePressEvent(QMouseEvent * event)
-   Q_DECL_OVERRIDE;
+   virtual void mousePressEvent(QMouseEvent * event) Q_DECL_OVERRIDE;
    virtual void paintCell(QPainter *painter, const QRect &rect,
          const QDate &date) const;
 private:

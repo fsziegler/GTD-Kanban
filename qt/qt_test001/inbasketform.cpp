@@ -11,11 +11,11 @@ using namespace std;
 
 InBasketForm::InBasketForm(QWidget *parent)
       : QWidget(parent),
-        ui(new Ui::InBasketForm),
+        mp_ui(new Ui::InBasketForm),
         mp_gtdTree(nullptr)
 {
-   ui->setupUi(this);
-   ui->InBasketListWidget->setSelectionMode(
+   mp_ui->setupUi(this);
+   mp_ui->InBasketListWidget->setSelectionMode(
          QAbstractItemView::ExtendedSelection);
    // TEMPORARY FOR QUICK TESTING
    const QString inBasket("Call Fred re tel. # for the garage he recommended.\n"
@@ -33,8 +33,8 @@ InBasketForm::InBasketForm(QWidget *parent)
 //    Allen, David (2002-12-31). Getting Things Done: The Art of Stress-Free
 //   Productivity (p. 34). Penguin Group. Kindle Edition.
 
-   ui->inBasketTextEdit->setText(inBasket);
-   ui->inBasketTextEdit->setAcceptDrops(true);
+   mp_ui->inBasketTextEdit->setText(inBasket);
+   mp_ui->inBasketTextEdit->setAcceptDrops(true);
 //    ui->inBasketTextEdit->set
 //    m_gtdTree.setAcceptDrops(true);
 //    m_gtdTree.setDragEnabled(true);
@@ -43,7 +43,7 @@ InBasketForm::InBasketForm(QWidget *parent)
 
 InBasketForm::~InBasketForm()
 {
-   delete ui;
+   delete mp_ui;
 }
 
 void InBasketForm::SetGTDTreeWidget(QTreeWidget* gtdTree)
@@ -54,13 +54,15 @@ void InBasketForm::SetGTDTreeWidget(QTreeWidget* gtdTree)
 void InBasketForm::GetSelectionOutOfGTDBasketList(
       QList<QListWidgetItem*>& itemSelectionList, bool move)
 {
-   itemSelectionList = ui->InBasketListWidget->selectedItems();
+   itemSelectionList = mp_ui->InBasketListWidget->selectedItems();
    if (move)
    {
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
       {
-         ui->InBasketListWidget->takeItem(ui->InBasketListWidget->row((*itr)));
+         int row = mp_ui->InBasketListWidget->row((*itr));
+         mp_ui->InBasketListWidget->takeItem(
+               mp_ui->InBasketListWidget->row((*itr)));
       }
    }
 }
@@ -110,13 +112,14 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
 void InBasketForm::RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove)
 {
    QList<QListWidgetItem*> itemSelectionList(
-         ui->InBasketListWidget->selectedItems());
+         mp_ui->InBasketListWidget->selectedItems());
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)
    {
       if (itemToRemove->text() == (*itr)->text())
       {
-         ui->InBasketListWidget->takeItem(ui->InBasketListWidget->row((*itr)));
+         mp_ui->InBasketListWidget->takeItem(
+               mp_ui->InBasketListWidget->row((*itr)));
          return;
       }
    }
@@ -124,13 +127,14 @@ void InBasketForm::RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove)
 
 void InBasketForm::on_inBasketTextEdit_textChanged()
 {
-   if (0 == ui->inBasketTextEdit->toPlainText().size())
+   if (0 == mp_ui->inBasketTextEdit->toPlainText().size())
    {
       return;
    }
-   QString text(ui->inBasketTextEdit->toPlainText());
+   QString text(mp_ui->inBasketTextEdit->toPlainText());
    if ('\n' == text[text.size() - 1])
    {
+      m_userData.DumpAllGTD();
       text.resize(text.size() - 1);
       // parse text & strip out all '\n's
       int start(0);
@@ -146,11 +150,13 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
          {
             subtext[i - start] = text[i];
          }
-         ui->InBasketListWidget->addItem(subtext);
+         mp_ui->InBasketListWidget->addItem(subtext);
+         m_userData.AddStrToCategory(subtext.toStdString());
          start = ++end;
       } while (text.size() > end);
-      ui->inBasketTextEdit->selectAll();
-      ui->inBasketTextEdit->cut();
+      mp_ui->inBasketTextEdit->selectAll();
+      mp_ui->inBasketTextEdit->cut();
+      m_userData.DumpAllGTD();
    }
 }
 
@@ -169,7 +175,7 @@ void InBasketForm::on_reEditSelectionButton_clicked()
       }
       editText.append(qwi->text());
    }
-   ui->inBasketTextEdit->insertPlainText(editText);
+   mp_ui->inBasketTextEdit->insertPlainText(editText);
 }
 
 void InBasketForm::on_somedayMaybeButton_clicked()
@@ -261,8 +267,8 @@ void InBasketForm::on_calendarButton_clicked()
             if ((*itr)->text() == (*itr2)->text())
             {
                itemList.erase(itr2);
-               ui->InBasketListWidget->takeItem(
-                     ui->InBasketListWidget->row((*itr2)));
+               mp_ui->InBasketListWidget->takeItem(
+                     mp_ui->InBasketListWidget->row((*itr2)));
                break;
             }
          }
@@ -290,11 +296,11 @@ void InBasketForm::on_gtdMinMaxButton_clicked()
    if (100 < height())
    {
       setFixedHeight(40);
-      ui->gtdMinMaxButton->setArrowType(Qt::DownArrow);
+      mp_ui->gtdMinMaxButton->setArrowType(Qt::DownArrow);
    }
    else
    {
       setFixedHeight(471);
-      ui->gtdMinMaxButton->setArrowType(Qt::UpArrow);
+      mp_ui->gtdMinMaxButton->setArrowType(Qt::UpArrow);
    }
 }
