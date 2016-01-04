@@ -101,7 +101,7 @@ Third, **make it fast** by
 You may iterate through the second and third phases any number of times as your refine your product.
 
 ####Reliable, Maintainable, Scalable
-`"Rational behavior requires theory. Reactive behavior requires only reflex reaction"`
+`"Rational behavior requires theory. Reactive behavior requires only reflex action"`
 
 `--W. Edwards Deming`
 
