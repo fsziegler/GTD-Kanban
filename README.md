@@ -1,4 +1,4 @@
-Copyright (c) 2015 Frederick S. Ziegler
+Copyright (c) 2015, 2016 Frederick S. Ziegler
 
 # GTD-Kanban
 
@@ -8,7 +8,7 @@ Copyright (c) 2015 Frederick S. Ziegler
 
 ##1 Life Organizer, based on "Getting Things Done" and Kanban
 
-Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) and the Kanban methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
+Purpose: To create a software tool for creative people to organize and track various aspects of their lives, including projects. This is conceptually based on two works: David Allen's book ["Getting Things Done"](https://en.wikipedia.org/wiki/Getting_Things_Done) (**GTD**) and the **Kanban** methodology for managing projects, in particular the form of Kanban outlined in ["Personal Kanban"](http://www.personalkanban.com/) by Jim Benson and Tonianne DeMaria Barry. This tool is intended to empower the individual.
 
 ### 1.1 Getting Things Done
 
