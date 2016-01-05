@@ -3,6 +3,7 @@
 #include "kanbancalendardialog.h"
 #include <QMessageBox>
 #include <QDate>
+#include <QKeyEvent>
 #include <set>
 #include <vector>
 #include <iostream>
@@ -39,6 +40,8 @@ InBasketForm::InBasketForm(QWidget *parent)
 //    m_gtdTree.setAcceptDrops(true);
 //    m_gtdTree.setDragEnabled(true);
 //    m_gtdTree.setDragDropMode(QTreeWidget::InternalMove);
+   QKeyEvent *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Alt, Qt::NoModifier);
+   QCoreApplication::postEvent (this, event);
 }
 
 InBasketForm::~InBasketForm()
@@ -295,12 +298,12 @@ void InBasketForm::on_gtdMinMaxButton_clicked()
 {
    if (100 < height())
    {
-      setFixedHeight(40);
+      setFixedHeight(41);
       mp_ui->gtdMinMaxButton->setArrowType(Qt::DownArrow);
    }
    else
    {
-      setFixedHeight(471);
+      setFixedHeight(480);
       mp_ui->gtdMinMaxButton->setArrowType(Qt::UpArrow);
    }
 }

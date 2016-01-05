@@ -179,6 +179,7 @@ Makefile: ../qt_test001/qt_test001.pro ../../../../Qt/5.5/mingw492_32/mkspecs/wi
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds_post.prf \
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/default_post.prf \
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/c++11.prf \
+		../../../../Qt/5.5/mingw492_32/mkspecs/features/c++14.prf \
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/qml_debug.prf \
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/win32/rtti.prf \
 		../../../../Qt/5.5/mingw492_32/mkspecs/features/precompile_header.prf \
@@ -319,6 +320,7 @@ Makefile: ../qt_test001/qt_test001.pro ../../../../Qt/5.5/mingw492_32/mkspecs/wi
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/exclusive_builds_post.prf:
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/default_post.prf:
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/c++11.prf:
+../../../../Qt/5.5/mingw492_32/mkspecs/features/c++14.prf:
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/qml_debug.prf:
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/win32/rtti.prf:
 ../../../../Qt/5.5/mingw492_32/mkspecs/features/precompile_header.prf:
