@@ -1,0 +1,14 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\inbasketform.o
+./debug\gtdtreewidget.o
+./debug\kanbancalendardialog.o
+./debug\gtdcalendarwidget.o
+./debug\UserData.o
+./debug\TreeNode.o
+./debug\moc_mainwindow.o
+./debug\moc_inbasketform.o
+./debug\moc_kanbancalendardialog.o
+./debug\moc_gtdcalendarwidget.o
+);

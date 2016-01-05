@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\inbasketform.o
+./release\gtdtreewidget.o
+./release\kanbancalendardialog.o
+./release\gtdcalendarwidget.o
+./release\UserData.o
+./release\TreeNode.o
+./release\moc_mainwindow.o
+./release\moc_inbasketform.o
+./release\moc_kanbancalendardialog.o
+./release\moc_gtdcalendarwidget.o
+);
