@@ -27,22 +27,19 @@
 
  */
 #include <TreeNode.h>
+#include <boost/thread/lock_guard.hpp>
 
 namespace ZiegGTDKanban
 {
 
-TreeNode TreeNode::NonExistentTreeNode("NonExistentTreeNode");
+TStrSet           TreeNode::ms_itemRepoSet;
+recursive_mutex   TreeNode::m_mutex;
 
-TreeNode::TreeNode()
-:mp_nodeNameStrPtr(nullptr),
-m_date(special_values::not_a_date_time),
-m_time(special_values::not_a_date_time)
-{
-}
+TreeNode NonExistentTreeNode("NonExistentTreeNode");
 
 TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode)
 :mp_parentNode(parentNode),
- mp_nodeNameStrPtr(&newItemStr),
+ mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
 m_date(special_values::not_a_date_time),
 m_time(special_values::not_a_date_time)
 {
@@ -61,6 +58,16 @@ TreeNode& TreeNode::operator=(const TreeNode& rhs)
 {
    SetEqualTo(rhs);
    return *this;
+}
+
+bool TreeNode::operator==(const TreeNode& rhs)
+{
+   return IsEqualTo(rhs);
+}
+
+bool TreeNode::operator!=(const TreeNode& rhs)
+{
+   return !IsEqualTo(rhs);
 }
 
 TreeNode& TreeNode::operator[](size_t index)
@@ -91,6 +98,19 @@ TreeNode& TreeNode::operator[](size_t index)
    }
    // We should never reach this point
    return NonExistentTreeNode;
+}
+
+const string* TreeNode::GetRepoSetStrPtr(const string& newItemStr)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   ms_itemRepoSet.insert(newItemStr);
+   return &(*ms_itemRepoSet.insert(newItemStr).first);
+}
+
+bool TreeNode::IsStrInSystem(const string& newItemStr)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   return (ms_itemRepoSet.end() != ms_itemRepoSet.find(newItemStr));
 }
 
 unsigned int TreeNode::GetNumInstancesOfItemStr(const string& itemStr,
@@ -128,92 +148,10 @@ size_t TreeNode::CalcNestedChildCount() const
    return childCnt;
 }
 
-bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
-{
-   size_t rowCnt(row);
-   if(0 == row)
-   {
-      rowStr = *mp_nodeNameStrPtr;
-      return true;
-   }
-   --rowCnt;
-   for(auto itr: m_children)
-   {
-      if (0 == rowCnt)
-      {
-         rowStr = *itr.mp_nodeNameStrPtr;
-         return true;
-      }
-      size_t nestedChildCnt(itr.CalcNestedChildCount());
-      if(nestedChildCnt < rowCnt)
-      {
-         --rowCnt;
-
-          rowCnt -= nestedChildCnt;
-      }
-      else
-      {
-         return itr.ReadStrAtRow(rowCnt, rowStr);
-      }
-   }
-   return false;
-}
-
-size_t TreeNode::CalcChildrenCountUnderRow(size_t row)
-{
-   const TreeNode& rowNode = (*this)[row];
-   size_t cnt(rowNode.m_children.size());
-   for(auto itr: rowNode.m_children)
-   {
-      cnt += itr.CalcNestedChildCount();
-   }
-   return cnt;
-}
-
 size_t TreeNode::AddChildNode(TreeNode& childNode)
 {
    m_children.push_back(childNode);
    return m_children.size();
-}
-
-bool TreeNode::RemoveNthChild(size_t n)
-{
-   if(m_children.size() > n)
-   {
-      for (size_t i = n; m_children.size() > i; ++i)
-      {
-         m_children[i] = m_children[i + 1];
-      }
-      m_children.pop_back();
-      return true;
-   }
-   return false;
-}
-
-TreeNode* TreeNode::FindItem(const TNodeLocationDeque &indexDeque)
-{
-   // Case of this node
-   if(0 == indexDeque.size())
-   {
-      return this;
-   }
-   const size_t childIndex(indexDeque[0]);
-   // Error handling - should not happen
-   if((0 < childIndex) && (m_children.size() < childIndex))
-   {
-      return nullptr;
-   }
-   // Case where item is a child node of this
-   if(1 == indexDeque.size())
-   {
-      // We know this is not nullptr due to error handling above
-      return &(*this)[childIndex];
-   }
-
-   // Case of needing to iterate down further
-   TNodeLocationDeque newDeque(indexDeque);
-   newDeque.pop_front();
-   return (*this)[childIndex].FindItem(newDeque);
 }
 
 bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
@@ -247,62 +185,8 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
          }
       }
    }
-   size_t sz1(m_children.size());
    m_children = newVect;
-   size_t sz2(m_children.size());
    return true;
-}
-
-bool TreeNode::FindNextItem(const string& itemStr,
-      TNodeLocationDeque &indexDeque)
-{
-   // Find the location passed in, if any
-   if(0 < indexDeque.size())
-   {
-      // Search for itemStr under the TreeNode in indexVect
-      TreeNode* itr = FindItem(indexDeque);
-      if(nullptr == itr)
-      {
-         return false;
-      }
-      TNodeLocationDeque tmpVect;
-      if(itr->FindNextItem(itemStr, tmpVect))
-      {
-         for(auto tmpItr: tmpVect)
-         {
-            indexDeque.push_back(tmpVect[tmpItr]);
-         }
-         return true;
-      }
-      return false;
-   }
-
-   // Case of this node matching
-   if(0 == itemStr.compare(*mp_nodeNameStrPtr))
-   {
-      indexDeque.push_back(0);
-      return true;
-   }
-
-   // Search children for a match
-   size_t cnt(1);
-   while(m_children.size() >= cnt)
-   {
-      // Case of root child node matching
-      if (0 == (*m_children[cnt - 1].mp_nodeNameStrPtr).compare(
-            *mp_nodeNameStrPtr))
-      {
-         indexDeque.push_back(cnt);
-         return true;
-      }
-      // Case of child of child node matching
-      if(m_children[cnt - 1].FindNextItem(itemStr, indexDeque))
-      {
-         return true;
-      }
-      ++cnt;
-   }
-   return false;
 }
 
 void TreeNode::SetDate(date& newDate, EnumTargetNode node)
@@ -384,6 +268,30 @@ void TreeNode::SetEqualTo(const TreeNode& rhs)
    m_date            =  rhs.m_date;
    m_time            =  rhs.m_time;
    m_children        =  rhs.m_children;
+}
+
+bool TreeNode::IsEqualTo(const TreeNode& rhs) const
+{
+   bool rslt(rhs.m_children.size() == m_children.size());
+   if(!rslt)
+   {
+      return false;
+   }
+   for(size_t i = 0; m_children.size() > i; ++i)
+   {
+      rslt &= (rhs.m_children[i].IsEqualTo(m_children[i]));
+   }
+   return (rslt
+         && (rhs.mp_parentNode == mp_parentNode)
+         && (rhs.mp_nodeNameStrPtr == mp_nodeNameStrPtr)
+         && (rhs.m_date == m_date)
+         && (rhs.m_time == m_time));
+}
+
+const TStrSet& TreeNode::getMsItemRepoSet()
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   return ms_itemRepoSet;
 }
 
 } /* namespace ZiegGTDKanban */

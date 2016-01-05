@@ -32,11 +32,6 @@
 #include <TreeNode.h>
 #include <string>
 #include <map>
-#include <set>
-#include <boost/thread/recursive_mutex.hpp>
-//#include <boost/property_tree/ptree.hpp>
-
-using namespace boost;
 
 namespace ZiegGTDKanban
 {
@@ -62,9 +57,6 @@ typedef map<EnumGTDCategory, string> TGTDCategoryMap;
 
 typedef vector<const string*> TStrPtrVect;
 
-typedef set<string> TStrSet;
-typedef set<const string*> TCStrPtrSet;
-
 typedef pair<EnumGTDCategory, TreeNode> TCatTreeNodeVectPair;
 typedef map<EnumGTDCategory, TreeNode> TCatTreeNodeVectMap;
 
@@ -77,26 +69,20 @@ public:
    virtual ~UserData();
 
    // INFORMATIONAL
-   // ReadStrAtRow() returns the string in category at row.
-   bool ReadStrAtRow(EnumGTDCategory category, size_t row,
-         string& rowStr) const;
-   // GetGTDCatStr() returns the string for gtdCat.
-   const string& GetGTDCatStr(EnumGTDCategory category) const;
-   // GetRepoSetStrPtr() returns a pointer to newItemStr in the set of added
-   // item names, inserting it if it is not already there.
-   const string* GetRepoSetStrPtr(const string& newItemStr) const;
-   // IsItemInSystem() returns true iff newItemStr is in the set of added item
-   // names.
-   bool IsStrInSystem(const string& newItemStr) const;
-   // GetCategoryItemCount() returns the number of instances of itemStr in the
-   // category.
-   int GetCategoryStrCount(EnumGTDCategory category,
-         const string& itemStr) const;
-   // FindNthCategoryItemIndex() returns true iff itemStr appears in the
-   // category at least n times, returning the index in the category iff true.
-   bool FindNthCategoryStrIndex(EnumGTDCategory category,
-         const string& itemStr, const size_t n, size_t& index) const;
-   // GetNthCategoryItemStr() returns true iff the category contains at least
+//   // ReadStrAtRow() returns the string in category at row.
+//   bool ReadStrAtRow(EnumGTDCategory category, size_t row,
+//         string& rowStr) const;
+//   // GetGTDCatStr() returns the string for gtdCat.
+//   const string& GetGTDCatStr(EnumGTDCategory category) const;
+//   // GetCategoryItemCount() returns the number of instances of itemStr in the
+//   // category.
+//   int GetCategoryStrCount(EnumGTDCategory category,
+//         const string& itemStr) const;
+//   // FindNthCategoryItemIndex() returns true iff itemStr appears in the
+//   // category at least n times, returning the index in the category iff true.
+//   bool FindNthCategoryStrIndex(EnumGTDCategory category,
+//         const string& itemStr, const size_t n, size_t& index) const;
+   // GetNthCategoryStr() returns true iff the category contains at least
    // index items, setting itemStr to this value iff true.
    bool GetNthCategoryStr(EnumGTDCategory category, const size_t& index,
          string& itemStr) const;
@@ -145,7 +131,6 @@ private:
          TCStrPtrSet& strPtrSet) const;
    void DumpIndent(int indent) const;
    void DumpTreeNode(const TreeNode& treeNode, int& cnt, int indent = 0) const;
-   size_t CleanUpRepoSet();
 
    // NOT IMPLEMENTED
    UserData(const UserData&);
@@ -155,10 +140,8 @@ private:
 
    static TGTDCategoryMap  ms_gtdFixedCatMap;   // Fixed map of category
                                                 // enum-string pairs
-   // TODO Move ms_itemRepoSet to TreeNode
-   static TStrSet       ms_itemRepoSet;   // Set of all added user item names
    static recursive_mutex  m_mutex;          // Mutex to keep class thread safe
-   TCatTreeNodeVectMap  m_gtdNodeTree;    // Tree of structured GTD items
+   TCatTreeNodeVectMap     m_gtdNodeTree;    // Tree of structured GTD items
 };
 
 } /* namespace ZiegGTDKanban */

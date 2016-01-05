@@ -33,12 +33,10 @@ namespace ZiegGTDKanban
 {
 
 TGTDCategoryMap   UserData::ms_gtdFixedCatMap;
-TStrSet           UserData::ms_itemRepoSet;
 recursive_mutex   UserData::m_mutex;
 
 UserData::UserData()
 {
-
    lock_guard<recursive_mutex> guard(m_mutex);
    if(0 == ms_gtdFixedCatMap.size())
    {
@@ -65,7 +63,7 @@ UserData::UserData()
 
       for(auto itr: ms_gtdFixedCatMap)
       {
-         TreeNode node(*GetRepoSetStrPtr(itr.second));
+         TreeNode node(itr.second);
          m_gtdNodeTree.insert(
                TCatTreeNodeVectPair(itr.first, node));
       }
@@ -76,73 +74,61 @@ UserData::~UserData()
 {
 }
 
-bool UserData::ReadStrAtRow(EnumGTDCategory category, size_t row,
-      string& rowStr) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   const TreeNode& treeNode = GetCTreeNode(category);
-   // Incrementing row here because the top level category node does not count
-   return treeNode.ReadStrAtRow(row + 1, rowStr);
-}
-
-const string &UserData::GetGTDCatStr(EnumGTDCategory category) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   return (*ms_gtdFixedCatMap.find(category)).second;
-}
-
-const string* UserData::GetRepoSetStrPtr(const string& newItemStr) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   return &(*ms_itemRepoSet.insert(newItemStr).first);
-}
-
-bool UserData::IsStrInSystem(const string& newItemStr) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   return (ms_itemRepoSet.end() != ms_itemRepoSet.find(newItemStr));
-}
-
-int UserData::GetCategoryStrCount(EnumGTDCategory category,
-      const string& itemStr) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   int nCnt(0);
-   size_t tmpIndex(0);
-   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
-   {
-      if (itemStr
-            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
-      {
-         ++nCnt;
-      }
-      ++tmpIndex;
-   }
-   return nCnt;
-}
-
-bool UserData::FindNthCategoryStrIndex(EnumGTDCategory category,
-      const string& itemStr, const size_t n, size_t& index) const
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   size_t nCnt(0);
-   size_t tmpIndex(0);
-   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
-   {
-      if (itemStr
-            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
-      {
-         if(n == nCnt)
-         {
-            index = tmpIndex;
-            return true;
-         }
-         ++nCnt;
-      }
-      ++tmpIndex;
-   }
-   return false;
-}
+//bool UserData::ReadStrAtRow(EnumGTDCategory category, size_t row,
+//      string& rowStr) const
+//{
+//   lock_guard<recursive_mutex> guard(m_mutex);
+//   const TreeNode& treeNode = GetCTreeNode(category);
+//   // Incrementing row here because the top level category node does not count
+//   return treeNode.ReadStrAtRow(row + 1, rowStr);
+//}
+//
+//const string &UserData::GetGTDCatStr(EnumGTDCategory category) const
+//{
+//   lock_guard<recursive_mutex> guard(m_mutex);
+//   return (*ms_gtdFixedCatMap.find(category)).second;
+//}
+//
+//int UserData::GetCategoryStrCount(EnumGTDCategory category,
+//      const string& itemStr) const
+//{
+//   lock_guard<recursive_mutex> guard(m_mutex);
+//   int nCnt(0);
+//   size_t tmpIndex(0);
+//   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
+//   {
+//      if (itemStr
+//            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
+//      {
+//         ++nCnt;
+//      }
+//      ++tmpIndex;
+//   }
+//   return nCnt;
+//}
+//
+//bool UserData::FindNthCategoryStrIndex(EnumGTDCategory category,
+//      const string& itemStr, const size_t n, size_t& index) const
+//{
+//   lock_guard<recursive_mutex> guard(m_mutex);
+//   size_t nCnt(0);
+//   size_t tmpIndex(0);
+//   while(getCategoryCTreeNodeVect(category).size() > tmpIndex)
+//   {
+//      if (itemStr
+//            == GetNodeNameStr(getCategoryCTreeNodeVect(category), tmpIndex))
+//      {
+//         if(n == nCnt)
+//         {
+//            index = tmpIndex;
+//            return true;
+//         }
+//         ++nCnt;
+//      }
+//      ++tmpIndex;
+//   }
+//   return false;
+//}
 
 bool UserData::GetNthCategoryStr(EnumGTDCategory category,
       const size_t& index, string& itemStr) const
@@ -219,7 +205,7 @@ size_t UserData::AddStrToCategory(const string& newItemStr,
    TreeNode& treeNode = GetTreeNode(category);
    if(0 < newItemStr.size())
    {
-      TreeNode node(*GetRepoSetStrPtr(newItemStr));
+      TreeNode node(newItemStr);
       treeNode.AddChildNode(node);
    }
    return treeNode.getChildren().size();
@@ -258,7 +244,7 @@ bool UserData::MoveNthStrBetweenCategories(const string& itemStr,
       EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t row)
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   if (!IsStrInSystem(itemStr))
+   if (!TreeNode::IsStrInSystem(itemStr))
    {
       return false;
    }
@@ -267,7 +253,7 @@ bool UserData::MoveNthStrBetweenCategories(const string& itemStr,
    {
       return false;
    }
-   TreeNode newNode(*GetRepoSetStrPtr(itemStr));
+   TreeNode newNode(itemStr);
    GetTreeNode(tgtCat).AddChildNode(newNode);
    return true;
 }
@@ -316,36 +302,6 @@ void UserData::DumpTreeNode(const TreeNode& treeNode, int& cnt,
    {
       DumpTreeNode(itr, cnt, indent+1);
    }
-}
-
-size_t UserData::CleanUpRepoSet()
-{
-   lock_guard<recursive_mutex> guard(m_mutex);
-   // Add GTD tree contents to newRepoSet
-   TCStrPtrSet newRepoSet;
-   for(auto itr: m_gtdNodeTree)
-   {
-      PopulateCStrPtrSetFromTreeNode(itr.second, newRepoSet);
-   }
-   // Remove all strings not in newSet from ms_itemRepoSet
-   const size_t diff(ms_itemRepoSet.size() - newRepoSet.size());
-   if(0 != diff)
-   {
-      TCStrPtrSet removeSet;
-      for(auto itr: ms_itemRepoSet)
-      {
-         if(newRepoSet.end() == newRepoSet.find(&itr))
-         {
-            removeSet.insert(&itr);
-         }
-      }
-      for(auto itr: removeSet)
-      {
-         string removeStr(*itr);
-         ms_itemRepoSet.erase(ms_itemRepoSet.find(removeStr));
-      }
-   }
-   return diff;
 }
 
 } /* namespace ZiegGTDKanban */
