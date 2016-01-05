@@ -43,3 +43,7 @@ workspace/RemoteSystemsTempFiles
 
 # CCCC files
 .cccc
+
+# Debug build file
+qt/build-qt_test001-Desktop_Qt_5_4_2_GCC_32bit-Debug/qt_test001
+
