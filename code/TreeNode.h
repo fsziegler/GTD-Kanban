@@ -99,6 +99,7 @@ public:
          EnumTargetNode node = kParentNode);
 
    // ACCESSORS
+   bool ReadStrAtRow(size_t row, string& rowStr) const;
    const TTreeNodeVect& getChildren() const;
    const date& getDate() const;
    const ptime& getTime() const;

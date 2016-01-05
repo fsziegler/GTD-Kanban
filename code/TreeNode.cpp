@@ -236,6 +236,37 @@ void TreeNode::SetDateTime(date& newDate, ptime& newTime, EnumTargetNode node)
    }
 }
 
+bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
+{
+   size_t rowCnt(row);
+   if(0 == row)
+   {
+      rowStr = *mp_nodeNameStrPtr;
+      return true;
+   }
+   --rowCnt;
+   for(auto itr: m_children)
+   {
+      if (0 == rowCnt)
+      {
+         rowStr = *itr.mp_nodeNameStrPtr;
+         return true;
+      }
+      size_t nestedChildCnt(itr.CalcNestedChildCount());
+      if(nestedChildCnt < rowCnt)
+      {
+         --rowCnt;
+
+          rowCnt -= nestedChildCnt;
+      }
+      else
+      {
+         return itr.ReadStrAtRow(rowCnt, rowStr);
+      }
+   }
+   return false;
+}
+
 const TTreeNodeVect& TreeNode::getChildren() const
 {
    return m_children;

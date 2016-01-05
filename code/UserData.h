@@ -70,8 +70,8 @@ public:
 
    // INFORMATIONAL
 //   // ReadStrAtRow() returns the string in category at row.
-//   bool ReadStrAtRow(EnumGTDCategory category, size_t row,
-//         string& rowStr) const;
+   bool ReadStrAtRow(EnumGTDCategory category, size_t row,
+         string& rowStr) const;
 //   // GetGTDCatStr() returns the string for gtdCat.
 //   const string& GetGTDCatStr(EnumGTDCategory category) const;
 //   // GetCategoryItemCount() returns the number of instances of itemStr in the

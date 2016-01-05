@@ -64,8 +64,7 @@ UserData::UserData()
       for(auto itr: ms_gtdFixedCatMap)
       {
          TreeNode node(itr.second);
-         m_gtdNodeTree.insert(
-               TCatTreeNodeVectPair(itr.first, node));
+         m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
       }
    }
 }
@@ -74,15 +73,15 @@ UserData::~UserData()
 {
 }
 
-//bool UserData::ReadStrAtRow(EnumGTDCategory category, size_t row,
-//      string& rowStr) const
-//{
-//   lock_guard<recursive_mutex> guard(m_mutex);
-//   const TreeNode& treeNode = GetCTreeNode(category);
-//   // Incrementing row here because the top level category node does not count
-//   return treeNode.ReadStrAtRow(row + 1, rowStr);
-//}
-//
+bool UserData::ReadStrAtRow(EnumGTDCategory category, size_t row,
+      string& rowStr) const
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   const TreeNode& treeNode = GetCTreeNode(category);
+   // Incrementing row here because the top level category node does not count
+   return treeNode.ReadStrAtRow(row + 1, rowStr);
+}
+
 //const string &UserData::GetGTDCatStr(EnumGTDCategory category) const
 //{
 //   lock_guard<recursive_mutex> guard(m_mutex);
