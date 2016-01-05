@@ -71,6 +71,7 @@ public:
    // operator[] treats the tree as a sequential list, and returns the index-th
    // TreeNode, or NonExistentTreeNode if index is out of range.
    TreeNode& operator[](size_t index);
+   static TreeNode& getNonExistentTreeNode();
 
    // INFORMATIONAL
    // GetRepoSetStrPtr() returns a pointer to newItemStr in the set of added

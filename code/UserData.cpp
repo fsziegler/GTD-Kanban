@@ -59,7 +59,12 @@ UserData::UserData()
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kNextActions, "Next Actions"));
       ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kTrash, "(Trash)"));
+      ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kMoveQueue, "(Move Queue)"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kGTDCategoryUNKNOWN,
+                  "(GTD Category UNKNOWN)"));
 
       for(auto itr: ms_gtdFixedCatMap)
       {
@@ -274,9 +279,14 @@ size_t UserData::MoveAllBetweenCategories(EnumGTDCategory srcCat,
       EnumGTDCategory tgtCat)
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   size_t numMoved(GetTreeNode(srcCat).getChildren().size());
-   GetTreeNode(tgtCat).AddChildren(GetTreeNode(srcCat).getChildren());
+   TreeNode& tgtNode = GetTreeNode(tgtCat);
+   if(TreeNode::getNonExistentTreeNode() == tgtNode)
+   {
+      throw;
+   }
+   tgtNode.AddChildren(GetTreeNode(srcCat).getChildren());
    TreeNode& srcTreeNode = GetTreeNode(srcCat);
+   const size_t numMoved(GetTreeNode(srcCat).getChildren().size());
    srcTreeNode.ClearAllChildren();
    return numMoved;
 }

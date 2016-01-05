@@ -47,6 +47,7 @@ enum class EnumGTDCategory
    kProjectsToPlan,
    kProjectPlans,
    kNextActions,
+   kTrash,
    kMoveQueue,
    kGTDCategoryUNKNOWN,
 };

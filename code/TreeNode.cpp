@@ -100,6 +100,12 @@ TreeNode& TreeNode::operator[](size_t index)
    return NonExistentTreeNode;
 }
 
+TreeNode& TreeNode::getNonExistentTreeNode()
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   return NonExistentTreeNode;
+}
+
 const string* TreeNode::GetRepoSetStrPtr(const string& newItemStr)
 {
    lock_guard<recursive_mutex> guard(m_mutex);

@@ -178,7 +178,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         trashButton->setToolTip(QApplication::translate("InBasketForm", "Throw this away!", 0));
 #endif // QT_NO_TOOLTIP
-        trashButton->setText(QApplication::translate("InBasketForm", "&Trash", 0));
+        trashButton->setText(QApplication::translate("InBasketForm", "Trash(&X)", 0));
 #ifndef QT_NO_TOOLTIP
         waitingOnSomeoneButton->setToolTip(QApplication::translate("InBasketForm", "You have or will delegate this to someone else", 0));
 #endif // QT_NO_TOOLTIP

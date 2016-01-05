@@ -96,7 +96,7 @@
     <string>Throw this away!</string>
    </property>
    <property name="text">
-    <string>&amp;Trash</string>
+    <string>Trash(&amp;X)</string>
    </property>
   </widget>
   <widget class="QPushButton" name="waitingOnSomeoneButton">
