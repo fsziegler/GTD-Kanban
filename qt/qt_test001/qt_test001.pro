@@ -7,9 +7,9 @@
 QT       += core gui
 
 DEFINES += BOOST_SYSTEM_NO_DEPRECATED
-#            BOOST_WINDOWS_API
-#DEFINES += BOOST_ALL_DYN_LINK  # for using dynamic libraries
+win32{
 DEFINES += BOOST_ERROR_CODE_HEADER_ONLY
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,13 +32,13 @@ SOURCES += main.cpp\
         gtdtreewidget.cpp \
         kanbancalendardialog.cpp \
         gtdcalendarwidget.cpp
-X11 {
+unix {
 SOURCES += ../../code/UserData.cpp \
-        ../../code/TreeNode.cpp
+            ../../code/TreeNode.cpp
 }
 else:win32 {
 SOURCES += C:\dev\github\GTD-Kanban\code\UserData.cpp \
-        C:\dev\github\GTD-Kanban\code\TreeNode.cpp
+            C:\dev\github\GTD-Kanban\code\TreeNode.cpp
 }
 
 HEADERS  += mainwindow.h \
@@ -46,9 +46,9 @@ HEADERS  += mainwindow.h \
     gtdtreewidget.h \
     kanbancalendardialog.h \
     gtdcalendarwidget.h
-X11 {
+unix {
 HEADERS += ../../code/UserData.h \
-        ../../code/TreeNode.h
+            ../../code/TreeNode.h
 }
 else:win32{
 HEADERS += C:\dev\github\GTD-Kanban\code\UserData.h \
@@ -59,22 +59,15 @@ FORMS    += mainwindow.ui \
     inbasketform.ui \
     kanbancalendardialog.ui
 
-X11 {
-LIBS += -lboost_system -lpthread
+unix {
+LIBS += -lboost_system \
+         -lpthread
 }
 else:win32{
 LIBS += -LC:/dev/boost_1_60_0/stage/lib \
-#        -llibboost_atomic-vc140-mt-1_60  \
-#        -llibboost_date_time-vc140-mt-1_60  \
-#        -llibboost_exception-vc140-mt-1_60  \
         -llibboost_system-vc140-mt-1_60  \
-#        -llibboost_thread-vc140-mt-1_60 \
-#        -llibboost_system \
         -lpthread
 }
 
 # Added 2015-12-21 by Fred
-CONFIG += c++11
-#CONFIG += console
-CONFIG -= app_bundle
-#CONFIG -= qt
+CONFIG += c++14

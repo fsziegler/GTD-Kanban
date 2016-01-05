@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DBOOST_SYSTEM_NO_DEPRECATED -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=c++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../qt_test001 -I. -I/usr/include/boost -I../../code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. -I. -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++
+INCPATH       = -I../qt_test001 -I. -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. -I. -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++
 QMAKE         = /opt/Qt5.4.2/5.4/gcc/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -683,7 +683,7 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
 		../qt_test001/mainwindow.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/mainwindow.h -o moc_mainwindow.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/mainwindow.h -o moc_mainwindow.cpp
 
 moc_inbasketform.cpp: ../../code/UserData.h \
 		../../code/TreeNode.h \
@@ -814,7 +814,7 @@ moc_inbasketform.cpp: ../../code/UserData.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/inbasketform.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/inbasketform.h -o moc_inbasketform.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/inbasketform.h -o moc_inbasketform.cpp
 
 moc_kanbancalendardialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
@@ -940,7 +940,7 @@ moc_kanbancalendardialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
 		../qt_test001/kanbancalendardialog.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbancalendardialog.h -o moc_kanbancalendardialog.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbancalendardialog.h -o moc_kanbancalendardialog.cpp
 
 moc_gtdcalendarwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -1053,7 +1053,7 @@ moc_gtdcalendarwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidge
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/gtdcalendarwidget.h
-	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/usr/include/boost -I/home/fred/dev/GTD-Kanban/code -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/gtdcalendarwidget.h -o moc_gtdcalendarwidget.cpp
+	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/gtdcalendarwidget.h -o moc_gtdcalendarwidget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

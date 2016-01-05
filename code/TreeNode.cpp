@@ -26,7 +26,7 @@
  SOFTWARE.
 
  */
-#include <TreeNode.h>
+#include "TreeNode.h"
 #include <boost/thread/lock_guard.hpp>
 
 namespace ZiegGTDKanban
