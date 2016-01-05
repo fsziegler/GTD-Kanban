@@ -30,28 +30,36 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
 
 int main() {
    UserData data;
-   data.AddItemsToCategory(inBasketStr);
-   cout << "data.DumpInBasket()" << endl;
+   data.AddDelimStrToCategory(inBasketStr);
+   cout << "1. data.DumpInBasket()" << endl;
    data.DumpGTDCategory(EnumGTDCategory::kInBasket);
-   int cnt(0);
+   int cnt(2);
    string str;
-   while (data.GetNthCategoryItemStr(EnumGTDCategory::kInBasket, cnt++, str))
+   while (data.GetNthCategoryStr(EnumGTDCategory::kInBasket, cnt, str))
    {
-      data.MoveNthItemBetweenCategories(str, EnumGTDCategory::kInBasket,
-            EnumGTDCategory::kSomedayMaybe);
-   }
-   cout << "data.DumpAllGTD()" << endl;
-   data.DumpAllGTD();
-   for(auto itr: UserData::getGtdFixedCatMap())
-   {
-      if(data.GetNthCategoryItemStr(EnumGTDCategory::kInBasket, 0, str))
+      if(data.MoveNthStrBetweenCategories(str, EnumGTDCategory::kInBasket,
+            EnumGTDCategory::kSomedayMaybe, cnt))
       {
-         data.MoveNthItemBetweenCategories(str, EnumGTDCategory::kInBasket,
-               itr.first);
+         ++cnt;
       }
+      else
+      {
+         cnt = 0;
+      }
+      data.DumpAllGTD();
    }
-   cout << "data.DumpAllGTD()" << endl;
-   data.DumpAllGTD();
+   cout << "2. data.DumpAllGTD()" << endl;
+//   data.DumpAllGTD();
+//   for(auto itr: UserData::getGtdFixedCatMap())
+//   {
+//      if(data.GetNthCategoryStr(EnumGTDCategory::kInBasket, 0, str))
+//      {
+//         data.MoveNthStrBetweenCategories(str, EnumGTDCategory::kInBasket,
+//               itr.first, 1);
+//      }
+//   }
+//   cout << "3. data.DumpAllGTD()" << endl;
+//   data.DumpAllGTD();
    cout << "Done!!!" << endl; // prints !!!Hello World!!!
 	return 0;
 }

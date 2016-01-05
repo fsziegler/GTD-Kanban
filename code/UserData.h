@@ -52,6 +52,7 @@ enum class EnumGTDCategory
    kProjectsToPlan,
    kProjectPlans,
    kNextActions,
+   kMoveQueue,
    kGTDCategoryUNKNOWN,
 };
 
@@ -76,6 +77,9 @@ public:
    virtual ~UserData();
 
    // INFORMATIONAL
+   // ReadStrAtRow() returns the string in category at row.
+   bool ReadStrAtRow(EnumGTDCategory category, size_t row,
+         string& rowStr) const;
    // GetGTDCatStr() returns the string for gtdCat.
    const string& GetGTDCatStr(EnumGTDCategory category) const;
    // GetRepoSetStrPtr() returns a pointer to newItemStr in the set of added
@@ -102,11 +106,8 @@ public:
    void DumpAllGTD() const;
 
    // ACCESSORS
-   const TTreeNodeVect& getCategoryCTreeNodeVect(
-         EnumGTDCategory category) const;
-   const TCatTreeNodeVectMap& getGtdNodeTree() const;
-   const TreeNode& GetCTreeNode(EnumGTDCategory category =
-         EnumGTDCategory::kInBasket) const;
+   // getGtdFixedCatMap() returns a reference to the ms_gtdFixedCatMap data
+   // member.
    static const TGTDCategoryMap& getGtdFixedCatMap();
 
    // ADDING ACTIONS
@@ -119,29 +120,25 @@ public:
          EnumGTDCategory category = EnumGTDCategory::kInBasket, char delim =
                '\n');
 
+   // FINDING ACTIONS
+
    // MOVING ACTIONS
-   // MoveNthItemBetweenCategories() moves the n-th itemStr in the fromCat
-   // category to the toCat category, returning false if there is no n-th
-   // itemStr.
+   // MoveNthStrBetweenCategories() moves the n-th item in the srcCat
+   // category to the tgtCat category, returning false if there is no n-th
+   // item or it does not match itemStr.
    bool MoveNthStrBetweenCategories(const string& itemStr,
-         EnumGTDCategory fromCat, EnumGTDCategory toCat, size_t n = 0);
-   // This version of MoveNthItemBetweenCategories() sets the date of the n-th
-   // itemStr after moving it, and moves it into the Calendar category by
-   // default.
-   bool MoveNthStrBetweenCategories(const string& itemStr, date newDate,
-         EnumGTDCategory fromCat, EnumGTDCategory toCat =
-               EnumGTDCategory::kCalendar, size_t n = 0);
-   // This version of MoveNthItemBetweenCategories() sets the date and time of
-   // the n-th itemStr after moving it, and moves it into the Calendar category
-   // by default.
-   bool MoveNthStrBetweenCategories(const string& itemStr, date newDate,
-         ptime newTime, EnumGTDCategory fromCat,
-         EnumGTDCategory toCat = EnumGTDCategory::kCalendar, size_t n = 0);
+         EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t n);
+
+   // REMOVING ACTIONS
 
 private:
+   // GetCTreeNode() returns the TreeNode for category.
    TreeNode& GetTreeNode(EnumGTDCategory category);
-   const TTreeNodeVect& getCategoryCTreeNodeVect(EnumGTDCategory category =
-         EnumGTDCategory::kInBasket);
+   const TreeNode& GetCTreeNode(EnumGTDCategory category) const;
+   // getCategoryCTreeNodeVect() returns the TTreeNodeVect of the children of
+   // the category TreeNode.
+   const TTreeNodeVect& getCategoryCTreeNodeVect(
+         EnumGTDCategory category) const;
    const string& GetNodeNameStr(const TTreeNodeVect& treeNodeVect,
          size_t index) const;
    void PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
@@ -158,6 +155,7 @@ private:
 
    static TGTDCategoryMap  ms_gtdFixedCatMap;   // Fixed map of category
                                                 // enum-string pairs
+   // TODO Move ms_itemRepoSet to TreeNode
    static TStrSet       ms_itemRepoSet;   // Set of all added user item names
    static recursive_mutex  m_mutex;          // Mutex to keep class thread safe
    TCatTreeNodeVectMap  m_gtdNodeTree;    // Tree of structured GTD items

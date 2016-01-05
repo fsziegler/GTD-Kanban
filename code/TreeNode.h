@@ -30,6 +30,7 @@
 #define TREENODE_H_
 
 #include <vector>
+#include <deque>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
@@ -49,29 +50,64 @@ enum EnumTargetNode
    kLastChildNode,
 };
 
+typedef deque<size_t> TNodeLocationDeque;
+
 class TreeNode
 {
 public:
    TreeNode();
-   TreeNode(const string& newItemStr);
+   TreeNode(const string& newItemStr, TreeNode* parentNode = nullptr);
    virtual ~TreeNode();
    TreeNode(const TreeNode& rhs);
    TreeNode& operator=(const TreeNode& rhs);
+   // operator[] treats the tree as a sequential list, and returns the index-th
+   // TreeNode, or NonExistentTreeNode if index is out of range.
+   TreeNode& operator[](size_t index);
 
+   static TreeNode NonExistentTreeNode;
+
+   // INFORMATIONAL
+   // RemoveNthChild() returns the number of TreeNode instances named itemStr,
+   // returning the index of the last one found in lastIndexVect (empty if not
+   // found).
+   unsigned int GetNumInstancesOfItemStr(const string& itemStr,
+         TNodeLocationDeque &lastIndexDeque) const;
+   size_t CalcNestedChildCount() const;
+   bool ReadStrAtRow(size_t row, string& rowStr) const;
+   size_t CalcChildrenCountUnderRow(size_t row);
+
+   // ADD/REMOVE ACTIONS
+   // AddChildNode() appends childNode to this node's children, returning the
+   // resulting number of children.
    size_t AddChildNode(TreeNode& childNode);
-   size_t RemoveNthChild(size_t n);
+   // RemoveNthChild() removes the n-th child node, iff extant, returning the
+   // operation result.
+   bool RemoveNthChild(size_t n);
+   bool RemoveNodeAtRow(const string& rowStr, size_t row);
+   bool RemoveIndexedChild(TNodeLocationDeque &indexDeque);
+   // FindNextItem() appends the path to the next child named itemStr to
+   // indexVect, iff extant, where indexVect may be empty or contain a path to a
+   // sub-node.
+   bool FindNextItem(const string& itemStr, TNodeLocationDeque &indexDeque);
+
+   // SETTERS
    void SetDate(date& newDate, EnumTargetNode node = kParentNode);
    void SetTime(ptime& newTime, EnumTargetNode node = kParentNode);
    void SetDateTime(date& newDate, ptime& newTime,
          EnumTargetNode node = kParentNode);
 
+   // GETTERS
    const TTreeNodeVect& getChildren() const;
    const date& getDate() const;
    const ptime& getTime() const;
    const string* getMpNodeNameStrPtr() const;
+   const string& getMpNodeNameStr() const;
 
 private:
+   TreeNode* FindItem(const TNodeLocationDeque &indexDeque);
    void SetEqualTo(const TreeNode& rhs);
+
+   TreeNode*      mp_parentNode;
    const string*  mp_nodeNameStrPtr;
    date           m_date;
    ptime          m_time;
