@@ -60,13 +60,22 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
    itemSelectionList = mp_ui->InBasketListWidget->selectedItems();
    if (move)
    {
+      m_userData.DumpAllGTD();
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
       {
+         // Store and pass back the row so it can be used to ID the node to move
+         QString rowStr((*itr)->text());
          int row = mp_ui->InBasketListWidget->row((*itr));
+         string stdRowStr;
+         m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
+         assert(stdRowStr == rowStr.toStdString());
          mp_ui->InBasketListWidget->takeItem(
                mp_ui->InBasketListWidget->row((*itr)));
+         m_userData.MoveNthStrBetweenCategories(stdRowStr,
+               EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
+      m_userData.DumpAllGTD();
    }
 }
 
@@ -85,6 +94,9 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
       qti->setBackground(0, b);
       gtdTreeItem->addChild(qti);
    }
+   EnumGTDCategory tgtCat = m_userData.LookUpCategory(nodeNameStr.toStdString());
+   m_userData.MoveAllBetweenCategories(EnumGTDCategory::kMoveQueue, tgtCat);
+   m_userData.DumpAllGTD();
 }
 
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)

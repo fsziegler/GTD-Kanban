@@ -197,6 +197,19 @@ const TGTDCategoryMap& UserData::getGtdFixedCatMap()
    return ms_gtdFixedCatMap;
 }
 
+EnumGTDCategory UserData::LookUpCategory(const string& categoryStr)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   for(auto itr: ms_gtdFixedCatMap)
+   {
+      if(categoryStr == itr.second)
+      {
+         return itr.first;
+      }
+   }
+   return EnumGTDCategory::kGTDCategoryUNKNOWN;
+}
+
 size_t UserData::AddStrToCategory(const string& newItemStr,
       EnumGTDCategory category)
 {
@@ -255,6 +268,17 @@ bool UserData::MoveNthStrBetweenCategories(const string& itemStr,
    TreeNode newNode(itemStr);
    GetTreeNode(tgtCat).AddChildNode(newNode);
    return true;
+}
+
+size_t UserData::MoveAllBetweenCategories(EnumGTDCategory srcCat,
+      EnumGTDCategory tgtCat)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   size_t numMoved(GetTreeNode(srcCat).getChildren().size());
+   GetTreeNode(tgtCat).AddChildren(GetTreeNode(srcCat).getChildren());
+   TreeNode& srcTreeNode = GetTreeNode(srcCat);
+   srcTreeNode.ClearAllChildren();
+   return numMoved;
 }
 
 const TTreeNodeVect& UserData::getCategoryCTreeNodeVect(

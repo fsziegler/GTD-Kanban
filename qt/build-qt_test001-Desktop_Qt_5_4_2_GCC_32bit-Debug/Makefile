@@ -1602,7 +1602,8 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMessageBox \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QDate \
-		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdatetime.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdatetime.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inbasketform.o ../qt_test001/inbasketform.cpp
 
 gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \

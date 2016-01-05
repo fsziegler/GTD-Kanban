@@ -80,7 +80,7 @@ void MainWindow::on_actionOpen_triggered()
    file.open(QFile::ReadOnly | QFile::Text);
    QTextStream ReadFile(&file);
    m_gtdEditor.setText(ReadFile.readAll());
-   m_gtdEditor.parentWidget()->setWindowTitle(fileName);
+   QApplication::setApplicationName(fileName);
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)

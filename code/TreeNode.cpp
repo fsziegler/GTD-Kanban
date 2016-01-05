@@ -154,6 +154,11 @@ size_t TreeNode::AddChildNode(TreeNode& childNode)
    return m_children.size();
 }
 
+void TreeNode::AddChildren(const TTreeNodeVect& children)
+{
+   m_children = children;
+}
+
 bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
 {
    if((0 == row) || (CalcNestedChildCount() < row))
@@ -188,6 +193,12 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
    m_children = newVect;
    return true;
 }
+
+void TreeNode::ClearAllChildren()
+{
+   m_children.clear();
+}
+
 
 void TreeNode::SetDate(date& newDate, EnumTargetNode node)
 {

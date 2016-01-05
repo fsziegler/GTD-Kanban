@@ -90,7 +90,9 @@ public:
    // AddChildNode() appends childNode to this node's children, returning the
    // resulting number of children.
    size_t AddChildNode(TreeNode& childNode);
+   void AddChildren(const TTreeNodeVect& children);
    bool RemoveNodeAtRow(const string& rowStr, size_t row);
+   void ClearAllChildren();
 
    // SETTERS
    void SetDate(date& newDate, EnumTargetNode node = kParentNode);

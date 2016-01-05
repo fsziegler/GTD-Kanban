@@ -95,6 +95,7 @@ public:
    // getGtdFixedCatMap() returns a reference to the ms_gtdFixedCatMap data
    // member.
    static const TGTDCategoryMap& getGtdFixedCatMap();
+   static EnumGTDCategory LookUpCategory(const string& categoryStr);
 
    // ADDING ACTIONS
    // AddItemToCategory() adds newItemStr to the category.
@@ -114,6 +115,9 @@ public:
    // item or it does not match itemStr.
    bool MoveNthStrBetweenCategories(const string& itemStr,
          EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t n);
+   // MoveAllBetweenCategories() moves every item in srcCat to tgtCat.
+   size_t MoveAllBetweenCategories(EnumGTDCategory srcCat,
+         EnumGTDCategory tgtCat);
 
    // REMOVING ACTIONS
 
