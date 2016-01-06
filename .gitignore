@@ -29,6 +29,7 @@
 
 # Qt archived project files
 qt/qt_test001/qt_test001.pro.user.*
+qt/qt_test001/qt_test001.pro.user
 
 # Backed up text files
 *.*~
