@@ -35,8 +35,8 @@ If an issue **is** actionable, the next question is whether it requires only a s
 - if it will take more time, then either
   - delegate it, in which case move it into your **Waiting for Another Person** list, or
   - defer it, in which case it you either
-    - move it into your **Calendar**, to be done at a specific time, or
-    - move it into your **Next Actions** list, to be done as soon as it can.
+    - move it into your **Calendar**, to do at a specific time, or
+    - move it into your **Next Actions** list, to do as soon as you can.
 
 If an issue is a ***project***, then move it into your **Projects-to-Plan** list. When you do plan your projects, you move the results into your **Project Plans** list and, from here, you identify actionable **tasks** that you will move into your **Next Actions** list. If a project contains many dependencies (i.e. multiple steps are dependent on other steps being completed), then a Gannt chart tool, such as the open-source [GanntProject](http://www.ganttproject.biz/) software tool may be helpful.
 
@@ -56,7 +56,7 @@ Only your **Project Plans** and **Next Actions** lists contain **tasks** to work
 
 `--Dwight D. Eisenhower`
 
-How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any ***projects*** and ***tasks***. A more in-depth approach is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
+How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any issue. A more in-depth approach to carrying out projects is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
 
 ###1.2 Kanban
 `"Strategy without tactics is the slowest route to victory. Tactics without strategy is the noise before defeat."`
@@ -72,9 +72,7 @@ In order to **visualize your work**, ***tasks*** are tracked graphically on a **
   - *Doing*
   - *Done*
 
-***Tasks*** are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, you move it from one column to the next. Once a ***task*** is *Done*, you remove it and move another into the *Ready* column.
-
-Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on (the authors of "Personal Kanban" recommend starting with three), and then move these onto the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. This keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once you have completed one ***task*** (moved it to *Done*), remove if from the board, and move another one on.
+***Tasks*** are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, you move it from one column to the next. Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on - the authors of "Personal Kanban" recommend starting with three. Move these tasks onto the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. This keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once you have completed one ***task*** (moved it to *Done*), remove if from the board, and move another one into the *Ready* column.
 
 ### 1.3 Executing Engineering Projects
 ####Make It Work, Make It Right, Make It Fast
@@ -113,7 +111,7 @@ First, explicitly implement an **architecture** - this is the skeleton in the "m
 #####Modularity
 Second, practice **modularity**. A module is a component that has a well-defined purpose and interface, and is reliable. Because a module's scope is limited, its interface should be simple, and it should be straightforward to design a set of tests to validate its functionality. Examples include door assemblies for houses, winches for boats, transmissions for cars, and [objects](https://en.wikipedia.org/wiki/Object-oriented_programming) in software.
 
-Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has two benefits:
+Practicing modularity may allow you to identify duplicated functionality, which you should then merge into a single module. This has several benefits:
   - you only have to build and maintain a single module, and
   - if your design changes, 
     - you only have to change a single module, and
@@ -125,7 +123,7 @@ For example, it makes sense to have one design (a module) for both front wheels 
 Third, keep your work product **neat and clean**. Your desk may be messy, but you should periodically organize and restructure your work tools, factory floor, and code base. Your output, be it machined parts, electronic diagrams, or software should look ready for sale. Better yet, it should have an identifiable "look and feel". All of your code should be well-formatted and follow a uniform coding style.
 
 #####Best Practices
-Finally, develop and enforce **best practices**. With experience, technologists discover that certain ways of doing things work really well, and that others are risky. The housing construction, boat-building, automobile, and other industries all have standards that manufacturers adhere to, and many are written into law. The software industry is younger and less mature than these other industries, but good standards exist and can prevent hard-to-find bugs. A good example of software design guidelines are the [Basics of the Unix Philosophy](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
+Finally, develop and enforce **best practices**. With experience, technologists discover that certain ways of doing things work really well, and that others are risky. The housing construction, boat-building, automobile, aviation, semiconductor, and other industries all have standards that manufacturers adhere to, and many are written into law and contracts. The software industry is younger and less mature than these other industries, but good standards exist and can prevent hard-to-find bugs. A good example of software design guidelines are the [Basics of the Unix Philosophy](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
 
 ##2 Use Cases
 Some typical use cases that this tool are intended to address are:
@@ -162,3 +160,5 @@ Files created with this tool will be stored in the [JSON format](http://www.json
 A key UI feature will be the ability to hide and show information in order to focus on specific issues. The UI will display the GTD section in a tree where every branch can be expanded or contracted. The user will be able to filter the tree for tags and/or attributes and view a resulting tree containing only items with those tags and attributes. A tag is text that a user has associated with an object, and an attribute is a system property, such as **Calendar** items.
 
 The base code is being written in C++. The UI is being developed using the cross-platform Qt development tools. Future development may leverage [node.js](https://nodejs.org/en/about/) as an interface between the C++ and a web UI front-end on a server, [export the APIs to Python](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/index.html), or [integrate the code into Java](http://www.javaworld.com/article/2077513/learn-java/java-tip-17--integrating-java-with-c--.html). The C++ code will make extensive use of [STL](https://en.wikipedia.org/wiki/Standard_Template_Library) and the [Boost libraries](https://en.wikipedia.org/wiki/Boost_(C%2B%2B_libraries)). All code will be written in a cross-platform style, with the possible exception of the UI code. The intent is to host this on Linux, Windows, iOS, and Android.
+
+You can get a sense of the progress of this project by viewing the [code check-ins](https://github.com/fsziegler/GTD-Kanban/commits/master), which normally have a description.
