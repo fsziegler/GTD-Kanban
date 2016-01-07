@@ -194,6 +194,16 @@ void UserData::DumpAllToJSONFile(const string& jsonFileNameStr) const
    jsonOutFile.close();
 }
 
+bool UserData::LoadFromToJSONFile(const string& jsonFileNameStr)
+{
+   if(!exists(jsonFileNameStr))
+   {
+      return false;
+   }
+   m_gtdNodeTree.clear();
+   return true;
+}
+
 TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
 {
    lock_guard<recursive_mutex> guard(m_mutex);

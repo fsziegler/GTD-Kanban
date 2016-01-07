@@ -39,10 +39,10 @@ recursive_mutex   TreeNode::m_mutex;
 TreeNode NonExistentTreeNode("NonExistentTreeNode");
 
 TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode)
-:mp_parentNode(parentNode),
- mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
-m_date(special_values::not_a_date_time),
-m_time(special_values::not_a_date_time)
+: mp_parentNode(parentNode),
+  mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
+  m_date(special_values::not_a_date_time),
+  m_time(special_values::not_a_date_time)
 {
 }
 

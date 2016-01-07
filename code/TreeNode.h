@@ -35,11 +35,13 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/recursive_mutex.hpp>
+#include <boost/filesystem.hpp>
 
 using namespace std;
 using namespace boost;
 using namespace boost::gregorian;
 using namespace boost::posix_time;
+using namespace boost::filesystem;
 
 namespace ZiegGTDKanban
 {
