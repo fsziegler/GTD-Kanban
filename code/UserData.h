@@ -87,10 +87,13 @@ public:
    // index items, setting itemStr to this value iff true.
    bool GetNthCategoryStr(EnumGTDCategory category, const size_t& index,
          string& itemStr) const;
+
+   // INPUT/OUTPUT
    // DumpGTDCategory() dumps the GTD category contents to the console.
    void DumpGTDCategory(EnumGTDCategory category) const;
    // DumpAllGTD() dumps all GTD contents to the console.
    void DumpAllGTD() const;
+   void DumpAllToJSONFile(const string& jsonFileNameStr) const;
 
    // ACCESSORS
    // getGtdFixedCatMap() returns a reference to the ms_gtdFixedCatMap data

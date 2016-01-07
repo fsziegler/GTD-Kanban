@@ -30,6 +30,7 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
 
 int main() {
    UserData data;
+//   data.DumpAllToJSONFile(string("test.json"));
    data.AddDelimStrToCategory(inBasketStr);
    cout << "1. data.DumpInBasket()" << endl;
    data.DumpGTDCategory(EnumGTDCategory::kInBasket);
@@ -48,6 +49,7 @@ int main() {
       }
       data.DumpAllGTD();
    }
+   data.DumpAllToJSONFile(string("test.json"));
    cout << "2. data.DumpAllGTD()" << endl;
 //   data.DumpAllGTD();
 //   for(auto itr: UserData::getGtdFixedCatMap())

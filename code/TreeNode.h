@@ -87,6 +87,11 @@ public:
          TNodeLocationDeque &lastIndexDeque) const;
    size_t CalcNestedChildCount() const;
 
+   // INPUT/OUTPUT
+   void IndentJSONFile(size_t indent, ofstream& jsonOutFile) const;
+   void DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const;
+
+
    // ADD/REMOVE ACTIONS
    // AddChildNode() appends childNode to this node's children, returning the
    // resulting number of children.

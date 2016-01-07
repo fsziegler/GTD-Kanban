@@ -27,6 +27,8 @@
 
  */
 #include "UserData.h"
+#include <iostream>
+#include <fstream>
 #include <boost/thread/lock_guard.hpp>
 
 namespace ZiegGTDKanban
@@ -172,6 +174,24 @@ void UserData::DumpAllGTD() const
    {
       DumpGTDCategory(itr.first);
    }
+}
+
+void UserData::DumpAllToJSONFile(const string& jsonFileNameStr) const
+{
+   ofstream jsonOutFile;
+   jsonOutFile.open (jsonFileNameStr);
+   jsonOutFile << "{\n  \"GTD Node Tree\":{";
+   size_t indent(1);
+   bool first(true);
+   for(auto itr: m_gtdNodeTree)
+   {
+      jsonOutFile << (first ? "" : ",");
+      jsonOutFile << endl;
+      first = false;
+      itr.second.DumpAllToJSONFile(indent, jsonOutFile);
+   }
+   jsonOutFile << endl << "  }" << endl << "}";
+   jsonOutFile.close();
 }
 
 TreeNode& UserData::GetTreeNode(EnumGTDCategory category)

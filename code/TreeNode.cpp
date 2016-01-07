@@ -27,6 +27,7 @@
 
  */
 #include "TreeNode.h"
+#include <fstream>
 #include <boost/thread/lock_guard.hpp>
 
 namespace ZiegGTDKanban
@@ -152,6 +153,47 @@ size_t TreeNode::CalcNestedChildCount() const
       childCnt += itr.CalcNestedChildCount();
    }
    return childCnt;
+}
+
+void TreeNode::IndentJSONFile(size_t indent, ofstream& jsonOutFile) const
+{
+   size_t i(indent);
+   while(i)
+   {
+      jsonOutFile << "  ";
+      --i;
+   }
+}
+
+void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
+{
+//   const string*           mp_nodeNameStrPtr;
+//   date                    m_date;
+//   ptime                   m_time;
+//   TTreeNodeVect           m_children;
+   IndentJSONFile(indent + 1, jsonOutFile);
+   jsonOutFile << "\"" << *mp_nodeNameStrPtr << "\": {" << endl;
+   {
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"date\" : \"" << m_date << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"time\" : \"" << m_time << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"children\" : {";
+      bool first(true);
+      for(auto itr: m_children)
+      {
+         jsonOutFile << (first ? "" : ",");
+         jsonOutFile << endl;
+         first = false;
+         itr.DumpAllToJSONFile(indent + 2, jsonOutFile);
+      }
+      jsonOutFile << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "}" << endl;
+   }
+   IndentJSONFile(indent + 1, jsonOutFile);
+   jsonOutFile << "}";
 }
 
 size_t TreeNode::AddChildNode(TreeNode& childNode)
