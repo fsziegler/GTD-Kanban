@@ -63,6 +63,12 @@ GTDTreeWidget::~GTDTreeWidget()
 {
 }
 
+bool GTDTreeWidget::IsBranchCollapsed(const QString& branchStr) const
+{
+   return ((branchStr == QString("Trash"))
+         || (branchStr == QString("Calendar")));
+}
+
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
 {
    static const Qt::ItemFlags flags(

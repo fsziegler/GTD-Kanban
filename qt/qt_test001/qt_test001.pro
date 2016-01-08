@@ -34,7 +34,8 @@ SOURCES += main.cpp\
         gtdcalendarwidget.cpp
 unix {
 SOURCES += ../../code/UserData.cpp \
-            ../../code/TreeNode.cpp
+            ../../code/TreeNode.cpp \
+            ../../code/BoostJSON.cpp
 }
 else:win32 {
 SOURCES += C:\dev\github\GTD-Kanban\code\UserData.cpp \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
     gtdcalendarwidget.h
 unix {
 HEADERS += ../../code/UserData.h \
-            ../../code/TreeNode.h
+            ../../code/TreeNode.h   \
+            ../../code/BoostJSON.h
 }
 else:win32{
 HEADERS += C:\dev\github\GTD-Kanban\code\UserData.h \
@@ -61,6 +63,9 @@ FORMS    += mainwindow.ui \
 
 unix {
 LIBS += -lboost_system \
+        -lboost_filesystem \
+        -lboost_regex   \
+        -lboost_date_time    \
          -lpthread
 }
 else:win32{

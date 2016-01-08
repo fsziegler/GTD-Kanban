@@ -40,7 +40,8 @@ InBasketForm::InBasketForm(QWidget *parent)
 //    m_gtdTree.setAcceptDrops(true);
 //    m_gtdTree.setDragEnabled(true);
 //    m_gtdTree.setDragDropMode(QTreeWidget::InternalMove);
-   QKeyEvent *event = new QKeyEvent ( QEvent::KeyPress, Qt::Key_Alt, Qt::NoModifier);
+   QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Alt,
+         Qt::NoModifier);
    QCoreApplication::postEvent (this, event);
 }
 
@@ -49,7 +50,7 @@ InBasketForm::~InBasketForm()
    delete mp_ui;
 }
 
-void InBasketForm::SetGTDTreeWidget(QTreeWidget* gtdTree)
+void InBasketForm::SetGTDTreeWidget(GTDTreeWidget* gtdTree)
 {
    mp_gtdTree = gtdTree;
 }
@@ -60,13 +61,14 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
    itemSelectionList = mp_ui->InBasketListWidget->selectedItems();
    if (move)
    {
+      cout << "BEGIN InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
       m_userData.DumpAllGTD();
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
       {
          // Store and pass back the row so it can be used to ID the node to move
-         QString rowStr((*itr)->text());
-         int row = mp_ui->InBasketListWidget->row((*itr));
+         const QString rowStr((*itr)->text());
+         const int row = mp_ui->InBasketListWidget->row((*itr));
          string stdRowStr;
          m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
@@ -75,6 +77,7 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
          m_userData.MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
+      cout << "END InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
       m_userData.DumpAllGTD();
    }
 }
@@ -93,9 +96,15 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
       static const QBrush b(QColor(255, 255, 128));
       qti->setBackground(0, b);
       gtdTreeItem->addChild(qti);
+      if(mp_gtdTree->IsBranchCollapsed(nodeNameStr))
+      {
+          mp_gtdTree->collapseItem(gtdTreeItem);
+      }
    }
-   EnumGTDCategory tgtCat = m_userData.LookUpCategory(nodeNameStr.toStdString());
+   EnumGTDCategory tgtCat = m_userData.LookUpCategory(
+         nodeNameStr.toStdString());
    m_userData.MoveAllBetweenCategories(EnumGTDCategory::kMoveQueue, tgtCat);
+   cout << "END InBasketForm::MoveFromListToTree()" << endl;
    m_userData.DumpAllGTD();
 }
 
@@ -124,20 +133,28 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
    MoveFromListToTree(itemSelectionList, nodeNameStr);
 }
 
-void InBasketForm::RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove)
+void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
+                                 const QString& nodeNameStr)
 {
-   QList<QListWidgetItem*> itemSelectionList(
-         mp_ui->InBasketListWidget->selectedItems());
-   for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
-         ++itr)
-   {
-      if (itemToRemove->text() == (*itr)->text())
-      {
-         mp_ui->InBasketListWidget->takeItem(
-               mp_ui->InBasketListWidget->row((*itr)));
-         return;
-      }
-   }
+    QList<QListWidgetItem*> itemSelectionList =
+            mp_ui->InBasketListWidget->selectedItems();
+    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
+          ++itr)
+    {
+       // Store and pass back the row so it can be used to ID the node to move
+       const QString rowStr((*itr)->text());
+       if(rowStr == itemNameStr)
+       {
+           const int row = mp_ui->InBasketListWidget->row((*itr));
+           string stdRowStr;
+           m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
+           assert(stdRowStr == rowStr.toStdString());
+           mp_ui->InBasketListWidget->takeItem(
+                 mp_ui->InBasketListWidget->row((*itr)));
+           m_userData.MoveNthStrBetweenCategories(stdRowStr,
+                 EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
+       }
+    }
 }
 
 void InBasketForm::on_inBasketTextEdit_textChanged()
@@ -149,6 +166,7 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
    QString text(mp_ui->inBasketTextEdit->toPlainText());
    if ('\n' == text[text.size() - 1])
    {
+      cout << "BEGIN InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
       m_userData.DumpAllGTD();
       text.resize(text.size() - 1);
       // parse text & strip out all '\n's
@@ -171,6 +189,7 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
       } while (text.size() > end);
       mp_ui->inBasketTextEdit->selectAll();
       mp_ui->inBasketTextEdit->cut();
+      cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
       m_userData.DumpAllGTD();
    }
 }
@@ -235,6 +254,7 @@ void InBasketForm::on_calendarButton_clicked()
          {
          case kbcd_ScheduleNow:
          {
+            // Ask for the date/time for each selected item
             QList<QListWidgetItem*> dlgItemSelectionList;
             kbcalDlg.GetSelectedItemsList(dlgItemSelectionList);
             for (auto itr = dlgItemSelectionList.begin();
@@ -257,8 +277,12 @@ void InBasketForm::on_calendarButton_clicked()
                {
                   kbcalDlg.RemoveSelectedItem(*itr);
                   removeItemList.append(*itr);
+                  int size = kbcalDlg.GetListSize();
                }
             }
+            MoveFromListToTree(removeItemList, "Calendar");
+            int size = kbcalDlg.GetListSize();
+            exit = (0 == kbcalDlg.GetListSize());
             break;
          }
          case kbcd_ScheduleLater:
@@ -274,20 +298,20 @@ void InBasketForm::on_calendarButton_clicked()
             break;
          }
       }
-      for (auto itr = removeItemList.begin(); removeItemList.end() != itr;
-            ++itr)
-      {
-         for (auto itr2 = itemList.begin(); itemList.end() != itr2; ++itr2)
-         {
-            if ((*itr)->text() == (*itr2)->text())
-            {
-               itemList.erase(itr2);
-               mp_ui->InBasketListWidget->takeItem(
-                     mp_ui->InBasketListWidget->row((*itr2)));
-               break;
-            }
-         }
-      }
+//      for (auto itr = removeItemList.begin(); removeItemList.end() != itr;
+//            ++itr)
+//      {
+//         for (auto itr2 = itemList.begin(); itemList.end() != itr2; ++itr2)
+//         {
+//            if ((*itr)->text() == (*itr2)->text())
+//            {
+//               itemList.erase(itr2);
+//               mp_ui->InBasketListWidget->takeItem(
+//                     mp_ui->InBasketListWidget->row((*itr2)));
+//               break;
+//            }
+//         }
+//      }
    }
 }
 

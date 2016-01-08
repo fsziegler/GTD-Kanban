@@ -35,8 +35,14 @@ void KanbanCalendarDialog::GetSelectedItemsList(
    selectedItemsList = ui->listWidget->selectedItems();
 }
 
+int KanbanCalendarDialog::GetListSize() const
+{
+   return ui->listWidget->count();
+}
+
 void KanbanCalendarDialog::RemoveSelectedItem(QListWidgetItem* itemToRemove)
 {
+//    itemSelectionList = mp_ui->InBasketListWidget->selectedItems();
    QList<QListWidgetItem*> itemSelectionList(ui->listWidget->selectedItems());
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)

@@ -2,6 +2,7 @@
 #define INBASKETFORM_H
 
 #include "../../code/UserData.h"
+#include "gtdtreewidget.h"
 #include <QWidget>
 #include <QTreeWidget>
 #include <QListWidgetItem>
@@ -21,13 +22,17 @@ public:
    explicit InBasketForm(QWidget *parent = 0);
    ~InBasketForm();
 
-   void SetGTDTreeWidget(QTreeWidget* gtdTree);
+   void SetGTDTreeWidget(GTDTreeWidget* gtdTree);
+   // GetSelectionOutOfGTDBasketList() copies all selected items from
+   // InBasketListWidget into itemSelectionList and, iff move is true, moves
+   // them into the move queue.
    void GetSelectionOutOfGTDBasketList(
          QList<QListWidgetItem*>& itemSelectionList, bool move = true);
    void MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
          const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
-   void RemoveItemFromGTDBasketList(QListWidgetItem* itemToRemove);
+   void MoveFromGTDBasketListToTree(const QString& itemNameStr,
+                                    const QString& nodeNameStr);
 
 private slots:
    void on_inBasketTextEdit_textChanged();
@@ -56,7 +61,7 @@ private slots:
 
 private:
    Ui::InBasketForm* mp_ui;
-   QTreeWidget* mp_gtdTree;
+   GTDTreeWidget* mp_gtdTree;
    UserData m_userData;
 };
 

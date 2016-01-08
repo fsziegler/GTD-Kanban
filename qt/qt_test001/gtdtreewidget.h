@@ -10,6 +10,8 @@ public:
    GTDTreeWidget();
    virtual ~GTDTreeWidget();
 
+   bool IsBranchCollapsed(const QString& branchStr) const;
+
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
    bool IsPosInMemberHdrTWI(const QPoint& pos) const;
