@@ -247,6 +247,72 @@ void TreeNode::ClearAllChildren()
    m_children.clear();
 }
 
+const string kDateStr("date");
+const string kTimeStr("time");
+const string kNotADateTimeStr("not-a-date-time");
+const string kChildrenStr("children");
+bool TreeNode::LoadPTree(ptree& pTree)
+{
+   BoostJSON bJson(pTree);
+   bJson.Dump();
+   for(auto objItr: bJson.getPt())
+   {
+      bool first(0 < objItr.first.size());
+      bool childName(0 < objItr.second.data().size());
+      bool children(0 < objItr.second.size());
+
+      const string& firstStr = objItr.first;
+      if(first && childName && !children)
+      {
+         const string str(objItr.first);
+         const string value(objItr.second.data());
+         if(str == kDateStr)
+         {
+            if(kNotADateTimeStr == value)
+            {
+               date tmpDate(special_values::not_a_date_time);
+               m_date = tmpDate;
+            }
+            else
+            {
+               m_date = from_string(value);
+            }
+         }
+         else if(str == kTimeStr)
+         {
+            if(kNotADateTimeStr == value)
+            {
+               ptime tmpTime(special_values::not_a_date_time);
+               m_time = tmpTime;
+            }
+            else
+            {
+               m_time = boost::posix_time::time_from_string(value);
+            }
+         }
+         else
+         {
+            throw;
+         }
+      }
+      else if (first && !childName && children)
+      {
+         if(kChildrenStr == objItr.first)
+         {
+            ptree& pt = objItr.second;
+            LoadPTree(pt);
+         }
+         else
+         {
+            TreeNode node(objItr.first, this);
+            ptree& pt = objItr.second;
+            node.LoadPTree(pt);
+            m_children.push_back(node);
+         }
+      }
+   }
+   return true;
+}
 
 void TreeNode::SetDate(date& newDate, EnumTargetNode node)
 {

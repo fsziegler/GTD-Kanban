@@ -41,42 +41,13 @@ const string            kUNKNOWNJSONObjTypeStr("UNKNOWNObjType");
 
 BoostJSON::BoostJSON()
 {
-   if (0 == ms_valTypeStrMap.size())
-   {
-      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONTrueType, "true"));
-      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONFalseType, "false"));
-      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONNullType, "null"));
-      ms_valTypeStrMap.insert(
-            TTJSONValueTypeStrPair(kJSONNumberType, "number"));
-      ms_valTypeStrMap.insert(
-            TTJSONValueTypeStrPair(kJSONStringType, "string"));
-      ms_valTypeStrMap.insert(
-            TTJSONValueTypeStrPair(kJSONObjectType, "object"));
-      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONArrayType, "array"));
-      ms_valTypeStrMap.insert(
-            TTJSONValueTypeStrPair(kUNKNOWNJSONValueType,
-                  kUNKNOWNJSONValueTypeStr));
+   Init();
+}
 
-      ms_valTypeRegexStrMap.insert(
-            TTJSONValueTypeRegexPair(kJSONTrueType, boost::regex("true")));
-      ms_valTypeRegexStrMap.insert(
-            TTJSONValueTypeRegexPair(kJSONFalseType, boost::regex("false")));
-      ms_valTypeRegexStrMap.insert(
-            TTJSONValueTypeRegexPair(kJSONNullType, boost::regex("null")));
-      ms_valTypeRegexStrMap.insert(
-            TTJSONValueTypeRegexPair(kJSONNumberType,
-                  boost::regex("[0-9\\+\\-\\.eE]+")));
-      ms_valTypeRegexStrMap.insert(
-            TTJSONValueTypeRegexPair(kJSONStringType,
-                  boost::regex("[[:alnum:][:punct:][:space:]]+")));
-
-      ms_objTypeStrMap.insert(TTObjTypeStrPair(kObject, "Object"));
-      ms_objTypeStrMap.insert(TTObjTypeStrPair(kArray, "Array"));
-      ms_objTypeStrMap.insert(TTObjTypeStrPair(kValue, "Value"));
-      ms_objTypeStrMap.insert(TTObjTypeStrPair(kStrValuePair, "ValuePair"));
-      ms_objTypeStrMap.insert(
-            TTObjTypeStrPair(kUNKNOWNObjType, kUNKNOWNJSONObjTypeStr));
-   }
+BoostJSON::BoostJSON(ptree& pTree)
+: m_pt(pTree)
+{
+   Init();
 }
 
 BoostJSON::~BoostJSON()
@@ -87,6 +58,7 @@ void BoostJSON::LoadJSONFile(const string& jsonFileName)
 {
    try
    {
+      m_pt.clear();
       read_json(jsonFileName.c_str(), m_pt);
    }
    catch(exception& ex)
@@ -319,6 +291,46 @@ bool BoostJSON::IsValue(ptree::const_iterator& itr) const
 bool BoostJSON::IsStrValuePair(ptree::const_iterator &itr) const
 {
    return (kStrValuePair == GetObjectType(itr));
+}
+
+void BoostJSON::Init()
+{
+   if (0 == ms_valTypeStrMap.size())
+   {
+      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONTrueType, "true"));
+      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONFalseType, "false"));
+      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONNullType, "null"));
+      ms_valTypeStrMap.insert(
+            TTJSONValueTypeStrPair(kJSONNumberType, "number"));
+      ms_valTypeStrMap.insert(
+            TTJSONValueTypeStrPair(kJSONStringType, "string"));
+      ms_valTypeStrMap.insert(
+            TTJSONValueTypeStrPair(kJSONObjectType, "object"));
+      ms_valTypeStrMap.insert(TTJSONValueTypeStrPair(kJSONArrayType, "array"));
+      ms_valTypeStrMap.insert(
+            TTJSONValueTypeStrPair(kUNKNOWNJSONValueType,
+                  kUNKNOWNJSONValueTypeStr));
+
+      ms_valTypeRegexStrMap.insert(
+            TTJSONValueTypeRegexPair(kJSONTrueType, boost::regex("true")));
+      ms_valTypeRegexStrMap.insert(
+            TTJSONValueTypeRegexPair(kJSONFalseType, boost::regex("false")));
+      ms_valTypeRegexStrMap.insert(
+            TTJSONValueTypeRegexPair(kJSONNullType, boost::regex("null")));
+      ms_valTypeRegexStrMap.insert(
+            TTJSONValueTypeRegexPair(kJSONNumberType,
+                  boost::regex("[0-9\\+\\-\\.eE]+")));
+      ms_valTypeRegexStrMap.insert(
+            TTJSONValueTypeRegexPair(kJSONStringType,
+                  boost::regex("[[:alnum:][:punct:][:space:]]+")));
+
+      ms_objTypeStrMap.insert(TTObjTypeStrPair(kObject, "Object"));
+      ms_objTypeStrMap.insert(TTObjTypeStrPair(kArray, "Array"));
+      ms_objTypeStrMap.insert(TTObjTypeStrPair(kValue, "Value"));
+      ms_objTypeStrMap.insert(TTObjTypeStrPair(kStrValuePair, "ValuePair"));
+      ms_objTypeStrMap.insert(
+            TTObjTypeStrPair(kUNKNOWNObjType, kUNKNOWNJSONObjTypeStr));
+   }
 }
 
 }

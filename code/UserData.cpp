@@ -27,9 +27,12 @@
 
  */
 #include "UserData.h"
+#include "BoostJSON.h"
 #include <iostream>
 #include <fstream>
 #include <boost/thread/lock_guard.hpp>
+
+using namespace BoostJSONDemo;
 
 namespace ZiegGTDKanban
 {
@@ -194,13 +197,63 @@ void UserData::DumpAllToJSONFile(const string& jsonFileNameStr) const
    jsonOutFile.close();
 }
 
-bool UserData::LoadFromToJSONFile(const string& jsonFileNameStr)
+void CheckCategoryNameStrThrow(const string& catStr, const UserData& userData)
+{
+   if ((0 == catStr.size())
+         || (EnumGTDCategory::kGTDCategoryUNKNOWN
+               == userData.LookUpCategory(catStr)))
+   {
+      throw;
+   }
+   EnumGTDCategory nodeCat(userData.LookUpCategory(catStr));
+   if (userData.getGtdNodeTree().end()
+         != userData.getGtdNodeTree().find(nodeCat))
+   {
+      throw;   // Each category should only show up once
+   }
+}
+
+const string kGTDNodeTreeStr("GTD Node Tree");
+bool UserData::LoadFromJSONFile(const string& jsonFileNameStr)
 {
    if(!exists(jsonFileNameStr))
    {
       return false;
    }
-   m_gtdNodeTree.clear();
+
+   BoostJSON bjson;
+   bjson.LoadJSONFile(jsonFileNameStr);
+   ptree::const_iterator gtdItr = bjson.getPt().begin();
+   bool validJSON(false);
+   while(bjson.getPt().end() != gtdItr)
+   {
+      if ((0 < (*gtdItr).first.size())
+            && (0 == kGTDNodeTreeStr.compare((*gtdItr).first)))
+      {
+         validJSON = true;
+         break;
+      }
+      ++gtdItr;
+   }
+   if(!validJSON)
+   {
+      return false;
+   }
+   m_gtdNodeTree.clear();  // Now you know you have a valid JSON file
+
+   for(auto itr: (*gtdItr).second)
+   {
+      const string& nodeNameStr = itr.first;
+      // All of the JSON comprises named objects with a valid category name
+//      CheckCategoryNameStrThrow(nodeNameStr, *this);
+      EnumGTDCategory nodeCat(LookUpCategory(nodeNameStr));
+      TreeNode node(nodeNameStr);
+      TreeNode& catNode = (*m_gtdNodeTree.insert(
+            TCatTreeNodeVectPair(nodeCat, node)).first).second;
+      catNode.LoadPTree(itr.second);
+   }
+   DumpAllGTD();
+
    return true;
 }
 
@@ -365,6 +418,11 @@ void UserData::DumpTreeNode(const TreeNode& treeNode, int& cnt,
    {
       DumpTreeNode(itr, cnt, indent+1);
    }
+}
+
+const TCatTreeNodeVectMap& UserData::getGtdNodeTree() const
+{
+   return m_gtdNodeTree;
 }
 
 } /* namespace ZiegGTDKanban */

@@ -36,12 +36,14 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/filesystem.hpp>
+#include "BoostJSON.h"
 
 using namespace std;
 using namespace boost;
 using namespace boost::gregorian;
 using namespace boost::posix_time;
 using namespace boost::filesystem;
+using namespace BoostJSONDemo;
 
 namespace ZiegGTDKanban
 {
@@ -93,7 +95,6 @@ public:
    void IndentJSONFile(size_t indent, ofstream& jsonOutFile) const;
    void DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const;
 
-
    // ADD/REMOVE ACTIONS
    // AddChildNode() appends childNode to this node's children, returning the
    // resulting number of children.
@@ -101,6 +102,7 @@ public:
    void AddChildren(const TTreeNodeVect& children);
    bool RemoveNodeAtRow(const string& rowStr, size_t row);
    void ClearAllChildren();
+   bool LoadPTree(ptree& pTree);
 
    // SETTERS
    void SetDate(date& newDate, EnumTargetNode node = kParentNode);

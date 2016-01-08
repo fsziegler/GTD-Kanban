@@ -81,6 +81,7 @@ class BoostJSON
 {
 public:
    BoostJSON();
+   BoostJSON(ptree& pTree);
    virtual ~BoostJSON();
 
    // INPUT/OUPUT
@@ -126,6 +127,7 @@ public:
    bool IsStrValuePair(ptree::const_iterator &itr) const;
 
 private:
+   void Init();
    // Not implemented
    BoostJSON(BoostJSON&);
    BoostJSON& operator=(BoostJSON&);

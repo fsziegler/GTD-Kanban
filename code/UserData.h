@@ -94,7 +94,7 @@ public:
    // DumpAllGTD() dumps all GTD contents to the console.
    void DumpAllGTD() const;
    void DumpAllToJSONFile(const string& jsonFileNameStr) const;
-   bool LoadFromToJSONFile(const string& jsonFileNameStr);
+   bool LoadFromJSONFile(const string& jsonFileNameStr);
 
    // ACCESSORS
    // getGtdFixedCatMap() returns a reference to the ms_gtdFixedCatMap data
@@ -123,6 +123,7 @@ public:
    // MoveAllBetweenCategories() moves every item in srcCat to tgtCat.
    size_t MoveAllBetweenCategories(EnumGTDCategory srcCat,
          EnumGTDCategory tgtCat);
+   const TCatTreeNodeVectMap& getGtdNodeTree() const;
 
    // REMOVING ACTIONS
 

@@ -30,6 +30,7 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
 
 int main() {
    UserData data;
+   data.LoadFromJSONFile(string("test.json"));
 //   data.DumpAllToJSONFile(string("test.json"));
    data.AddDelimStrToCategory(inBasketStr);
    cout << "1. data.DumpInBasket()" << endl;
