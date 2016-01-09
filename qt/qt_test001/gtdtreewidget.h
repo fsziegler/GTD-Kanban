@@ -11,6 +11,7 @@ public:
    virtual ~GTDTreeWidget();
 
    bool IsBranchCollapsed(const QString& branchStr) const;
+   void ClearTree();
 
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);

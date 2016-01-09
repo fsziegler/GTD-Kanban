@@ -51,7 +51,7 @@
    </widget>
    <widget class="QMenu" name="menuWizard">
     <property name="title">
-     <string>&amp;Wizard</string>
+     <string>Wi&amp;zard</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuStats">

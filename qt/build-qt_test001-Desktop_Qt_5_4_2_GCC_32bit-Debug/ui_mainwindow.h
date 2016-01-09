@@ -125,7 +125,7 @@ public:
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0));
-        menuWizard->setTitle(QApplication::translate("MainWindow", "&Wizard", 0));
+        menuWizard->setTitle(QApplication::translate("MainWindow", "Wi&zard", 0));
         menuStats->setTitle(QApplication::translate("MainWindow", "S&tats", 0));
     } // retranslateUi
 

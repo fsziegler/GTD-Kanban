@@ -144,7 +144,7 @@
     <string>You need to plan this project before taking action</string>
    </property>
    <property name="text">
-    <string>Projects-&amp;to-Plan</string>
+    <string>Pro&amp;jects-to-Plan</string>
    </property>
   </widget>
   <widget class="QPushButton" name="projectPlansButton">
@@ -179,7 +179,7 @@
     <string>Next &amp;Actions</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="InBasketListWidget">
+  <widget class="QListWidget" name="inBasketListWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -252,7 +252,7 @@
     <string>Move selected issue below to In-Basket for editing</string>
    </property>
    <property name="text">
-    <string>&amp;Re-edit Selection</string>
+    <string>Re-edit &amp;Selection</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox">
@@ -352,7 +352,7 @@
   <zorder>projectsToPlanButton</zorder>
   <zorder>projectPlansButton</zorder>
   <zorder>nextActionsButton</zorder>
-  <zorder>InBasketListWidget</zorder>
+  <zorder>inBasketListWidget</zorder>
   <zorder>inBasketTextEdit</zorder>
   <zorder>label_3</zorder>
   <zorder>reEditSelectionButton</zorder>
@@ -362,7 +362,7 @@
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
   <tabstop>reEditSelectionButton</tabstop>
-  <tabstop>InBasketListWidget</tabstop>
+  <tabstop>inBasketListWidget</tabstop>
   <tabstop>somedayMaybeButton</tabstop>
   <tabstop>referenceButton</tabstop>
   <tabstop>trashButton</tabstop>

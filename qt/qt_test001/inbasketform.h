@@ -33,6 +33,7 @@ public:
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& itemNameStr,
                                     const QString& nodeNameStr);
+   void ClearWorkspace();
 
 private slots:
    void on_inBasketTextEdit_textChanged();

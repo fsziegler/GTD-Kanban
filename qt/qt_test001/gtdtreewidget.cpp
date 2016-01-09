@@ -69,6 +69,22 @@ bool GTDTreeWidget::IsBranchCollapsed(const QString& branchStr) const
          || (branchStr == QString("Calendar")));
 }
 
+void GTDTreeWidget::ClearTree()
+{
+    QList<QTreeWidgetItem *> childList;
+    childList = m_SomedayMaybeTWI.takeChildren();
+    childList = m_ReferenceTWI.takeChildren();
+    childList = m_TrashTWI.takeChildren();
+
+    childList = m_DoItTWI.takeChildren();
+    childList = m_WaitingOnSomeoneTWI.takeChildren();
+    childList = m_CalendarTWI.takeChildren();
+    childList = m_NextActionsTWI.takeChildren();
+
+    childList = m_projectsToPlanTWI.takeChildren();
+    childList = m_projectPlansTWI.takeChildren();
+}
+
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
 {
    static const Qt::ItemFlags flags(

@@ -37,7 +37,7 @@ public:
     QPushButton *projectsToPlanButton;
     QPushButton *projectPlansButton;
     QPushButton *nextActionsButton;
-    QListWidget *InBasketListWidget;
+    QListWidget *inBasketListWidget;
     QTextEdit *inBasketTextEdit;
     QLabel *label_3;
     QPushButton *reEditSelectionButton;
@@ -87,13 +87,13 @@ public:
         nextActionsButton = new QPushButton(InBasketForm);
         nextActionsButton->setObjectName(QStringLiteral("nextActionsButton"));
         nextActionsButton->setGeometry(QRect(330, 320, 141, 23));
-        InBasketListWidget = new QListWidget(InBasketForm);
-        InBasketListWidget->setObjectName(QStringLiteral("InBasketListWidget"));
-        InBasketListWidget->setGeometry(QRect(20, 260, 271, 201));
-        InBasketListWidget->setFocusPolicy(Qt::StrongFocus);
-        InBasketListWidget->setAcceptDrops(false);
-        InBasketListWidget->setAlternatingRowColors(true);
-        InBasketListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        inBasketListWidget = new QListWidget(InBasketForm);
+        inBasketListWidget->setObjectName(QStringLiteral("inBasketListWidget"));
+        inBasketListWidget->setGeometry(QRect(20, 260, 271, 201));
+        inBasketListWidget->setFocusPolicy(Qt::StrongFocus);
+        inBasketListWidget->setAcceptDrops(false);
+        inBasketListWidget->setAlternatingRowColors(true);
+        inBasketListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
         inBasketTextEdit = new QTextEdit(InBasketForm);
         inBasketTextEdit->setObjectName(QStringLiteral("inBasketTextEdit"));
         inBasketTextEdit->setGeometry(QRect(20, 50, 271, 70));
@@ -139,15 +139,15 @@ public:
         projectsToPlanButton->raise();
         projectPlansButton->raise();
         nextActionsButton->raise();
-        InBasketListWidget->raise();
+        inBasketListWidget->raise();
         inBasketTextEdit->raise();
         label_3->raise();
         reEditSelectionButton->raise();
         doItButton->raise();
         gtdMinMaxButton->raise();
         QWidget::setTabOrder(inBasketTextEdit, reEditSelectionButton);
-        QWidget::setTabOrder(reEditSelectionButton, InBasketListWidget);
-        QWidget::setTabOrder(InBasketListWidget, somedayMaybeButton);
+        QWidget::setTabOrder(reEditSelectionButton, inBasketListWidget);
+        QWidget::setTabOrder(inBasketListWidget, somedayMaybeButton);
         QWidget::setTabOrder(somedayMaybeButton, referenceButton);
         QWidget::setTabOrder(referenceButton, trashButton);
         QWidget::setTabOrder(trashButton, doItButton);
@@ -190,7 +190,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         projectsToPlanButton->setToolTip(QApplication::translate("InBasketForm", "You need to plan this project before taking action", 0));
 #endif // QT_NO_TOOLTIP
-        projectsToPlanButton->setText(QApplication::translate("InBasketForm", "Projects-&to-Plan", 0));
+        projectsToPlanButton->setText(QApplication::translate("InBasketForm", "Pro&jects-to-Plan", 0));
 #ifndef QT_NO_TOOLTIP
         projectPlansButton->setToolTip(QApplication::translate("InBasketForm", "You need to review this plan for Next Actions", 0));
 #endif // QT_NO_TOOLTIP
@@ -203,7 +203,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         reEditSelectionButton->setToolTip(QApplication::translate("InBasketForm", "Move selected issue below to In-Basket for editing", 0));
 #endif // QT_NO_TOOLTIP
-        reEditSelectionButton->setText(QApplication::translate("InBasketForm", "&Re-edit Selection", 0));
+        reEditSelectionButton->setText(QApplication::translate("InBasketForm", "Re-edit &Selection", 0));
         groupBox->setTitle(QApplication::translate("InBasketForm", "Non-Actionable", 0));
         groupBox_2->setTitle(QApplication::translate("InBasketForm", "Actionable", 0));
         tasksGroupBox->setTitle(QApplication::translate("InBasketForm", "Tasks", 0));

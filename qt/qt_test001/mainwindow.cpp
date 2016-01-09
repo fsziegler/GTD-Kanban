@@ -74,13 +74,35 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-   QString fileName = QFileDialog::getOpenFileName(this, tr("Open Image"),
-         "/home", tr("JSON Files (*.json);;All Files (*.*)"));
-   QFile file(fileName);
-   file.open(QFile::ReadOnly | QFile::Text);
-   QTextStream ReadFile(&file);
-   m_gtdEditor.setText(ReadFile.readAll());
-   QApplication::setApplicationName(fileName);
+   QFileDialog ofDialog(this, tr("Open Image"), "/home");
+   ofDialog.setNameFilter(tr("JSON Files (*.json);;All Files (*.*)"));
+   if (ofDialog.exec())
+   {
+       QStringList fileNames;
+       fileNames = ofDialog.selectedFiles();
+       if(0 < fileNames.size())
+       {
+           m_gtdEditor.clear();
+           m_gtdTree.ClearTree();
+           m_inBasketForm.ClearWorkspace();
+           m_gtdCalendar.repaint();
+           for(auto fileName: fileNames)
+           {
+               QFile file(fileName);
+               file.open(QFile::ReadOnly | QFile::Text);
+               QTextStream ReadFile(&file);
+               m_gtdEditor.setText(ReadFile.readAll());
+           }
+       }
+//       QApplication::setApplicationName(fileName);
+   }
+//   QString fileName = QFileDialog::getOpenFileName(this, tr("Open Image"),
+//         "/home", tr("JSON Files (*.json);;All Files (*.*)"));
+//   QFile file(fileName);
+//   file.open(QFile::ReadOnly | QFile::Text);
+//   QTextStream ReadFile(&file);
+//   m_gtdEditor.setText(ReadFile.readAll());
+//   QApplication::setApplicationName(fileName);
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)
