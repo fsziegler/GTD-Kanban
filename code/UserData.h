@@ -94,7 +94,8 @@ public:
    // DumpAllGTD() dumps all GTD contents to the console.
    void DumpAllGTD() const;
    void DumpAllToJSONFile(const string& jsonFileNameStr) const;
-   bool LoadFromJSONFile(const string& jsonFileNameStr);
+   bool LoadFromJSONFile(const string& jsonFileNameStr, bool clearExisting =
+         true);
 
    // ACCESSORS
    // getGtdFixedCatMap() returns a reference to the ms_gtdFixedCatMap data

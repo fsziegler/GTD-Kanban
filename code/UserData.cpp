@@ -214,7 +214,8 @@ void CheckCategoryNameStrThrow(const string& catStr, const UserData& userData)
 }
 
 const string kGTDNodeTreeStr("GTD Node Tree");
-bool UserData::LoadFromJSONFile(const string& jsonFileNameStr)
+bool UserData::LoadFromJSONFile(const string& jsonFileNameStr,
+      bool clearExisting)
 {
    if(!exists(jsonFileNameStr))
    {
@@ -239,7 +240,10 @@ bool UserData::LoadFromJSONFile(const string& jsonFileNameStr)
    {
       return false;
    }
-   m_gtdNodeTree.clear();  // Now you know you have a valid JSON file
+   if(clearExisting)
+   {
+      m_gtdNodeTree.clear();  // Now you know you have a valid JSON file
+   }
 
    for(auto itr: (*gtdItr).second)
    {

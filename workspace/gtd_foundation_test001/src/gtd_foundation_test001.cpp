@@ -30,9 +30,11 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
 
 int main() {
    UserData data;
-   data.LoadFromJSONFile(string("test.json"));
 //   data.DumpAllToJSONFile(string("test.json"));
    data.AddDelimStrToCategory(inBasketStr);
+   data.DumpAllGTD();
+   data.LoadFromJSONFile(string("test.json"), false);
+   data.DumpAllGTD();
    cout << "1. data.DumpInBasket()" << endl;
    data.DumpGTDCategory(EnumGTDCategory::kInBasket);
    int cnt(2);
