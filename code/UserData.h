@@ -127,8 +127,10 @@ public:
    const TCatTreeNodeVectMap& getGtdNodeTree() const;
 
    // REMOVING ACTIONS
+   void Clear();
 
 private:
+   void PopulateGTDNodeTree();
    // GetCTreeNode() returns the TreeNode for category.
    TreeNode& GetTreeNode(EnumGTDCategory category);
    const TreeNode& GetCTreeNode(EnumGTDCategory category) const;

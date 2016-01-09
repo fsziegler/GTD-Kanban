@@ -35,6 +35,11 @@ int main() {
    data.DumpAllGTD();
    data.LoadFromJSONFile(string("test.json"), false);
    data.DumpAllGTD();
+   data.Clear();
+   data.DumpAllGTD();
+   data.AddDelimStrToCategory(inBasketStr);
+   data.DumpAllGTD();
+
    cout << "1. data.DumpInBasket()" << endl;
    data.DumpGTDCategory(EnumGTDCategory::kInBasket);
    int cnt(2);

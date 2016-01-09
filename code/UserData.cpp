@@ -71,11 +71,7 @@ UserData::UserData()
             TGTDCategoryPair(EnumGTDCategory::kGTDCategoryUNKNOWN,
                   "(GTD Category UNKNOWN)"));
 
-      for(auto itr: ms_gtdFixedCatMap)
-      {
-         TreeNode node(itr.second);
-         m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
-      }
+      PopulateGTDNodeTree();
    }
 }
 
@@ -259,6 +255,22 @@ bool UserData::LoadFromJSONFile(const string& jsonFileNameStr,
    DumpAllGTD();
 
    return true;
+}
+
+void UserData::Clear()
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   m_gtdNodeTree.clear();
+   PopulateGTDNodeTree();
+}
+
+void UserData::PopulateGTDNodeTree()
+{
+   for(auto itr: ms_gtdFixedCatMap)
+   {
+      TreeNode node(itr.second);
+      m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
+   }
 }
 
 TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
