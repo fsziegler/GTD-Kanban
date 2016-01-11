@@ -13,7 +13,8 @@
 MainWindow::MainWindow(QWidget *parent)
       : QMainWindow(parent),
         ui(new Ui::MainWindow),
-        m_gtdCalendar(parent)
+        m_gtdCalendar(parent),
+        m_currentFileNameStr("[None]")
 {
    ui->setupUi(this);
    setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
@@ -78,20 +79,24 @@ void MainWindow::on_actionOpen_triggered()
    ofDialog.setNameFilter(tr("JSON Files (*.json);;All Files (*.*)"));
    if (ofDialog.exec())
    {
-       QStringList fileNames;
-       fileNames = ofDialog.selectedFiles();
-       if(0 < fileNames.size())
-       {
-           m_gtdEditor.clear();
-           m_gtdTree.ClearTree();
-           m_inBasketForm.ClearWorkspace();
-           m_gtdCalendar.repaint();
-           for(auto fileName: fileNames)
-           {
-               m_inBasketForm.LoadFromFile(fileName);
-           }
-       }
-//       QApplication::setApplicationName(fileName);
+      QStringList fileNames;
+      fileNames = ofDialog.selectedFiles();
+      if (0 < fileNames.size())
+      {
+         m_gtdEditor.clear();
+         m_gtdTree.ClearTree();
+         m_inBasketForm.ClearWorkspace();
+         m_gtdCalendar.repaint();
+         for (auto fileName : fileNames)
+         {
+            m_inBasketForm.LoadFromFile(fileName);
+            setWindowTitle(fileName);
+            QString statusMsg("File \"");
+            statusMsg.append(fileName).append("\" loaded ...");
+            statusBar()->showMessage(statusMsg, 5000);
+            m_currentFileNameStr = fileName;
+         }
+      }
    }
 }
 
@@ -102,4 +107,34 @@ void MainWindow::ScaleAndCenterWindow(float scale)
    const int x = (QApplication::desktop()->width() - newSize.width()) / 2;
    const int y = (QApplication::desktop()->height() - newSize.height()) / 2;
    move(x, y);
+}
+
+void MainWindow::on_action_New_triggered()
+{
+   statusBar()->showMessage("New File ...", 5000);
+   m_gtdEditor.clear();
+   m_gtdTree.ClearTree();
+   m_inBasketForm.ClearWorkspace();
+   m_gtdCalendar.repaint();
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+   if (QString("[None]") == m_currentFileNameStr)
+   {
+      on_actionSave_As_triggered();
+   }
+   else
+   {
+      QString statusMsg("File \"");
+      statusMsg.append(m_currentFileNameStr).append("\" saved.");
+      statusBar()->showMessage(statusMsg, 5000);
+      m_inBasketForm.GetUserData().DumpAllToJSONFile(
+            m_currentFileNameStr.toStdString());
+   }
+}
+
+void MainWindow::on_actionSave_As_triggered()
+{
+   statusBar()->showMessage("Save As ...", 5000);
 }

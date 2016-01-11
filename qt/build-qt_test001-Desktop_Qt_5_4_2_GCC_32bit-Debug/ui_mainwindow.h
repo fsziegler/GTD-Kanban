@@ -117,11 +117,15 @@ public:
         actionGTD->setText(QApplication::translate("MainWindow", "&GTD", 0));
         actionKanban->setText(QApplication::translate("MainWindow", "&Kanban", 0));
         actionOpen->setText(QApplication::translate("MainWindow", "&Open", 0));
+        actionOpen->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0));
         actionClose->setText(QApplication::translate("MainWindow", "&Close", 0));
         actionSave->setText(QApplication::translate("MainWindow", "&Save", 0));
+        actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0));
         actionSave_As->setText(QApplication::translate("MainWindow", "Save &As", 0));
+        actionSave_As->setShortcut(QApplication::translate("MainWindow", "Ctrl+A", 0));
         actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0));
         action_New->setText(QApplication::translate("MainWindow", "&New", 0));
+        action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0));

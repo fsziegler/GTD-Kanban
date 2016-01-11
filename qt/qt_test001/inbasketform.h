@@ -36,6 +36,8 @@ public:
    void ClearWorkspace();
    bool LoadFromFile(const QString& jsonFileName);
 
+   UserData& GetUserData();
+
 private slots:
    void on_inBasketTextEdit_textChanged();
 

@@ -128,18 +128,18 @@
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "children" : {
-              "Establish next year’s seminar schedule": {
-                "date" : "not-a-date-time",
-                "time" : "not-a-date-time",
-                "children" : {
-                    "Get proficient with videoconferencing access": {
-                      "date" : "not-a-date-time",
-                      "time" : "not-a-date-time",
-                      "children" : {
-                      }
-                    }
+            "Establish next year’s seminar schedule": {
+              "date" : "not-a-date-time",
+              "time" : "not-a-date-time",
+              "children" : {
+                "Get proficient with videoconferencing access": {
+                  "date" : "not-a-date-time",
+                  "time" : "not-a-date-time",
+                  "children" : {
+                  }
                 }
               }
+            }
           }
         },
         "Install new backyard lights": {

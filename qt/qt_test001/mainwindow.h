@@ -33,6 +33,12 @@ private slots:
 
    void on_actionOpen_triggered();
 
+   void on_action_New_triggered();
+
+   void on_actionSave_triggered();
+
+   void on_actionSave_As_triggered();
+
 private:
    void ScaleAndCenterWindow(float scale);
 
@@ -49,5 +55,7 @@ private:
 //    QCalendarWidget m_gtdCalendar;
 
    QTextEdit m_kanbanEditor;
+
+   QString m_currentFileNameStr;
 };
 #endif // MAINWINDOW_H

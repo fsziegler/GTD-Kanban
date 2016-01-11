@@ -195,6 +195,11 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
    }
 }
 
+UserData& InBasketForm::GetUserData()
+{
+   return m_userData;
+}
+
 void InBasketForm::on_inBasketTextEdit_textChanged()
 {
    if (0 == mp_ui->inBasketTextEdit->toPlainText().size())
