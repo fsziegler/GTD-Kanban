@@ -1,8 +1,11 @@
 #ifndef GTDTREEWIDGET_H
 #define GTDTREEWIDGET_H
 
+#include "../../code/UserData.h"
 #include <QTreeWidget>
 #include <QDropEvent>
+
+using namespace ZiegGTDKanban;
 
 class GTDTreeWidget: public QTreeWidget
 {
@@ -11,7 +14,11 @@ public:
    virtual ~GTDTreeWidget();
 
    bool IsBranchCollapsed(const QString& branchStr) const;
+   bool IsValidGTDTreeCategory(EnumGTDCategory category) const;
+   QTreeWidgetItem* GetTreeWidgetItem(EnumGTDCategory category);
    void ClearTree();
+   bool AddNode(const TreeNode& node, EnumGTDCategory category);
+   bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
 
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);

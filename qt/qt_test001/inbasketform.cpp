@@ -42,7 +42,7 @@ InBasketForm::InBasketForm(QWidget *parent)
 //    m_gtdTree.setDragDropMode(QTreeWidget::InternalMove);
    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Alt,
          Qt::NoModifier);
-   QCoreApplication::postEvent (this, event);
+   QCoreApplication::postEvent(this, event);
 }
 
 InBasketForm::~InBasketForm()
@@ -96,9 +96,9 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
       static const QBrush b(QColor(255, 255, 128));
       qti->setBackground(0, b);
       gtdTreeItem->addChild(qti);
-      if(mp_gtdTree->IsBranchCollapsed(nodeNameStr))
+      if (mp_gtdTree->IsBranchCollapsed(nodeNameStr))
       {
-          mp_gtdTree->collapseItem(gtdTreeItem);
+         mp_gtdTree->collapseItem(gtdTreeItem);
       }
    }
    EnumGTDCategory tgtCat = m_userData.LookUpCategory(
@@ -134,33 +134,65 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
 }
 
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
-                                 const QString& nodeNameStr)
+      const QString& nodeNameStr)
 {
-    QList<QListWidgetItem*> itemSelectionList =
-            mp_ui->inBasketListWidget->selectedItems();
-    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
-          ++itr)
-    {
-       // Store and pass back the row so it can be used to ID the node to move
-       const QString rowStr((*itr)->text());
-       if(rowStr == itemNameStr)
-       {
-           const int row = mp_ui->inBasketListWidget->row((*itr));
-           string stdRowStr;
-           m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
-           assert(stdRowStr == rowStr.toStdString());
-           mp_ui->inBasketListWidget->takeItem(
-                 mp_ui->inBasketListWidget->row((*itr)));
-           m_userData.MoveNthStrBetweenCategories(stdRowStr,
-                 EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
-       }
-    }
+   QList<QListWidgetItem*> itemSelectionList = mp_ui->inBasketListWidget
+         ->selectedItems();
+   for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
+         ++itr)
+   {
+      // Store and pass back the row so it can be used to ID the node to move
+      const QString rowStr((*itr)->text());
+      if (rowStr == itemNameStr)
+      {
+         const int row = mp_ui->inBasketListWidget->row((*itr));
+         string stdRowStr;
+         m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
+         assert(stdRowStr == rowStr.toStdString());
+         mp_ui->inBasketListWidget->takeItem(
+               mp_ui->inBasketListWidget->row((*itr)));
+         m_userData.MoveNthStrBetweenCategories(stdRowStr,
+               EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
+      }
+   }
 }
 
 void InBasketForm::ClearWorkspace()
 {
-    mp_ui->inBasketTextEdit->clear();
-    mp_ui->inBasketListWidget->clear();
+   mp_ui->inBasketTextEdit->clear();
+   mp_ui->inBasketListWidget->clear();
+   m_userData.Clear();
+}
+
+bool InBasketForm::LoadFromFile(const QString& jsonFileName)
+{
+   if (!m_userData.LoadFromJSONFile(jsonFileName.toStdString(), false))
+   {
+      return false;
+   }
+   mp_ui->inBasketTextEdit->clear();
+   mp_ui->inBasketListWidget->clear();
+   for (auto itr : m_userData.getGtdNodeTree())
+   {
+      const QString nodeNameStr(
+            (*m_userData.getGtdFixedCatMap().find(itr.first)).second.c_str());
+      const TCatTreeNodeVectPair& pair = itr;
+
+      if (nodeNameStr == QString("In Basket"))
+          {
+          for(auto inBItr: pair.second.getChildren())
+          {
+            mp_ui->inBasketListWidget->addItem(
+                  QString(inBItr.getMpNodeNameStr().c_str()));
+          }
+      }
+      else
+      {
+         QList<QTreeWidgetItem*> gtdTreeList = mp_gtdTree->findItems(
+               nodeNameStr, Qt::MatchExactly | Qt::MatchRecursive, 0);
+         mp_gtdTree->AddNode(itr.second, itr.first);
+      }
+   }
 }
 
 void InBasketForm::on_inBasketTextEdit_textChanged()
@@ -283,11 +315,9 @@ void InBasketForm::on_calendarButton_clicked()
                {
                   kbcalDlg.RemoveSelectedItem(*itr);
                   removeItemList.append(*itr);
-                  int size = kbcalDlg.GetListSize();
                }
             }
             MoveFromListToTree(removeItemList, "Calendar");
-            int size = kbcalDlg.GetListSize();
             exit = (0 == kbcalDlg.GetListSize());
             break;
          }

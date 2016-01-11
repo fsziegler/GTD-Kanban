@@ -34,6 +34,7 @@ public:
    void MoveFromGTDBasketListToTree(const QString& itemNameStr,
                                     const QString& nodeNameStr);
    void ClearWorkspace();
+   bool LoadFromFile(const QString& jsonFileName);
 
 private slots:
    void on_inBasketTextEdit_textChanged();

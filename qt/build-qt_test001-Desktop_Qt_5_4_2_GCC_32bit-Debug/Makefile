@@ -1620,6 +1620,9 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inbasketform.o ../qt_test001/inbasketform.cpp
 
 gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
+		../../code/BoostJSON.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \

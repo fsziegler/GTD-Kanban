@@ -69,6 +69,44 @@ bool GTDTreeWidget::IsBranchCollapsed(const QString& branchStr) const
          || (branchStr == QString("Calendar")));
 }
 
+bool GTDTreeWidget::IsValidGTDTreeCategory(EnumGTDCategory category) const
+{
+   if ((EnumGTDCategory::kInBasket == category)
+         || (EnumGTDCategory::kMoveQueue == category)
+         || (EnumGTDCategory::kGTDCategoryUNKNOWN == category))
+   {
+      return false;
+   }
+   return true;
+}
+
+QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
+{
+    switch(category)
+    {
+//    case EnumGTDCategory::kInBasket:
+    case EnumGTDCategory::kSomedayMaybe:
+        return &m_SomedayMaybeTWI;
+    case EnumGTDCategory::kReference:
+        return &m_ReferenceTWI;
+    case EnumGTDCategory::kWaitingForAnotherPerson:
+        return &m_WaitingOnSomeoneTWI;
+    case EnumGTDCategory::kCalendar:
+        return &m_CalendarTWI;
+    case EnumGTDCategory::kProjectsToPlan:
+        return &m_projectsToPlanTWI;
+    case EnumGTDCategory::kProjectPlans:
+        return &m_projectPlansTWI;
+    case EnumGTDCategory::kNextActions:
+        return &m_NextActionsTWI;
+    case EnumGTDCategory::kTrash:
+        return &m_TrashTWI;
+    case EnumGTDCategory::kMoveQueue:
+    default:
+        throw;
+    }
+}
+
 void GTDTreeWidget::ClearTree()
 {
     QList<QTreeWidgetItem *> childList;
@@ -83,6 +121,29 @@ void GTDTreeWidget::ClearTree()
 
     childList = m_projectsToPlanTWI.takeChildren();
     childList = m_projectPlansTWI.takeChildren();
+}
+
+bool GTDTreeWidget::AddNode(const TreeNode& node, EnumGTDCategory category)
+{
+    if(!IsValidGTDTreeCategory(category))
+    {
+        return false;
+    }
+    QTreeWidgetItem* twi = GetTreeWidgetItem(category);
+    return AddNode(node, twi);
+}
+
+bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
+{
+   for(auto itr: node.getChildren())
+   {
+       QStringList strings;
+       strings.append(itr.getMpNodeNameStr().c_str());
+       QTreeWidgetItem* childItem = new QTreeWidgetItem(strings);
+       AddNode(itr, childItem);
+       twi->addChild(childItem);
+   }
+   return true;
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
