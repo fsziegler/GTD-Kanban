@@ -41,6 +41,7 @@ workspace/RemoteSystemsTempFiles
 # Backup files
 *~
 *.*~
+*.autosave
 
 # CCCC files
 .cccc
