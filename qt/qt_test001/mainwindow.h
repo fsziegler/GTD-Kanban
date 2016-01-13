@@ -39,6 +39,8 @@ private slots:
 
    void on_actionSave_As_triggered();
 
+   void on_actionAbout_triggered();
+
 private:
    void ScaleAndCenterWindow(float scale);
 

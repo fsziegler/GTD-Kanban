@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "aboutdialog.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -137,4 +138,10 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionSave_As_triggered()
 {
    statusBar()->showMessage("Save As ...", 5000);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    AboutDialog abtDlg;
+    abtDlg.exec();
 }

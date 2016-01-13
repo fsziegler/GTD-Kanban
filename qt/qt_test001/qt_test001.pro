@@ -31,7 +31,8 @@ SOURCES += main.cpp\
         inbasketform.cpp \
         gtdtreewidget.cpp \
         kanbancalendardialog.cpp \
-        gtdcalendarwidget.cpp
+        gtdcalendarwidget.cpp \
+    aboutdialog.cpp
 unix {
 SOURCES += ../../code/UserData.cpp \
             ../../code/TreeNode.cpp \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
     inbasketform.h \
     gtdtreewidget.h \
     kanbancalendardialog.h \
-    gtdcalendarwidget.h
+    gtdcalendarwidget.h \
+    aboutdialog.h
 unix {
 HEADERS += ../../code/UserData.h \
             ../../code/TreeNode.h   \
@@ -59,7 +61,8 @@ HEADERS += C:\dev\github\GTD-Kanban\code\UserData.h \
 
 FORMS    += mainwindow.ui \
     inbasketform.ui \
-    kanbancalendardialog.ui
+    kanbancalendardialog.ui \
+    aboutdialog.ui
 
 unix {
 LIBS += -lboost_system \

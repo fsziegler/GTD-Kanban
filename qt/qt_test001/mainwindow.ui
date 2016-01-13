@@ -48,6 +48,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuWizard">
     <property name="title">
@@ -124,6 +125,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
    </property>
   </action>
  </widget>

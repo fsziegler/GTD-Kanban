@@ -34,6 +34,7 @@ public:
     QAction *actionSave_As;
     QAction *actionExit;
     QAction *action_New;
+    QAction *actionAbout;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -65,6 +66,8 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         action_New = new QAction(MainWindow);
         action_New->setObjectName(QStringLiteral("action_New"));
+        actionAbout = new QAction(MainWindow);
+        actionAbout->setObjectName(QStringLiteral("actionAbout"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -105,6 +108,7 @@ public:
         menuFile->addAction(actionExit);
         menuView->addAction(actionGTD);
         menuView->addAction(actionKanban);
+        menuHelp->addAction(actionAbout);
 
         retranslateUi(MainWindow);
 
@@ -126,6 +130,7 @@ public:
         actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0));
         action_New->setText(QApplication::translate("MainWindow", "&New", 0));
         action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
+        actionAbout->setText(QApplication::translate("MainWindow", "&About", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0));
