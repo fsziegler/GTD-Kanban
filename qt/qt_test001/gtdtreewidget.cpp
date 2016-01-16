@@ -12,7 +12,7 @@ GTDTreeWidget::GTDTreeWidget()
         m_tasksTWI((QTreeWidget*) 0, QStringList(QString("Tasks"))),
         m_DoItTWI((QTreeWidget*) 0, QStringList(QString("Do It!"))),
         m_WaitingOnSomeoneTWI((QTreeWidget*) 0,
-              QStringList(QString("Waiting on someone"))),
+              QStringList(QString("Waiting for Another Person"))),
         m_CalendarTWI((QTreeWidget*) 0, QStringList(QString("Calendar"))),
         m_NextActionsTWI((QTreeWidget*) 0,
               QStringList(QString("Next Actions"))),

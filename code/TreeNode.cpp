@@ -220,7 +220,7 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
       return false;
    }
 //   TreeNode* parentNode = remNode->mp_parentNode;
-   // TODO Convert TTreeNodeVect to a list type, which allows erase-ing an item.
+   // This would be better with a list, but we need random access
    TTreeNodeVect& childVect =
          (nullptr != remNode->mp_parentNode ?
                remNode->mp_parentNode->m_children : m_children);

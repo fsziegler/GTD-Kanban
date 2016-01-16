@@ -35,9 +35,11 @@ public:
     QAction *actionExit;
     QAction *action_New;
     QAction *actionAbout;
+    QAction *actionFoo;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
+    QMenu *menuRecent_Files;
     QMenu *menuView;
     QMenu *menuHelp;
     QMenu *menuWizard;
@@ -68,6 +70,8 @@ public:
         action_New->setObjectName(QStringLiteral("action_New"));
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
+        actionFoo = new QAction(MainWindow);
+        actionFoo->setObjectName(QStringLiteral("actionFoo"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -76,6 +80,8 @@ public:
         menuBar->setGeometry(QRect(0, 0, 400, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuRecent_Files = new QMenu(menuFile);
+        menuRecent_Files->setObjectName(QStringLiteral("menuRecent_Files"));
         menuView = new QMenu(menuBar);
         menuView->setObjectName(QStringLiteral("menuView"));
         menuHelp = new QMenu(menuBar);
@@ -99,6 +105,7 @@ public:
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(action_New);
         menuFile->addAction(actionOpen);
+        menuFile->addAction(menuRecent_Files->menuAction());
         menuFile->addSeparator();
         menuFile->addAction(actionClose);
         menuFile->addSeparator();
@@ -106,6 +113,7 @@ public:
         menuFile->addAction(actionSave_As);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
+        menuRecent_Files->addAction(actionFoo);
         menuView->addAction(actionGTD);
         menuView->addAction(actionKanban);
         menuHelp->addAction(actionAbout);
@@ -131,7 +139,9 @@ public:
         action_New->setText(QApplication::translate("MainWindow", "&New", 0));
         action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
         actionAbout->setText(QApplication::translate("MainWindow", "&About", 0));
+        actionFoo->setText(QApplication::translate("MainWindow", "Foo", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
+        menuRecent_Files->setTitle(QApplication::translate("MainWindow", "Recent Files", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0));
         menuWizard->setTitle(QApplication::translate("MainWindow", "Wi&zard", 0));

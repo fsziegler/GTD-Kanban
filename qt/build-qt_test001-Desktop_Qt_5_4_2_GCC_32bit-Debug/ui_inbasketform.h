@@ -52,7 +52,7 @@ public:
     {
         if (InBasketForm->objectName().isEmpty())
             InBasketForm->setObjectName(QStringLiteral("InBasketForm"));
-        InBasketForm->resize(510, 480);
+        InBasketForm->resize(510, 501);
         InBasketForm->setFocusPolicy(Qt::ClickFocus);
         InBasketForm->setAcceptDrops(true);
         label = new QLabel(InBasketForm);
@@ -74,22 +74,22 @@ public:
         trashButton->setGeometry(QRect(330, 130, 141, 23));
         waitingOnSomeoneButton = new QPushButton(InBasketForm);
         waitingOnSomeoneButton->setObjectName(QStringLiteral("waitingOnSomeoneButton"));
-        waitingOnSomeoneButton->setGeometry(QRect(330, 260, 141, 23));
+        waitingOnSomeoneButton->setGeometry(QRect(330, 260, 141, 41));
         calendarButton = new QPushButton(InBasketForm);
         calendarButton->setObjectName(QStringLiteral("calendarButton"));
-        calendarButton->setGeometry(QRect(330, 290, 141, 23));
+        calendarButton->setGeometry(QRect(330, 310, 141, 23));
         projectsToPlanButton = new QPushButton(InBasketForm);
         projectsToPlanButton->setObjectName(QStringLiteral("projectsToPlanButton"));
-        projectsToPlanButton->setGeometry(QRect(330, 390, 141, 23));
+        projectsToPlanButton->setGeometry(QRect(330, 410, 141, 23));
         projectPlansButton = new QPushButton(InBasketForm);
         projectPlansButton->setObjectName(QStringLiteral("projectPlansButton"));
-        projectPlansButton->setGeometry(QRect(330, 420, 141, 23));
+        projectPlansButton->setGeometry(QRect(330, 440, 141, 23));
         nextActionsButton = new QPushButton(InBasketForm);
         nextActionsButton->setObjectName(QStringLiteral("nextActionsButton"));
-        nextActionsButton->setGeometry(QRect(330, 320, 141, 23));
+        nextActionsButton->setGeometry(QRect(330, 340, 141, 23));
         inBasketListWidget = new QListWidget(InBasketForm);
         inBasketListWidget->setObjectName(QStringLiteral("inBasketListWidget"));
-        inBasketListWidget->setGeometry(QRect(20, 260, 271, 201));
+        inBasketListWidget->setGeometry(QRect(20, 260, 271, 221));
         inBasketListWidget->setFocusPolicy(Qt::StrongFocus);
         inBasketListWidget->setAcceptDrops(false);
         inBasketListWidget->setAlternatingRowColors(true);
@@ -112,16 +112,16 @@ public:
         groupBox->setGeometry(QRect(310, 40, 181, 121));
         groupBox_2 = new QGroupBox(InBasketForm);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(310, 170, 181, 291));
+        groupBox_2->setGeometry(QRect(310, 170, 181, 311));
         tasksGroupBox = new QGroupBox(groupBox_2);
         tasksGroupBox->setObjectName(QStringLiteral("tasksGroupBox"));
-        tasksGroupBox->setGeometry(QRect(10, 30, 161, 151));
+        tasksGroupBox->setGeometry(QRect(10, 30, 161, 171));
         doItButton = new QPushButton(InBasketForm);
         doItButton->setObjectName(QStringLiteral("doItButton"));
         doItButton->setGeometry(QRect(330, 230, 141, 23));
         ProjectsGroupBox = new QGroupBox(InBasketForm);
         ProjectsGroupBox->setObjectName(QStringLiteral("ProjectsGroupBox"));
-        ProjectsGroupBox->setGeometry(QRect(320, 360, 161, 91));
+        ProjectsGroupBox->setGeometry(QRect(320, 380, 161, 91));
         gtdMinMaxButton = new QToolButton(InBasketForm);
         gtdMinMaxButton->setObjectName(QStringLiteral("gtdMinMaxButton"));
         gtdMinMaxButton->setGeometry(QRect(470, 10, 23, 22));
@@ -182,7 +182,8 @@ public:
 #ifndef QT_NO_TOOLTIP
         waitingOnSomeoneButton->setToolTip(QApplication::translate("InBasketForm", "You have or will delegate this to someone else", 0));
 #endif // QT_NO_TOOLTIP
-        waitingOnSomeoneButton->setText(QApplication::translate("InBasketForm", "&Waiting on someone", 0));
+        waitingOnSomeoneButton->setText(QApplication::translate("InBasketForm", "&Waiting for \n"
+"Another Person", 0));
 #ifndef QT_NO_TOOLTIP
         calendarButton->setToolTip(QApplication::translate("InBasketForm", "You will do this at a specific time", 0));
 #endif // QT_NO_TOOLTIP

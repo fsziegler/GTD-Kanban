@@ -137,7 +137,23 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-   statusBar()->showMessage("Save As ...", 5000);
+   QString filename = QFileDialog::getSaveFileName(this, "Save file", "", ".json");
+   if(0 < filename.size())
+   {
+      if(!filename.endsWith(".json"))
+      {
+         filename.append(".json");
+      }
+      QString msg("Save As ");
+      msg.append(filename);
+      statusBar()->showMessage(msg, 5000);
+      m_inBasketForm.GetUserData().DumpAllToJSONFile(
+            filename.toStdString());
+   }
+   else
+   {
+      statusBar()->showMessage("File:Save As cancelled", 5000);
+   }
 }
 
 void MainWindow::on_actionAbout_triggered()

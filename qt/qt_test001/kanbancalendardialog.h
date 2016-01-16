@@ -29,7 +29,7 @@ public:
    void GetSelectedItemsList(QList<QListWidgetItem*>& selectedItemsList) const;
    int GetListSize() const;
    void RemoveSelectedItem(QListWidgetItem* itemToRemove);
-   const QDate& GetSelectedDate() const;
+   const QDate GetSelectedDate() const;
    bool GetSelectedTime(QTime& time) const;
    KanbanCalendarDialogResult GetResult() const;
 

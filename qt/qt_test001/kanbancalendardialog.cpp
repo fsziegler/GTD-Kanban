@@ -56,7 +56,7 @@ void KanbanCalendarDialog::RemoveSelectedItem(QListWidgetItem* itemToRemove)
    }
 }
 
-const QDate& KanbanCalendarDialog::GetSelectedDate() const
+const QDate KanbanCalendarDialog::GetSelectedDate() const
 {
    return ui->calendarWidget->selectedDate();
 }

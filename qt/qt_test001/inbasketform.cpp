@@ -193,6 +193,7 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
          mp_gtdTree->AddNode(itr.second, itr.first);
       }
    }
+   return true;
 }
 
 UserData& InBasketForm::GetUserData()
@@ -277,7 +278,7 @@ void InBasketForm::on_doItButton_clicked()
 
 void InBasketForm::on_waitingOnSomeoneButton_clicked()
 {
-   MoveFromGTDBasketListToTree(QString("Waiting on someone"));
+   MoveFromGTDBasketListToTree(QString("Waiting for Another Person"));
 }
 
 void InBasketForm::on_calendarButton_clicked()

@@ -1545,11 +1545,13 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstatusbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QToolBar \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtoolbar.h \
+		../qt_test001/aboutdialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QFileDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qfiledialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdir.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfileinfo.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMessageBox \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDesktopWidget \
@@ -2246,7 +2248,44 @@ aboutdialog.o: ../qt_test001/aboutdialog.cpp ../qt_test001/aboutdialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
-		ui_aboutdialog.h
+		ui_aboutdialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QVariant \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QAction \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qaction.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qicon.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qactiongroup.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qeventloop.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qguiapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QButtonGroup \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qbuttongroup.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialogButtonBox \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialogbuttonbox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QFrame \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QHeaderView \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qheaderview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvalidator.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qregularexpression.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qslider.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qstyle.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QLabel \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aboutdialog.o ../qt_test001/aboutdialog.cpp
 
 UserData.o: ../../code/UserData.cpp ../../code/UserData.h \
