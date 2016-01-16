@@ -51,7 +51,7 @@ Once you have processed your issues, you will have the following lists stored in
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
-![Screenshot](GTD-Kanban Sreenshot.png)
+![Screenshot](GTD-Kanban Screenshot.png)
 
 #####Planning Projects
 `"Plans are worthless, but planning is everything."`
