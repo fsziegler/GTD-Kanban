@@ -32,7 +32,8 @@ SOURCES += main.cpp\
         gtdtreewidget.cpp \
         kanbancalendardialog.cpp \
         gtdcalendarwidget.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    kanbanwidget.cpp
 unix {
 SOURCES += ../../code/UserData.cpp \
             ../../code/TreeNode.cpp \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
     gtdtreewidget.h \
     kanbancalendardialog.h \
     gtdcalendarwidget.h \
-    aboutdialog.h
+    aboutdialog.h \
+    kanbanwidget.h
 unix {
 HEADERS += ../../code/UserData.h \
             ../../code/TreeNode.h   \

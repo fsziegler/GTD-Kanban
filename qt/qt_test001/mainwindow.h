@@ -4,6 +4,7 @@
 #include "inbasketform.h"
 #include "gtdtreewidget.h"
 #include "gtdcalendarwidget.h"
+#include "kanbanwidget.h"
 
 #include <QMainWindow>
 #include <QSplitter>
@@ -54,9 +55,7 @@ private:
 
    QPointer<QSplitter> mp_kanbanSplitter;
    GTDCalendarWidget m_gtdCalendar;
-//    QCalendarWidget m_gtdCalendar;
-
-   QTextEdit m_kanbanEditor;
+   KanbanWidget m_kanbanWindow;
 
    QString m_currentFileNameStr;
 };

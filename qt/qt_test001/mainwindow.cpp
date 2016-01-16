@@ -43,7 +43,9 @@ MainWindow::MainWindow(QWidget *parent)
    mp_kanbanSplitter = new QSplitter(Qt::Vertical);
    mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
    mp_kanbanSplitter->addWidget(&m_gtdCalendar);
-   mp_kanbanSplitter->addWidget(&m_kanbanEditor);
+   mp_kanbanSplitter->addWidget(&m_kanbanWindow);
+   QList<int> sizes = {1, 150};
+   mp_kanbanSplitter->setSizes(sizes);
 
    // Add Kanban splitter window to main splitter window & set as central widget
    mp_mainLRSplitter->addWidget(mp_kanbanSplitter);
