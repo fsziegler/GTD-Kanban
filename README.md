@@ -58,7 +58,7 @@ Only your **Project Plans** and **Next Actions** lists contain **tasks** to work
 
 `--Dwight D. Eisenhower`
 
-How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own way of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any issue. A more in-depth approach to carrying out projects is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
+How to plan projects in your **Projects-to-Plan** list is beyond the scope of this tool. As a creative person, you probably have your own ways of doing this. Two general approaches are [top-down design and bottom-up design](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design). A good way to start is to write down your objectives; a more formal way is to follow [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract) methodology. The GTD-Kanban tool will allow you to link planning files (e.g., documents, spreadsheets, diagrams, URLs, etc.) to any issue. A more in-depth approach to carrying out projects is described in section [1.3 Executing Engineering Projects](#13-executing-engineering-projects).
 
 ###1.2 Kanban
 `"Strategy without tactics is the slowest route to victory. Tactics without strategy is the noise before defeat."`
