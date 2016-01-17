@@ -10,7 +10,9 @@
 #include <QDebug>
 
 #include <iostream>
+#include <fstream>
 
+const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
       : QMainWindow(parent),
         ui(new Ui::MainWindow),
@@ -52,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
    setCentralWidget(mp_mainLRSplitter);
 
    ScaleAndCenterWindow(0.8);
+   UpdateRecentFilesMenu();
 }
 
 MainWindow::~MainWindow()
@@ -71,36 +74,113 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
          << event->pos().rx() << ", " << event->pos().ry() << ")" << std::endl;
 }
 
+void MainWindow::OpenFile(const QString& fileName)
+{
+   m_gtdEditor.clear();
+   m_gtdTree.ClearTree();
+   m_inBasketForm.ClearWorkspace();
+   m_gtdCalendar.repaint();
+
+   if(m_inBasketForm.LoadFromFile(fileName))
+   {
+       setWindowTitle(fileName);
+       QString statusMsg("File \"");
+       statusMsg.append(fileName).append("\" loaded ...");
+       statusBar()->showMessage(statusMsg, 5000);
+       m_currentFileNameStr = fileName;
+       AddToFileHistory(fileName);
+   }
+}
+
+void MainWindow::AddToFileHistory(const QString& fileName)
+{
+   m_recentFileList.prepend(fileName);
+   m_recentFileList.removeDuplicates();
+   while(10 < m_recentFileList.size())
+   {
+       m_recentFileList.pop_back();
+   }
+   std::ofstream recentFiles;
+   recentFiles.open(GTDKanbanFileHistoryFileName,
+                    std::ofstream::out | std::ofstream::trunc
+                    );
+   if (recentFiles.is_open())
+   {
+      for (auto itr : m_recentFileList)
+      {
+         recentFiles << (itr.toStdString()) << endl;
+      }
+      recentFiles.close();
+   }
+   UpdateRecentFilesMenu();
+}
+
+void MainWindow::UpdateRecentFilesMenu()
+{
+    std::ifstream recentFiles(GTDKanbanFileHistoryFileName,
+          std::ifstream::in);
+    if (recentFiles.is_open())
+    {
+       QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
+       QMenu* first = menus[0];
+       menus = first->findChildren<QMenu*>();
+       QMenu* recentFileMenu = menus[0];
+       recentFileMenu->clear();
+       string line;
+       int cnt(0);
+       while (getline(recentFiles, line))
+       {
+          m_recentFileList.push_back(line.c_str());
+          QAction* action = new QAction(line.c_str(), menus[0]);
+          recentFileMenu->addAction(action);
+          switch (cnt)
+          {
+          case 0:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile0()));
+             break;
+          case 1:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile1()));
+             break;
+          case 2:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile2()));
+             break;
+          case 3:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile3()));
+             break;
+          case 4:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile4()));
+             break;
+          case 5:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile5()));
+             break;
+          case 6:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile6()));
+             break;
+          case 7:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile7()));
+             break;
+          case 8:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile8()));
+             break;
+          case 9:
+             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile9()));
+             break;
+          default:
+             break;
+          }
+          ++cnt;
+          if(9 < cnt)
+          {
+              break;
+          }
+       }
+    }
+    recentFiles.close();
+}
+
 void MainWindow::on_actionExit_triggered()
 {
    QApplication::quit();
-}
-
-void MainWindow::on_actionOpen_triggered()
-{
-   QFileDialog ofDialog(this, tr("Open Image"), "/home");
-   ofDialog.setNameFilter(tr("JSON Files (*.json);;All Files (*.*)"));
-   if (ofDialog.exec())
-   {
-      QStringList fileNames;
-      fileNames = ofDialog.selectedFiles();
-      if (0 < fileNames.size())
-      {
-         m_gtdEditor.clear();
-         m_gtdTree.ClearTree();
-         m_inBasketForm.ClearWorkspace();
-         m_gtdCalendar.repaint();
-         for (auto fileName : fileNames)
-         {
-            m_inBasketForm.LoadFromFile(fileName);
-            setWindowTitle(fileName);
-            QString statusMsg("File \"");
-            statusMsg.append(fileName).append("\" loaded ...");
-            statusBar()->showMessage(statusMsg, 5000);
-            m_currentFileNameStr = fileName;
-         }
-      }
-   }
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)
@@ -139,18 +219,19 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-   QString filename = QFileDialog::getSaveFileName(this, "Save file", "", ".json");
-   if(0 < filename.size())
+   QString fileName = QFileDialog::getSaveFileName(this, "Save file", "",
+         ".json");
+   if (0 < fileName.size())
    {
-      if(!filename.endsWith(".json"))
+      if (!fileName.endsWith(".json"))
       {
-         filename.append(".json");
+         fileName.append(".json");
       }
       QString msg("Save As ");
-      msg.append(filename);
+      msg.append(fileName);
       statusBar()->showMessage(msg, 5000);
-      m_inBasketForm.GetUserData().DumpAllToJSONFile(
-            filename.toStdString());
+      m_inBasketForm.GetUserData().DumpAllToJSONFile(fileName.toStdString());
+      AddToFileHistory(fileName);
    }
    else
    {
@@ -160,6 +241,78 @@ void MainWindow::on_actionSave_As_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    AboutDialog abtDlg;
-    abtDlg.exec();
+   AboutDialog abtDlg;
+   abtDlg.exec();
+}
+
+void MainWindow::on_action_Open_triggered()
+{
+    QFileDialog ofDialog(this, tr("Open Image"), "/home");
+    ofDialog.setNameFilter(tr("JSON Files (*.json);;All Files (*.*)"));
+    if (ofDialog.exec())
+    {
+       QStringList fileNames;
+       fileNames = ofDialog.selectedFiles();
+       if (0 < fileNames.size())
+       {
+          m_gtdEditor.clear();
+          m_gtdTree.ClearTree();
+          m_inBasketForm.ClearWorkspace();
+          m_gtdCalendar.repaint();
+          for (auto fileName : fileNames)
+          {
+             OpenFile(fileName);
+          }
+       }
+    }
+}
+
+void MainWindow::OpenRecentFile0()
+{
+    OpenFile(m_recentFileList[0]);
+}
+
+void MainWindow::OpenRecentFile1()
+{
+    OpenFile(m_recentFileList[1]);
+}
+
+void MainWindow::OpenRecentFile2()
+{
+    OpenFile(m_recentFileList[2]);
+}
+
+void MainWindow::OpenRecentFile3()
+{
+    OpenFile(m_recentFileList[3]);
+}
+
+void MainWindow::OpenRecentFile4()
+{
+    OpenFile(m_recentFileList[4]);
+}
+
+void MainWindow::OpenRecentFile5()
+{
+    OpenFile(m_recentFileList[5]);
+}
+
+void MainWindow::OpenRecentFile6()
+{
+    OpenFile(m_recentFileList[6]);
+}
+
+void MainWindow::OpenRecentFile7()
+{
+    OpenFile(m_recentFileList[7]);
+}
+
+void MainWindow::OpenRecentFile8()
+{
+    OpenFile(m_recentFileList[8]);
+}
+
+void MainWindow::OpenRecentFile9()
+{
+    OpenFile(m_recentFileList[9]);
 }
