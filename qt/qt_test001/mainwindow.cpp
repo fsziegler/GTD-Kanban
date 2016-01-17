@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sys/stat.h>
 
 const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
@@ -117,65 +118,78 @@ void MainWindow::AddToFileHistory(const QString& fileName)
 
 void MainWindow::UpdateRecentFilesMenu()
 {
-    std::ifstream recentFiles(GTDKanbanFileHistoryFileName,
-          std::ifstream::in);
-    if (recentFiles.is_open())
-    {
-       QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
-       QMenu* first = menus[0];
-       menus = first->findChildren<QMenu*>();
-       QMenu* recentFileMenu = menus[0];
-       recentFileMenu->clear();
-       string line;
-       int cnt(0);
-       while (getline(recentFiles, line))
-       {
-          m_recentFileList.push_back(line.c_str());
-          QAction* action = new QAction(line.c_str(), menus[0]);
-          recentFileMenu->addAction(action);
-          switch (cnt)
-          {
-          case 0:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile0()));
-             break;
-          case 1:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile1()));
-             break;
-          case 2:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile2()));
-             break;
-          case 3:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile3()));
-             break;
-          case 4:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile4()));
-             break;
-          case 5:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile5()));
-             break;
-          case 6:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile6()));
-             break;
-          case 7:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile7()));
-             break;
-          case 8:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile8()));
-             break;
-          case 9:
-             connect(action, SIGNAL(triggered()), this, SLOT(OpenRecentFile9()));
-             break;
-          default:
-             break;
-          }
-          ++cnt;
-          if(9 < cnt)
-          {
-              break;
-          }
-       }
-    }
-    recentFiles.close();
+   std::ifstream recentFiles(GTDKanbanFileHistoryFileName, std::ifstream::in);
+   if (recentFiles.is_open())
+   {
+      QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
+      QMenu* first = menus[0];
+      menus = first->findChildren<QMenu*>();
+      QMenu* recentFileMenu = menus[0];
+      recentFileMenu->clear();
+      string line;
+      int cnt(0);
+      while (getline(recentFiles, line))
+      {
+         struct stat buffer;
+         if (stat(line.c_str(), &buffer) == 0)
+         {
+            m_recentFileList.push_back(line.c_str());
+            QAction* action = new QAction(line.c_str(), menus[0]);
+            recentFileMenu->addAction(action);
+            switch (cnt)
+            {
+            case 0:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile0()));
+               break;
+            case 1:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile1()));
+               break;
+            case 2:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile2()));
+               break;
+            case 3:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile3()));
+               break;
+            case 4:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile4()));
+               break;
+            case 5:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile5()));
+               break;
+            case 6:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile6()));
+               break;
+            case 7:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile7()));
+               break;
+            case 8:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile8()));
+               break;
+            case 9:
+               connect(action, SIGNAL(triggered()), this,
+                     SLOT(OpenRecentFile9()));
+               break;
+            default:
+               break;
+            }
+            ++cnt;
+            if (9 < cnt)
+            {
+               break;
+            }
+         }
+      }
+   }
+   recentFiles.close();
 }
 
 void MainWindow::on_actionExit_triggered()
