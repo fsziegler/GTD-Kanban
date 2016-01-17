@@ -19,6 +19,7 @@ public:
    void ClearTree();
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
+   void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool topLevelItem = false);
 
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);

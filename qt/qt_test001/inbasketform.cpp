@@ -93,9 +93,7 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
    {
       QTreeWidgetItem* qti = new QTreeWidgetItem((QTreeWidget*) 0,
             QStringList((*itr)->text()));
-      static const QBrush b(QColor(255, 255, 128));
-      qti->setBackground(0, b);
-      gtdTreeItem->addChild(qti);
+      mp_gtdTree->addChild(gtdTreeItem, qti);
       if (mp_gtdTree->IsBranchCollapsed(nodeNameStr))
       {
          mp_gtdTree->collapseItem(gtdTreeItem);

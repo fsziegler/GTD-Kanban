@@ -43,19 +43,19 @@ GTDTreeWidget::GTDTreeWidget()
    setDragEnabled(true);
    setDragDropMode(QTreeWidget::InternalMove);
 
-   m_nonActionableTWI.addChild(&m_SomedayMaybeTWI);
-   m_nonActionableTWI.addChild(&m_ReferenceTWI);
-   m_nonActionableTWI.addChild(&m_TrashTWI);
-   m_actionableTWI.addChild(&m_tasksTWI);
+   addChild(&m_nonActionableTWI, &m_SomedayMaybeTWI, true);
+   addChild(&m_nonActionableTWI, &m_ReferenceTWI, true);
+   addChild(&m_nonActionableTWI, &m_TrashTWI, true);
+   addChild(&m_actionableTWI, &m_tasksTWI, true);
    insertTopLevelItem(0, &m_actionableTWI);
    insertTopLevelItem(0, &m_nonActionableTWI);
-   m_tasksTWI.addChild(&m_DoItTWI);
-   m_tasksTWI.addChild(&m_WaitingOnSomeoneTWI);
-   m_tasksTWI.addChild(&m_CalendarTWI);
-   m_tasksTWI.addChild(&m_NextActionsTWI);
-   m_actionableTWI.addChild(&m_projectsTWI);
-   m_projectsTWI.addChild(&m_projectsToPlanTWI);
-   m_projectsTWI.addChild(&m_projectPlansTWI);
+   addChild(&m_tasksTWI, &m_DoItTWI, true);
+   addChild(&m_tasksTWI, &m_WaitingOnSomeoneTWI, true);
+   addChild(&m_tasksTWI, &m_CalendarTWI, true);
+   addChild(&m_tasksTWI, &m_NextActionsTWI, true);
+   addChild(&m_actionableTWI, &m_projectsTWI, true);
+   addChild(&m_projectsTWI, &m_projectsToPlanTWI, true);
+   addChild(&m_projectsTWI, &m_projectPlansTWI, true);
    expandAll();
 }
 
@@ -140,9 +140,19 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
       strings.append(itr.getMpNodeNameStr().c_str());
       QTreeWidgetItem* childItem = new QTreeWidgetItem(strings);
       AddNode(itr, childItem);
-      twi->addChild(childItem);
+      addChild(twi, childItem);
    }
    return true;
+}
+
+void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool topLevelItem)
+{
+    if(!topLevelItem)
+    {
+        static const QBrush b(QColor(255, 255, 128));
+        child->setBackground(0, b);
+    }
+    parent->addChild(child);
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
