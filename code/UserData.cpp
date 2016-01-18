@@ -52,6 +52,9 @@ UserData::UserData()
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
       ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kDoIt,
+                  "Do It!"));
+      ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kWaitingForAnotherPerson,
                   "Waiting for Another Person"));
       ms_gtdFixedCatMap.insert(
@@ -383,7 +386,7 @@ size_t UserData::MoveAllBetweenCategories(EnumGTDCategory srcCat,
    {
       throw;
    }
-   tgtNode.AddChildren(GetTreeNode(srcCat).getChildren());
+   tgtNode.AppendChildren(GetTreeNode(srcCat).getChildren());
    TreeNode& srcTreeNode = GetTreeNode(srcCat);
    const size_t numMoved(GetTreeNode(srcCat).getChildren().size());
    srcTreeNode.ClearAllChildren();

@@ -64,7 +64,7 @@ private slots:
    void on_gtdMinMaxButton_clicked();
 
 private:
-   Ui::InBasketForm* mp_ui;
+   Ui::InBasketForm* mp_inBasketForm;
    GTDTreeWidget* mp_gtdTree;
    UserData m_userData;
 };

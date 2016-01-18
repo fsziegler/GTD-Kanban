@@ -88,6 +88,8 @@ QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
       return &m_SomedayMaybeTWI;
    case EnumGTDCategory::kReference:
       return &m_ReferenceTWI;
+   case EnumGTDCategory::kDoIt:
+      return &m_DoItTWI;
    case EnumGTDCategory::kWaitingForAnotherPerson:
       return &m_WaitingOnSomeoneTWI;
    case EnumGTDCategory::kCalendar:

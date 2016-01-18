@@ -202,9 +202,12 @@ size_t TreeNode::AddChildNode(TreeNode& childNode)
    return m_children.size();
 }
 
-void TreeNode::AddChildren(const TTreeNodeVect& children)
+void TreeNode::AppendChildren(const TTreeNodeVect& children)
 {
-   m_children = children;
+   for(auto itr: children)
+   {
+      AddChildNode(itr);
+   }
 }
 
 bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)

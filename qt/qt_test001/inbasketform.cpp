@@ -12,11 +12,11 @@ using namespace std;
 
 InBasketForm::InBasketForm(QWidget *parent)
       : QWidget(parent),
-        mp_ui(new Ui::InBasketForm),
+        mp_inBasketForm(new Ui::InBasketForm),
         mp_gtdTree(nullptr)
 {
-   mp_ui->setupUi(this);
-   mp_ui->inBasketListWidget->setSelectionMode(
+   mp_inBasketForm->setupUi(this);
+   mp_inBasketForm->inBasketListWidget->setSelectionMode(
          QAbstractItemView::ExtendedSelection);
    // TEMPORARY FOR QUICK TESTING
    const QString inBasket("Call Fred re tel. # for the garage he recommended.\n"
@@ -31,15 +31,11 @@ InBasketForm::InBasketForm(QWidget *parent)
          "Establish next year’s seminar schedule\nOrchestrate a one-hour "
          "keynote presentation\nGet proficient with videoconferencing access\n"
          "Finalize employment agreements\nInstall new backyard lights");
-//    Allen, David (2002-12-31). Getting Things Done: The Art of Stress-Free
-//   Productivity (p. 34). Penguin Group. Kindle Edition.
+// Allen, David (2002-12-31). Getting Things Done: The Art of Stress-Free
+// Productivity (p. 34). Penguin Group. Kindle Edition.
 
-   mp_ui->inBasketTextEdit->setText(inBasket);
-   mp_ui->inBasketTextEdit->setAcceptDrops(true);
-//    ui->inBasketTextEdit->set
-//    m_gtdTree.setAcceptDrops(true);
-//    m_gtdTree.setDragEnabled(true);
-//    m_gtdTree.setDragDropMode(QTreeWidget::InternalMove);
+   mp_inBasketForm->inBasketTextEdit->setText(inBasket);
+   mp_inBasketForm->inBasketTextEdit->setAcceptDrops(true);
    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Alt,
          Qt::NoModifier);
    QCoreApplication::postEvent(this, event);
@@ -47,7 +43,7 @@ InBasketForm::InBasketForm(QWidget *parent)
 
 InBasketForm::~InBasketForm()
 {
-   delete mp_ui;
+   delete mp_inBasketForm;
 }
 
 void InBasketForm::SetGTDTreeWidget(GTDTreeWidget* gtdTree)
@@ -58,7 +54,7 @@ void InBasketForm::SetGTDTreeWidget(GTDTreeWidget* gtdTree)
 void InBasketForm::GetSelectionOutOfGTDBasketList(
       QList<QListWidgetItem*>& itemSelectionList, bool move)
 {
-   itemSelectionList = mp_ui->inBasketListWidget->selectedItems();
+   itemSelectionList = mp_inBasketForm->inBasketListWidget->selectedItems();
    if (move)
    {
       cout << "BEGIN InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
@@ -68,12 +64,12 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
       {
          // Store and pass back the row so it can be used to ID the node to move
          const QString rowStr((*itr)->text());
-         const int row = mp_ui->inBasketListWidget->row((*itr));
+         const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
          m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
-         mp_ui->inBasketListWidget->takeItem(
-               mp_ui->inBasketListWidget->row((*itr)));
+         mp_inBasketForm->inBasketListWidget->takeItem(
+               mp_inBasketForm->inBasketListWidget->row((*itr)));
          m_userData.MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
@@ -134,7 +130,7 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
       const QString& nodeNameStr)
 {
-   QList<QListWidgetItem*> itemSelectionList = mp_ui->inBasketListWidget
+   QList<QListWidgetItem*> itemSelectionList = mp_inBasketForm->inBasketListWidget
          ->selectedItems();
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)
@@ -143,12 +139,12 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
       const QString rowStr((*itr)->text());
       if (rowStr == itemNameStr)
       {
-         const int row = mp_ui->inBasketListWidget->row((*itr));
+         const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
          m_userData.ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
-         mp_ui->inBasketListWidget->takeItem(
-               mp_ui->inBasketListWidget->row((*itr)));
+         mp_inBasketForm->inBasketListWidget->takeItem(
+               mp_inBasketForm->inBasketListWidget->row((*itr)));
          m_userData.MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
@@ -157,8 +153,8 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
 
 void InBasketForm::ClearWorkspace()
 {
-   mp_ui->inBasketTextEdit->clear();
-   mp_ui->inBasketListWidget->clear();
+   mp_inBasketForm->inBasketTextEdit->clear();
+   mp_inBasketForm->inBasketListWidget->clear();
    m_userData.Clear();
 }
 
@@ -168,8 +164,8 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
    {
       return false;
    }
-   mp_ui->inBasketTextEdit->clear();
-   mp_ui->inBasketListWidget->clear();
+   mp_inBasketForm->inBasketTextEdit->clear();
+   mp_inBasketForm->inBasketListWidget->clear();
    for (auto itr : m_userData.getGtdNodeTree())
    {
       const QString nodeNameStr(
@@ -180,7 +176,7 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
           {
           for(auto inBItr: pair.second.getChildren())
           {
-            mp_ui->inBasketListWidget->addItem(
+            mp_inBasketForm->inBasketListWidget->addItem(
                   QString(inBItr.getMpNodeNameStr().c_str()));
           }
       }
@@ -201,11 +197,11 @@ UserData& InBasketForm::GetUserData()
 
 void InBasketForm::on_inBasketTextEdit_textChanged()
 {
-   if (0 == mp_ui->inBasketTextEdit->toPlainText().size())
+   if (0 == mp_inBasketForm->inBasketTextEdit->toPlainText().size())
    {
       return;
    }
-   QString text(mp_ui->inBasketTextEdit->toPlainText());
+   QString text(mp_inBasketForm->inBasketTextEdit->toPlainText());
    if ('\n' == text[text.size() - 1])
    {
       cout << "BEGIN InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
@@ -225,12 +221,12 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
          {
             subtext[i - start] = text[i];
          }
-         mp_ui->inBasketListWidget->addItem(subtext);
+         mp_inBasketForm->inBasketListWidget->addItem(subtext);
          m_userData.AddStrToCategory(subtext.toStdString());
          start = ++end;
       } while (text.size() > end);
-      mp_ui->inBasketTextEdit->selectAll();
-      mp_ui->inBasketTextEdit->cut();
+      mp_inBasketForm->inBasketTextEdit->selectAll();
+      mp_inBasketForm->inBasketTextEdit->cut();
       cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
       m_userData.DumpAllGTD();
    }
@@ -251,7 +247,7 @@ void InBasketForm::on_reEditSelectionButton_clicked()
       }
       editText.append(qwi->text());
    }
-   mp_ui->inBasketTextEdit->insertPlainText(editText);
+   mp_inBasketForm->inBasketTextEdit->insertPlainText(editText);
 }
 
 void InBasketForm::on_somedayMaybeButton_clicked()
@@ -375,11 +371,11 @@ void InBasketForm::on_gtdMinMaxButton_clicked()
    if (100 < height())
    {
       setFixedHeight(41);
-      mp_ui->gtdMinMaxButton->setArrowType(Qt::DownArrow);
+      mp_inBasketForm->gtdMinMaxButton->setArrowType(Qt::DownArrow);
    }
    else
    {
       setFixedHeight(480);
-      mp_ui->gtdMinMaxButton->setArrowType(Qt::UpArrow);
+      mp_inBasketForm->gtdMinMaxButton->setArrowType(Qt::UpArrow);
    }
 }

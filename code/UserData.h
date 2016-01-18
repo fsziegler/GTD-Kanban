@@ -42,6 +42,7 @@ enum class EnumGTDCategory
    kInBasket,
    kSomedayMaybe,
    kReference,
+   kDoIt,
    kWaitingForAnotherPerson,
    kCalendar,
    kProjectsToPlan,
