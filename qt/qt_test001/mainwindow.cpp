@@ -67,6 +67,11 @@ MainWindow::~MainWindow()
    delete ui;
 }
 
+UserData& MainWindow::getUserData()
+{
+   return m_userData;
+}
+
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
    QMainWindow::mousePressEvent(event);

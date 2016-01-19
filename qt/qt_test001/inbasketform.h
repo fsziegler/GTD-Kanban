@@ -13,13 +13,14 @@ namespace Ui
 {
 class InBasketForm;
 }
+class MainWindow;
 
 class InBasketForm: public QWidget
 {
    Q_OBJECT
 
 public:
-   explicit InBasketForm(QWidget *parent = 0);
+   explicit InBasketForm(MainWindow* parent = 0);
    ~InBasketForm();
 
    void SetGTDTreeWidget(GTDTreeWidget* gtdTree);
@@ -65,8 +66,8 @@ private slots:
 
 private:
    Ui::InBasketForm* mp_inBasketForm;
-   GTDTreeWidget* mp_gtdTree;
-   UserData m_userData;
+   MainWindow*       mp_mainWindow;
+   GTDTreeWidget*    mp_gtdTree;
 };
 
 #endif // INBASKETFORM_H

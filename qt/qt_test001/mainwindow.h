@@ -24,6 +24,7 @@ Q_OBJECT
 public:
    explicit MainWindow(QWidget *parent = 0);
    ~MainWindow();
+    UserData& getUserData();
 
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
@@ -60,6 +61,7 @@ private:
    void ScaleAndCenterWindow(float scale);
 
    Ui::MainWindow*               ui;
+   UserData m_userData;
 
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;
