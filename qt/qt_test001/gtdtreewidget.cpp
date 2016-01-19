@@ -189,9 +189,35 @@ bool GTDTreeWidget::IsPosInMemberHdrTWI(const QPoint& pos) const
    return retVal;
 }
 
+void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
+      TreeNode& node)
+{
+   int cnt(0);
+   while(treeWidgetItem.childCount() > cnt)
+   {
+      QTreeWidgetItem *child = treeWidgetItem.child(cnt);
+      cout << "GTD tree item: " << child->text(0).toStdString() << endl;
+      TreeNode newNode(child->text(0).toStdString(), &node);
+      TreeNode& childNode = node.AddChildNode(newNode);
+      if(0 < child->childCount())
+      {
+          PopulateChildren(*child, childNode);
+      }
+      ++cnt;
+   }
+}
+
+void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
+      QTreeWidgetItem& treeWidgetItem)
+{
+   TreeNode node("temp");
+   PopulateChildren(treeWidgetItem, node);
+   mp_mainWindow->getUserData().ReplaceCategoryTree(category, node.getChildren());
+   mp_mainWindow->getUserData().DumpGTDCategory(category);
+}
+
 void GTDTreeWidget::dropEvent(QDropEvent * event)
 {
-   Qt::DropAction action = event->proposedAction();
    bool move(Qt::MoveAction == event->proposedAction());
    // Case where move is not allowed
    if (move && IsPosInMemberHdrTWI(event->pos()))
@@ -201,4 +227,14 @@ void GTDTreeWidget::dropEvent(QDropEvent * event)
       return;
    }
    QTreeWidget::dropEvent(event);
+   ReplaceCategoryTree(EnumGTDCategory::kSomedayMaybe, m_SomedayMaybeTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kReference, m_ReferenceTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kTrash, m_TrashTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kDoIt, m_DoItTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson, m_WaitingOnSomeoneTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kCalendar, m_CalendarTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
+
 }

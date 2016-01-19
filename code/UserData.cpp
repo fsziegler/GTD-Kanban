@@ -43,7 +43,7 @@ recursive_mutex   UserData::m_mutex;
 UserData::UserData()
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   if(0 == ms_gtdFixedCatMap.size())
+   if (0 == ms_gtdFixedCatMap.size())
    {
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kInBasket, "In Basket"));
@@ -52,8 +52,7 @@ UserData::UserData()
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
       ms_gtdFixedCatMap.insert(
-            TGTDCategoryPair(EnumGTDCategory::kDoIt,
-                  "Do It!"));
+            TGTDCategoryPair(EnumGTDCategory::kDoIt, "Do It!"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kWaitingForAnotherPerson,
                   "Waiting for Another Person"));
@@ -138,16 +137,15 @@ bool UserData::ReadStrAtRow(EnumGTDCategory category, size_t row,
 //   return false;
 //}
 
-bool UserData::GetNthCategoryStr(EnumGTDCategory category,
-      const size_t& index, string& itemStr) const
+bool UserData::GetNthCategoryStr(EnumGTDCategory category, const size_t& index,
+      string& itemStr) const
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   if(getCategoryCTreeNodeVect(category).size() <= index)
+   if (getCategoryCTreeNodeVect(category).size() <= index)
    {
       return false;
    }
-   itemStr = GetNodeNameStr(
-         getCategoryCTreeNodeVect(category), index);
+   itemStr = GetNodeNameStr(getCategoryCTreeNodeVect(category), index);
    return true;
 }
 
@@ -155,14 +153,14 @@ void UserData::DumpGTDCategory(EnumGTDCategory category) const
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    cout << GetCTreeNode(category).getMpNodeNameStr() << ":" << endl;
-   if(getCategoryCTreeNodeVect(category).empty())
+   if (getCategoryCTreeNodeVect(category).empty())
    {
       cout << "  (empty)" << endl;
    }
    else
    {
       int cnt(1);
-      for(auto itr: getCategoryCTreeNodeVect(category))
+      for (auto itr : getCategoryCTreeNodeVect(category))
       {
          DumpTreeNode(itr, cnt, 1);
       }
@@ -172,7 +170,7 @@ void UserData::DumpGTDCategory(EnumGTDCategory category) const
 void UserData::DumpAllGTD() const
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   for(auto itr: ms_gtdFixedCatMap)
+   for (auto itr : ms_gtdFixedCatMap)
    {
       DumpGTDCategory(itr.first);
    }
@@ -181,11 +179,11 @@ void UserData::DumpAllGTD() const
 void UserData::DumpAllToJSONFile(const string& jsonFileNameStr) const
 {
    ofstream jsonOutFile;
-   jsonOutFile.open (jsonFileNameStr);
+   jsonOutFile.open(jsonFileNameStr);
    jsonOutFile << "{\n  \"GTD Node Tree\":{";
    size_t indent(1);
    bool first(true);
-   for(auto itr: m_gtdNodeTree)
+   for (auto itr : m_gtdNodeTree)
    {
       jsonOutFile << (first ? "" : ",");
       jsonOutFile << endl;
@@ -216,7 +214,7 @@ const string kGTDNodeTreeStr("GTD Node Tree");
 bool UserData::LoadFromJSONFile(const string& jsonFileNameStr,
       bool clearExisting)
 {
-   if(!exists(jsonFileNameStr))
+   if (!exists(jsonFileNameStr))
    {
       return false;
    }
@@ -225,7 +223,7 @@ bool UserData::LoadFromJSONFile(const string& jsonFileNameStr,
    bjson.LoadJSONFile(jsonFileNameStr);
    ptree::const_iterator gtdItr = bjson.getPt().begin();
    bool validJSON(false);
-   while(bjson.getPt().end() != gtdItr)
+   while (bjson.getPt().end() != gtdItr)
    {
       if ((0 < (*gtdItr).first.size())
             && (0 == kGTDNodeTreeStr.compare((*gtdItr).first)))
@@ -235,16 +233,16 @@ bool UserData::LoadFromJSONFile(const string& jsonFileNameStr,
       }
       ++gtdItr;
    }
-   if(!validJSON)
+   if (!validJSON)
    {
       return false;
    }
-   if(clearExisting)
+   if (clearExisting)
    {
       m_gtdNodeTree.clear();  // Now you know you have a valid JSON file
    }
 
-   for(auto itr: (*gtdItr).second)
+   for (auto itr : (*gtdItr).second)
    {
       const string& nodeNameStr = itr.first;
       // All of the JSON comprises named objects with a valid category name
@@ -269,7 +267,7 @@ void UserData::Clear()
 
 void UserData::PopulateGTDNodeTree()
 {
-   for(auto itr: ms_gtdFixedCatMap)
+   for (auto itr : ms_gtdFixedCatMap)
    {
       TreeNode node(itr.second);
       m_gtdNodeTree.insert(TCatTreeNodeVectPair(itr.first, node));
@@ -280,7 +278,7 @@ TreeNode& UserData::GetTreeNode(EnumGTDCategory category)
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    auto itr(m_gtdNodeTree.find(category));
-   if(m_gtdNodeTree.end() == itr)
+   if (m_gtdNodeTree.end() == itr)
    {
       throw;
    }
@@ -291,7 +289,7 @@ const TreeNode& UserData::GetCTreeNode(EnumGTDCategory category) const
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    auto itr(m_gtdNodeTree.find(category));
-   if(m_gtdNodeTree.end() == itr)
+   if (m_gtdNodeTree.end() == itr)
    {
       throw;
    }
@@ -307,9 +305,9 @@ const TGTDCategoryMap& UserData::getGtdFixedCatMap()
 EnumGTDCategory UserData::LookUpCategory(const string& categoryStr)
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   for(auto itr: ms_gtdFixedCatMap)
+   for (auto itr : ms_gtdFixedCatMap)
    {
-      if(categoryStr == itr.second)
+      if (categoryStr == itr.second)
       {
          return itr.first;
       }
@@ -322,7 +320,7 @@ size_t UserData::AddStrToCategory(const string& newItemStr,
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    TreeNode& treeNode = GetTreeNode(category);
-   if(0 < newItemStr.size())
+   if (0 < newItemStr.size())
    {
       TreeNode node(newItemStr);
       treeNode.AddChildNode(node);
@@ -359,6 +357,15 @@ size_t UserData::AddDelimStrToCategory(const string& newItemsStr,
    return GetTreeNode(category).getChildren().size();
 }
 
+void UserData::ReplaceCategoryTree(EnumGTDCategory category,
+      const TTreeNodeVect& children)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   TreeNode& node = GetTreeNode(category);
+   node.ClearAllChildren();
+   node.AppendChildren(children);
+}
+
 bool UserData::MoveNthStrBetweenCategories(const string& itemStr,
       EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t row)
 {
@@ -368,7 +375,7 @@ bool UserData::MoveNthStrBetweenCategories(const string& itemStr,
       return false;
    }
    // row is incremented here because the initial node is the root node
-   if(!GetTreeNode(srcCat).RemoveNodeAtRow(itemStr, row + 1))
+   if (!GetTreeNode(srcCat).RemoveNodeAtRow(itemStr, row + 1))
    {
       return false;
    }
@@ -382,7 +389,7 @@ size_t UserData::MoveAllBetweenCategories(EnumGTDCategory srcCat,
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    TreeNode& tgtNode = GetTreeNode(tgtCat);
-   if(TreeNode::getNonExistentTreeNode() == tgtNode)
+   if (TreeNode::getNonExistentTreeNode() == tgtNode)
    {
       throw;
    }
@@ -412,7 +419,7 @@ void UserData::PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    strPtrSet.insert(treeNode.getMpNodeNameStrPtr());
-   for(auto itr: treeNode.getChildren())
+   for (auto itr : treeNode.getChildren())
    {
       PopulateCStrPtrSetFromTreeNode(itr, strPtrSet);
    }
@@ -421,7 +428,7 @@ void UserData::PopulateCStrPtrSetFromTreeNode(const TreeNode& treeNode,
 void UserData::DumpIndent(int indent) const
 {
    lock_guard<recursive_mutex> guard(m_mutex);
-   for(int i = 0; indent > i; ++i)
+   for (int i = 0; indent > i; ++i)
    {
       cout << "  ";
    }
@@ -432,10 +439,10 @@ void UserData::DumpTreeNode(const TreeNode& treeNode, int& cnt,
 {
    lock_guard<recursive_mutex> guard(m_mutex);
    DumpIndent(indent);
-   cout << cnt++ << ") "<< treeNode.getMpNodeNameStr() << endl;
-   for(auto itr: treeNode.getChildren())
+   cout << cnt++ << ") " << treeNode.getMpNodeNameStr() << endl;
+   for (auto itr : treeNode.getChildren())
    {
-      DumpTreeNode(itr, cnt, indent+1);
+      DumpTreeNode(itr, cnt, indent + 1);
    }
 }
 

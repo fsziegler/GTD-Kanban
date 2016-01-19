@@ -26,6 +26,9 @@ public:
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
    bool IsPosInMemberHdrTWI(const QPoint& pos) const;
+   void PopulateChildren(QTreeWidgetItem& treeWidgetItem, TreeNode& node);
+   void ReplaceCategoryTree(EnumGTDCategory category,
+         QTreeWidgetItem& treeWidgetItem);
    void dropEvent(QDropEvent * event);
 
 private:

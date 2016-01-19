@@ -59,8 +59,8 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
    itemSelectionList = mp_inBasketForm->inBasketListWidget->selectedItems();
    if (move)
    {
-      cout << "BEGIN InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
-      mp_mainWindow->getUserData().DumpAllGTD();
+//      cout << "BEGIN InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
+//      mp_mainWindow->getUserData().DumpAllGTD();
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
       {
@@ -68,15 +68,16 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
          const QString rowStr((*itr)->text());
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
-         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
+         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket,
+               row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
                mp_inBasketForm->inBasketListWidget->row((*itr)));
          mp_mainWindow->getUserData().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
-      cout << "END InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
-      mp_mainWindow->getUserData().DumpAllGTD();
+//      cout << "END InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
+//      mp_mainWindow->getUserData().DumpAllGTD();
    }
 }
 
@@ -99,9 +100,10 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
    }
    EnumGTDCategory tgtCat = mp_mainWindow->getUserData().LookUpCategory(
          nodeNameStr.toStdString());
-   mp_mainWindow->getUserData().MoveAllBetweenCategories(EnumGTDCategory::kMoveQueue, tgtCat);
-   cout << "END InBasketForm::MoveFromListToTree()" << endl;
-   mp_mainWindow->getUserData().DumpAllGTD();
+   mp_mainWindow->getUserData().MoveAllBetweenCategories(
+         EnumGTDCategory::kMoveQueue, tgtCat);
+//   cout << "END InBasketForm::MoveFromListToTree()" << endl;
+//   mp_mainWindow->getUserData().DumpAllGTD();
 }
 
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
@@ -132,8 +134,8 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
       const QString& nodeNameStr)
 {
-   QList<QListWidgetItem*> itemSelectionList = mp_inBasketForm->inBasketListWidget
-         ->selectedItems();
+   QList<QListWidgetItem*> itemSelectionList = mp_inBasketForm
+         ->inBasketListWidget->selectedItems();
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)
    {
@@ -143,7 +145,8 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
       {
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
-         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket, row, stdRowStr);
+         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket,
+               row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
                mp_inBasketForm->inBasketListWidget->row((*itr)));
@@ -162,7 +165,8 @@ void InBasketForm::ClearWorkspace()
 
 bool InBasketForm::LoadFromFile(const QString& jsonFileName)
 {
-   if (!mp_mainWindow->getUserData().LoadFromJSONFile(jsonFileName.toStdString(), false))
+   if (!mp_mainWindow->getUserData().LoadFromJSONFile(
+         jsonFileName.toStdString(), false))
    {
       return false;
    }
@@ -171,7 +175,8 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
    for (auto itr : mp_mainWindow->getUserData().getGtdNodeTree())
    {
       const QString nodeNameStr(
-            (*mp_mainWindow->getUserData().getGtdFixedCatMap().find(itr.first)).second.c_str());
+            (*mp_mainWindow->getUserData().getGtdFixedCatMap().find(itr.first))
+                  .second.c_str());
       const TCatTreeNodeVectPair& pair = itr;
 
       if (nodeNameStr == QString("In Basket"))
@@ -206,8 +211,8 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
    QString text(mp_inBasketForm->inBasketTextEdit->toPlainText());
    if ('\n' == text[text.size() - 1])
    {
-      cout << "BEGIN InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
-      mp_mainWindow->getUserData().DumpAllGTD();
+//      cout << "BEGIN InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
+//      mp_mainWindow->getUserData().DumpAllGTD();
       text.resize(text.size() - 1);
       // parse text & strip out all '\n's
       int start(0);
@@ -229,8 +234,8 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
       } while (text.size() > end);
       mp_inBasketForm->inBasketTextEdit->selectAll();
       mp_inBasketForm->inBasketTextEdit->cut();
-      cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
-      mp_mainWindow->getUserData().DumpAllGTD();
+//      cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
+//      mp_mainWindow->getUserData().DumpAllGTD();
    }
 }
 

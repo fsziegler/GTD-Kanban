@@ -113,6 +113,9 @@ public:
    size_t AddDelimStrToCategory(const string& newItemsStr,
          EnumGTDCategory category = EnumGTDCategory::kInBasket, char delim =
                '\n');
+   // ReplaceCategoryTree() replaces the children under category with children.
+   void ReplaceCategoryTree(EnumGTDCategory category,
+         const TTreeNodeVect& children);
 
    // FINDING ACTIONS
 

@@ -196,10 +196,10 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
    jsonOutFile << "}";
 }
 
-size_t TreeNode::AddChildNode(TreeNode& childNode)
+TreeNode& TreeNode::AddChildNode(TreeNode& childNode)
 {
    m_children.push_back(childNode);
-   return m_children.size();
+   return m_children.back();
 }
 
 void TreeNode::AppendChildren(const TTreeNodeVect& children)
