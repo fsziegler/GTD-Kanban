@@ -7,10 +7,12 @@
 
 using namespace ZiegGTDKanban;
 
+class MainWindow;
+
 class GTDTreeWidget: public QTreeWidget
 {
 public:
-   GTDTreeWidget();
+   GTDTreeWidget(MainWindow* mainWindow);
    virtual ~GTDTreeWidget();
 
    bool IsBranchCollapsed(const QString& branchStr) const;
@@ -27,6 +29,10 @@ protected:
    void dropEvent(QDropEvent * event);
 
 private:
+   // NOT IMPLEMENTED
+   GTDTreeWidget();
+
+   MainWindow* mp_mainWindow;
    QTreeWidgetItem m_nonActionableTWI;
    QTreeWidgetItem m_SomedayMaybeTWI;
    QTreeWidgetItem m_ReferenceTWI;

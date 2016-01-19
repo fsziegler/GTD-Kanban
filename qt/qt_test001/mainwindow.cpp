@@ -17,7 +17,7 @@ const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
       : QMainWindow(parent),
         ui(new Ui::MainWindow),
-        m_gtdCalendar(parent),
+        m_gtdTree(this),
         m_currentFileNameStr("[None]")
 {
    ui->setupUi(this);
@@ -25,14 +25,15 @@ MainWindow::MainWindow(QWidget *parent)
    setMouseTracking(true);
 
    // Set up In-Basket form
-   m_inBasketForm.SetGTDTreeWidget(&m_gtdTree);
-   m_inBasketForm.setAcceptDrops(true);
-   m_inBasketForm.setFixedHeight(471);
-   m_inBasketForm.setFixedWidth(501);
+   mp_inBasketForm = new InBasketForm(this),
+   mp_inBasketForm->SetGTDTreeWidget(&m_gtdTree);
+   mp_inBasketForm->setAcceptDrops(true);
+   mp_inBasketForm->setFixedHeight(471);
+   mp_inBasketForm->setFixedWidth(501);
 
    // Create GTD splitter window & add in-basket and tree windows to it
    mp_gtdSplitter = new QSplitter(Qt::Vertical);
-   mp_gtdSplitter->addWidget(&m_inBasketForm);
+   mp_gtdSplitter->addWidget(mp_inBasketForm);
    mp_gtdSplitter->addWidget(&m_gtdTree);
    mp_gtdSplitter->setChildrenCollapsible(true);
 
@@ -41,12 +42,15 @@ MainWindow::MainWindow(QWidget *parent)
    mp_mainLRSplitter->addWidget(mp_gtdSplitter);
 
    // Set up Kanban calendar & editor and add to Kanban splitter window
-   m_gtdCalendar.setDateEditEnabled(true);
-   m_gtdCalendar.setDateEditEnabled(true);
+   mp_gtdCalendar = new GTDCalendarWidget(parent);
+   mp_gtdCalendar->setDateEditEnabled(true);
+   mp_gtdCalendar->setDateEditEnabled(true);
    mp_kanbanSplitter = new QSplitter(Qt::Vertical);
    mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
-   mp_kanbanSplitter->addWidget(&m_gtdCalendar);
-   mp_kanbanSplitter->addWidget(&m_kanbanWindow);
+   mp_kanbanSplitter->addWidget(mp_gtdCalendar);
+
+   mp_kanbanWindow = new KanbanWidget;
+   mp_kanbanSplitter->addWidget(mp_kanbanWindow);
    QList<int> sizes = {1, 150};
    mp_kanbanSplitter->setSizes(sizes);
 
@@ -66,7 +70,7 @@ MainWindow::~MainWindow()
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
    QMainWindow::mousePressEvent(event);
-   m_gtdCalendar.mousePressEvent(event);
+   mp_gtdCalendar->mousePressEvent(event);
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -79,10 +83,10 @@ void MainWindow::OpenFile(const QString& fileName)
 {
    m_gtdEditor.clear();
    m_gtdTree.ClearTree();
-   m_inBasketForm.ClearWorkspace();
-   m_gtdCalendar.repaint();
+   mp_inBasketForm->ClearWorkspace();
+   mp_gtdCalendar->repaint();
 
-   if(m_inBasketForm.LoadFromFile(fileName))
+   if(mp_inBasketForm->LoadFromFile(fileName))
    {
        setWindowTitle(fileName);
        QString statusMsg("File \"");
@@ -211,8 +215,8 @@ void MainWindow::on_action_New_triggered()
    statusBar()->showMessage("New File ...", 5000);
    m_gtdEditor.clear();
    m_gtdTree.ClearTree();
-   m_inBasketForm.ClearWorkspace();
-   m_gtdCalendar.repaint();
+   mp_inBasketForm->ClearWorkspace();
+   mp_gtdCalendar->repaint();
 }
 
 void MainWindow::on_actionSave_triggered()
@@ -226,7 +230,7 @@ void MainWindow::on_actionSave_triggered()
       QString statusMsg("File \"");
       statusMsg.append(m_currentFileNameStr).append("\" saved.");
       statusBar()->showMessage(statusMsg, 5000);
-      m_inBasketForm.GetUserData().DumpAllToJSONFile(
+      mp_inBasketForm->GetUserData().DumpAllToJSONFile(
             m_currentFileNameStr.toStdString());
    }
 }
@@ -244,7 +248,7 @@ void MainWindow::on_actionSave_As_triggered()
       QString msg("Save As ");
       msg.append(fileName);
       statusBar()->showMessage(msg, 5000);
-      m_inBasketForm.GetUserData().DumpAllToJSONFile(fileName.toStdString());
+      mp_inBasketForm->GetUserData().DumpAllToJSONFile(fileName.toStdString());
       AddToFileHistory(fileName);
    }
    else
@@ -271,8 +275,8 @@ void MainWindow::on_action_Open_triggered()
        {
           m_gtdEditor.clear();
           m_gtdTree.ClearTree();
-          m_inBasketForm.ClearWorkspace();
-          m_gtdCalendar.repaint();
+          mp_inBasketForm->ClearWorkspace();
+          mp_gtdCalendar->repaint();
           for (auto fileName : fileNames)
           {
              OpenFile(fileName);

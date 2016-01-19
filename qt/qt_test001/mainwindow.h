@@ -59,20 +59,19 @@ private slots:
 private:
    void ScaleAndCenterWindow(float scale);
 
-   Ui::MainWindow *ui;
+   Ui::MainWindow*               ui;
 
-   InBasketForm         m_inBasketForm;
-   QPointer<QSplitter>  mp_gtdSplitter;
-   QPointer<QSplitter>  mp_mainLRSplitter;
-   QTextEdit            m_gtdEditor;
-   GTDTreeWidget        m_gtdTree;
+   QPointer<InBasketForm>        mp_inBasketForm;
+   QPointer<QSplitter>           mp_gtdSplitter;
+   QPointer<QSplitter>           mp_mainLRSplitter;
+   QTextEdit                     m_gtdEditor;
+   GTDTreeWidget                 m_gtdTree;
 
-   QPointer<QSplitter>  mp_kanbanSplitter;
-   GTDCalendarWidget    m_gtdCalendar;
-   KanbanWidget         m_kanbanWindow;
+   QPointer<QSplitter>           mp_kanbanSplitter;
+   QPointer<GTDCalendarWidget>   mp_gtdCalendar;
+   QPointer<KanbanWidget>        mp_kanbanWindow;
 
-   QString          m_currentFileNameStr;
-//   QList<QString>   m_recentFileList;
-   QStringList      m_recentFileList;
+   QString                       m_currentFileNameStr;
+   QStringList                   m_recentFileList;
 };
 #endif // MAINWINDOW_H

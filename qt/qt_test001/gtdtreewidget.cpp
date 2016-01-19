@@ -1,8 +1,10 @@
 #include "gtdtreewidget.h"
+#include "mainwindow.h"
 #include<QMessageBox>
 
-GTDTreeWidget::GTDTreeWidget()
-      : m_nonActionableTWI((QTreeWidget*) 0,
+GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
+      : mp_mainWindow(mainWindow),
+        m_nonActionableTWI((QTreeWidget*) 0,
               QStringList(QString("Non-Actionable"))),
         m_SomedayMaybeTWI((QTreeWidget*) 0,
               QStringList(QString("Someday Maybe"))),
