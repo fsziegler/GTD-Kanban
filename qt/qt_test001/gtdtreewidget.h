@@ -22,6 +22,8 @@ public:
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
    void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool topLevelItem = false);
+   void ResetDirtyFlag();
+   bool IsDirty() const;
 
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
@@ -35,7 +37,8 @@ private:
    // NOT IMPLEMENTED
    GTDTreeWidget();
 
-   MainWindow* mp_mainWindow;
+   MainWindow*     mp_mainWindow;
+   bool            m_dirtyFlag;
    QTreeWidgetItem m_nonActionableTWI;
    QTreeWidgetItem m_SomedayMaybeTWI;
    QTreeWidgetItem m_ReferenceTWI;

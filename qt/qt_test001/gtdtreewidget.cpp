@@ -4,6 +4,7 @@
 
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
       : mp_mainWindow(mainWindow),
+        m_dirtyFlag(false),
         m_nonActionableTWI((QTreeWidget*) 0,
               QStringList(QString("Non-Actionable"))),
         m_SomedayMaybeTWI((QTreeWidget*) 0,
@@ -67,7 +68,8 @@ GTDTreeWidget::~GTDTreeWidget()
 
 bool GTDTreeWidget::IsBranchCollapsed(const QString& branchStr) const
 {
-   return ((branchStr == QString("Trash")) || (branchStr == QString("Calendar")));
+   return ((branchStr == QString("Trash"))
+           || (branchStr == QString("Calendar")));
 }
 
 bool GTDTreeWidget::IsValidGTDTreeCategory(EnumGTDCategory category) const
@@ -124,6 +126,7 @@ void GTDTreeWidget::ClearTree()
 
    childList = m_projectsToPlanTWI.takeChildren();
    childList = m_projectPlansTWI.takeChildren();
+   m_dirtyFlag = true;
 }
 
 bool GTDTreeWidget::AddNode(const TreeNode& node, EnumGTDCategory category)
@@ -133,6 +136,7 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, EnumGTDCategory category)
       return false;
    }
    QTreeWidgetItem* twi = GetTreeWidgetItem(category);
+   m_dirtyFlag = true;
    return AddNode(node, twi);
 }
 
@@ -146,6 +150,7 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
       AddNode(itr, childItem);
       addChild(twi, childItem);
    }
+   m_dirtyFlag = true;
    return true;
 }
 
@@ -157,6 +162,17 @@ void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bo
         child->setBackground(0, b);
     }
     parent->addChild(child);
+    m_dirtyFlag = true;
+}
+
+void GTDTreeWidget::ResetDirtyFlag()
+{
+    m_dirtyFlag = false;
+}
+
+bool GTDTreeWidget::IsDirty() const
+{
+   return m_dirtyFlag;
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
@@ -205,6 +221,7 @@ void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
       }
       ++cnt;
    }
+   m_dirtyFlag = true;
 }
 
 void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
@@ -214,6 +231,7 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
    PopulateChildren(treeWidgetItem, node);
    mp_mainWindow->getUserData().ReplaceCategoryTree(category, node.getChildren());
    mp_mainWindow->getUserData().DumpGTDCategory(category);
+   m_dirtyFlag = true;
 }
 
 void GTDTreeWidget::dropEvent(QDropEvent * event)
@@ -236,5 +254,5 @@ void GTDTreeWidget::dropEvent(QDropEvent * event)
    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
-
+   m_dirtyFlag = true;
 }

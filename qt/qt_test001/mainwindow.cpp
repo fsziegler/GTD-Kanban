@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutdialog.h"
+#include "exitdialog.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -84,6 +85,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
          << event->pos().rx() << ", " << event->pos().ry() << ")" << std::endl;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+   on_actionExit_triggered();
+   QWidget::closeEvent(event);
+}
+
 void MainWindow::OpenFile(const QString& fileName)
 {
    m_gtdEditor.clear();
@@ -99,6 +106,7 @@ void MainWindow::OpenFile(const QString& fileName)
        statusBar()->showMessage(statusMsg, 5000);
        m_currentFileNameStr = fileName;
        AddToFileHistory(fileName);
+       m_gtdTree.ResetDirtyFlag();
    }
 }
 
@@ -203,6 +211,21 @@ void MainWindow::UpdateRecentFilesMenu()
 
 void MainWindow::on_actionExit_triggered()
 {
+   if(m_gtdTree.IsDirty())
+   {
+       ExitDialog exitDlg;
+       exitDlg.exec();
+       QDialogButtonBox::StandardButton btn = exitDlg.ReadButton();
+       switch(exitDlg.ReadButton())
+       {
+       case QDialogButtonBox::Yes:
+           on_actionSave_triggered();
+           break;
+       case QDialogButtonBox::No:
+       default:
+           break;
+       }
+   }
    QApplication::quit();
 }
 
@@ -222,6 +245,7 @@ void MainWindow::on_action_New_triggered()
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
    mp_gtdCalendar->repaint();
+   m_gtdTree.ResetDirtyFlag();
 }
 
 void MainWindow::on_actionSave_triggered()
@@ -238,6 +262,7 @@ void MainWindow::on_actionSave_triggered()
       mp_inBasketForm->GetUserData().DumpAllToJSONFile(
             m_currentFileNameStr.toStdString());
    }
+   m_gtdTree.ResetDirtyFlag();
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -260,6 +285,7 @@ void MainWindow::on_actionSave_As_triggered()
    {
       statusBar()->showMessage("File:Save As cancelled", 5000);
    }
+   m_gtdTree.ResetDirtyFlag();
 }
 
 void MainWindow::on_actionAbout_triggered()

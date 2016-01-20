@@ -29,6 +29,8 @@ public:
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
    void mouseMoveEvent(QMouseEvent *event);
+   void closeEvent(QCloseEvent *event);
+
    void OpenFile(const QString& fileName);
    void AddToFileHistory(const QString& fileName);
    void UpdateRecentFilesMenu();
@@ -61,7 +63,7 @@ private:
    void ScaleAndCenterWindow(float scale);
 
    Ui::MainWindow*               ui;
-   UserData m_userData;
+   UserData                      m_userData;
 
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;
