@@ -19,6 +19,10 @@ public:
 
     QDialogButtonBox::StandardButton ReadButton() const;
 
+public Q_SLOTS:
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private slots:
     void on_yes_clicked();
     void on_no_clicked();

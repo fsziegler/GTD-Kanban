@@ -39,6 +39,15 @@ public:
 
    UserData& GetUserData();
 
+Q_SIGNALS:
+protected:
+   // Event handlers
+   virtual void mousePressEvent(QMouseEvent *);
+   virtual void dragEnterEvent(QDragEnterEvent *);
+   virtual void dragMoveEvent(QDragMoveEvent *);
+   virtual void dragLeaveEvent(QDragLeaveEvent *);
+   virtual void dropEvent(QDropEvent *);
+
 private slots:
    void on_inBasketTextEdit_textChanged();
 

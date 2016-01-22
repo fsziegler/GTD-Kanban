@@ -110,7 +110,7 @@ public:
         AboutDialog->setWindowTitle(QApplication::translate("AboutDialog", "Dialog", 0));
         label->setText(QApplication::translate("AboutDialog", "GTD-Kanban", 0));
         label_8->setText(QApplication::translate("AboutDialog", "Copyright 2015, 2016 Frederick S. Ziegler", 0));
-        label_2->setText(QApplication::translate("AboutDialog", "Based on \"Getting Things Done\" by David Allen and", 0));
+        label_2->setText(QApplication::translate("AboutDialog", "Inspired by \"Getting Things Done\" by David Allen and", 0));
         label_4->setText(QApplication::translate("AboutDialog", "<a href=\"https://en.wikipedia.org/wiki/Getting_Things_Done\">Wikipedia: Getting Things Done</a>", 0));
         label_3->setText(QApplication::translate("AboutDialog", "\"Personal Kanban\" by Jim Benson and Tonianne DeMaria Barry", 0));
         label_5->setText(QApplication::translate("AboutDialog", "<a href=\"http://www.personalkanban.com/pk/\">Personal Kanban</a>", 0));

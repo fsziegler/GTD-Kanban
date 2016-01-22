@@ -81,7 +81,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Based on &quot;Getting Things Done&quot; by David Allen and</string>
+    <string>Inspired by &quot;Getting Things Done&quot; by David Allen and</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

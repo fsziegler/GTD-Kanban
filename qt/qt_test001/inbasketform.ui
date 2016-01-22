@@ -180,7 +180,7 @@ Another Person</string>
     <string>Next &amp;Actions</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="inBasketListWidget">
+  <widget class="GTDListWidget" name="inBasketListWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -360,6 +360,13 @@ Another Person</string>
   <zorder>doItButton</zorder>
   <zorder>gtdMinMaxButton</zorder>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GTDListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">gtdlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
   <tabstop>reEditSelectionButton</tabstop>

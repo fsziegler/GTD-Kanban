@@ -5,11 +5,11 @@
 #include "gtdtreewidget.h"
 #include "gtdcalendarwidget.h"
 #include "kanbanwidget.h"
+#include "gtdtextedit.h"
 
 #include <QMainWindow>
 #include <QSplitter>
 #include <QPointer>
-#include <QTextEdit>
 #include <QCalendarWidget>
 
 namespace Ui
@@ -68,7 +68,7 @@ private:
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;
    QPointer<QSplitter>           mp_mainLRSplitter;
-   QTextEdit                     m_gtdEditor;
+   GTDTextEdit                   m_gtdEditor;
    GTDTreeWidget                 m_gtdTree;
 
    QPointer<QSplitter>           mp_kanbanSplitter;

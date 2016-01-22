@@ -30,12 +30,12 @@ SOFTWARE.
 #define TODOS_H_
 
 // TODO Design principle: the UserData instance defines the state of the system, and the UI simply reflects this.
-// TODO Start reading and writing JSON files so this tool can be used to develop its own development.
+// TODO Enable moving item from GTD tree back into the in-basket.
+// TODO Implement the Kanban window.
 // TODO Log the date/time of every transition of a node through the system.
 // TODO Verifier that Qt conforms with UserData
-// TODO Retain file history under File menu
 // TODO Negotiation module/road map ("Negotiation Genius")
-// TODO Cost benefit module - (.g. is a trip to Costco worth it. Calculate sum of savings, my hourly rate, gas per mile in city
+// TODO Cost benefit module - (e.g. is a trip to Costco worth it. Calculate sum of savings, my hourly rate, gas per mile in city
 // TODO Game theory module - apply game theory to a issue
 // TODO Patenting module - walk through writing a patent
 

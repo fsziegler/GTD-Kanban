@@ -129,7 +129,7 @@ public:
         actionSave->setText(QApplication::translate("MainWindow", "&Save", 0));
         actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0));
         actionSave_As->setText(QApplication::translate("MainWindow", "Save &As", 0));
-        actionSave_As->setShortcut(QApplication::translate("MainWindow", "Ctrl+A", 0));
+        actionSave_As->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+A", 0));
         actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0));
         action_New->setText(QApplication::translate("MainWindow", "&New", 0));
         action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));

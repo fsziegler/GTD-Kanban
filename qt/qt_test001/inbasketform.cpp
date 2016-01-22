@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QDate>
 #include <QKeyEvent>
+#include <QDrag>
+#include <QMimeData>
 #include <set>
 #include <vector>
 #include <iostream>
@@ -41,6 +43,8 @@ InBasketForm::InBasketForm(MainWindow* parent)
    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Alt,
          Qt::NoModifier);
    QCoreApplication::postEvent(this, event);
+   mp_inBasketForm->inBasketTextEdit->setAcceptDrops(true);
+   setAcceptDrops(true);
 }
 
 InBasketForm::~InBasketForm()
@@ -200,6 +204,49 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
 UserData& InBasketForm::GetUserData()
 {
    return mp_mainWindow->getUserData();
+}
+
+void InBasketForm::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton
+        && mp_inBasketForm->inBasketListWidget->geometry().contains(event->pos())) {
+
+        QDrag *drag = new QDrag(this);
+        QMimeData *mimeData = new QMimeData;
+
+//        mimeData->setText(commentEdit->toPlainText());
+        drag->setMimeData(mimeData);
+//        drag->setPixmap(iconPixmap);
+
+//        Qt::DropAction dropAction = drag->exec();
+//        ...
+    }
+    else
+    {
+       QWidget::mousePressEvent(event);
+    }
+}
+
+void InBasketForm::dragEnterEvent(QDragEnterEvent *event)
+{
+   event->acceptProposedAction();
+   QWidget::dragEnterEvent(event);
+}
+
+void InBasketForm::dragMoveEvent(QDragMoveEvent *event)
+{
+    QWidget::dragMoveEvent(event);
+}
+
+void InBasketForm::dragLeaveEvent(QDragLeaveEvent *event)
+{
+    QWidget::dragLeaveEvent(event);
+}
+
+void InBasketForm::dropEvent(QDropEvent *event)
+{
+    event->acceptProposedAction();
+    QWidget::dropEvent(event);
 }
 
 void InBasketForm::on_inBasketTextEdit_textChanged()

@@ -1,6 +1,7 @@
 #include "exitdialog.h"
 #include "ui_exitdialog.h"
-#include<QMessageBox>
+#include <QMessageBox>
+#include <QKeyEvent>
 
 ExitDialog::ExitDialog(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +31,26 @@ ExitDialog::~ExitDialog()
 QDialogButtonBox::StandardButton ExitDialog::ReadButton() const
 {
     return m_btn;
+}
+
+void ExitDialog::keyPressEvent(QKeyEvent *event)
+{
+   if ((event->type() == QEvent::KeyPress)
+           && event->key())
+   {
+      const QString str = event->text();
+      if(("Y" == str) || ("y" == str))
+      {
+          on_yes_clicked();
+          QDialog::close();
+      }
+      else if(("N" == str) || (QString("n") == str))
+      {
+          on_no_clicked();
+          QDialog::close();
+      }
+   }
+   QDialog::keyPressEvent(event);
 }
 
 void ExitDialog::on_yes_clicked()

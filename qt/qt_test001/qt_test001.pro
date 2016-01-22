@@ -34,7 +34,9 @@ SOURCES += main.cpp\
         gtdcalendarwidget.cpp \
     aboutdialog.cpp \
     kanbanwidget.cpp \
-    exitdialog.cpp
+    exitdialog.cpp \
+    gtdtextedit.cpp \
+    gtdlistwidget.cpp
 unix {
 SOURCES += ../../code/UserData.cpp \
             ../../code/TreeNode.cpp \
@@ -52,7 +54,9 @@ HEADERS  += mainwindow.h \
     gtdcalendarwidget.h \
     aboutdialog.h \
     kanbanwidget.h \
-    exitdialog.h
+    exitdialog.h \
+    gtdtextedit.h \
+    gtdlistwidget.h
 unix {
 HEADERS += ../../code/UserData.h \
             ../../code/TreeNode.h   \

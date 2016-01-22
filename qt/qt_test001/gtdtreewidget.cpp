@@ -1,6 +1,8 @@
 #include "gtdtreewidget.h"
 #include "mainwindow.h"
-#include<QMessageBox>
+#include <QMessageBox>
+#include <QDrag>
+#include <QMimeData>
 
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
       : mp_mainWindow(mainWindow),
@@ -59,6 +61,7 @@ GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    addChild(&m_actionableTWI, &m_projectsTWI, true);
    addChild(&m_projectsTWI, &m_projectsToPlanTWI, true);
    addChild(&m_projectsTWI, &m_projectPlansTWI, true);
+   ResetDirtyFlag();
    expandAll();
 }
 
@@ -173,6 +176,28 @@ void GTDTreeWidget::ResetDirtyFlag()
 bool GTDTreeWidget::IsDirty() const
 {
    return m_dirtyFlag;
+}
+
+void GTDTreeWidget::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton)
+//        && mp_inBasketForm->inBasketTextEdit->geometry().contains(event->pos())) {
+    {
+        QPoint pos = event->pos();
+        const QTreeWidgetItem& item = *itemAt(pos.x(), pos.y());
+//        const QString itemStr = item.text(0);
+
+        QDrag *drag = new QDrag(this);
+        QMimeData *mimeData = new QMimeData;
+
+//        mimeData->setText(commentEdit->toPlainText());
+        drag->setMimeData(mimeData);
+//        drag->setPixmap(iconPixmap);
+
+//        Qt::DropAction dropAction = drag->exec();
+//        ...
+    }
+    QTreeWidget::mousePressEvent(event);
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)

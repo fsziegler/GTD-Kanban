@@ -110,7 +110,7 @@
     <string>Save &amp;As</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+A</string>
+    <string>Ctrl+Shift+A</string>
    </property>
   </action>
   <action name="actionExit">

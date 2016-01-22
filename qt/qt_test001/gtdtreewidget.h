@@ -25,6 +25,10 @@ public:
    void ResetDirtyFlag();
    bool IsDirty() const;
 
+Q_SIGNALS:
+protected:
+    // Event handlers
+    virtual void mousePressEvent(QMouseEvent *);
 protected:
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
    bool IsPosInMemberHdrTWI(const QPoint& pos) const;
