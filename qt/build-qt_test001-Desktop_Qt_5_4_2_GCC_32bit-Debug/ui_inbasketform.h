@@ -17,10 +17,10 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 #include <gtdlistwidget.h>
+#include "gtdtextedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -38,7 +38,7 @@ public:
     QPushButton *projectPlansButton;
     QPushButton *nextActionsButton;
     GTDListWidget *inBasketListWidget;
-    QTextEdit *inBasketTextEdit;
+    GTDTextEdit *inBasketTextEdit;
     QLabel *label_3;
     QPushButton *reEditSelectionButton;
     QGroupBox *groupBox;
@@ -94,7 +94,7 @@ public:
         inBasketListWidget->setAcceptDrops(false);
         inBasketListWidget->setAlternatingRowColors(true);
         inBasketListWidget->setSelectionMode(QAbstractItemView::MultiSelection);
-        inBasketTextEdit = new QTextEdit(InBasketForm);
+        inBasketTextEdit = new GTDTextEdit(InBasketForm);
         inBasketTextEdit->setObjectName(QStringLiteral("inBasketTextEdit"));
         inBasketTextEdit->setGeometry(QRect(20, 50, 271, 70));
         inBasketTextEdit->setFocusPolicy(Qt::StrongFocus);

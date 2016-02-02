@@ -16,9 +16,6 @@ protected:
 
 private:
     GTDTextEdit();
-
-private:
-    QWidget* mp_parentWidget;
 };
 
 #endif // GTDTEXTEDIT_H
