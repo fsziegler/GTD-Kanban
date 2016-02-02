@@ -233,6 +233,10 @@ bool GTDTreeWidget::IsPosInMemberHdrTWI(const QPoint& pos) const
 void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
       TreeNode& node)
 {
+   if(!isItemExpanded(&treeWidgetItem))
+   {
+      node.SetExpandState(false);
+   }
    int cnt(0);
    while(treeWidgetItem.childCount() > cnt)
    {
