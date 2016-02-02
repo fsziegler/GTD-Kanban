@@ -109,12 +109,14 @@ public:
    void SetTime(ptime& newTime, EnumTargetNode node = kParentNode);
    void SetDateTime(date& newDate, ptime& newTime,
          EnumTargetNode node = kParentNode);
+   void SetExpandState(bool expand);
 
    // ACCESSORS
    bool ReadStrAtRow(size_t row, string& rowStr) const;
    const TTreeNodeVect& getChildren() const;
    const date& getDate() const;
    const ptime& getTime() const;
+   bool getExpandState() const;
    const string* getMpNodeNameStrPtr() const;
    const string& getMpNodeNameStr() const;
    static const TStrSet& getMsItemRepoSet();
@@ -132,6 +134,7 @@ private:
    const string*           mp_nodeNameStrPtr;
    date                    m_date;
    ptime                   m_time;
+   bool                    m_expanded;
    TTreeNodeVect           m_children;
 };
 

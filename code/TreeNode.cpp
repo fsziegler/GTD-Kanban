@@ -42,7 +42,8 @@ TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode)
 : mp_parentNode(parentNode),
   mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
   m_date(special_values::not_a_date_time),
-  m_time(special_values::not_a_date_time)
+  m_time(special_values::not_a_date_time),
+  m_expanded(true)
 {
 }
 
@@ -179,6 +180,8 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"time\" : \"" << m_time << "\"," << endl;
       IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"expand\" : \"" << (m_expanded ? "true" : "false") << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"children\" : {";
       bool first(true);
       for(auto itr: m_children)
@@ -253,6 +256,9 @@ void TreeNode::ClearAllChildren()
 
 const string kDateStr("date");
 const string kTimeStr("time");
+const string kExpandStr("expand");
+const string kTrueStr("true");
+const string kFalseStr("false");
 const string kNotADateTimeStr("not-a-date-time");
 const string kChildrenStr("children");
 bool TreeNode::LoadPTree(ptree& pTree)
@@ -293,6 +299,21 @@ bool TreeNode::LoadPTree(ptree& pTree)
             {
                m_time = boost::posix_time::time_from_string(value);
             }
+         }
+         else if(str == kExpandStr)
+         {
+             if(kTrueStr == value)
+             {
+                m_expanded = true;
+             }
+             else if (kFalseStr == value)
+             {
+                 m_expanded = false;
+             }
+             else
+             {
+                throw;
+             }
          }
          else
          {
@@ -365,6 +386,11 @@ void TreeNode::SetDateTime(date& newDate, ptime& newTime, EnumTargetNode node)
    }
 }
 
+void TreeNode::SetExpandState(bool expand)
+{
+   m_expanded = expand;
+}
+
 bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
 {
    size_t rowCnt(row);
@@ -411,6 +437,11 @@ const ptime& TreeNode::getTime() const
    return m_time;
 }
 
+bool TreeNode::getExpandState() const
+{
+   return m_expanded;
+}
+
 const string* TreeNode::getMpNodeNameStrPtr() const
 {
    return mp_nodeNameStrPtr;
@@ -423,11 +454,12 @@ const string& TreeNode::getMpNodeNameStr() const
 
 void TreeNode::SetEqualTo(const TreeNode& rhs)
 {
-   mp_parentNode     =  rhs.mp_parentNode;
-   mp_nodeNameStrPtr =  rhs.mp_nodeNameStrPtr;
-   m_date            =  rhs.m_date;
-   m_time            =  rhs.m_time;
-   m_children        =  rhs.m_children;
+   mp_parentNode     = rhs.mp_parentNode;
+   mp_nodeNameStrPtr = rhs.mp_nodeNameStrPtr;
+   m_date            = rhs.m_date;
+   m_time            = rhs.m_time;
+   m_expanded        = rhs.m_expanded;
+   m_children        = rhs.m_children;
 }
 
 bool TreeNode::IsEqualTo(const TreeNode& rhs) const
@@ -445,7 +477,8 @@ bool TreeNode::IsEqualTo(const TreeNode& rhs) const
          && (rhs.mp_parentNode == mp_parentNode)
          && (rhs.mp_nodeNameStrPtr == mp_nodeNameStrPtr)
          && (rhs.m_date == m_date)
-         && (rhs.m_time == m_time));
+         && (rhs.m_time == m_time)
+         && (rhs.m_expanded == m_expanded));
 }
 
 const TStrSet& TreeNode::getMsItemRepoSet()
