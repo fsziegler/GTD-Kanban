@@ -45,6 +45,8 @@ InBasketForm::InBasketForm(MainWindow* parent)
    QCoreApplication::postEvent(this, event);
    mp_inBasketForm->inBasketTextEdit->setAcceptDrops(true);
    setAcceptDrops(true);
+
+   SetFocusInTextEdit();
 }
 
 InBasketForm::~InBasketForm()
@@ -96,11 +98,8 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
    {
       QTreeWidgetItem* qti = new QTreeWidgetItem((QTreeWidget*) 0,
             QStringList((*itr)->text()));
-      mp_gtdTree->addChild(gtdTreeItem, qti);
-      if (mp_gtdTree->IsBranchCollapsed(nodeNameStr))
-      {
-         mp_gtdTree->collapseItem(gtdTreeItem);
-      }
+      mp_gtdTree->addChild(gtdTreeItem, qti,
+                           mp_gtdTree->IsBranchCollapsed(nodeNameStr));
    }
    EnumGTDCategory tgtCat = mp_mainWindow->getUserData().LookUpCategory(
          nodeNameStr.toStdString());
@@ -237,17 +236,6 @@ void InBasketForm::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void InBasketForm::dragEnterEvent(QDragEnterEvent *event)
-{
-   event->acceptProposedAction();
-   QWidget::dragEnterEvent(event);
-}
-
-void InBasketForm::dragMoveEvent(QDragMoveEvent *event)
-{
-    QWidget::dragMoveEvent(event);
-}
-
 void InBasketForm::keyPressEvent(QKeyEvent *event)
 {
    QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -259,6 +247,17 @@ void InBasketForm::keyPressEvent(QKeyEvent *event)
    {
        SetFocusInListWidget();
    }
+}
+
+void InBasketForm::dragEnterEvent(QDragEnterEvent *event)
+{
+   event->acceptProposedAction();
+   QWidget::dragEnterEvent(event);
+}
+
+void InBasketForm::dragMoveEvent(QDragMoveEvent *event)
+{
+    QWidget::dragMoveEvent(event);
 }
 
 void InBasketForm::dragLeaveEvent(QDragLeaveEvent *event)

@@ -11,7 +11,7 @@ using namespace ZiegGTDKanban;
 
 namespace Ui
 {
-class InBasketForm;
+   class InBasketForm;
 }
 class MainWindow;
 

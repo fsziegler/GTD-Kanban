@@ -202,7 +202,7 @@ Another Person</string>
     <enum>QAbstractItemView::MultiSelection</enum>
    </property>
   </widget>
-  <widget class="QTextEdit" name="inBasketTextEdit">
+  <widget class="GTDTextEdit" name="inBasketTextEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -370,7 +370,8 @@ Another Person</string>
    <class>GTDTextEdit</class>
    <extends>QTextEdit</extends>
    <header>gtdtextedit.h</header>
-  </customwidget> </customwidgets>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
   <tabstop>reEditSelectionButton</tabstop>
