@@ -8,6 +8,8 @@
 #include <QPen>
 #include <QBrush>
 
+class MainWindow;
+
 class GTDCalendarWidget: public QCalendarWidget
 {
 Q_OBJECT
@@ -20,6 +22,8 @@ public:
    virtual void paintCell(QPainter *painter, const QRect &rect,
          const QDate &date) const;
 private:
+   MainWindow* mp_mainWindow;
+
    QTime m_timer;
    Qt::MouseButtons m_mouseBtns;
    QPoint m_leftClickPoint;

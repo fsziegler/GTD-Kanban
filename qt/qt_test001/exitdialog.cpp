@@ -33,6 +33,11 @@ QDialogButtonBox::StandardButton ExitDialog::ReadButton() const
     return m_btn;
 }
 
+void ExitDialog::SetLabelText(const QString& newText)
+{
+   ui->label->setText(newText);
+}
+
 void ExitDialog::keyPressEvent(QKeyEvent *event)
 {
    if ((event->type() == QEvent::KeyPress)

@@ -18,6 +18,7 @@ const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
       : QMainWindow(parent),
         ui(new Ui::MainWindow),
+        m_gtdTextEditor(this),
         m_gtdTree(this),
         m_currentFileNameStr("[None]")
 {
@@ -61,6 +62,8 @@ MainWindow::MainWindow(QWidget *parent)
 
    ScaleAndCenterWindow(0.8);
    UpdateRecentFilesMenu();
+
+   mp_inBasketForm->SetFocusInTextEdit();
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +74,26 @@ MainWindow::~MainWindow()
 UserData& MainWindow::getUserData()
 {
    return m_userData;
+}
+/*
+void MainWindow::PushDragText(const QString& dragStr)
+{
+   m_dragStringList.push_back(dragStr);
+}
+
+int MainWindow::PopDragText(QString& dragStr)
+{
+   if(0 < m_dragStringList.size())
+   {
+       dragStr = m_dragStringList.front();
+       m_dragStringList.pop_front();
+   }
+   return m_dragStringList.size();
+}
+*/
+void MainWindow::SetFocusInListWidget()
+{
+   mp_inBasketForm->SetFocusInListWidget();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -93,7 +116,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::OpenFile(const QString& fileName)
 {
-   m_gtdEditor.clear();
+   m_gtdTextEditor.clear();
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
    mp_gtdCalendar->repaint();
@@ -209,24 +232,39 @@ void MainWindow::UpdateRecentFilesMenu()
    recentFiles.close();
 }
 
+void MainWindow::CheckDirty(const QString& newTitle, const QString& newText)
+{
+    if(m_gtdTree.IsDirty())
+    {
+        ExitDialog exitDlg;
+        exitDlg.setWindowTitle(newTitle);
+        if(0 < newText.size())
+        {
+           exitDlg.SetLabelText(newText);
+        }
+        exitDlg.exec();
+        QDialogButtonBox::StandardButton btn = exitDlg.ReadButton();
+        switch(exitDlg.ReadButton())
+        {
+        case QDialogButtonBox::Yes:
+            on_actionSave_triggered();
+            break;
+        case QDialogButtonBox::No:
+        default:
+            break;
+        }
+    }
+}
+
 void MainWindow::on_actionExit_triggered()
 {
-   if(m_gtdTree.IsDirty())
-   {
-       ExitDialog exitDlg;
-       exitDlg.exec();
-       QDialogButtonBox::StandardButton btn = exitDlg.ReadButton();
-       switch(exitDlg.ReadButton())
-       {
-       case QDialogButtonBox::Yes:
-           on_actionSave_triggered();
-           break;
-       case QDialogButtonBox::No:
-       default:
-           break;
-       }
-   }
+   CheckDirty("Exiting", "");
    QApplication::quit();
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+   QWidget::mouseReleaseEvent(event);
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)
@@ -240,12 +278,16 @@ void MainWindow::ScaleAndCenterWindow(float scale)
 
 void MainWindow::on_action_New_triggered()
 {
+   CheckDirty("Creating New File",
+              "The file has changed since your last save.\nWould you like to "
+              "save before opening a new file?");
    statusBar()->showMessage("New File ...", 5000);
-   m_gtdEditor.clear();
+   m_gtdTextEditor.clear();
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
    mp_gtdCalendar->repaint();
    m_gtdTree.ResetDirtyFlag();
+   mp_inBasketForm->SetFocusInTextEdit();
 }
 
 void MainWindow::on_actionSave_triggered()
@@ -267,8 +309,11 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-   QString fileName = QFileDialog::getSaveFileName(this, "Save file", "",
-         ".json");
+   QString fileName =
+           QFileDialog::getSaveFileName(this, "Save file",
+                                        QDir::currentPath(),
+                                        "JSON Files (*.json)",
+                                        new QString("JSON Files (*.json)"));
    if (0 < fileName.size())
    {
       if (!fileName.endsWith(".json"))
@@ -296,6 +341,9 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_action_Open_triggered()
 {
+    CheckDirty("Opening New File",
+               "The file has changed since your last save.\nWould you like to "
+               "save before opening another file?");
     QFileDialog ofDialog(this, tr("Open Image"), "/home");
     ofDialog.setNameFilter(tr("JSON Files (*.json);;All Files (*.*)"));
     if (ofDialog.exec())
@@ -304,7 +352,7 @@ void MainWindow::on_action_Open_triggered()
        fileNames = ofDialog.selectedFiles();
        if (0 < fileNames.size())
        {
-          m_gtdEditor.clear();
+          m_gtdTextEditor.clear();
           m_gtdTree.ClearTree();
           mp_inBasketForm->ClearWorkspace();
           mp_gtdCalendar->repaint();
@@ -313,6 +361,7 @@ void MainWindow::on_action_Open_triggered()
              OpenFile(fileName);
           }
        }
+       mp_inBasketForm->SetFocusInTextEdit();
     }
 }
 

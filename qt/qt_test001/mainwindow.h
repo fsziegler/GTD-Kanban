@@ -26,6 +26,11 @@ public:
    ~MainWindow();
     UserData& getUserData();
 
+//    void PushDragText(const QString& dragStr);
+//    int PopDragText(QString& dragStr);
+
+    void SetFocusInListWidget();
+
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
    void mouseMoveEvent(QMouseEvent *event);
@@ -34,6 +39,7 @@ protected:
    void OpenFile(const QString& fileName);
    void AddToFileHistory(const QString& fileName);
    void UpdateRecentFilesMenu();
+   void CheckDirty(const QString& newTitle, const QString& newText);
 
 private slots:
    void on_actionExit_triggered();
@@ -59,6 +65,15 @@ private slots:
    void OpenRecentFile8();
    void OpenRecentFile9();
 
+Q_SIGNALS:
+protected:
+    // Event handlers
+//    bool event(QEvent *);
+//    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+//    virtual void mouseDoubleClickEvent(QMouseEvent *);
+//    virtual void mouseMoveEvent(QMouseEvent *);
+
 private:
    void ScaleAndCenterWindow(float scale);
 
@@ -68,7 +83,7 @@ private:
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;
    QPointer<QSplitter>           mp_mainLRSplitter;
-   GTDTextEdit                   m_gtdEditor;
+   GTDTextEdit                   m_gtdTextEditor;
    GTDTreeWidget                 m_gtdTree;
 
    QPointer<QSplitter>           mp_kanbanSplitter;
@@ -77,5 +92,6 @@ private:
 
    QString                       m_currentFileNameStr;
    QStringList                   m_recentFileList;
+   QStringList                   m_dragStringList;
 };
 #endif // MAINWINDOW_H

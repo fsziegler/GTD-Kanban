@@ -1,4 +1,5 @@
 #include "gtdcalendarwidget.h"
+#include "mainwindow.h"
 #include <QMessageBox>
 #include <QPainter>
 #include <iostream>
@@ -6,9 +7,10 @@
 using namespace std;
 
 GTDCalendarWidget::GTDCalendarWidget(QWidget *parent)
-      : QCalendarWidget(parent),
-        m_mouseBtns(Qt::NoButton),
-        m_leftClickPoint(0, 0)
+: QCalendarWidget(parent),
+  mp_mainWindow((MainWindow*) parent),
+  m_mouseBtns(Qt::NoButton),
+  m_leftClickPoint(0, 0)
 {
    m_timer.start();
    setMouseTracking(true);

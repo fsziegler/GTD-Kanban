@@ -18,6 +18,7 @@ public:
     ~ExitDialog();
 
     QDialogButtonBox::StandardButton ReadButton() const;
+    void SetLabelText(const QString& newText);
 
 public Q_SLOTS:
 protected:
