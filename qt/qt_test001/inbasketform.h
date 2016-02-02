@@ -45,6 +45,7 @@ Q_SIGNALS:
 protected:
    // Event handlers
    virtual void mousePressEvent(QMouseEvent *);
+   virtual void keyPressEvent(QKeyEvent *);
    virtual void dragEnterEvent(QDragEnterEvent *);
    virtual void dragMoveEvent(QDragMoveEvent *);
    virtual void dragLeaveEvent(QDragLeaveEvent *);

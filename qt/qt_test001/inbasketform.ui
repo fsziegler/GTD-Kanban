@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>1. GTD In Basket - Start by entering issues here, separated by carriage return (&lt;Enter&gt;)</string>
+    <string>&lt;u&gt;1&lt;/u&gt;. GTD In Basket - Start by entering issues here, separated by carriage return (&lt;Enter&gt;)</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -199,7 +199,7 @@ Another Person</string>
     <bool>true</bool>
    </property>
    <property name="selectionMode">
-    <enum>QAbstractItemView::ExtendedSelection</enum>
+    <enum>QAbstractItemView::MultiSelection</enum>
    </property>
   </widget>
   <widget class="QTextEdit" name="inBasketTextEdit">
@@ -228,7 +228,7 @@ Another Person</string>
     </rect>
    </property>
    <property name="text">
-    <string>Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.</string>
+    <string>&lt;u&gt;2&lt;/u&gt;. Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -366,7 +366,11 @@ Another Person</string>
    <extends>QListWidget</extends>
    <header location="global">gtdlistwidget.h</header>
   </customwidget>
- </customwidgets>
+  <customwidget>
+   <class>GTDTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>gtdtextedit.h</header>
+  </customwidget> </customwidgets>
  <tabstops>
   <tabstop>inBasketTextEdit</tabstop>
   <tabstop>reEditSelectionButton</tabstop>

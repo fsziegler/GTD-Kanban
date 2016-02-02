@@ -21,6 +21,7 @@
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 #include <gtdlistwidget.h>
+#include "gtdtextedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -93,7 +94,7 @@ public:
         inBasketListWidget->setFocusPolicy(Qt::StrongFocus);
         inBasketListWidget->setAcceptDrops(false);
         inBasketListWidget->setAlternatingRowColors(true);
-        inBasketListWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        inBasketListWidget->setSelectionMode(QAbstractItemView::MultiSelection);
         inBasketTextEdit = new QTextEdit(InBasketForm);
         inBasketTextEdit->setObjectName(QStringLiteral("inBasketTextEdit"));
         inBasketTextEdit->setGeometry(QRect(20, 50, 271, 70));
@@ -165,7 +166,7 @@ public:
     void retranslateUi(QWidget *InBasketForm)
     {
         InBasketForm->setWindowTitle(QApplication::translate("InBasketForm", "Form", 0));
-        label->setText(QApplication::translate("InBasketForm", "1. GTD In Basket - Start by entering issues here, separated by carriage return (<Enter>)", 0));
+        label->setText(QApplication::translate("InBasketForm", "<u>1</u>. GTD In Basket - Start by entering issues here, separated by carriage return (<Enter>)", 0));
         label_2->setText(QApplication::translate("InBasketForm", "Text entered in the edit box above will automatically move to the list box below, where you can select and act upon it.", 0));
 #ifndef QT_NO_TOOLTIP
         somedayMaybeButton->setToolTip(QApplication::translate("InBasketForm", "Tickler file; hold for review", 0));
@@ -200,7 +201,7 @@ public:
         nextActionsButton->setToolTip(QApplication::translate("InBasketForm", "This is one of your next actions", 0));
 #endif // QT_NO_TOOLTIP
         nextActionsButton->setText(QApplication::translate("InBasketForm", "Next &Actions", 0));
-        label_3->setText(QApplication::translate("InBasketForm", "Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.", 0));
+        label_3->setText(QApplication::translate("InBasketForm", "<u>2</u>. Highlight one or more issues below (you can use the Ctrl key to select more than one) and choose an action on the right.", 0));
 #ifndef QT_NO_TOOLTIP
         reEditSelectionButton->setToolTip(QApplication::translate("InBasketForm", "Move selected issue below to In-Basket for editing", 0));
 #endif // QT_NO_TOOLTIP

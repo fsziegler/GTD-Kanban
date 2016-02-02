@@ -248,6 +248,19 @@ void InBasketForm::dragMoveEvent(QDragMoveEvent *event)
     QWidget::dragMoveEvent(event);
 }
 
+void InBasketForm::keyPressEvent(QKeyEvent *event)
+{
+   QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+   if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
+   {
+      SetFocusInTextEdit();
+   }
+   else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
+   {
+       SetFocusInListWidget();
+   }
+}
+
 void InBasketForm::dragLeaveEvent(QDragLeaveEvent *event)
 {
     QWidget::dragLeaveEvent(event);
