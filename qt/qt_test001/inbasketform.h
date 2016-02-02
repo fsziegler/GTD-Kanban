@@ -36,6 +36,8 @@ public:
                                     const QString& nodeNameStr);
    void ClearWorkspace();
    bool LoadFromFile(const QString& jsonFileName);
+   void SetFocusInTextEdit();
+   void SetFocusInListWidget();
 
    UserData& GetUserData();
 

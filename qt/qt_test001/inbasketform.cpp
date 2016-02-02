@@ -201,6 +201,16 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
    return true;
 }
 
+void InBasketForm::SetFocusInTextEdit()
+{
+   mp_inBasketForm->inBasketTextEdit->setFocus();
+}
+
+void InBasketForm::SetFocusInListWidget()
+{
+   mp_inBasketForm->inBasketListWidget->setFocus();
+}
+
 UserData& InBasketForm::GetUserData()
 {
    return mp_mainWindow->getUserData();

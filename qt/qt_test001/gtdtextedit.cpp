@@ -1,7 +1,8 @@
 #include "gtdtextedit.h"
 #include<QDropEvent>
 
-GTDTextEdit::GTDTextEdit()
+GTDTextEdit::GTDTextEdit(QWidget* parent)
+: mp_parentWidget(parent)
 {
-    QWidget::setAcceptDrops(true);
+
 }
