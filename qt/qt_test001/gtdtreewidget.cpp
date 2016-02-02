@@ -48,19 +48,21 @@ GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    setDragEnabled(true);
    setDragDropMode(QTreeWidget::InternalMove);
 
-   addChild(&m_nonActionableTWI, &m_SomedayMaybeTWI, true);
-   addChild(&m_nonActionableTWI, &m_ReferenceTWI, true);
-   addChild(&m_nonActionableTWI, &m_TrashTWI, true);
-   addChild(&m_actionableTWI, &m_tasksTWI, true);
+   setSelectionMode(QAbstractItemView::ExtendedSelection);
+
+   addChild(&m_nonActionableTWI, &m_SomedayMaybeTWI, false, true);
+   addChild(&m_nonActionableTWI, &m_ReferenceTWI, false, true);
+   addChild(&m_nonActionableTWI, &m_TrashTWI, false, true);
+   addChild(&m_actionableTWI, &m_tasksTWI, true, true);
    insertTopLevelItem(0, &m_actionableTWI);
    insertTopLevelItem(0, &m_nonActionableTWI);
-   addChild(&m_tasksTWI, &m_DoItTWI, true);
-   addChild(&m_tasksTWI, &m_WaitingOnSomeoneTWI, true);
-   addChild(&m_tasksTWI, &m_CalendarTWI, true);
-   addChild(&m_tasksTWI, &m_NextActionsTWI, true);
-   addChild(&m_actionableTWI, &m_projectsTWI, true);
-   addChild(&m_projectsTWI, &m_projectsToPlanTWI, true);
-   addChild(&m_projectsTWI, &m_projectPlansTWI, true);
+   addChild(&m_tasksTWI, &m_DoItTWI, true, true);
+   addChild(&m_tasksTWI, &m_WaitingOnSomeoneTWI, true, true);
+   addChild(&m_tasksTWI, &m_CalendarTWI, true, true);
+   addChild(&m_tasksTWI, &m_NextActionsTWI, true, true);
+   addChild(&m_actionableTWI, &m_projectsTWI, true, true);
+   addChild(&m_projectsTWI, &m_projectsToPlanTWI, true, true);
+   addChild(&m_projectsTWI, &m_projectPlansTWI, true, true);
    ResetDirtyFlag();
    expandAll();
 }
@@ -151,13 +153,14 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
       strings.append(itr.getMpNodeNameStr().c_str());
       QTreeWidgetItem* childItem = new QTreeWidgetItem(strings);
       AddNode(itr, childItem);
-      addChild(twi, childItem);
+      addChild(twi, childItem, itr.getExpandState());
    }
    m_dirtyFlag = true;
    return true;
 }
 
-void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool topLevelItem)
+void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child,
+                             bool expand, bool topLevelItem)
 {
     if(!topLevelItem)
     {
@@ -165,6 +168,10 @@ void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bo
         child->setBackground(0, b);
     }
     parent->addChild(child);
+    if(expand)
+    {
+       expandItem(child);
+    }
     m_dirtyFlag = true;
 }
 
@@ -258,7 +265,8 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
 {
    TreeNode node("temp");
    PopulateChildren(treeWidgetItem, node);
-   mp_mainWindow->getUserData().ReplaceCategoryTree(category, node.getChildren());
+   mp_mainWindow->getUserData().ReplaceCategoryTree(category,
+                                                    node.getChildren());
    mp_mainWindow->getUserData().DumpGTDCategory(category);
    m_dirtyFlag = true;
 }
@@ -278,7 +286,8 @@ void GTDTreeWidget::dropEvent(QDropEvent * event)
    ReplaceCategoryTree(EnumGTDCategory::kReference, m_ReferenceTWI);
    ReplaceCategoryTree(EnumGTDCategory::kTrash, m_TrashTWI);
    ReplaceCategoryTree(EnumGTDCategory::kDoIt, m_DoItTWI);
-   ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson, m_WaitingOnSomeoneTWI);
+   ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson,
+                       m_WaitingOnSomeoneTWI);
    ReplaceCategoryTree(EnumGTDCategory::kCalendar, m_CalendarTWI);
    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);

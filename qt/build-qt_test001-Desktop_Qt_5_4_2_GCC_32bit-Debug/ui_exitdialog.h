@@ -30,16 +30,16 @@ public:
     {
         if (ExitDialog->objectName().isEmpty())
             ExitDialog->setObjectName(QStringLiteral("ExitDialog"));
-        ExitDialog->resize(282, 120);
+        ExitDialog->resize(320, 120);
         ExitDialog->setContextMenuPolicy(Qt::PreventContextMenu);
         buttonBox = new QDialogButtonBox(ExitDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(60, 70, 161, 32));
+        buttonBox->setGeometry(QRect(80, 70, 161, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::No|QDialogButtonBox::Yes);
         label = new QLabel(ExitDialog);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(20, 20, 241, 31));
+        label->setGeometry(QRect(20, 20, 281, 31));
         label->setAlignment(Qt::AlignCenter);
         label->setWordWrap(true);
 

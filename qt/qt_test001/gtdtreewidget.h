@@ -21,7 +21,8 @@ public:
    void ClearTree();
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
-   void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool topLevelItem = false);
+   void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool expand,
+                 bool topLevelItem = false);
    void ResetDirtyFlag();
    bool IsDirty() const;
 

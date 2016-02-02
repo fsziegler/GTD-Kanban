@@ -17,6 +17,7 @@ protected:
 private:
     GTDTextEdit();
 
+private:
     QWidget* mp_parentWidget;
 };
 
