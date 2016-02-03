@@ -64,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent)
    UpdateRecentFilesMenu();
 
    mp_inBasketForm->SetFocusInTextEdit();
+
+   m_gtdTree.setContextMenuPolicy(Qt::CustomContextMenu);
+   connect(&m_gtdTree, SIGNAL(customContextMenuRequested(const QPoint&)), this,
+         SLOT(onCustomContextMenuRequested(const QPoint&)));
 }
 
 MainWindow::~MainWindow()
@@ -261,6 +265,11 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
    QWidget::mouseReleaseEvent(event);
+}
+
+void MainWindow::onCustomContextMenuRequested(const QPoint& pos)
+{
+   m_gtdTree.onCustomContextMenuRequested(pos);
 }
 
 void MainWindow::ScaleAndCenterWindow(float scale)

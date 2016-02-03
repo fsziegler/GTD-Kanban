@@ -11,6 +11,8 @@ class MainWindow;
 
 class GTDTreeWidget: public QTreeWidget
 {
+Q_OBJECT
+
 public:
    GTDTreeWidget(MainWindow* mainWindow);
    virtual ~GTDTreeWidget();
@@ -50,6 +52,10 @@ protected:
    void ReplaceCategoryTree(EnumGTDCategory category,
          QTreeWidgetItem& treeWidgetItem);
    void dropEvent(QDropEvent * event);
+
+public slots:
+   void onCustomContextMenuRequested(const QPoint& pos);
+   void onMenuAction(QAction* action);
 
 private:
    // NOT IMPLEMENTED

@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QDrag>
 #include <QMimeData>
+#include <QMenu>
 
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
       : mp_mainWindow(mainWindow),
@@ -306,4 +307,119 @@ void GTDTreeWidget::dropEvent(QDropEvent * event)
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
    m_dirtyFlag = true;
+}
+
+enum EnumAction
+{
+    kMoveUp,
+    kMoveDown,
+    kMoveToTop,
+    kMoveToBottom,
+    kDelete,
+    kCut,
+    kCopy,
+    kPaste,
+    kLink,
+    kMoveUpLevel,
+    kExpandAll,
+    kCollapseAll,
+};
+
+struct SActionTextPair
+{
+   EnumAction  action;
+   QString     text;
+};
+
+const size_t SActionTextPairLen(12);
+const SActionTextPair actionTextPair[SActionTextPairLen] =
+{
+   {kMoveUp, "Move Up"},
+   {kMoveDown, "Move Down"},
+   {kMoveToTop, "Move To Top"},
+   {kMoveToBottom, "Move To Bottom"},
+   {kDelete, "Delete"},
+   {kCut, "Cut"},
+   {kCopy, "Copy"},
+   {kPaste, "Paste"},
+   {kLink, "Link"},
+   {kMoveUpLevel, "Move Up Level"},
+   {kExpandAll, "Expand All"},
+   {kCollapseAll, "Collapse All"},
+};
+
+void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
+{
+   QMenu *menu = new QMenu(this);
+   for(size_t i = 0; SActionTextPairLen > i; ++i)
+   {
+       QAction* action = new QAction(actionTextPair[i].text, this);
+       action->setData(actionTextPair[i].action);
+       menu->addAction(action);
+   }
+   connect(menu, SIGNAL(triggered(QAction*)), this,
+           SLOT(onMenuAction(QAction*)));
+
+   menu->popup(viewport()->mapToGlobal(pos));
+}
+
+void GTDTreeWidget::onMenuAction(QAction* action)
+{
+    int k = action->data().toInt();
+    cout << action->data().toInt() << endl;
+    switch(action->data().toInt())
+    {
+    case kMoveUp:
+        break;
+    case kMoveDown:
+        break;
+    case kMoveToTop:
+        break;
+    case kMoveToBottom:
+        break;
+    case kDelete:
+        break;
+    case kCut:
+        break;
+    case kCopy:
+        break;
+    case kPaste:
+        break;
+    case kLink:
+        break;
+    case kMoveUpLevel:
+        break;
+    case kExpandAll:
+        m_nonActionableTWI.setExpanded(true);
+        m_SomedayMaybeTWI.setExpanded(true);
+        m_ReferenceTWI.setExpanded(true);
+        m_TrashTWI.setExpanded(true);
+        m_actionableTWI.setExpanded(true);
+        m_tasksTWI.setExpanded(true);
+        m_DoItTWI.setExpanded(true);
+        m_WaitingOnSomeoneTWI.setExpanded(true);
+        m_CalendarTWI.setExpanded(true);
+        m_NextActionsTWI.setExpanded(true);
+        m_projectsTWI.setExpanded(true);
+        m_projectsToPlanTWI.setExpanded(true);
+        m_projectPlansTWI.setExpanded(true);
+        break;
+    case kCollapseAll:
+        m_nonActionableTWI.setExpanded(false);
+        m_SomedayMaybeTWI.setExpanded(false);
+        m_ReferenceTWI.setExpanded(false);
+        m_TrashTWI.setExpanded(false);
+        m_actionableTWI.setExpanded(false);
+        m_tasksTWI.setExpanded(false);
+        m_DoItTWI.setExpanded(false);
+        m_WaitingOnSomeoneTWI.setExpanded(false);
+        m_CalendarTWI.setExpanded(false);
+        m_NextActionsTWI.setExpanded(false);
+        m_projectsTWI.setExpanded(false);
+        m_projectsToPlanTWI.setExpanded(false);
+        m_projectPlansTWI.setExpanded(false);
+        break;
+    default:
+        throw;
+    }
 }

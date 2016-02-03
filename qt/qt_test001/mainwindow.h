@@ -73,6 +73,8 @@ protected:
 //    virtual void mouseDoubleClickEvent(QMouseEvent *);
 //    virtual void mouseMoveEvent(QMouseEvent *);
 
+private slots:
+    void onCustomContextMenuRequested(const QPoint& pos);
 private:
    void ScaleAndCenterWindow(float scale);
 
