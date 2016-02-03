@@ -32,6 +32,9 @@ public:
    void SetFocusInListWidget();
    void SetFocusInGTDTreeWidget();
 
+   QStringList& getDragStringList();
+   QStringList& getClipboardList();
+
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
    void mouseMoveEvent(QMouseEvent *event);
@@ -90,5 +93,6 @@ private:
    QString                       m_currentFileNameStr;
    QStringList                   m_recentFileList;
    QStringList                   m_dragStringList;
+   QStringList                   m_clipboardList;
 };
 #endif // MAINWINDOW_H

@@ -238,6 +238,43 @@ void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
    {
       mp_mainWindow->SetFocusInListWidget();
    }
+   else if(((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
+           || ((event->key() == Qt::Key_X) && (event->modifiers() == Qt::CTRL)))
+   {
+      QList<QTreeWidgetItem*> items = selectedItems();
+      for(auto itr: items)
+      {
+         if(!itr->font(0).bold())
+         {
+            mp_mainWindow->getClipboardList().append(itr->text(0));
+            cout << mp_mainWindow->getClipboardList().size() << endl;
+            if(event->key() == Qt::Key_X)
+            {
+               QTreeWidgetItem* parent(itr->parent());
+               delete parent->takeChild(parent->indexOfChild(itr));
+            }
+         }
+      }
+      ReloadTree();
+   }
+   else if((event->key() == Qt::Key_V) && (event->modifiers() == Qt::CTRL))
+   {
+       QList<QTreeWidgetItem*> items = selectedItems();
+       if(0 == items.size())
+       {
+          return;
+       }
+       for(auto itr: mp_mainWindow->getClipboardList())
+       {
+          QStringList strings;
+          strings.append(itr);
+          QTreeWidgetItem* item = new QTreeWidgetItem(strings);
+          static const QBrush b(QColor(255, 255, 128));
+          item->setBackground(0, b);
+          items[0]->addChild(item);
+       }
+       mp_mainWindow->getClipboardList().clear();
+   }
    else
    {
       QTreeWidget::keyPressEvent(event);

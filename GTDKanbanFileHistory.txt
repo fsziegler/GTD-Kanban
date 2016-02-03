@@ -1,4 +1,4 @@
-/home/fred/dev/GTD-Kanban Progress.json
 /home/fred/dev/test1.json
+/home/fred/dev/GTD-Kanban Progress.json
 /home/fred/dev/GTD-Kanban/test1.json
 /home/fred/dev/test2.json

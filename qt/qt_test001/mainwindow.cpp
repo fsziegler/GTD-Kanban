@@ -107,6 +107,16 @@ void MainWindow::SetFocusInGTDTreeWidget()
    m_gtdTree.setFocus();
 }
 
+QStringList& MainWindow::getDragStringList()
+{
+   return m_dragStringList;
+}
+
+QStringList& MainWindow::getClipboardList()
+{
+    return m_clipboardList;
+}
+
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
    QMainWindow::mousePressEvent(event);
