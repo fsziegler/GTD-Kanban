@@ -297,6 +297,7 @@ void MainWindow::on_actionSave_triggered()
       QString statusMsg("File \"");
       statusMsg.append(m_currentFileNameStr).append("\" saved.");
       statusBar()->showMessage(statusMsg, 5000);
+      m_gtdTree.ReloadTree();
       UserData::getInst().DumpAllToJSONFile(
             m_currentFileNameStr.toStdString());
    }
@@ -319,6 +320,7 @@ void MainWindow::on_actionSave_As_triggered()
       QString msg("Save As ");
       msg.append(fileName);
       statusBar()->showMessage(msg, 5000);
+      m_gtdTree.ReloadTree();
       UserData::getInst().DumpAllToJSONFile(fileName.toStdString());
       AddToFileHistory(fileName);
    }

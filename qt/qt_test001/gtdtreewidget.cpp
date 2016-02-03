@@ -139,6 +139,20 @@ void GTDTreeWidget::ClearTree()
    m_dirtyFlag = true;
 }
 
+void GTDTreeWidget::ReloadTree()
+{
+    ReplaceCategoryTree(EnumGTDCategory::kSomedayMaybe, m_SomedayMaybeTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kReference, m_ReferenceTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kTrash, m_TrashTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kDoIt, m_DoItTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson,
+                        m_WaitingOnSomeoneTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kCalendar, m_CalendarTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
+    ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
+}
+
 bool GTDTreeWidget::AddNode(const TreeNode& node, EnumGTDCategory category)
 {
    if (!IsValidGTDTreeCategory(category))
