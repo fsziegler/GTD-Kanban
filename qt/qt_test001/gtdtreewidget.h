@@ -28,30 +28,34 @@ public:
    // MODIFIERS
    // ClearTree() clears all GTD QTreeWidgetItem contents.
    void ClearTree();
-   // ReloadTree() reloads the GTD QTreeWidgetItems into the UserData singleton,
-   // which causes the expand/collapse states to be updated.
+   // ReloadTree() reloads the GTD QTreeWidgetItems into the UserData 
+   // singleton, which causes the expand/collapse states to be updated.
    void ReloadTree();
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
-   void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool expand,
-                 bool topLevelItem = false);
+   void addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child, bool expand,
+         bool topLevelItem = false);
    void ResetDirtyFlag();
+
+protected:
+   bool AreTWIsEqual(const QTreeWidgetItem* lhs,
+         const QTreeWidgetItem* rhs) const;
 
 Q_SIGNALS:
 protected:
-    // Event handlers
-    virtual void mousePressEvent(QMouseEvent *);
+   // Event handlers
+   virtual void mousePressEvent(QMouseEvent* event);
 protected:
    // SetTreeItemProperties() sets the flags, foreground, and font of treeItem.
    void SetTreeItemProperties(QTreeWidgetItem& treeItem);
-   bool IsPosInMemberHdrTWI(const QPoint& pos) const;
+   bool IsPosInMemberHdrTWI(const QPoint& pos, bool gtdTWI) const;
    // PopulateChildren() populates node with the treeWidgetItem contents.
    void PopulateChildren(QTreeWidgetItem& treeWidgetItem, TreeNode& node);
    // ReplaceCategoryTree() populates category in the UserData singleton with
    // the contents of treeWidgetItem.
    void ReplaceCategoryTree(EnumGTDCategory category,
          QTreeWidgetItem& treeWidgetItem);
-   void dropEvent(QDropEvent * event);
+   void dropEvent(QDropEvent* event);
 
 public slots:
    void onCustomContextMenuRequested(const QPoint& pos);
