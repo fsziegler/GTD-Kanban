@@ -5,9 +5,9 @@
 using namespace std;
 
 KanbanCalendarDialog::KanbanCalendarDialog(QWidget *parent)
-      : QDialog(parent),
-        ui(new Ui::KanbanCalendarDialog),
-        m_rslt(kbcd_Cancel)
+   : QDialog(parent),
+     ui(new Ui::KanbanCalendarDialog),
+     m_rslt(kbcd_Cancel)
 {
    ui->setupUi(this);
    ui->listWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -20,7 +20,7 @@ KanbanCalendarDialog::~KanbanCalendarDialog()
 }
 
 void KanbanCalendarDialog::PopulateList(
-      const QList<QListWidgetItem*>& itemSelectionList)
+   const QList<QListWidgetItem*>& itemSelectionList)
 {
    for (auto itr = itemSelectionList.begin(); itemSelectionList.end() != itr;
          ++itr)
@@ -30,7 +30,7 @@ void KanbanCalendarDialog::PopulateList(
 }
 
 void KanbanCalendarDialog::GetSelectedItemsList(
-      QList<QListWidgetItem*>& selectedItemsList) const
+   QList<QListWidgetItem*>& selectedItemsList) const
 {
    selectedItemsList = ui->listWidget->selectedItems();
 }

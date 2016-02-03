@@ -5,9 +5,10 @@
 
 class KanbanWidget : public QWidget
 {
-    Q_OBJECT
+Q_OBJECT
+
 public:
-    explicit KanbanWidget(QWidget *parent = 0);
+   explicit KanbanWidget(QWidget *parent = 0);
 
 signals:
 
@@ -15,8 +16,8 @@ public slots:
 
 Q_SIGNALS:
 protected:
-    // Event handlers
-    virtual void paintEvent(QPaintEvent *);
+   // Event handlers
+   virtual void paintEvent(QPaintEvent *);
 
 };
 

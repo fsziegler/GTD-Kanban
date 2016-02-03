@@ -11,13 +11,13 @@ using namespace ZiegGTDKanban;
 
 namespace Ui
 {
-   class InBasketForm;
+class InBasketForm;
 }
 class MainWindow;
 
 class InBasketForm: public QWidget
 {
-   Q_OBJECT
+Q_OBJECT
 
 public:
    explicit InBasketForm(MainWindow* parent = 0);
@@ -28,9 +28,9 @@ public:
    // InBasketListWidget into itemSelectionList and, iff move is true, moves
    // them into the move queue.
    void GetSelectionOutOfGTDBasketList(
-         QList<QListWidgetItem*>& itemSelectionList, bool move = true);
+      QList<QListWidgetItem*>& itemSelectionList, bool move = true);
    void MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
-         const QString& nodeNameStr);
+                           const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& itemNameStr,
                                     const QString& nodeNameStr);
@@ -51,27 +51,16 @@ protected:
 
 private slots:
    void on_inBasketTextEdit_textChanged();
-
    void on_reEditSelectionButton_clicked();
-
    void on_somedayMaybeButton_clicked();
-
    void on_referenceButton_clicked();
-
    void on_trashButton_clicked();
-
    void on_doItButton_clicked();
-
    void on_waitingOnSomeoneButton_clicked();
-
    void on_calendarButton_clicked();
-
    void on_nextActionsButton_clicked();
-
    void on_projectsToPlanButton_clicked();
-
    void on_projectPlansButton_clicked();
-
    void on_gtdMinMaxButton_clicked();
 
 private:

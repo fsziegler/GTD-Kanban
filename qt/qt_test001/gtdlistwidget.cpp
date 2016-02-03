@@ -1,9 +1,9 @@
 #include "gtdlistwidget.h"
 
 GTDListWidget::GTDListWidget(QWidget *parent)
-    : QListWidget(parent)
+   : QListWidget(parent)
 {
-    setAcceptDrops(true);
+   setAcceptDrops(true);
 }
 
 GTDListWidget::GTDListWidget()
@@ -29,10 +29,10 @@ void GTDListWidget::dragLeaveEvent(QDragLeaveEvent *e)
 
 void GTDListWidget::dropEvent(QDropEvent *e)
 {
-    QListWidget::dropEvent(e);
+   QListWidget::dropEvent(e);
 }
 
 void GTDListWidget::startDrag(Qt::DropActions supportedActions)
 {
-    QListWidget::startDrag(supportedActions);
+   QListWidget::startDrag(supportedActions);
 }

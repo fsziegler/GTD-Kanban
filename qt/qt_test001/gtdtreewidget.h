@@ -28,18 +28,18 @@ public:
    // MODIFIERS
    // ClearTree() clears all GTD QTreeWidgetItem contents.
    void ClearTree();
-   // ReloadTree() reloads the GTD QTreeWidgetItems into the UserData 
+   // ReloadTree() reloads the GTD QTreeWidgetItems into the UserData
    // singleton, which causes the expand/collapse states to be updated.
    void ReloadTree();
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
    void addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child, bool expand,
-         bool topLevelItem = false);
+                 bool topLevelItem = false);
    void ResetDirtyFlag();
 
 protected:
    bool AreTWIsEqual(const QTreeWidgetItem* lhs,
-         const QTreeWidgetItem* rhs) const;
+                     const QTreeWidgetItem* rhs) const;
 
 Q_SIGNALS:
 protected:
@@ -54,7 +54,7 @@ protected:
    // ReplaceCategoryTree() populates category in the UserData singleton with
    // the contents of treeWidgetItem.
    void ReplaceCategoryTree(EnumGTDCategory category,
-         QTreeWidgetItem& treeWidgetItem);
+                            QTreeWidgetItem& treeWidgetItem);
    void dropEvent(QDropEvent* event);
 
 public slots:

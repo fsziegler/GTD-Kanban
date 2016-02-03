@@ -4,7 +4,7 @@
 #include <QApplication>
 
 GTDTextEdit::GTDTextEdit(QWidget* parent)
-: QTextEdit(parent)
+   : QTextEdit(parent)
 {
 
 }
@@ -13,9 +13,9 @@ void GTDTextEdit::keyPressEvent(QKeyEvent *event)
 {
    if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
    {
-       MainWindow * win = (MainWindow *) QApplication::activeWindow();
-       win->SetFocusInListWidget();
-       return;
+      MainWindow * win = (MainWindow *) QApplication::activeWindow();
+      win->SetFocusInListWidget();
+      return;
    }
    const QTextCursor& initCursor(textCursor());
    QTextEdit::keyPressEvent(event);
@@ -23,11 +23,11 @@ void GTDTextEdit::keyPressEvent(QKeyEvent *event)
    {
       if(Qt::Key_Down == event->key())
       {
-          QTextEdit::moveCursor(QTextCursor::MoveOperation::End);
+         QTextEdit::moveCursor(QTextCursor::MoveOperation::End);
       }
       else if(Qt::Key_Up == event->key())
       {
-          QTextEdit::moveCursor(QTextCursor::MoveOperation::StartOfLine);
+         QTextEdit::moveCursor(QTextCursor::MoveOperation::StartOfLine);
       }
    }
 }

@@ -7,10 +7,10 @@
 using namespace std;
 
 GTDCalendarWidget::GTDCalendarWidget(QWidget *parent)
-: QCalendarWidget(parent),
-  mp_mainWindow((MainWindow*) parent),
-  m_mouseBtns(Qt::NoButton),
-  m_leftClickPoint(0, 0)
+   : QCalendarWidget(parent),
+     mp_mainWindow((MainWindow*) parent),
+     m_mouseBtns(Qt::NoButton),
+     m_leftClickPoint(0, 0)
 {
    m_timer.start();
    setMouseTracking(true);
@@ -32,8 +32,8 @@ enum kMouseClick
 kMouseClick mouseClick(Down);
 void ToggleMouseClick()
 {
-   mouseClick = (
-         kMouseClick::Up == mouseClick ? kMouseClick::Down : kMouseClick::Up);
+   mouseClick =
+           (kMouseClick::Up == mouseClick ? kMouseClick::Down : kMouseClick::Up);
 //    cout << mouseClick << endl;
 }
 
@@ -48,22 +48,22 @@ void GTDCalendarWidget::mousePressEvent(QMouseEvent * event)
    else
    {
       std::cout << " (" << event->globalPos().x() << ", "
-            << event->globalPos().y() << ", " << event->pos().x() << ", "
-            << event->pos().y() << ") " << endl;
+                << event->globalPos().y() << ", " << event->pos().x() << ", "
+                << event->pos().y() << ") " << endl;
    }
 }
 
 void CoutRect(const QRect &rect)
 {
    cout << " (" << rect.x() << ", " << rect.y() << ", " << rect.width() << ", "
-         << rect.height() << ") ";
+        << rect.height() << ") ";
 }
 
 int cnt(0);
 QDate lastdate;
 int lastElapsed(0);
 void GTDCalendarWidget::paintCell(QPainter *painter, const QRect &rect,
-      const QDate &date) const
+                                  const QDate &date) const
 {
 //    ToggleMouseClick();
    QCalendarWidget::paintCell(painter, rect, date);

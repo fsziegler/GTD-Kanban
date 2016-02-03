@@ -19,7 +19,7 @@ enum KanbanCalendarDialogResult
 
 class KanbanCalendarDialog: public QDialog
 {
-   Q_OBJECT
+Q_OBJECT
 
 public:
    explicit KanbanCalendarDialog(QWidget *parent = 0);
@@ -35,9 +35,7 @@ public:
 
 private slots:
    void on_scheduleNowButton_clicked();
-
    void on_scheduleLaterButton_clicked();
-
    void on_specifyTimeCheckBox_clicked();
 
 private:

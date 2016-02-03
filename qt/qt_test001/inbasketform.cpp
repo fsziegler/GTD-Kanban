@@ -14,34 +14,34 @@
 using namespace std;
 
 InBasketForm::InBasketForm(MainWindow* parent)
-      : QWidget(parent),
-        mp_inBasketForm(new Ui::InBasketForm),
-        mp_mainWindow(parent),
-        mp_gtdTree(nullptr)
+   : QWidget(parent),
+     mp_inBasketForm(new Ui::InBasketForm),
+     mp_mainWindow(parent),
+     mp_gtdTree(nullptr)
 {
    mp_inBasketForm->setupUi(this);
    mp_inBasketForm->inBasketListWidget->setSelectionMode(
-         QAbstractItemView::ExtendedSelection);
+      QAbstractItemView::ExtendedSelection);
    // TEMPORARY FOR QUICK TESTING
    const QString inBasket("Call Fred re tel. # for the garage he recommended.\n"
-         "Draft thoughts for the budget-meeting agenda.\nTalk to Angela about "
-         "the filing system we need to set up.\nResearch database-management "
-         "software on the Web.\nGet new staff person on board August\nvacation "
-         "Staff off-site retreat\nPublish book\nFinalize computer upgrades\n"
-         "Update will\nFinalize budgets\nFinalize new product line\nGet "
-         "comfortable with new contact-management software\nGet reprints of "
-         "Fortune article\nGet a publicist\nFinish new orchard planting\nR&D "
-         "joint-venture video project\nProduce new training compact disk\n"
-         "Establish next year’s seminar schedule\nOrchestrate a one-hour "
-         "keynote presentation\nGet proficient with videoconferencing access\n"
-         "Finalize employment agreements\nInstall new backyard lights");
+                          "Draft thoughts for the budget-meeting agenda.\nTalk to Angela about "
+                          "the filing system we need to set up.\nResearch database-management "
+                          "software on the Web.\nGet new staff person on board August\nvacation "
+                          "Staff off-site retreat\nPublish book\nFinalize computer upgrades\n"
+                          "Update will\nFinalize budgets\nFinalize new product line\nGet "
+                          "comfortable with new contact-management software\nGet reprints of "
+                          "Fortune article\nGet a publicist\nFinish new orchard planting\nR&D "
+                          "joint-venture video project\nProduce new training compact disk\n"
+                          "Establish next year’s seminar schedule\nOrchestrate a one-hour "
+                          "keynote presentation\nGet proficient with videoconferencing access\n"
+                          "Finalize employment agreements\nInstall new backyard lights");
 // Allen, David (2002-12-31). Getting Things Done: The Art of Stress-Free
 // Productivity (p. 34). Penguin Group. Kindle Edition.
 
    mp_inBasketForm->inBasketTextEdit->setText(inBasket);
    mp_inBasketForm->inBasketTextEdit->setAcceptDrops(true);
    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Alt,
-         Qt::NoModifier);
+                                    Qt::NoModifier);
    QCoreApplication::postEvent(this, event);
    mp_inBasketForm->inBasketTextEdit->setAcceptDrops(true);
    setAcceptDrops(true);
@@ -60,7 +60,7 @@ void InBasketForm::SetGTDTreeWidget(GTDTreeWidget* gtdTree)
 }
 
 void InBasketForm::GetSelectionOutOfGTDBasketList(
-      QList<QListWidgetItem*>& itemSelectionList, bool move)
+   QList<QListWidgetItem*>& itemSelectionList, bool move)
 {
    itemSelectionList = mp_inBasketForm->inBasketListWidget->selectedItems();
    if (move)
@@ -75,10 +75,10 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
          UserData::getInst().ReadStrAtRow(EnumGTDCategory::kInBasket,
-               row, stdRowStr);
+                                          row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
-               mp_inBasketForm->inBasketListWidget->row((*itr)));
+            mp_inBasketForm->inBasketListWidget->row((*itr)));
          UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
@@ -88,10 +88,11 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
 }
 
 void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
-      const QString& nodeNameStr)
+                                      const QString& nodeNameStr)
 {
    QList<QTreeWidgetItem*> gtdTreeList = mp_gtdTree->findItems(nodeNameStr,
-         Qt::MatchExactly | Qt::MatchRecursive, 0);
+                                         Qt::MatchExactly | Qt::MatchRecursive,
+                                         0);
    QTreeWidgetItem* gtdTreeItem = gtdTreeList.front();
    for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
          ++itr)
@@ -102,9 +103,9 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
                            mp_gtdTree->IsBranchCollapsed(nodeNameStr));
    }
    EnumGTDCategory tgtCat = UserData::getInst().LookUpCategory(
-         nodeNameStr.toStdString());
+                               nodeNameStr.toStdString());
    UserData::getInst().MoveAllBetweenCategories(
-         EnumGTDCategory::kMoveQueue, tgtCat);
+      EnumGTDCategory::kMoveQueue, tgtCat);
 //   cout << "END InBasketForm::MoveFromListToTree()" << endl;
 //   mp_mainWindow->getUserData().DumpAllGTD();
 }
@@ -118,7 +119,8 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
    }
    // Another cursory check - should never fail
    QList<QTreeWidgetItem*> gtdTreeList = mp_gtdTree->findItems(nodeNameStr,
-         Qt::MatchExactly | Qt::MatchRecursive, 0);
+                                         Qt::MatchExactly | Qt::MatchRecursive,
+                                         0);
    if (0 == gtdTreeList.size())
    {
       QString errMsg(nodeNameStr);
@@ -149,10 +151,10 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
          UserData::getInst().ReadStrAtRow(EnumGTDCategory::kInBasket,
-               row, stdRowStr);
+                                          row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
-               mp_inBasketForm->inBasketListWidget->row((*itr)));
+            mp_inBasketForm->inBasketListWidget->row((*itr)));
          UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
@@ -169,7 +171,7 @@ void InBasketForm::ClearWorkspace()
 bool InBasketForm::LoadFromFile(const QString& jsonFileName)
 {
    if (!UserData::getInst().LoadFromJSONFile(
-         jsonFileName.toStdString(), false))
+            jsonFileName.toStdString(), false))
    {
       return false;
    }
@@ -178,17 +180,17 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
    for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
    {
       const QString nodeNameStr(
-            (*UserData::getInst().getGtdFixedCatMap().find(itr.first))
-                  .second.c_str());
+         (*UserData::getInst().getGtdFixedCatMap().find(itr.first))
+         .second.c_str());
       const TCatTreeNodeVectPair& pair = itr;
 
       if (nodeNameStr == QString("In Basket"))
-          {
-          for(auto inBItr: pair.second.getChildren())
-          {
+      {
+         for(auto inBItr: pair.second.getChildren())
+         {
             mp_inBasketForm->inBasketListWidget->addItem(
-                  QString(inBItr.getMpNodeNameStr().c_str()));
-          }
+               QString(inBItr.getMpNodeNameStr().c_str()));
+         }
       }
       else
       {
@@ -212,23 +214,25 @@ void InBasketForm::SetFocusInListWidget()
 
 void InBasketForm::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton
-        && mp_inBasketForm->inBasketListWidget->geometry().contains(event->pos())) {
+   if (event->button() == Qt::LeftButton
+         && mp_inBasketForm->inBasketListWidget->geometry().contains(
+            event->pos()))
+   {
 
-        QDrag *drag = new QDrag(this);
-        QMimeData *mimeData = new QMimeData;
+      QDrag *drag = new QDrag(this);
+      QMimeData *mimeData = new QMimeData;
 
 //        mimeData->setText(commentEdit->toPlainText());
-        drag->setMimeData(mimeData);
+      drag->setMimeData(mimeData);
 //        drag->setPixmap(iconPixmap);
 
 //        Qt::DropAction dropAction = drag->exec();
 //        ...
-    }
-    else
-    {
-       QWidget::mousePressEvent(event);
-    }
+   }
+   else
+   {
+      QWidget::mousePressEvent(event);
+   }
 }
 
 void InBasketForm::keyPressEvent(QKeyEvent *event)
@@ -251,18 +255,18 @@ void InBasketForm::dragEnterEvent(QDragEnterEvent *event)
 
 void InBasketForm::dragMoveEvent(QDragMoveEvent *event)
 {
-    QWidget::dragMoveEvent(event);
+   QWidget::dragMoveEvent(event);
 }
 
 void InBasketForm::dragLeaveEvent(QDragLeaveEvent *event)
 {
-    QWidget::dragLeaveEvent(event);
+   QWidget::dragLeaveEvent(event);
 }
 
 void InBasketForm::dropEvent(QDropEvent *event)
 {
-    event->acceptProposedAction();
-    QWidget::dropEvent(event);
+   event->acceptProposedAction();
+   QWidget::dropEvent(event);
 }
 
 void InBasketForm::on_inBasketTextEdit_textChanged()
@@ -294,7 +298,8 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
          mp_inBasketForm->inBasketListWidget->addItem(subtext);
          UserData::getInst().AddStrToCategory(subtext.toStdString());
          start = ++end;
-      } while (text.size() > end);
+      }
+      while (text.size() > end);
       mp_inBasketForm->inBasketTextEdit->selectAll();
       mp_inBasketForm->inBasketTextEdit->cut();
 //      cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;

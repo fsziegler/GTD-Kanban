@@ -28,7 +28,7 @@ public:
 //    void PushDragText(const QString& dragStr);
 //    int PopDragText(QString& dragStr);
 
-    void SetFocusInListWidget();
+   void SetFocusInListWidget();
 
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
@@ -42,15 +42,10 @@ protected:
 
 private slots:
    void on_actionExit_triggered();
-
    void on_action_New_triggered();
-
    void on_actionSave_triggered();
-
    void on_actionSave_As_triggered();
-
    void on_actionAbout_triggered();
-
    void on_action_Open_triggered();
 
    void OpenRecentFile0();
@@ -66,15 +61,15 @@ private slots:
 
 Q_SIGNALS:
 protected:
-    // Event handlers
+   // Event handlers
 //    bool event(QEvent *);
 //    virtual void mousePressEvent(QMouseEvent *);
-    virtual void mouseReleaseEvent(QMouseEvent *);
+   virtual void mouseReleaseEvent(QMouseEvent *);
 //    virtual void mouseDoubleClickEvent(QMouseEvent *);
 //    virtual void mouseMoveEvent(QMouseEvent *);
 
 private slots:
-    void onCustomContextMenuRequested(const QPoint& pos);
+   void onCustomContextMenuRequested(const QPoint& pos);
 private:
    void ScaleAndCenterWindow(float scale);
 

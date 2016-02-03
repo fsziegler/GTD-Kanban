@@ -6,27 +6,27 @@
 #include <QMenu>
 
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
-      : mp_mainWindow(mainWindow),
-        m_dirtyFlag(false),
-        m_nonActionableTWI((QTreeWidget*) 0,
-              QStringList(QString("Non-Actionable"))),
-        m_SomedayMaybeTWI((QTreeWidget*) 0,
-              QStringList(QString("Someday Maybe"))),
-        m_ReferenceTWI((QTreeWidget*) 0, QStringList(QString("Reference"))),
-        m_TrashTWI((QTreeWidget*) 0, QStringList(QString("Trash"))),
-        m_actionableTWI((QTreeWidget*) 0, QStringList(QString("Actionable"))),
-        m_tasksTWI((QTreeWidget*) 0, QStringList(QString("Tasks"))),
-        m_DoItTWI((QTreeWidget*) 0, QStringList(QString("Do It!"))),
-        m_WaitingOnSomeoneTWI((QTreeWidget*) 0,
-              QStringList(QString("Waiting for Another Person"))),
-        m_CalendarTWI((QTreeWidget*) 0, QStringList(QString("Calendar"))),
-        m_NextActionsTWI((QTreeWidget*) 0,
-              QStringList(QString("Next Actions"))),
-        m_projectsTWI((QTreeWidget*) 0, QStringList(QString("Projects"))),
-        m_projectsToPlanTWI((QTreeWidget*) 0,
-              QStringList(QString("Projects-to-Plan"))),
-        m_projectPlansTWI((QTreeWidget*) 0,
-              QStringList(QString("Project Plans")))
+   : mp_mainWindow(mainWindow),
+     m_dirtyFlag(false),
+     m_nonActionableTWI((QTreeWidget*) 0,
+                        QStringList(QString("Non-Actionable"))),
+     m_SomedayMaybeTWI((QTreeWidget*) 0,
+                       QStringList(QString("Someday Maybe"))),
+     m_ReferenceTWI((QTreeWidget*) 0, QStringList(QString("Reference"))),
+     m_TrashTWI((QTreeWidget*) 0, QStringList(QString("Trash"))),
+     m_actionableTWI((QTreeWidget*) 0, QStringList(QString("Actionable"))),
+     m_tasksTWI((QTreeWidget*) 0, QStringList(QString("Tasks"))),
+     m_DoItTWI((QTreeWidget*) 0, QStringList(QString("Do It!"))),
+     m_WaitingOnSomeoneTWI((QTreeWidget*) 0,
+                           QStringList(QString("Waiting for Another Person"))),
+     m_CalendarTWI((QTreeWidget*) 0, QStringList(QString("Calendar"))),
+     m_NextActionsTWI((QTreeWidget*) 0,
+                      QStringList(QString("Next Actions"))),
+     m_projectsTWI((QTreeWidget*) 0, QStringList(QString("Projects"))),
+     m_projectsToPlanTWI((QTreeWidget*) 0,
+                         QStringList(QString("Projects-to-Plan"))),
+     m_projectPlansTWI((QTreeWidget*) 0,
+                       QStringList(QString("Project Plans")))
 {
    SetTreeItemProperties (m_nonActionableTWI);
    SetTreeItemProperties (m_SomedayMaybeTWI);
@@ -74,7 +74,8 @@ GTDTreeWidget::~GTDTreeWidget()
 
 bool GTDTreeWidget::IsBranchCollapsed(const QString& branchStr) const
 {
-   return ((branchStr == QString("Trash")) || (branchStr == QString("Calendar")));
+   return ((branchStr == QString("Trash"))
+           || (branchStr == QString("Calendar")));
 }
 
 bool GTDTreeWidget::IsValidGTDTreeCategory(EnumGTDCategory category) const
@@ -146,7 +147,7 @@ void GTDTreeWidget::ReloadTree()
    ReplaceCategoryTree(EnumGTDCategory::kTrash, m_TrashTWI);
    ReplaceCategoryTree(EnumGTDCategory::kDoIt, m_DoItTWI);
    ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson,
-         m_WaitingOnSomeoneTWI);
+                       m_WaitingOnSomeoneTWI);
    ReplaceCategoryTree(EnumGTDCategory::kCalendar, m_CalendarTWI);
    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
@@ -179,7 +180,7 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
 }
 
 void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child,
-      bool expand, bool topLevelItem)
+                             bool expand, bool topLevelItem)
 {
    if (!topLevelItem)
    {
@@ -200,7 +201,7 @@ void GTDTreeWidget::ResetDirtyFlag()
 }
 
 bool GTDTreeWidget::AreTWIsEqual(const QTreeWidgetItem* lhs,
-      const QTreeWidgetItem* rhs) const
+                                 const QTreeWidgetItem* rhs) const
 {
    return (visualItemRect(lhs) == visualItemRect(rhs));
 }
@@ -230,8 +231,8 @@ void GTDTreeWidget::mousePressEvent(QMouseEvent* event)
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
 {
    static const Qt::ItemFlags flags(
-         Qt::ItemIsSelectable | Qt::ItemIsDropEnabled | Qt::ItemIsUserCheckable
-               | Qt::ItemIsEnabled);
+      Qt::ItemIsSelectable | Qt::ItemIsDropEnabled | Qt::ItemIsUserCheckable
+      | Qt::ItemIsEnabled);
    QFont font(treeItem.font(0).family(), 9, QFont::Bold);
    static const QBrush b(QColor(0, 49, 83));
    treeItem.setFlags(flags);
@@ -248,15 +249,15 @@ bool GTDTreeWidget::IsPosInMemberHdrTWI(const QPoint& pos, bool gtdTWI) const
    retVal = retVal || visualItemRect(&m_projectsTWI).contains(pos);
    if(gtdTWI)
    {
-       retVal = retVal || visualItemRect(&m_SomedayMaybeTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_ReferenceTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_TrashTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_DoItTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_WaitingOnSomeoneTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_CalendarTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_NextActionsTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_projectsToPlanTWI).contains(pos);
-       retVal = retVal || visualItemRect(&m_projectPlansTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_SomedayMaybeTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_ReferenceTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_TrashTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_DoItTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_WaitingOnSomeoneTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_CalendarTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_NextActionsTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_projectsToPlanTWI).contains(pos);
+      retVal = retVal || visualItemRect(&m_projectPlansTWI).contains(pos);
    }
    const int delta(1);
    const QTreeWidgetItem* pItem = itemAt(pos.x(), pos.y());
@@ -265,12 +266,12 @@ bool GTDTreeWidget::IsPosInMemberHdrTWI(const QPoint& pos, bool gtdTWI) const
    retVal = retVal || (delta >= (itemRect.bottom() - pos.y()));
 //   retVal = retVal || (delta >= abs(itemRect.y() - pos.y()));
    cout << (pos.y() - itemRect.top()) << ", " << (pos.y() - itemRect.bottom())
-         << endl;
+        << endl;
    return retVal;
 }
 
 void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
-      TreeNode& node)
+                                     TreeNode& node)
 {
    if (!isItemExpanded(&treeWidgetItem))
    {
@@ -293,7 +294,7 @@ void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
 }
 
 void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
-      QTreeWidgetItem& treeWidgetItem)
+                                        QTreeWidgetItem& treeWidgetItem)
 {
    TreeNode node("temp");
    PopulateChildren(treeWidgetItem, node);
@@ -318,7 +319,7 @@ void GTDTreeWidget::dropEvent(QDropEvent* event)
    ReplaceCategoryTree(EnumGTDCategory::kTrash, m_TrashTWI);
    ReplaceCategoryTree(EnumGTDCategory::kDoIt, m_DoItTWI);
    ReplaceCategoryTree(EnumGTDCategory::kWaitingForAnotherPerson,
-         m_WaitingOnSomeoneTWI);
+                       m_WaitingOnSomeoneTWI);
    ReplaceCategoryTree(EnumGTDCategory::kCalendar, m_CalendarTWI);
    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
@@ -351,18 +352,19 @@ struct SActionTextPair
 const size_t SActionTextPairLen(12);
 const SActionTextPair actionTextPair[SActionTextPairLen] =
 {
-{ kMoveUp, "Move Up" },
-{ kMoveDown, "Move Down" },
-{ kMoveToTop, "Move To Top" },
-{ kMoveToBottom, "Move To Bottom" },
-{ kDelete, "Delete" },
-{ kCut, "Cut" },
-{ kCopy, "Copy" },
-{ kPaste, "Paste" },
-{ kLink, "Link" },
-{ kMoveUpLevel, "Move Up Level" },
-{ kExpandAll, "Expand All" },
-{ kCollapseAll, "Collapse All" }, };
+   { kMoveUp, "Move Up" },
+   { kMoveDown, "Move Down" },
+   { kMoveToTop, "Move To Top" },
+   { kMoveToBottom, "Move To Bottom" },
+   { kDelete, "Delete" },
+   { kCut, "Cut" },
+   { kCopy, "Copy" },
+   { kPaste, "Paste" },
+   { kLink, "Link" },
+   { kMoveUpLevel, "Move Up Level" },
+   { kExpandAll, "Expand All" },
+   { kCollapseAll, "Collapse All" },
+};
 
 void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
 {
@@ -374,7 +376,7 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
       menu->addAction(action);
    }
    connect(menu, SIGNAL(triggered(QAction*)), this,
-         SLOT(onMenuAction(QAction*)));
+           SLOT(onMenuAction(QAction*)));
 
    menu->popup(viewport()->mapToGlobal(pos));
 }
