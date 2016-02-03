@@ -173,7 +173,9 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
 //   ptime                   m_time;
 //   TTreeNodeVect           m_children;
    IndentJSONFile(indent + 1, jsonOutFile);
-   jsonOutFile << "\"" << *mp_nodeNameStrPtr << "\": {" << endl;
+   string nodeNameStr;
+   FormatWithBackslash(*mp_nodeNameStrPtr, nodeNameStr);
+   jsonOutFile << "\"" << nodeNameStr << "\": {" << endl;
    {
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"date\" : \"" << m_date << "\"," << endl;
@@ -450,6 +452,21 @@ const string* TreeNode::getMpNodeNameStrPtr() const
 const string& TreeNode::getMpNodeNameStr() const
 {
    return *mp_nodeNameStrPtr;
+}
+
+void TreeNode::FormatWithBackslash(const string& inputStr,
+                                   string& outputStr) const
+{
+   outputStr.clear();
+   for(size_t i = 0; inputStr.size() > i; ++i)
+   {
+      if(('"' == inputStr[i])
+              || ('\\' == inputStr[i]))
+      {
+         outputStr += '\\';
+      }
+      outputStr += inputStr[i];
+   }
 }
 
 void TreeNode::SetEqualTo(const TreeNode& rhs)

@@ -122,6 +122,7 @@ public:
    static const TStrSet& getMsItemRepoSet();
 
 private:
+   void FormatWithBackslash(const string& inputStr, string& outputStr) const;
    void SetEqualTo(const TreeNode& rhs);
    bool IsEqualTo(const TreeNode& rhs) const;
 

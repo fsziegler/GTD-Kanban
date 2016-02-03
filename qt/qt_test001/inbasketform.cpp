@@ -233,14 +233,13 @@ void InBasketForm::mousePressEvent(QMouseEvent *event)
 
 void InBasketForm::keyPressEvent(QKeyEvent *event)
 {
-   QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
    if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
    {
       SetFocusInTextEdit();
    }
    else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
    {
-       SetFocusInListWidget();
+      SetFocusInListWidget();
    }
 }
 
@@ -319,6 +318,7 @@ void InBasketForm::on_reEditSelectionButton_clicked()
       editText.append(qwi->text());
    }
    mp_inBasketForm->inBasketTextEdit->insertPlainText(editText);
+   SetFocusInTextEdit();
 }
 
 void InBasketForm::on_somedayMaybeButton_clicked()

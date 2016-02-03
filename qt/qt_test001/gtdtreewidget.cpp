@@ -306,7 +306,7 @@ void GTDTreeWidget::dropEvent(QDropEvent* event)
 {
    bool move(Qt::MoveAction == event->proposedAction());
    // Case where move is not allowed
-   if (move && IsPosInMemberHdrTWI(event->pos(), true))
+   if (move && IsPosInMemberHdrTWI(event->pos(), false))
    {
       setVisible(false);
       setVisible(true);
