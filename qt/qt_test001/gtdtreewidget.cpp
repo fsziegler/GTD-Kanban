@@ -88,6 +88,11 @@ bool GTDTreeWidget::IsValidGTDTreeCategory(EnumGTDCategory category) const
    return true;
 }
 
+bool GTDTreeWidget::IsDirty() const
+{
+   return m_dirtyFlag;
+}
+
 QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
 {
    switch (category)
@@ -178,11 +183,6 @@ void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child,
 void GTDTreeWidget::ResetDirtyFlag()
 {
     m_dirtyFlag = false;
-}
-
-bool GTDTreeWidget::IsDirty() const
-{
-   return m_dirtyFlag;
 }
 
 void GTDTreeWidget::mousePressEvent(QMouseEvent* event)

@@ -15,16 +15,21 @@ public:
    GTDTreeWidget(MainWindow* mainWindow);
    virtual ~GTDTreeWidget();
 
+   // INFORMATIONAL
    bool IsBranchCollapsed(const QString& branchStr) const;
    bool IsValidGTDTreeCategory(EnumGTDCategory category) const;
+   bool IsDirty() const;
+
+   // ACCESSORS
    QTreeWidgetItem* GetTreeWidgetItem(EnumGTDCategory category);
+
+   // MODIFIERS
    void ClearTree();
    bool AddNode(const TreeNode& node, EnumGTDCategory category);
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
    void addChild(QTreeWidgetItem* parent, QTreeWidgetItem *child, bool expand,
                  bool topLevelItem = false);
    void ResetDirtyFlag();
-   bool IsDirty() const;
 
 Q_SIGNALS:
 protected:
