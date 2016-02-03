@@ -238,6 +238,10 @@ void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
    {
       mp_mainWindow->SetFocusInListWidget();
    }
+   else
+   {
+      QTreeWidget::keyPressEvent(event);
+   }
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)
