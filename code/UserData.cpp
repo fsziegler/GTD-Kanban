@@ -40,6 +40,12 @@ namespace ZiegGTDKanban
 TGTDCategoryMap   UserData::ms_gtdFixedCatMap;
 recursive_mutex   UserData::m_mutex;
 
+UserData& UserData::getInst()
+{
+   static UserData instance;
+   return instance;
+}
+
 UserData::UserData()
 {
    lock_guard<recursive_mutex> guard(m_mutex);

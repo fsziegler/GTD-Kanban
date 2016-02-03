@@ -71,10 +71,6 @@ MainWindow::~MainWindow()
    delete ui;
 }
 
-UserData& MainWindow::getUserData()
-{
-   return m_userData;
-}
 /*
 void MainWindow::PushDragText(const QString& dragStr)
 {
@@ -301,7 +297,7 @@ void MainWindow::on_actionSave_triggered()
       QString statusMsg("File \"");
       statusMsg.append(m_currentFileNameStr).append("\" saved.");
       statusBar()->showMessage(statusMsg, 5000);
-      mp_inBasketForm->GetUserData().DumpAllToJSONFile(
+      UserData::getInst().DumpAllToJSONFile(
             m_currentFileNameStr.toStdString());
    }
    m_gtdTree.ResetDirtyFlag();
@@ -323,7 +319,7 @@ void MainWindow::on_actionSave_As_triggered()
       QString msg("Save As ");
       msg.append(fileName);
       statusBar()->showMessage(msg, 5000);
-      mp_inBasketForm->GetUserData().DumpAllToJSONFile(fileName.toStdString());
+      UserData::getInst().DumpAllToJSONFile(fileName.toStdString());
       AddToFileHistory(fileName);
    }
    else

@@ -74,12 +74,12 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
          const QString rowStr((*itr)->text());
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
-         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket,
+         UserData::getInst().ReadStrAtRow(EnumGTDCategory::kInBasket,
                row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
                mp_inBasketForm->inBasketListWidget->row((*itr)));
-         mp_mainWindow->getUserData().MoveNthStrBetweenCategories(stdRowStr,
+         UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
 //      cout << "END InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
@@ -101,9 +101,9 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
       mp_gtdTree->addChild(gtdTreeItem, qti,
                            mp_gtdTree->IsBranchCollapsed(nodeNameStr));
    }
-   EnumGTDCategory tgtCat = mp_mainWindow->getUserData().LookUpCategory(
+   EnumGTDCategory tgtCat = UserData::getInst().LookUpCategory(
          nodeNameStr.toStdString());
-   mp_mainWindow->getUserData().MoveAllBetweenCategories(
+   UserData::getInst().MoveAllBetweenCategories(
          EnumGTDCategory::kMoveQueue, tgtCat);
 //   cout << "END InBasketForm::MoveFromListToTree()" << endl;
 //   mp_mainWindow->getUserData().DumpAllGTD();
@@ -148,12 +148,12 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
       {
          const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
          string stdRowStr;
-         mp_mainWindow->getUserData().ReadStrAtRow(EnumGTDCategory::kInBasket,
+         UserData::getInst().ReadStrAtRow(EnumGTDCategory::kInBasket,
                row, stdRowStr);
          assert(stdRowStr == rowStr.toStdString());
          mp_inBasketForm->inBasketListWidget->takeItem(
                mp_inBasketForm->inBasketListWidget->row((*itr)));
-         mp_mainWindow->getUserData().MoveNthStrBetweenCategories(stdRowStr,
+         UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
    }
@@ -163,22 +163,22 @@ void InBasketForm::ClearWorkspace()
 {
    mp_inBasketForm->inBasketTextEdit->clear();
    mp_inBasketForm->inBasketListWidget->clear();
-   mp_mainWindow->getUserData().Clear();
+   UserData::getInst().Clear();
 }
 
 bool InBasketForm::LoadFromFile(const QString& jsonFileName)
 {
-   if (!mp_mainWindow->getUserData().LoadFromJSONFile(
+   if (!UserData::getInst().LoadFromJSONFile(
          jsonFileName.toStdString(), false))
    {
       return false;
    }
    mp_inBasketForm->inBasketTextEdit->clear();
    mp_inBasketForm->inBasketListWidget->clear();
-   for (auto itr : mp_mainWindow->getUserData().getGtdNodeTree())
+   for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
    {
       const QString nodeNameStr(
-            (*mp_mainWindow->getUserData().getGtdFixedCatMap().find(itr.first))
+            (*UserData::getInst().getGtdFixedCatMap().find(itr.first))
                   .second.c_str());
       const TCatTreeNodeVectPair& pair = itr;
 
@@ -208,11 +208,6 @@ void InBasketForm::SetFocusInTextEdit()
 void InBasketForm::SetFocusInListWidget()
 {
    mp_inBasketForm->inBasketListWidget->setFocus();
-}
-
-UserData& InBasketForm::GetUserData()
-{
-   return mp_mainWindow->getUserData();
 }
 
 void InBasketForm::mousePressEvent(QMouseEvent *event)
@@ -298,7 +293,7 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
             subtext[i - start] = text[i];
          }
          mp_inBasketForm->inBasketListWidget->addItem(subtext);
-         mp_mainWindow->getUserData().AddStrToCategory(subtext.toStdString());
+         UserData::getInst().AddStrToCategory(subtext.toStdString());
          start = ++end;
       } while (text.size() > end);
       mp_inBasketForm->inBasketTextEdit->selectAll();

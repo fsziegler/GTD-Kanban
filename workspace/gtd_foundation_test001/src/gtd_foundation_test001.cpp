@@ -29,7 +29,7 @@ const string inBasketStr("Call Fred re tel. # for the garage he recommended.\n"
       "Finalize employment agreements\nInstall new backyard lights");
 
 int main() {
-   UserData data;
+   UserData& data = UserData::getInst();
 //   data.DumpAllToJSONFile(string("test.json"));
    data.AddDelimStrToCategory(inBasketStr);
    data.DumpAllGTD();

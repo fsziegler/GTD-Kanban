@@ -24,7 +24,6 @@ Q_OBJECT
 public:
    explicit MainWindow(QWidget *parent = 0);
    ~MainWindow();
-    UserData& getUserData();
 
 //    void PushDragText(const QString& dragStr);
 //    int PopDragText(QString& dragStr);
@@ -78,7 +77,6 @@ private:
    void ScaleAndCenterWindow(float scale);
 
    Ui::MainWindow*               ui;
-   UserData                      m_userData;
 
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;

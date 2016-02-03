@@ -67,9 +67,12 @@ typedef map<EnumGTDCategory, TreeNode> TCatTreeNodeVectMap;
 class UserData
 {
 public:
+   static UserData& getInst();
+private:
    UserData();
    virtual ~UserData();
 
+public:
    // INFORMATIONAL
 //   // ReadStrAtRow() returns the string in category at row.
    bool ReadStrAtRow(EnumGTDCategory category, size_t row,

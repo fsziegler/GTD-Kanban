@@ -265,9 +265,8 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
 {
    TreeNode node("temp");
    PopulateChildren(treeWidgetItem, node);
-   mp_mainWindow->getUserData().ReplaceCategoryTree(category,
-                                                    node.getChildren());
-   mp_mainWindow->getUserData().DumpGTDCategory(category);
+   UserData::getInst().ReplaceCategoryTree(category, node.getChildren());
+   UserData::getInst().DumpGTDCategory(category);
    m_dirtyFlag = true;
 }
 

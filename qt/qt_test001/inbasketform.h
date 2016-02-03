@@ -39,8 +39,6 @@ public:
    void SetFocusInTextEdit();
    void SetFocusInListWidget();
 
-   UserData& GetUserData();
-
 Q_SIGNALS:
 protected:
    // Event handlers
