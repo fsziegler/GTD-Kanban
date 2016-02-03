@@ -42,12 +42,12 @@ public:
 Q_SIGNALS:
 protected:
    // Event handlers
-   virtual void mousePressEvent(QMouseEvent *);
-   virtual void keyPressEvent(QKeyEvent *);
-   virtual void dragEnterEvent(QDragEnterEvent *);
-   virtual void dragMoveEvent(QDragMoveEvent *);
-   virtual void dragLeaveEvent(QDragLeaveEvent *);
-   virtual void dropEvent(QDropEvent *);
+   virtual void mousePressEvent(QMouseEvent* event);
+   virtual void keyPressEvent(QKeyEvent* event);
+   virtual void dragEnterEvent(QDragEnterEvent* event);
+   virtual void dragMoveEvent(QDragMoveEvent* event);
+   virtual void dragLeaveEvent(QDragLeaveEvent* event);
+   virtual void dropEvent(QDropEvent* event);
 
 private slots:
    void on_inBasketTextEdit_textChanged();

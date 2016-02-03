@@ -33,7 +33,7 @@ kMouseClick mouseClick(Down);
 void ToggleMouseClick()
 {
    mouseClick =
-           (kMouseClick::Up == mouseClick ? kMouseClick::Down : kMouseClick::Up);
+      (kMouseClick::Up == mouseClick ? kMouseClick::Down : kMouseClick::Up);
 //    cout << mouseClick << endl;
 }
 

@@ -11,12 +11,18 @@ GTDTextEdit::GTDTextEdit(QWidget* parent)
 
 void GTDTextEdit::keyPressEvent(QKeyEvent *event)
 {
+   MainWindow * win = (MainWindow *) QApplication::activeWindow();
    if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
    {
-      MainWindow * win = (MainWindow *) QApplication::activeWindow();
       win->SetFocusInListWidget();
       return;
    }
+   else if((event->key() == Qt::Key_3) && (event->modifiers() == Qt::ALT))
+   {
+      win->SetFocusInGTDTreeWidget();
+      return;
+   }
+
    const QTextCursor& initCursor(textCursor());
    QTextEdit::keyPressEvent(event);
    if(textCursor().position() == initCursor.position())

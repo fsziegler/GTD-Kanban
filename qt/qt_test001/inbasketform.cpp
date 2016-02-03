@@ -245,6 +245,10 @@ void InBasketForm::keyPressEvent(QKeyEvent *event)
    {
       SetFocusInListWidget();
    }
+   else if((event->key() == Qt::Key_3) && (event->modifiers() == Qt::ALT))
+   {
+      mp_mainWindow->SetFocusInGTDTreeWidget();
+   }
 }
 
 void InBasketForm::dragEnterEvent(QDragEnterEvent *event)

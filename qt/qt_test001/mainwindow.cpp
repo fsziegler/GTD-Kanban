@@ -91,9 +91,20 @@ int MainWindow::PopDragText(QString& dragStr)
    return m_dragStringList.size();
 }
 */
+
+void MainWindow::SetFocusInTextEdit()
+{
+   mp_inBasketForm->SetFocusInTextEdit();
+}
+
 void MainWindow::SetFocusInListWidget()
 {
    mp_inBasketForm->SetFocusInListWidget();
+}
+
+void MainWindow::SetFocusInGTDTreeWidget()
+{
+   m_gtdTree.setFocus();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)

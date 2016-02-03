@@ -43,7 +43,7 @@ GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    SetTreeItemProperties (m_projectPlansTWI);
 
    setColumnCount(1);
-   setHeaderLabel(QString("      2. GTD Tree"));
+   setHeaderLabel(QString("      3. GTD Tree"));
    setSortingEnabled(false);
    setAcceptDrops(true);
    setDragEnabled(true);
@@ -226,6 +226,18 @@ void GTDTreeWidget::mousePressEvent(QMouseEvent* event)
 //        ...
    }
    QTreeWidget::mousePressEvent(event);
+}
+
+void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
+{
+   if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
+   {
+      mp_mainWindow->SetFocusInTextEdit();
+   }
+   else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
+   {
+      mp_mainWindow->SetFocusInListWidget();
+   }
 }
 
 void GTDTreeWidget::SetTreeItemProperties(QTreeWidgetItem& treeItem)

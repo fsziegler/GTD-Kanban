@@ -28,7 +28,9 @@ public:
 //    void PushDragText(const QString& dragStr);
 //    int PopDragText(QString& dragStr);
 
+   void SetFocusInTextEdit();
    void SetFocusInListWidget();
+   void SetFocusInGTDTreeWidget();
 
 protected:
    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
