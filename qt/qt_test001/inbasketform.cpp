@@ -204,11 +204,15 @@ bool InBasketForm::LoadFromFile(const QString& jsonFileName)
 
 void InBasketForm::SetFocusInTextEdit()
 {
+   setFixedHeight(480);
+   mp_inBasketForm->gtdMinMaxButton->setArrowType(Qt::UpArrow);
    mp_inBasketForm->inBasketTextEdit->setFocus();
 }
 
 void InBasketForm::SetFocusInListWidget()
 {
+   setFixedHeight(480);
+   mp_inBasketForm->gtdMinMaxButton->setArrowType(Qt::UpArrow);
    mp_inBasketForm->inBasketListWidget->setFocus();
 }
 
@@ -456,6 +460,7 @@ void InBasketForm::on_gtdMinMaxButton_clicked()
    {
       setFixedHeight(41);
       mp_inBasketForm->gtdMinMaxButton->setArrowType(Qt::DownArrow);
+      mp_mainWindow->SetFocusInGTDTreeWidget();
    }
    else
    {
