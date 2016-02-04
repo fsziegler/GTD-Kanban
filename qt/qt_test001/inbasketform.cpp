@@ -249,6 +249,10 @@ void InBasketForm::keyPressEvent(QKeyEvent *event)
    {
       mp_mainWindow->SetFocusInGTDTreeWidget();
    }
+   else if((event->key() == Qt::Key_M) && (event->modifiers() == Qt::ALT))
+   {
+      on_gtdMinMaxButton_clicked();
+   }
 }
 
 void InBasketForm::dragEnterEvent(QDragEnterEvent *event)

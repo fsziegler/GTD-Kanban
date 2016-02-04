@@ -3,7 +3,7 @@
 
 #include<QTextEdit>
 
-class MainWindow;
+class InBasketForm;
 
 class GTDTextEdit : public QTextEdit
 {
@@ -18,6 +18,8 @@ protected:
 
 private:
    GTDTextEdit();
+
+   InBasketForm*    mp_inBasketForm;
 };
 
 #endif // GTDTEXTEDIT_H

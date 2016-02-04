@@ -8,6 +8,7 @@
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    : mp_mainWindow(mainWindow),
      m_dirtyFlag(false),
+     mp_editItem(nullptr),
      m_nonActionableTWI((QTreeWidget*) 0,
                         QStringList(QString("Non-Actionable"))),
      m_SomedayMaybeTWI((QTreeWidget*) 0,
@@ -66,6 +67,11 @@ GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    addChild(&m_projectsTWI, &m_projectPlansTWI, true, true);
    ResetDirtyFlag();
    expandAll();
+
+   setFocusPolicy(Qt::StrongFocus);
+
+   connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this,
+           SLOT(EditItem(QTreeWidgetItem*)));
 }
 
 GTDTreeWidget::~GTDTreeWidget()
@@ -182,6 +188,8 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
 void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child,
                              bool expand, bool topLevelItem)
 {
+   parent->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+   child->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
    if (!topLevelItem)
    {
       static const QBrush b(QColor(255, 255, 128));
@@ -230,54 +238,106 @@ void GTDTreeWidget::mousePressEvent(QMouseEvent* event)
 
 void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
 {
-   if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
+   if(nullptr != mp_editItem)
    {
-      mp_mainWindow->SetFocusInTextEdit();
-   }
-   else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
-   {
-      mp_mainWindow->SetFocusInListWidget();
-   }
-   else if(((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
-           || ((event->key() == Qt::Key_X) && (event->modifiers() == Qt::CTRL)))
-   {
-      QList<QTreeWidgetItem*> items = selectedItems();
-      for(auto itr: items)
+      openPersistentEditor(mp_editItem, 0);
+      if(event->key() == Qt::Key_Return/*Key_Enter*/)
       {
-         if(!itr->font(0).bold())
+         closePersistentEditor(mp_editItem, 0);
+         if(mp_editItem->text(0) != m_editItemStr)
          {
-            mp_mainWindow->getClipboardList().append(itr->text(0));
-            cout << mp_mainWindow->getClipboardList().size() << endl;
-            if(event->key() == Qt::Key_X)
+            ReloadTree();
+         }
+         mp_editItem = nullptr;
+      }
+      else if((event->key() == Qt::Key_Home)
+              || (event->key() == Qt::Key_End)
+//              || (event->key() == Qt::Key_Left)
+              || (event->key() == Qt::Key_Up)
+//              || (event->key() == Qt::Key_Right)
+              || (event->key() == Qt::Key_Down)
+              || (event->key() == Qt::Key_PageUp)
+              || (event->key() == Qt::Key_PageDown)
+             )
+      {
+         static int cnt(0);
+         cout << cnt++ << ") Disallowed key" << endl;
+      }
+      else
+      {
+         QTreeWidget::keyPressEvent(event);
+      }
+   }
+   else
+   {
+      if(event->key() == Qt::Key_F2)
+      {
+         EditItem(nullptr);
+         return;
+      }
+      else if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
+      {
+         mp_mainWindow->SetFocusInTextEdit();
+      }
+      else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
+      {
+         mp_mainWindow->SetFocusInListWidget();
+      }
+      else if(event->key() == Qt::Key_Delete)
+      {
+         QList<QTreeWidgetItem*> items = selectedItems();
+         for(auto itr: items)
+         {
+            if(!itr->font(0).bold())
             {
                QTreeWidgetItem* parent(itr->parent());
                delete parent->takeChild(parent->indexOfChild(itr));
             }
          }
+         ReloadTree();
       }
-      ReloadTree();
-   }
-   else if((event->key() == Qt::Key_V) && (event->modifiers() == Qt::CTRL))
-   {
-       QList<QTreeWidgetItem*> items = selectedItems();
-       if(0 == items.size())
-       {
-          return;
-       }
-       for(auto itr: mp_mainWindow->getClipboardList())
-       {
-          QStringList strings;
-          strings.append(itr);
-          QTreeWidgetItem* item = new QTreeWidgetItem(strings);
-          static const QBrush b(QColor(255, 255, 128));
-          item->setBackground(0, b);
-          items[0]->addChild(item);
-       }
-       mp_mainWindow->getClipboardList().clear();
-   }
-   else
-   {
-      QTreeWidget::keyPressEvent(event);
+      else if(((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
+              || ((event->key() == Qt::Key_X)
+                  && (event->modifiers() == Qt::CTRL)))
+      {
+         QList<QTreeWidgetItem*> items = selectedItems();
+         for(auto itr: items)
+         {
+            if(!itr->font(0).bold())
+            {
+               mp_mainWindow->getClipboardList().append(itr->text(0));
+               cout << mp_mainWindow->getClipboardList().size() << endl;
+               if(event->key() == Qt::Key_X)
+               {
+                  QTreeWidgetItem* parent(itr->parent());
+                  delete parent->takeChild(parent->indexOfChild(itr));
+               }
+            }
+         }
+         ReloadTree();
+      }
+      else if((event->key() == Qt::Key_V) && (event->modifiers() == Qt::CTRL))
+      {
+         QList<QTreeWidgetItem*> items = selectedItems();
+         if(0 == items.size())
+         {
+            return;
+         }
+         for(auto itr: mp_mainWindow->getClipboardList())
+         {
+            QStringList strings;
+            strings.append(itr);
+            QTreeWidgetItem* item = new QTreeWidgetItem(strings);
+            static const QBrush b(QColor(255, 255, 128));
+            item->setBackground(0, b);
+            items[0]->addChild(item);
+         }
+         mp_mainWindow->getClipboardList().clear();
+      }
+      else
+      {
+         QTreeWidget::keyPressEvent(event);
+      }
    }
 }
 
@@ -493,4 +553,25 @@ void GTDTreeWidget::onMenuAction(QAction* action)
    default:
       throw;
    }
+}
+
+void GTDTreeWidget::EditItem(QTreeWidgetItem *item)
+{
+   if(nullptr == item)
+   {
+      QList<QTreeWidgetItem*> items = selectedItems();
+      if(0 == items.size())
+      {
+         return;
+      }
+      mp_editItem = items.front();
+   }
+   else
+   {
+      mp_editItem = item;
+   }
+   m_editItemStr = mp_editItem->text(0);
+   QString statusMsg("Editing tree item. Press <Enter> to finish");
+   mp_mainWindow->ShowStatusMessage(statusMsg);
+   openPersistentEditor(mp_editItem, 0);
 }

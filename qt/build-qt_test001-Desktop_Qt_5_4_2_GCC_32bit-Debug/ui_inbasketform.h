@@ -47,6 +47,7 @@ public:
     QPushButton *doItButton;
     QGroupBox *ProjectsGroupBox;
     QToolButton *gtdMinMaxButton;
+    QLabel *label_4;
 
     void setupUi(QWidget *InBasketForm)
     {
@@ -126,6 +127,9 @@ public:
         gtdMinMaxButton->setObjectName(QStringLiteral("gtdMinMaxButton"));
         gtdMinMaxButton->setGeometry(QRect(470, 10, 23, 22));
         gtdMinMaxButton->setArrowType(Qt::UpArrow);
+        label_4 = new QLabel(InBasketForm);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(413, 14, 54, 15));
         groupBox_2->raise();
         groupBox->raise();
         ProjectsGroupBox->raise();
@@ -145,6 +149,7 @@ public:
         reEditSelectionButton->raise();
         doItButton->raise();
         gtdMinMaxButton->raise();
+        label_4->raise();
         QWidget::setTabOrder(inBasketTextEdit, reEditSelectionButton);
         QWidget::setTabOrder(reEditSelectionButton, inBasketListWidget);
         QWidget::setTabOrder(inBasketListWidget, somedayMaybeButton);
@@ -170,7 +175,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         somedayMaybeButton->setToolTip(QApplication::translate("InBasketForm", "Tickler file; hold for review", 0));
 #endif // QT_NO_TOOLTIP
-        somedayMaybeButton->setText(QApplication::translate("InBasketForm", "Someday &Maybe", 0));
+        somedayMaybeButton->setText(QApplication::translate("InBasketForm", "Someday Ma&ybe", 0));
 #ifndef QT_NO_TOOLTIP
         referenceButton->setToolTip(QApplication::translate("InBasketForm", "Retrievable when required", 0));
 #endif // QT_NO_TOOLTIP
@@ -214,6 +219,7 @@ public:
         doItButton->setText(QApplication::translate("InBasketForm", "&Do It!", 0));
         ProjectsGroupBox->setTitle(QApplication::translate("InBasketForm", "Projects", 0));
         gtdMinMaxButton->setText(QApplication::translate("InBasketForm", "...", 0));
+        label_4->setText(QApplication::translate("InBasketForm", "<u>M</u>in/Max", 0));
     } // retranslateUi
 
 };

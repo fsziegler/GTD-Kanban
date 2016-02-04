@@ -56,6 +56,9 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="actionMinimize"/>
+    <addaction name="actionMaximize"/>
+    <addaction name="actionRestore"/>
    </widget>
    <widget class="QMenu" name="menuWizard">
     <property name="title">
@@ -134,6 +137,21 @@
   <action name="action_Open">
    <property name="text">
     <string>&amp;Open</string>
+   </property>
+  </action>
+  <action name="actionMinimize">
+   <property name="text">
+    <string>M&amp;inimize</string>
+   </property>
+  </action>
+  <action name="actionMaximize">
+   <property name="text">
+    <string>M&amp;aximize</string>
+   </property>
+  </action>
+  <action name="actionRestore">
+   <property name="text">
+    <string>&amp;Restore</string>
    </property>
   </action>
  </widget>

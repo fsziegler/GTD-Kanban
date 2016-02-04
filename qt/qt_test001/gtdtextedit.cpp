@@ -1,10 +1,12 @@
 #include "gtdtextedit.h"
 #include "mainwindow.h"
+#include "inbasketform.h"
 #include <QDropEvent>
 #include <QApplication>
 
 GTDTextEdit::GTDTextEdit(QWidget* parent)
-   : QTextEdit(parent)
+   : QTextEdit(parent),
+     mp_inBasketForm((InBasketForm*)parent)
 {
 
 }
@@ -20,6 +22,11 @@ void GTDTextEdit::keyPressEvent(QKeyEvent *event)
    else if((event->key() == Qt::Key_3) && (event->modifiers() == Qt::ALT))
    {
       win->SetFocusInGTDTreeWidget();
+      return;
+   }
+   else if((event->key() == Qt::Key_M) && (event->modifiers() == Qt::ALT))
+   {
+      mp_inBasketForm->on_gtdMinMaxButton_clicked();
       return;
    }
 

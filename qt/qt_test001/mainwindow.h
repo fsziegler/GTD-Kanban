@@ -27,6 +27,7 @@ public:
 
 //    void PushDragText(const QString& dragStr);
 //    int PopDragText(QString& dragStr);
+   void ShowStatusMessage(QString& statusMsg) const;
 
    void SetFocusInTextEdit();
    void SetFocusInListWidget();
@@ -75,10 +76,15 @@ protected:
 
 private slots:
    void onCustomContextMenuRequested(const QPoint& pos);
+   void on_actionMinimize_triggered();
+   void on_actionMaximize_triggered();
+   void on_actionRestore_triggered();
+
 private:
    void ScaleAndCenterWindow(float scale);
 
    Ui::MainWindow*               ui;
+   Qt::WindowStates              m_defaultWindowState;
 
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;

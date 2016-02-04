@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
    setCentralWidget(mp_mainLRSplitter);
 
    ScaleAndCenterWindow(0.8);
+   m_defaultWindowState = windowState();
    UpdateRecentFilesMenu();
 
    mp_inBasketForm->SetFocusInTextEdit();
@@ -92,6 +93,11 @@ int MainWindow::PopDragText(QString& dragStr)
 }
 */
 
+void MainWindow::ShowStatusMessage(QString& statusMsg) const
+{
+   statusBar()->showMessage(statusMsg);
+}
+
 void MainWindow::SetFocusInTextEdit()
 {
    mp_inBasketForm->SetFocusInTextEdit();
@@ -114,7 +120,7 @@ QStringList& MainWindow::getDragStringList()
 
 QStringList& MainWindow::getClipboardList()
 {
-    return m_clipboardList;
+   return m_clipboardList;
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -442,4 +448,19 @@ void MainWindow::OpenRecentFile8()
 void MainWindow::OpenRecentFile9()
 {
    OpenFile(m_recentFileList[9]);
+}
+
+void MainWindow::on_actionMinimize_triggered()
+{
+   setWindowState(Qt::WindowMinimized);
+}
+
+void MainWindow::on_actionMaximize_triggered()
+{
+   setWindowState(Qt::WindowMaximized);
+}
+
+void MainWindow::on_actionRestore_triggered()
+{
+   setWindowState(m_defaultWindowState);
 }

@@ -64,7 +64,7 @@
     <string>Tickler file; hold for review</string>
    </property>
    <property name="text">
-    <string>Someday &amp;Maybe</string>
+    <string>Someday Ma&amp;ybe</string>
    </property>
   </widget>
   <widget class="QPushButton" name="referenceButton">
@@ -340,6 +340,19 @@ Another Person</string>
     <enum>Qt::UpArrow</enum>
    </property>
   </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>413</x>
+     <y>14</y>
+     <width>54</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;u&gt;M&lt;/u&gt;in/Max</string>
+   </property>
+  </widget>
   <zorder>groupBox_2</zorder>
   <zorder>groupBox</zorder>
   <zorder>ProjectsGroupBox</zorder>
@@ -359,6 +372,7 @@ Another Person</string>
   <zorder>reEditSelectionButton</zorder>
   <zorder>doItButton</zorder>
   <zorder>gtdMinMaxButton</zorder>
+  <zorder>label_4</zorder>
  </widget>
  <customwidgets>
   <customwidget>

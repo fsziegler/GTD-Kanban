@@ -3,6 +3,7 @@
 
 #include "../../code/UserData.h"
 #include "gtdtreewidget.h"
+#include "gtdtextedit.h"
 #include <QWidget>
 #include <QTreeWidget>
 #include <QListWidgetItem>
@@ -67,6 +68,8 @@ private:
    Ui::InBasketForm* mp_inBasketForm;
    MainWindow*       mp_mainWindow;
    GTDTreeWidget*    mp_gtdTree;
+
+   friend class GTDTextEdit;
 };
 
 #endif // INBASKETFORM_H

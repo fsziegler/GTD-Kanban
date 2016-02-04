@@ -35,6 +35,9 @@ public:
     QAction *action_New;
     QAction *actionAbout;
     QAction *action_Open;
+    QAction *actionMinimize;
+    QAction *actionMaximize;
+    QAction *actionRestore;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -69,6 +72,12 @@ public:
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         action_Open = new QAction(MainWindow);
         action_Open->setObjectName(QStringLiteral("action_Open"));
+        actionMinimize = new QAction(MainWindow);
+        actionMinimize->setObjectName(QStringLiteral("actionMinimize"));
+        actionMaximize = new QAction(MainWindow);
+        actionMaximize->setObjectName(QStringLiteral("actionMaximize"));
+        actionRestore = new QAction(MainWindow);
+        actionRestore->setObjectName(QStringLiteral("actionRestore"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -114,6 +123,9 @@ public:
         menuView->addAction(actionGTD);
         menuView->addAction(actionKanban);
         menuHelp->addAction(actionAbout);
+        menuHelp->addAction(actionMinimize);
+        menuHelp->addAction(actionMaximize);
+        menuHelp->addAction(actionRestore);
 
         retranslateUi(MainWindow);
 
@@ -135,6 +147,9 @@ public:
         action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
         actionAbout->setText(QApplication::translate("MainWindow", "&About", 0));
         action_Open->setText(QApplication::translate("MainWindow", "&Open", 0));
+        actionMinimize->setText(QApplication::translate("MainWindow", "M&inimize", 0));
+        actionMaximize->setText(QApplication::translate("MainWindow", "M&aximize", 0));
+        actionRestore->setText(QApplication::translate("MainWindow", "&Restore", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
         menuRecent_Files->setTitle(QApplication::translate("MainWindow", "Recent Files", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));

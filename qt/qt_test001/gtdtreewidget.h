@@ -61,28 +61,32 @@ protected:
 public slots:
    void onCustomContextMenuRequested(const QPoint& pos);
    void onMenuAction(QAction* action);
+   void EditItem(QTreeWidgetItem *item);
 
 private:
    // NOT IMPLEMENTED
    GTDTreeWidget();
 
-   MainWindow*     mp_mainWindow;
-   bool            m_dirtyFlag;
-   QTreeWidgetItem m_nonActionableTWI;
-   QTreeWidgetItem m_SomedayMaybeTWI;
-   QTreeWidgetItem m_ReferenceTWI;
-   QTreeWidgetItem m_TrashTWI;
+   MainWindow*      mp_mainWindow;
+   bool             m_dirtyFlag;
+   QTreeWidgetItem* mp_editItem;
+   QString          m_editItemStr;
 
-   QTreeWidgetItem m_actionableTWI;
-   QTreeWidgetItem m_tasksTWI;
-   QTreeWidgetItem m_DoItTWI;
-   QTreeWidgetItem m_WaitingOnSomeoneTWI;
-   QTreeWidgetItem m_CalendarTWI;
-   QTreeWidgetItem m_NextActionsTWI;
+   QTreeWidgetItem  m_nonActionableTWI;
+   QTreeWidgetItem  m_SomedayMaybeTWI;
+   QTreeWidgetItem  m_ReferenceTWI;
+   QTreeWidgetItem  m_TrashTWI;
 
-   QTreeWidgetItem m_projectsTWI;
-   QTreeWidgetItem m_projectsToPlanTWI;
-   QTreeWidgetItem m_projectPlansTWI;
+   QTreeWidgetItem  m_actionableTWI;
+   QTreeWidgetItem  m_tasksTWI;
+   QTreeWidgetItem  m_DoItTWI;
+   QTreeWidgetItem  m_WaitingOnSomeoneTWI;
+   QTreeWidgetItem  m_CalendarTWI;
+   QTreeWidgetItem  m_NextActionsTWI;
+
+   QTreeWidgetItem  m_projectsTWI;
+   QTreeWidgetItem  m_projectsToPlanTWI;
+   QTreeWidgetItem  m_projectPlansTWI;
 };
 
 #endif // GTDTREEWIDGET_H
