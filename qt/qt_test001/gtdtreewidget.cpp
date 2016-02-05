@@ -386,6 +386,69 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
    m_dirtyFlag = true;
 }
 
+void GTDTreeWidget::MoveUp()
+{
+}
+
+void GTDTreeWidget::MoveDown()
+{
+
+}
+
+void GTDTreeWidget::MoveToTop()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   if(0 < items.size())
+   {
+      while(0 < items.size())
+      {
+         QTreeWidgetItem* item = items.back();
+         QTreeWidgetItem* parent = item->parent();
+         parent->removeChild(item);
+         parent->insertChild(0, item);
+         items.removeLast();
+      }
+   }
+   ReloadTree();
+}
+
+void GTDTreeWidget::MoveToBottom()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   if(0 < items.size())
+   {
+      for(auto itr: items)
+      {
+         QTreeWidgetItem* parent = itr->parent();
+         parent->removeChild(itr);
+         parent->addChild(itr);
+      }
+   }
+   ReloadTree();
+}
+
+void GTDTreeWidget::SortAscending()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   for(auto itr: items)
+   {
+      QTreeWidgetItem* parent(itr->parent());
+      parent->sortChildren(0, Qt::AscendingOrder);
+   }
+   ReloadTree();
+}
+
+void GTDTreeWidget::SortDescending()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   for(auto itr: items)
+   {
+      QTreeWidgetItem* parent(itr->parent());
+      parent->sortChildren(0, Qt::DescendingOrder);
+   }
+   ReloadTree();
+}
+
 void GTDTreeWidget::Delete()
 {
    QList<QTreeWidgetItem*> items = selectedItems();
@@ -448,6 +511,50 @@ void GTDTreeWidget::Paste()
    ReloadTree();
 }
 
+void GTDTreeWidget::Link()
+{
+
+}
+
+void GTDTreeWidget::MoveUpLevel()
+{
+
+}
+
+void GTDTreeWidget::ExpandAll()
+{
+   m_nonActionableTWI.setExpanded(true);
+   m_SomedayMaybeTWI.setExpanded(true);
+   m_ReferenceTWI.setExpanded(true);
+   m_TrashTWI.setExpanded(true);
+   m_actionableTWI.setExpanded(true);
+   m_tasksTWI.setExpanded(true);
+   m_DoItTWI.setExpanded(true);
+   m_WaitingOnSomeoneTWI.setExpanded(true);
+   m_CalendarTWI.setExpanded(true);
+   m_NextActionsTWI.setExpanded(true);
+   m_projectsTWI.setExpanded(true);
+   m_projectsToPlanTWI.setExpanded(true);
+   m_projectPlansTWI.setExpanded(true);
+}
+
+void GTDTreeWidget::CollapseAll()
+{
+   m_nonActionableTWI.setExpanded(false);
+   m_SomedayMaybeTWI.setExpanded(false);
+   m_ReferenceTWI.setExpanded(false);
+   m_TrashTWI.setExpanded(false);
+   m_actionableTWI.setExpanded(false);
+   m_tasksTWI.setExpanded(false);
+   m_DoItTWI.setExpanded(false);
+   m_WaitingOnSomeoneTWI.setExpanded(false);
+   m_CalendarTWI.setExpanded(false);
+   m_NextActionsTWI.setExpanded(false);
+   m_projectsTWI.setExpanded(false);
+   m_projectsToPlanTWI.setExpanded(false);
+   m_projectPlansTWI.setExpanded(false);
+}
+
 void GTDTreeWidget::dropEvent(QDropEvent* event)
 {
    bool move(Qt::MoveAction == event->proposedAction());
@@ -478,6 +585,8 @@ enum EnumAction
    kMoveDown,
    kMoveToTop,
    kMoveToBottom,
+   kSortAscending,
+   kSortDescending,
    kDelete,
    kCut,
    kCopy,
@@ -494,13 +603,15 @@ struct SActionTextPair
    QString text;
 };
 
-const size_t SActionTextPairLen(12);
+const size_t SActionTextPairLen(14);
 const SActionTextPair actionTextPair[SActionTextPairLen] =
 {
    { kMoveUp, "Move Up" },
    { kMoveDown, "Move Down" },
    { kMoveToTop, "Move To Top" },
    { kMoveToBottom, "Move To Bottom" },
+   { kSortAscending, "Sort Ascending" },
+   { kSortDescending, "Sort Descending" },
    { kDelete, "Delete" },
    { kCut, "Cut" },
    { kCopy, "Copy" },
@@ -520,8 +631,6 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
       action->setData(actionTextPair[i].action);
       if((kMoveUp == actionTextPair[i].action)
             || (kMoveDown == actionTextPair[i].action)
-            || (kMoveToTop == actionTextPair[i].action)
-            || (kMoveToBottom == actionTextPair[i].action)
             || (kLink == actionTextPair[i].action)
             || (kMoveUpLevel == actionTextPair[i].action)
         )
@@ -538,17 +647,25 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
 
 void GTDTreeWidget::onMenuAction(QAction* action)
 {
-   int k = action->data().toInt();
-   cout << action->data().toInt() << endl;
    switch (action->data().toInt())
    {
    case kMoveUp:
+      MoveUp();
       break;
    case kMoveDown:
+      MoveDown();
       break;
    case kMoveToTop:
+      MoveToTop();
       break;
    case kMoveToBottom:
+      MoveToBottom();
+      break;
+   case kSortAscending:
+      SortAscending();
+      break;
+   case kSortDescending:
+      SortDescending();
       break;
    case kDelete:
       Delete();
@@ -563,38 +680,16 @@ void GTDTreeWidget::onMenuAction(QAction* action)
       Paste();
       break;
    case kLink:
+      Link();
       break;
    case kMoveUpLevel:
+      MoveUpLevel();
       break;
    case kExpandAll:
-      m_nonActionableTWI.setExpanded(true);
-      m_SomedayMaybeTWI.setExpanded(true);
-      m_ReferenceTWI.setExpanded(true);
-      m_TrashTWI.setExpanded(true);
-      m_actionableTWI.setExpanded(true);
-      m_tasksTWI.setExpanded(true);
-      m_DoItTWI.setExpanded(true);
-      m_WaitingOnSomeoneTWI.setExpanded(true);
-      m_CalendarTWI.setExpanded(true);
-      m_NextActionsTWI.setExpanded(true);
-      m_projectsTWI.setExpanded(true);
-      m_projectsToPlanTWI.setExpanded(true);
-      m_projectPlansTWI.setExpanded(true);
+      ExpandAll();
       break;
    case kCollapseAll:
-      m_nonActionableTWI.setExpanded(false);
-      m_SomedayMaybeTWI.setExpanded(false);
-      m_ReferenceTWI.setExpanded(false);
-      m_TrashTWI.setExpanded(false);
-      m_actionableTWI.setExpanded(false);
-      m_tasksTWI.setExpanded(false);
-      m_DoItTWI.setExpanded(false);
-      m_WaitingOnSomeoneTWI.setExpanded(false);
-      m_CalendarTWI.setExpanded(false);
-      m_NextActionsTWI.setExpanded(false);
-      m_projectsTWI.setExpanded(false);
-      m_projectsToPlanTWI.setExpanded(false);
-      m_projectPlansTWI.setExpanded(false);
+      CollapseAll();
       break;
    default:
       throw;

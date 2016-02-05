@@ -56,10 +56,20 @@ protected:
    // the contents of treeWidgetItem.
    void ReplaceCategoryTree(EnumGTDCategory category,
                             QTreeWidgetItem& treeWidgetItem);
+   void MoveUp();
+   void MoveDown();
+   void MoveToTop();
+   void MoveToBottom();
+   void SortAscending();
+   void SortDescending();
    void Delete();
    void Cut();
    void Copy();
    void Paste();
+   void Link();
+   void MoveUpLevel();
+   void ExpandAll();
+   void CollapseAll();
 
    void dropEvent(QDropEvent* event);
 
