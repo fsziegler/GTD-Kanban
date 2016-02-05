@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
      m_currentFileNameStr("[None]")
 {
    ui->setupUi(this);
-   setWindowTitle(QString("GTD-Kanban, by Fred Ziegler"));
+   setWindowTitle(QString("GTD-Kanban Prototype, by Fred Ziegler"));
    setMouseTracking(true);
 
    // Set up In-Basket form
@@ -158,7 +158,9 @@ void MainWindow::OpenFile(const QString& fileName)
 
    if(mp_inBasketForm->LoadFromFile(fileName))
    {
-      setWindowTitle(fileName);
+      QString titleStr("GTD-Kanban Prototype, by Fred Ziegler [");
+      titleStr.append(fileName).append("]");
+      setWindowTitle(titleStr);
       QString statusMsg("File \"");
       statusMsg.append(fileName).append("\" loaded ...");
       statusBar()->showMessage(statusMsg, 5000);
