@@ -289,54 +289,20 @@ void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
       }
       else if(event->key() == Qt::Key_Delete)
       {
-         QList<QTreeWidgetItem*> items = selectedItems();
-         for(auto itr: items)
-         {
-            if(!itr->font(0).bold())
-            {
-               QTreeWidgetItem* parent(itr->parent());
-               delete parent->takeChild(parent->indexOfChild(itr));
-            }
-         }
-         ReloadTree();
+         Delete();
       }
-      else if(((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
-              || ((event->key() == Qt::Key_X)
-                  && (event->modifiers() == Qt::CTRL)))
+      else if((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
       {
-         QList<QTreeWidgetItem*> items = selectedItems();
-         for(auto itr: items)
-         {
-            if(!itr->font(0).bold())
-            {
-               mp_mainWindow->getClipboardList().append(itr->text(0));
-               cout << mp_mainWindow->getClipboardList().size() << endl;
-               if(event->key() == Qt::Key_X)
-               {
-                  QTreeWidgetItem* parent(itr->parent());
-                  delete parent->takeChild(parent->indexOfChild(itr));
-               }
-            }
-         }
-         ReloadTree();
+         Copy();
+      }
+      else if((event->key() == Qt::Key_X)
+              && (event->modifiers() == Qt::CTRL))
+      {
+         Cut();
       }
       else if((event->key() == Qt::Key_V) && (event->modifiers() == Qt::CTRL))
       {
-         QList<QTreeWidgetItem*> items = selectedItems();
-         if(0 == items.size())
-         {
-            return;
-         }
-         for(auto itr: mp_mainWindow->getClipboardList())
-         {
-            QStringList strings;
-            strings.append(itr);
-            QTreeWidgetItem* item = new QTreeWidgetItem(strings);
-            static const QBrush b(QColor(255, 255, 128));
-            item->setBackground(0, b);
-            items[0]->addChild(item);
-         }
-         mp_mainWindow->getClipboardList().clear();
+         Paste();
       }
       else
       {
@@ -420,6 +386,68 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
    m_dirtyFlag = true;
 }
 
+void GTDTreeWidget::Delete()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   for(auto itr: items)
+   {
+      if(!itr->font(0).bold())
+      {
+         QTreeWidgetItem* parent(itr->parent());
+         delete parent->takeChild(parent->indexOfChild(itr));
+      }
+   }
+   ReloadTree();
+}
+
+void GTDTreeWidget::Cut()
+{
+   Copy();
+   QList<QTreeWidgetItem*> items = selectedItems();
+   for(auto itr: items)
+   {
+      if(!itr->font(0).bold())
+      {
+         QTreeWidgetItem* parent(itr->parent());
+         delete parent->takeChild(parent->indexOfChild(itr));
+      }
+   }
+   ReloadTree();
+}
+
+void GTDTreeWidget::Copy()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   for(auto itr: items)
+   {
+      if(!itr->font(0).bold())
+      {
+         mp_mainWindow->getClipboardList().append(itr->text(0));
+         cout << mp_mainWindow->getClipboardList().size() << endl;
+      }
+   }
+}
+
+void GTDTreeWidget::Paste()
+{
+   QList<QTreeWidgetItem*> items = selectedItems();
+   if(0 == items.size())
+   {
+      return;
+   }
+   for(auto itr: mp_mainWindow->getClipboardList())
+   {
+      QStringList strings;
+      strings.append(itr);
+      QTreeWidgetItem* item = new QTreeWidgetItem(strings);
+      static const QBrush b(QColor(255, 255, 128));
+      item->setBackground(0, b);
+      items[0]->addChild(item);
+   }
+   mp_mainWindow->getClipboardList().clear();
+   ReloadTree();
+}
+
 void GTDTreeWidget::dropEvent(QDropEvent* event)
 {
    bool move(Qt::MoveAction == event->proposedAction());
@@ -490,6 +518,16 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
    {
       QAction* action = new QAction(actionTextPair[i].text, this);
       action->setData(actionTextPair[i].action);
+      if((kMoveUp == actionTextPair[i].action)
+            || (kMoveDown == actionTextPair[i].action)
+            || (kMoveToTop == actionTextPair[i].action)
+            || (kMoveToBottom == actionTextPair[i].action)
+            || (kLink == actionTextPair[i].action)
+            || (kMoveUpLevel == actionTextPair[i].action)
+        )
+      {
+         action->setEnabled(false);
+      }
       menu->addAction(action);
    }
    connect(menu, SIGNAL(triggered(QAction*)), this,
@@ -513,12 +551,16 @@ void GTDTreeWidget::onMenuAction(QAction* action)
    case kMoveToBottom:
       break;
    case kDelete:
+      Delete();
       break;
    case kCut:
+      Cut();
       break;
    case kCopy:
+      Copy();
       break;
    case kPaste:
+      Paste();
       break;
    case kLink:
       break;

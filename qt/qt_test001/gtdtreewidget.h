@@ -56,6 +56,11 @@ protected:
    // the contents of treeWidgetItem.
    void ReplaceCategoryTree(EnumGTDCategory category,
                             QTreeWidgetItem& treeWidgetItem);
+   void Delete();
+   void Cut();
+   void Copy();
+   void Paste();
+
    void dropEvent(QDropEvent* event);
 
 public slots:
