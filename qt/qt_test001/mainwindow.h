@@ -32,6 +32,7 @@ public:
    void SetFocusInTextEdit();
    void SetFocusInListWidget();
    void SetFocusInGTDTreeWidget();
+   void MinMaxInBasket();
 
    QStringList& getDragStringList();
    QStringList& getClipboardList();

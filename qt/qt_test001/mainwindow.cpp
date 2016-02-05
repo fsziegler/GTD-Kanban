@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent)
    m_gtdTree.setContextMenuPolicy(Qt::CustomContextMenu);
    connect(&m_gtdTree, SIGNAL(customContextMenuRequested(const QPoint&)), this,
            SLOT(onCustomContextMenuRequested(const QPoint&)));
+
+   setWindowIcon(QIcon("/home/fred/.kde/share/icons/GTD-Kanban.ico"));
 }
 
 MainWindow::~MainWindow()
@@ -111,6 +113,11 @@ void MainWindow::SetFocusInListWidget()
 void MainWindow::SetFocusInGTDTreeWidget()
 {
    m_gtdTree.setFocus();
+}
+
+void MainWindow::MinMaxInBasket()
+{
+   mp_inBasketForm->MinMaxInBasket();
 }
 
 QStringList& MainWindow::getDragStringList()

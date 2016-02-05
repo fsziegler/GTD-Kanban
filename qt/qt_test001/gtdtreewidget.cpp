@@ -283,6 +283,10 @@ void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
       {
          mp_mainWindow->SetFocusInListWidget();
       }
+      else if((event->key() == Qt::Key_M) && (event->modifiers() == Qt::ALT))
+      {
+         mp_mainWindow->MinMaxInBasket();
+      }
       else if(event->key() == Qt::Key_Delete)
       {
          QList<QTreeWidgetItem*> items = selectedItems();

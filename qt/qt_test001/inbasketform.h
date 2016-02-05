@@ -39,6 +39,7 @@ public:
    bool LoadFromFile(const QString& jsonFileName);
    void SetFocusInTextEdit();
    void SetFocusInListWidget();
+   void MinMaxInBasket();
 
 Q_SIGNALS:
 protected:

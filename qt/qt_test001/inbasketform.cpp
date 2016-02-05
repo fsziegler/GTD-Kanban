@@ -216,6 +216,11 @@ void InBasketForm::SetFocusInListWidget()
    mp_inBasketForm->inBasketListWidget->setFocus();
 }
 
+void InBasketForm::MinMaxInBasket()
+{
+   on_gtdMinMaxButton_clicked();
+}
+
 void InBasketForm::mousePressEvent(QMouseEvent *event)
 {
    if (event->button() == Qt::LeftButton

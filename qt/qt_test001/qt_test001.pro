@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+RC_ICONS = /home/fred/.kde/share/icons/GTD-Kanban.ico
+
 DEFINES += BOOST_SYSTEM_NO_DEPRECATED
 win32{
 DEFINES += BOOST_ERROR_CODE_HEADER_ONLY
