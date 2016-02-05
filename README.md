@@ -24,7 +24,7 @@ A useful open-source brain-storming software tool for initially collecting all t
 In GTD, you start by identifying and classifying all of your issues. You initially create these in your **In-basket** and work through them one by one.
 
 ![Screenshot](GTD-Kanban Screenshot - GTD in-basket.png)
-*Screenshot showing an in-basket with some issues.*
+*Screenshot showing the in-basket populated with issues.*
 
 If an issue **is not** actionable, you move it into one of the following:
 -  **Trash**
@@ -54,8 +54,8 @@ Once you have processed your issues, you will have the following lists stored in
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
-![Screenshot](GTD-Kanban Screenshot.png)
-*Screenshot showing a GTD tree with issues organized according to GTD.*
+![Screenshot](GTD-Kanban Screenshot - GTD tree.png)
+*Screenshot showing the GTD tree populated with issues organized according to GTD.*
 
 #####Planning Projects
 `"Plans are worthless, but planning is everything."`
