@@ -131,7 +131,10 @@
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>&amp;About</string>
+    <string>A&amp;bout</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+B</string>
    </property>
   </action>
   <action name="action_Open">
@@ -143,15 +146,24 @@
    <property name="text">
     <string>M&amp;inimize</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+I</string>
+   </property>
   </action>
   <action name="actionMaximize">
    <property name="text">
-    <string>M&amp;aximize</string>
+    <string>Ma&amp;ximize</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+X</string>
    </property>
   </action>
   <action name="actionRestore">
    <property name="text">
     <string>&amp;Restore</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+R</string>
    </property>
   </action>
  </widget>

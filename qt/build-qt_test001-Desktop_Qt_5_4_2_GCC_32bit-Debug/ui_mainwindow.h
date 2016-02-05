@@ -145,11 +145,15 @@ public:
         actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0));
         action_New->setText(QApplication::translate("MainWindow", "&New", 0));
         action_New->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
-        actionAbout->setText(QApplication::translate("MainWindow", "&About", 0));
+        actionAbout->setText(QApplication::translate("MainWindow", "A&bout", 0));
+        actionAbout->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+B", 0));
         action_Open->setText(QApplication::translate("MainWindow", "&Open", 0));
         actionMinimize->setText(QApplication::translate("MainWindow", "M&inimize", 0));
-        actionMaximize->setText(QApplication::translate("MainWindow", "M&aximize", 0));
+        actionMinimize->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+I", 0));
+        actionMaximize->setText(QApplication::translate("MainWindow", "Ma&ximize", 0));
+        actionMaximize->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+X", 0));
         actionRestore->setText(QApplication::translate("MainWindow", "&Restore", 0));
+        actionRestore->setShortcut(QApplication::translate("MainWindow", "Ctrl+Shift+R", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
         menuRecent_Files->setTitle(QApplication::translate("MainWindow", "Recent Files", 0));
         menuView->setTitle(QApplication::translate("MainWindow", "&View", 0));
