@@ -1,6 +1,6 @@
 Copyright (c) 2015, 2016 Frederick S. Ziegler
 
-# GTD-Kanban
+#GTD-Kanban ![Screenshot](https://github.com/fsziegler/GTD-Kanban/blob/master/qt/qt_test001/GTD-Kanban.png)
 
 `"I must create a system or be enslaved by another man's; I will not reason and compare: my business is to create."`
 
