@@ -27,9 +27,9 @@ In GTD, you start by identifying and classifying all of your issues. You initial
 *Screenshot showing the GTD in-basket populated with issues.*
 
 If an issue **is not** actionable, you move it into one of the following:
--  **Trash**
 -  your **Someday Maybe** list
 -  your **Reference** list
+-  **Trash**
 
 at which point you ignore it, at least until some later date.
 
@@ -55,7 +55,7 @@ Once you have processed your issues, you will have the following lists stored in
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
 ![Screenshot](GTD-Kanban Screenshot - GTD tree.png)
-*Screenshot showing the GTD tree populated with issues organized according to GTD.*
+*Screenshot showing the GTD tree populated with issues organized according to GTD. The GTD in-basket has been minimized to show more of the tree.*
 
 #####Planning Projects
 `"Plans are worthless, but planning is everything."`
