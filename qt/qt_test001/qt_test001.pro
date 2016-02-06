@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     kanbanwidget.cpp \
     exitdialog.cpp \
     gtdtextedit.cpp \
-    gtdlistwidget.cpp
+    gtdlistwidget.cpp \
+    kanbantask.cpp
 unix {
 SOURCES += ../../code/UserData.cpp \
             ../../code/TreeNode.cpp \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     kanbanwidget.h \
     exitdialog.h \
     gtdtextedit.h \
-    gtdlistwidget.h
+    gtdlistwidget.h \
+    kanbantask.h
 unix {
 HEADERS += ../../code/UserData.h \
             ../../code/TreeNode.h   \

@@ -4,12 +4,26 @@
 #include <QFontMetrics>
 #include <QTreeWidget>
 
-KanbanWidget::KanbanWidget(QWidget *parent) : QWidget(parent)
+KanbanWidget::KanbanWidget(QWidget *parent)
+   : QWidget(parent),
+     m_testChild(this),
+     UpdateTimer(this)
 {
    setAutoFillBackground(true);
    QPalette Pal(palette());
-   Pal.setColor(QPalette::Background, QColor(255, 255, 128));
+   Pal.setColor(QPalette::Background, QColor(64, 128, 64));
    setPalette(Pal);
+
+   m_testChild.move(m_testChild.x() + 10, m_testChild.y() + 70);
+   m_testChild.show();
+   m_testChild.setFocus();
+   connect(&UpdateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
+   UpdateTimer.start(100);
+}
+
+const QPoint& KanbanWidget::childPos() const
+{
+   return m_testChild.pos();
 }
 
 void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
@@ -34,13 +48,14 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
    QRect readyRect(rect.left(), rect.top(), rect.right()/3, height);
    static const QBrush b(Qt::white);
    painter.setBackground(b);
+   painter.setBackgroundMode(Qt::BGMode::OpaqueMode);
    painter.fillRect(QRect(QPoint(0,0), rhsColHrd), b);
 
    // Draw outline rect & section dividers
    QBrush lineBrush(Qt::darkGray);
    painter.setPen(QPen(lineBrush, 6, Qt::SolidLine, Qt::SquareCap));
    painter.drawRect(rect);
-   painter.setPen(QPen(lineBrush, 4, Qt::DashDotLine, Qt::RoundCap));
+   painter.setPen(QPen(lineBrush, 2, Qt::DotLine, Qt::SquareCap));
    QPoint top1_3(rect.right()/3, rect.top());
    QPoint bottom1_3(rect.right()/3, rect.bottom());
    QPoint top2_3(2*rect.right()/3, rect.top());
