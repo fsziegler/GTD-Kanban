@@ -46,11 +46,13 @@ If an issue is a ***project***, then move it into your **Projects-to-Plan** list
 Once you have processed your issues, you will have the following lists stored in your **trusted system**:
 - your **Someday Maybe** list
 - your **Reference** list
+- **Trash**
+- your **DoIt!** list
 - your **Waiting for Another Person** list
-- Tasks in your **Calendar** on specific dates
+- tasks in your **Calendar** on specific dates
+- your **Next Actions** list
 - your **Projects-to-Plan** list
 - your **Project Plans** list
-- your **Next Actions** list
 
 Only your **Project Plans** and **Next Actions** lists contain **tasks** to work on at this point.
 
