@@ -7,7 +7,7 @@
 using namespace std;
 
 KanbanTask::KanbanTask(QWidget* parent)
-: QWidget(parent)
+   : QWidget(parent)
 {
    setAutoFillBackground(true);
    QPalette Pal(palette());
@@ -17,12 +17,6 @@ KanbanTask::KanbanTask(QWidget* parent)
    UpdateTimer.start(500);
 
    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-   parentWidget()->rect();
-//   setFixedWidth(1500);
-//   setFixedWidth(parentWidget()->width()/3);
-   setFixedSize(parentWidget()->width()/3, 100);
-
-//   setFixedWidth(parentWidget()->rect().right() - parentWidget()->rect().left());
 }
 
 void KanbanTask::mousePressEvent(QMouseEvent* event)
