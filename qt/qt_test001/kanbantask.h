@@ -10,6 +10,9 @@ class KanbanTask : public QWidget
 public:
    explicit KanbanTask(QWidget* parent = 0);
 
+   void setText(const QString& newText);
+   const QString& getText() const;
+
 signals:
 
 public slots:
@@ -29,6 +32,7 @@ private:
    QPoint m_currPos;
    QRegion m_initRegion;
    QRegion m_currRegion;
+   QString m_text;
    QTimer UpdateTimer;
 };
 

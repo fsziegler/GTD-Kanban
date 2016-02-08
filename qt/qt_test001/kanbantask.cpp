@@ -19,6 +19,33 @@ KanbanTask::KanbanTask(QWidget* parent)
    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 }
 
+void KanbanTask::setText(const QString& newText)
+{
+   m_text = newText;
+   const int lines = 1 + m_text.count(QLatin1Char('\n'));
+   int maxLen(0);
+   int cnt(0);
+   for(auto itr: m_text)
+   {
+      if('\n' != itr)
+      {
+         ++cnt;
+      }
+      else
+      {
+         maxLen = (maxLen < cnt ? cnt : maxLen);
+         cnt = 0;
+      }
+   }
+   QSize newSize(maxLen * 12, lines * 20);
+   resize(newSize);
+}
+
+const QString& KanbanTask::getText() const
+{
+   return m_text;
+}
+
 void KanbanTask::mousePressEvent(QMouseEvent* event)
 {
    m_initPos = event->pos();
@@ -82,7 +109,7 @@ void KanbanTask::paintEvent(QPaintEvent* pntEvent)
 
    painter.setPen(Qt::darkGray);
    painter.setFont(QFont("Arial", 11));
-   painter.drawText(rect, Qt::AlignCenter, "Kanban Task\n(I am draggable)");
+   painter.drawText(rect, Qt::AlignCenter, m_text);
    painter.setBackgroundMode(Qt::BGMode::OpaqueMode);
 
    QBrush lineBrush(Qt::black);

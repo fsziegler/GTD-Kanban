@@ -16,6 +16,7 @@ KanbanWidget::KanbanWidget(QWidget *parent)
 
    m_readyList.append(new KanbanTask(this));
    KanbanTask* testChild = m_readyList.front();
+   testChild->setText("Kanban Task\n(I am draggable)\n(I am draggable)\n(I am draggable)");
    m_readyList.front()->move(testChild->x() + 10, testChild->y() + 70);
    m_readyList.front()->show();
    m_readyList.front()->setFocus();
