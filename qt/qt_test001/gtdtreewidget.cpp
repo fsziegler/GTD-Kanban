@@ -188,10 +188,12 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
 void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child,
                              bool expand, bool topLevelItem)
 {
-   parent->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-   child->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+   parent->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDropEnabled);
+   child->setFlags(Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDropEnabled);
+
    if (!topLevelItem)
    {
+      child->setFlags(child->flags() | Qt::ItemIsDragEnabled);
       static const QBrush b(QColor(255, 255, 128));
       child->setBackground(0, b);
    }
