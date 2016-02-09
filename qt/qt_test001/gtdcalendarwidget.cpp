@@ -69,9 +69,9 @@ void GTDCalendarWidget::paintCell(QPainter *painter, const QRect &rect,
    QCalendarWidget::paintCell(painter, rect, date);
 
    painter->save();
-   painter->setPen(Qt::blue);
-   painter->setFont(QFont("Arial", 12));
-   painter->drawText(rect, Qt::AlignRight, "Qt");
+   painter->setPen(QColor(0, 94, 166));
+   painter->setFont(QFont("Arial", 6));
+   painter->drawText(rect, Qt::AlignRight, "GTD");
    painter->restore();
 
    /*
