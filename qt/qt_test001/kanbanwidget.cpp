@@ -321,7 +321,7 @@ void KanbanWidget::AutoArrange(const QRegion& region, QList<KanbanTask*>& list)
    {
       return;
    }
-   // Center all items so horizontal position wiil not change
+   // Center all items so horizontal position will not change
    for(auto itr: list)
    {
       itr->Center(region.boundingRect().center());
