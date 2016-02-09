@@ -130,25 +130,6 @@ QStringList& MainWindow::getClipboardList()
    return m_clipboardList;
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
-   QMainWindow::mousePressEvent(event);
-   mp_gtdCalendar->mousePressEvent(event);
-}
-
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
-{
-   std::cout << "(" << event->pos().x() << ", " << event->pos().y() << "), ("
-             << event->pos().rx() << ", " << event->pos().ry() << ")"
-             << std::endl;
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-   on_actionExit_triggered();
-   QWidget::closeEvent(event);
-}
-
 void MainWindow::OpenFile(const QString& fileName)
 {
    m_gtdTextEditor.clear();
@@ -299,9 +280,45 @@ void MainWindow::on_actionExit_triggered()
    QApplication::quit();
 }
 
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+   QMainWindow::mousePressEvent(event);
+   mp_gtdCalendar->mousePressEvent(event);
+}
+
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
    QWidget::mouseReleaseEvent(event);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+   if((event->key() == Qt::Key_1) && (event->modifiers() == Qt::ALT))
+   {
+      SetFocusInTextEdit();
+   }
+   else if((event->key() == Qt::Key_2) && (event->modifiers() == Qt::ALT))
+   {
+      SetFocusInListWidget();
+   }
+   else if((event->key() == Qt::Key_3) && (event->modifiers() == Qt::ALT))
+   {
+      SetFocusInGTDTreeWidget();
+   }
+   else if((event->key() == Qt::Key_M) && (event->modifiers() == Qt::ALT))
+   {
+      MinMaxInBasket();
+   }
+   else
+   {
+      QWidget::keyPressEvent(event);
+   }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+   on_actionExit_triggered();
+   QWidget::closeEvent(event);
 }
 
 void MainWindow::onCustomContextMenuRequested(const QPoint& pos)

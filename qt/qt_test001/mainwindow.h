@@ -38,10 +38,6 @@ public:
    QStringList& getClipboardList();
 
 protected:
-   void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-   void mouseMoveEvent(QMouseEvent *event);
-   void closeEvent(QCloseEvent *event);
-
    void OpenFile(const QString& fileName);
    void AddToFileHistory(const QString& fileName);
    void UpdateRecentFilesMenu();
@@ -69,11 +65,10 @@ private slots:
 Q_SIGNALS:
 protected:
    // Event handlers
-//    bool event(QEvent *);
-//    virtual void mousePressEvent(QMouseEvent *);
-   virtual void mouseReleaseEvent(QMouseEvent *);
-//    virtual void mouseDoubleClickEvent(QMouseEvent *);
-//    virtual void mouseMoveEvent(QMouseEvent *);
+   virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+   virtual void mouseReleaseEvent(QMouseEvent* event);
+   virtual void keyPressEvent(QKeyEvent* event);
+   virtual void closeEvent(QCloseEvent* event);
 
 private slots:
    void onCustomContextMenuRequested(const QPoint& pos);
