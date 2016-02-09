@@ -231,6 +231,7 @@ DIST          = /opt/Qt5.4.2/5.4/gcc/mkspecs/features/spec_pre.prf \
 		../qt_test001/gtdtextedit.h \
 		../qt_test001/gtdlistwidget.h \
 		../qt_test001/kanbantask.h \
+		../qt_test001/actionmenuitems.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h ../qt_test001/main.cpp \
@@ -543,7 +544,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt_test001/mainwindow.h ../qt_test001/inbasketform.h ../qt_test001/gtdtreewidget.h ../qt_test001/kanbancalendardialog.h ../qt_test001/gtdcalendarwidget.h ../qt_test001/aboutdialog.h ../qt_test001/kanbanwidget.h ../qt_test001/exitdialog.h ../qt_test001/gtdtextedit.h ../qt_test001/gtdlistwidget.h ../qt_test001/kanbantask.h ../../code/UserData.h ../../code/TreeNode.h ../../code/BoostJSON.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt_test001/mainwindow.h ../qt_test001/inbasketform.h ../qt_test001/gtdtreewidget.h ../qt_test001/kanbancalendardialog.h ../qt_test001/gtdcalendarwidget.h ../qt_test001/aboutdialog.h ../qt_test001/kanbanwidget.h ../qt_test001/exitdialog.h ../qt_test001/gtdtextedit.h ../qt_test001/gtdlistwidget.h ../qt_test001/kanbantask.h ../qt_test001/actionmenuitems.h ../../code/UserData.h ../../code/TreeNode.h ../../code/BoostJSON.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt_test001/main.cpp ../qt_test001/mainwindow.cpp ../qt_test001/inbasketform.cpp ../qt_test001/gtdtreewidget.cpp ../qt_test001/kanbancalendardialog.cpp ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/aboutdialog.cpp ../qt_test001/kanbanwidget.cpp ../qt_test001/exitdialog.cpp ../qt_test001/gtdtextedit.cpp ../qt_test001/gtdlistwidget.cpp ../qt_test001/kanbantask.cpp ../../code/UserData.cpp ../../code/TreeNode.cpp ../../code/BoostJSON.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt_test001/mainwindow.ui ../qt_test001/inbasketform.ui ../qt_test001/kanbancalendardialog.ui ../qt_test001/aboutdialog.ui ../qt_test001/exitdialog.ui $(DISTDIR)/
 
@@ -721,6 +722,9 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -1449,6 +1453,9 @@ moc_kanbanwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		../qt_test001/kanbanwidget.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbanwidget.h -o moc_kanbanwidget.cpp
@@ -1903,6 +1910,9 @@ moc_kanbantask.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbantask.h -o moc_kanbantask.cpp
 
@@ -2320,6 +2330,9 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -2487,6 +2500,9 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -2720,6 +2736,9 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -2888,6 +2907,9 @@ gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -2895,6 +2917,7 @@ gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qsplitter.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPointer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qpointer.h \
+		../qt_test001/actionmenuitems.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMessageBox \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmessagebox.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
@@ -3216,6 +3239,9 @@ gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalend
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -3477,13 +3503,16 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPaintEvent \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QFontMetrics \
+		../qt_test001/mainwindow.h \
+		../qt_test001/inbasketform.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
+		../../code/BoostJSON.h \
+		../qt_test001/gtdtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
@@ -3504,7 +3533,46 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		../qt_test001/gtdcalendarwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qdatetime.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTime \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QMouseEvent \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPoint \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qsplitter.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPointer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qpointer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPaintEvent \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QFontMetrics \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QtDebug \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qeventloop.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qguiapplication.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kanbanwidget.o ../qt_test001/kanbanwidget.cpp
 
 exitdialog.o: ../qt_test001/exitdialog.cpp ../qt_test001/exitdialog.h \
@@ -3806,6 +3874,9 @@ gtdtextedit.o: ../qt_test001/gtdtextedit.cpp ../qt_test001/gtdtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
@@ -4048,7 +4119,16 @@ kanbantask.o: ../qt_test001/kanbantask.cpp ../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfile.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
+		../qt_test001/kanbanwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPaintEvent \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kanbantask.o ../qt_test001/kanbantask.cpp
 
 UserData.o: ../../code/UserData.cpp ../../code/UserData.h \

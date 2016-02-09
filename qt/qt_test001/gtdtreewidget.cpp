@@ -1,5 +1,6 @@
 #include "gtdtreewidget.h"
 #include "mainwindow.h"
+#include "actionmenuitems.h"
 #include <QMessageBox>
 #include <QDrag>
 #include <QMimeData>
@@ -580,49 +581,6 @@ void GTDTreeWidget::dropEvent(QDropEvent* event)
    ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
    m_dirtyFlag = true;
 }
-
-enum EnumAction
-{
-   kMoveUp,
-   kMoveDown,
-   kMoveToTop,
-   kMoveToBottom,
-   kSortAscending,
-   kSortDescending,
-   kDelete,
-   kCut,
-   kCopy,
-   kPaste,
-   kLink,
-   kMoveUpLevel,
-   kExpandAll,
-   kCollapseAll,
-};
-
-struct SActionTextPair
-{
-   EnumAction action;
-   QString text;
-};
-
-const size_t SActionTextPairLen(14);
-const SActionTextPair actionTextPair[SActionTextPairLen] =
-{
-   { kMoveUp, "Move Up" },
-   { kMoveDown, "Move Down" },
-   { kMoveToTop, "Move To Top" },
-   { kMoveToBottom, "Move To Bottom" },
-   { kSortAscending, "Sort Ascending" },
-   { kSortDescending, "Sort Descending" },
-   { kDelete, "Delete" },
-   { kCut, "Cut" },
-   { kCopy, "Copy" },
-   { kPaste, "Paste" },
-   { kLink, "Link" },
-   { kMoveUpLevel, "Move Up Level" },
-   { kExpandAll, "Expand All" },
-   { kCollapseAll, "Collapse All" },
-};
 
 void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
 {

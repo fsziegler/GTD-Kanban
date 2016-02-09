@@ -29,7 +29,15 @@ public slots:
 Q_SIGNALS:
 protected:
    // Event handlers
-   virtual void paintEvent(QPaintEvent *);
+   virtual void paintEvent(QPaintEvent* event);
+   virtual void contextMenuEvent(QContextMenuEvent* event);
+
+protected:
+   void Delete();
+   void Cut();
+   void Copy();
+   void Paste();
+   void Link();
 
 private:
    void UpdateRegion(const QRect& inRect, QRegion& outRegion);

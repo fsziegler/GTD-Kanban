@@ -324,6 +324,8 @@ void MainWindow::on_action_New_triggered()
               "The file has changed since your last save.\nWould you like to "
               "save before opening a new file?");
    statusBar()->showMessage("New File ...", 5000);
+   QString titleStr("GTD-Kanban Prototype, by Fred Ziegler [New File]");
+   setWindowTitle(titleStr);
    m_gtdTextEditor.clear();
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
@@ -366,6 +368,9 @@ void MainWindow::on_actionSave_As_triggered()
       QString msg("Save As ");
       msg.append(fileName);
       statusBar()->showMessage(msg, 5000);
+      QString titleStr("GTD-Kanban Prototype, by Fred Ziegler [");
+      titleStr.append(fileName).append("]");
+      setWindowTitle(titleStr);
       m_gtdTree.ReloadTree();
       UserData::getInst().DumpAllToJSONFile(fileName.toStdString());
       AddToFileHistory(fileName);

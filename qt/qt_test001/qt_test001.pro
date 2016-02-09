@@ -60,7 +60,8 @@ HEADERS  += mainwindow.h \
     exitdialog.h \
     gtdtextedit.h \
     gtdlistwidget.h \
-    kanbantask.h
+    kanbantask.h \
+    actionmenuitems.h
 unix {
 HEADERS += ../../code/UserData.h \
             ../../code/TreeNode.h   \

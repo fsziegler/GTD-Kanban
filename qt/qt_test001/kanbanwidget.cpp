@@ -1,9 +1,11 @@
 #include "kanbanwidget.h"
+#include "actionmenuitems.h"
 #include <QPainter>
 #include <QPaintEvent>
-#include <QFontMetrics>
 #include <QTreeWidget>
-#include <QtDebug>
+#include <QApplication>
+#include <QMenu>
+#include <QWindow>
 
 KanbanWidget::KanbanWidget(QWidget *parent)
    : QWidget(parent),
@@ -105,6 +107,58 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
 
    painter.restore();
    QWidget::paintEvent(pntEvent);
+}
+
+void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
+{
+   QMenu* menu = new QMenu(this);
+   for (size_t i = 6; 11 > i; ++i)
+   {
+      QAction* action = new QAction(actionTextPair[i].text, this);
+      action->setData(actionTextPair[i].action);
+      if((kDelete == actionTextPair[i].action)
+            || (kCut == actionTextPair[i].action)
+            || (kCopy == actionTextPair[i].action)
+            || (kLink == actionTextPair[i].action)
+        )
+      {
+         action->setEnabled(false);
+      }
+      menu->addAction(action);
+   }
+   connect(menu, SIGNAL(triggered(QAction*)), this,
+           SLOT(onMenuAction(QAction*)));
+
+   QPoint pos0 = QApplication::topLevelWindows().front()->position();
+   pos0.setY(pos0.y() - QApplication::style()->pixelMetric(
+                QStyle::PM_TitleBarHeight));
+   QPoint pos1(mapFromGlobal(QApplication::activeWindow()->pos()));
+   menu->popup(mapFromGlobal(QCursor::pos()) + pos0 - pos1);
+}
+
+void KanbanWidget::Delete()
+{
+
+}
+
+void KanbanWidget::Cut()
+{
+
+}
+
+void KanbanWidget::Copy()
+{
+
+}
+
+void KanbanWidget::Paste()
+{
+
+}
+
+void KanbanWidget::Link()
+{
+
 }
 
 void KanbanWidget::UpdateRegion(const QRect& inRect, QRegion& outRegion)
