@@ -19,12 +19,12 @@ Q_OBJECT
 public:
    explicit KanbanWidget(QWidget *parent = 0);
 
-   const QPoint& childPos() const;
    const QRegion& GetKanbanStateRegion(EnumKanbanState state);
 
 signals:
 
 public slots:
+   void onMenuAction(QAction* action);
 
 Q_SIGNALS:
 protected:

@@ -1,4 +1,5 @@
 #include "kanbanwidget.h"
+#include "mainwindow.h"
 #include "actionmenuitems.h"
 #include <QPainter>
 #include <QPaintEvent>
@@ -26,11 +27,6 @@ KanbanWidget::KanbanWidget(QWidget *parent)
    UpdateTimer.start(100);
 }
 
-const QPoint& KanbanWidget::childPos() const
-{
-   return m_readyList.front()->pos();
-}
-
 const QRegion& KanbanWidget::GetKanbanStateRegion(EnumKanbanState state)
 {
    UpdateRegions();
@@ -46,6 +42,30 @@ const QRegion& KanbanWidget::GetKanbanStateRegion(EnumKanbanState state)
       break;
    }
    throw;
+}
+
+void KanbanWidget::onMenuAction(QAction* action)
+{
+   switch (action->data().toInt())
+   {
+   case kDelete:
+      Delete();
+      break;
+   case kCut:
+      Cut();
+      break;
+   case kCopy:
+      Copy();
+      break;
+   case kPaste:
+      Paste();
+      break;
+   case kLink:
+      Link();
+      break;
+   default:
+      throw;
+   }
 }
 
 void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
@@ -153,7 +173,18 @@ void KanbanWidget::Copy()
 
 void KanbanWidget::Paste()
 {
-
+   MainWindow * win = (MainWindow *) QApplication::activeWindow();
+   KanbanTask* testChild = m_readyList.front();
+   for(auto itr: win->getClipboardList())
+   {
+      KanbanTask* task = new KanbanTask(this);
+      task->setText(itr);
+      m_readyList.push_back(task);
+      m_readyList.back()->move(testChild->x() + 20, testChild->y() + 80);
+      m_readyList.back()->show();
+      m_readyList.back()->setFocus();
+   }
+   win->getClipboardList().clear();
 }
 
 void KanbanWidget::Link()

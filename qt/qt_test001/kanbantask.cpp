@@ -21,20 +21,28 @@ KanbanTask::KanbanTask(QWidget* parent)
 
 void KanbanTask::setText(const QString& newText)
 {
+   static const int kMinLines(2);
    m_text = newText;
-   const int lines = 1 + m_text.count(QLatin1Char('\n'));
+   const int lines = kMinLines + m_text.count(QLatin1Char('\n'));
    int maxLen(0);
    int cnt(0);
-   for(auto itr: m_text)
+   if(kMinLines == lines)
    {
-      if('\n' != itr)
+      maxLen = m_text.length();
+   }
+   else
+   {
+      for(auto itr: m_text)
       {
-         ++cnt;
-      }
-      else
-      {
-         maxLen = (maxLen < cnt ? cnt : maxLen);
-         cnt = 0;
+         if('\n' != itr)
+         {
+            ++cnt;
+         }
+         else
+         {
+            maxLen = (maxLen < cnt ? cnt : maxLen);
+            cnt = 0;
+         }
       }
    }
    QSize newSize(maxLen * 12, lines * 20);

@@ -468,12 +468,12 @@ void GTDTreeWidget::Delete()
 
 void GTDTreeWidget::Cut()
 {
-   Copy();
    QList<QTreeWidgetItem*> items = selectedItems();
    for(auto itr: items)
    {
       if(!itr->font(0).bold())
       {
+         mp_mainWindow->getClipboardList().append(itr->text(0));
          QTreeWidgetItem* parent(itr->parent());
          delete parent->takeChild(parent->indexOfChild(itr));
       }
