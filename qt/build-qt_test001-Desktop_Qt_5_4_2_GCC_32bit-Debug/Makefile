@@ -576,11 +576,9 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
@@ -684,6 +682,16 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -698,20 +706,14 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -722,10 +724,10 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -738,11 +740,9 @@ moc_mainwindow.cpp: ../qt_test001/inbasketform.h \
 moc_inbasketform.cpp: ../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
@@ -846,6 +846,16 @@ moc_inbasketform.cpp: ../../code/UserData.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -860,20 +870,14 @@ moc_inbasketform.cpp: ../../code/UserData.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/inbasketform.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/inbasketform.h -o moc_inbasketform.cpp
 
@@ -1351,7 +1355,8 @@ moc_aboutdialog.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		../qt_test001/aboutdialog.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/aboutdialog.h -o moc_aboutdialog.cpp
 
-moc_kanbanwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
+moc_kanbanwidget.cpp: ../qt_test001/kanbantask.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qglobal.h \
@@ -1456,7 +1461,9 @@ moc_kanbanwidget.cpp: /opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
+		../../code/BoostJSON.h \
 		../qt_test001/kanbanwidget.h
 	/opt/Qt5.4.2/5.4/gcc/bin/moc $(DEFINES) -I/opt/Qt5.4.2/5.4/gcc/mkspecs/linux-g++ -I/home/fred/dev/GTD-Kanban/qt/qt_test001 -I/opt/Qt5.4.2/5.4/gcc/include -I/opt/Qt5.4.2/5.4/gcc/include/QtWidgets -I/opt/Qt5.4.2/5.4/gcc/include/QtGui -I/opt/Qt5.4.2/5.4/gcc/include/QtCore -I. ../qt_test001/kanbanwidget.h -o moc_kanbanwidget.cpp
 
@@ -2184,11 +2191,9 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
@@ -2292,6 +2297,16 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -2306,20 +2321,14 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -2330,10 +2339,10 @@ main.o: ../qt_test001/main.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -2354,11 +2363,9 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
@@ -2462,6 +2469,16 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -2476,20 +2493,14 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -2500,10 +2511,10 @@ mainwindow.o: ../qt_test001/mainwindow.cpp ../qt_test001/mainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -2559,11 +2570,9 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
@@ -2667,6 +2676,16 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qfiledevice.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qvector2d.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -2681,20 +2700,14 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		ui_inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QVariant \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QAction \
@@ -2720,8 +2733,6 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractbutton.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QToolButton \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtoolbutton.h \
-		../qt_test001/gtdlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
 		../qt_test001/kanbancalendardialog.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QDialog \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
@@ -2736,10 +2747,10 @@ inbasketform.o: ../qt_test001/inbasketform.cpp ../qt_test001/inbasketform.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -2893,10 +2904,12 @@ gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -2907,10 +2920,10 @@ gtdtreewidget.o: ../qt_test001/gtdtreewidget.cpp ../qt_test001/gtdtreewidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -3204,13 +3217,20 @@ gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalend
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -3225,24 +3245,19 @@ gtdcalendarwidget.o: ../qt_test001/gtdcalendarwidget.cpp ../qt_test001/gtdcalend
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -3401,6 +3416,7 @@ aboutdialog.o: ../qt_test001/aboutdialog.cpp ../qt_test001/aboutdialog.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aboutdialog.o ../qt_test001/aboutdialog.cpp
 
 kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindowdefs.h \
@@ -3506,19 +3522,26 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
-		../qt_test001/mainwindow.h \
-		../qt_test001/inbasketform.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
+		../qt_test001/mainwindow.h \
+		../qt_test001/inbasketform.h \
+		../qt_test001/gtdtextedit.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractscrollarea.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qframe.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemdelegate.h \
@@ -3533,19 +3556,13 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
-		../qt_test001/gtdtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTextEdit \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtextedit.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextdocument.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextoption.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextcursor.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qtextformat.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpen.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -3561,18 +3578,29 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qsplitter.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QPointer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qpointer.h \
+		../qt_test001/actionmenuitems.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPaintEvent \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QFontMetrics \
-		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QtDebug \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QApplication \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qapplication.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qcoreapplication.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qeventloop.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qguiapplication.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qinputmethod.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMenu \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmenu.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qaction.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qactiongroup.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QWindow \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qwindow.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QObject \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QEvent \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QMargins \
+		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QRect \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qsurface.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qsurfaceformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kanbanwidget.o ../qt_test001/kanbanwidget.cpp
 
 exitdialog.o: ../qt_test001/exitdialog.cpp ../qt_test001/exitdialog.h \
@@ -3839,10 +3867,10 @@ gtdtextedit.o: ../qt_test001/gtdtextedit.cpp ../qt_test001/gtdtextedit.h \
 		../../code/UserData.h \
 		../../code/TreeNode.h \
 		../../code/BoostJSON.h \
-		../qt_test001/gtdtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
+		../qt_test001/gtdlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qitemselectionmodel.h \
@@ -3858,12 +3886,14 @@ gtdtextedit.o: ../qt_test001/gtdtextedit.cpp ../qt_test001/gtdtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabbar.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qrubberband.h \
+		../qt_test001/gtdtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QTreeWidget \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidget.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreeview.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qtreewidgetitemiterator.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QDropEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QListWidgetItem \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistwidget.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlistview.h \
 		../qt_test001/gtdcalendarwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QCalendarWidget \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qcalendarwidget.h \
@@ -3874,10 +3904,10 @@ gtdtextedit.o: ../qt_test001/gtdtextedit.cpp ../qt_test001/gtdtextedit.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPen \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QBrush \
 		../qt_test001/kanbanwidget.h \
+		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QTimer \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
-		../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QMainWindow \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QSplitter \
@@ -4124,6 +4154,9 @@ kanbantask.o: ../qt_test001/kanbantask.cpp ../qt_test001/kanbantask.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qtimer.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/qbasictimer.h \
 		../qt_test001/kanbanwidget.h \
+		../../code/UserData.h \
+		../../code/TreeNode.h \
+		../../code/BoostJSON.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPaintEvent \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/QPainter \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qpainter.h \

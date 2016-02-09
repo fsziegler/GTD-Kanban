@@ -8,7 +8,6 @@
 
 GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    : mp_mainWindow(mainWindow),
-     m_dirtyFlag(false),
      mp_editItem(nullptr),
      m_nonActionableTWI((QTreeWidget*) 0,
                         QStringList(QString("Non-Actionable"))),
@@ -66,7 +65,6 @@ GTDTreeWidget::GTDTreeWidget(MainWindow* mainWindow)
    addChild(&m_actionableTWI, &m_projectsTWI, true, true);
    addChild(&m_projectsTWI, &m_projectsToPlanTWI, true, true);
    addChild(&m_projectsTWI, &m_projectPlansTWI, true, true);
-   ResetDirtyFlag();
    expandAll();
 
    setFocusPolicy(Qt::StrongFocus);
@@ -94,11 +92,6 @@ bool GTDTreeWidget::IsValidGTDTreeCategory(EnumGTDCategory category) const
       return false;
    }
    return true;
-}
-
-bool GTDTreeWidget::IsDirty() const
-{
-   return m_dirtyFlag;
 }
 
 QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
@@ -144,7 +137,7 @@ void GTDTreeWidget::ClearTree()
 
    childList = m_projectsToPlanTWI.takeChildren();
    childList = m_projectPlansTWI.takeChildren();
-   m_dirtyFlag = true;
+   mp_mainWindow->setDirtyFlag(true);
 }
 
 void GTDTreeWidget::ReloadTree()
@@ -168,8 +161,12 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, EnumGTDCategory category)
       return false;
    }
    QTreeWidgetItem* twi = GetTreeWidgetItem(category);
-   m_dirtyFlag = true;
-   return AddNode(node, twi);
+   if(nullptr != twi)
+   {
+      mp_mainWindow->setDirtyFlag(true);
+      return AddNode(node, twi);
+   }
+   return false;
 }
 
 bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
@@ -182,7 +179,7 @@ bool GTDTreeWidget::AddNode(const TreeNode& node, QTreeWidgetItem* twi)
       AddNode(itr, childItem);
       addChild(twi, childItem, itr.getExpandState());
    }
-   m_dirtyFlag = true;
+   mp_mainWindow->setDirtyFlag(true);
    return true;
 }
 
@@ -203,12 +200,7 @@ void GTDTreeWidget::addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child,
    {
       expandItem(child);
    }
-   m_dirtyFlag = true;
-}
-
-void GTDTreeWidget::ResetDirtyFlag()
-{
-   m_dirtyFlag = false;
+   mp_mainWindow->setDirtyFlag(true);
 }
 
 bool GTDTreeWidget::AreTWIsEqual(const QTreeWidgetItem* lhs,
@@ -376,7 +368,7 @@ void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
       }
       ++cnt;
    }
-   m_dirtyFlag = true;
+   mp_mainWindow->setDirtyFlag(true);
 }
 
 void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
@@ -386,7 +378,7 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
    PopulateChildren(treeWidgetItem, node);
    UserData::getInst().ReplaceCategoryTree(category, node.getChildren());
    UserData::getInst().DumpGTDCategory(category);
-   m_dirtyFlag = true;
+   mp_mainWindow->setDirtyFlag(true);
 }
 
 void GTDTreeWidget::MoveUp()
@@ -579,7 +571,7 @@ void GTDTreeWidget::dropEvent(QDropEvent* event)
    ReplaceCategoryTree(EnumGTDCategory::kNextActions, m_NextActionsTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectsToPlan, m_projectsToPlanTWI);
    ReplaceCategoryTree(EnumGTDCategory::kProjectPlans, m_projectPlansTWI);
-   m_dirtyFlag = true;
+   mp_mainWindow->setDirtyFlag(true);
 }
 
 void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)

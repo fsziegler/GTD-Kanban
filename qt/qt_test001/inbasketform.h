@@ -2,8 +2,9 @@
 #define INBASKETFORM_H
 
 #include "../../code/UserData.h"
-#include "gtdtreewidget.h"
 #include "gtdtextedit.h"
+#include "gtdlistwidget.h"
+#include "gtdtreewidget.h"
 #include <QWidget>
 #include <QTreeWidget>
 #include <QListWidgetItem>
@@ -25,6 +26,9 @@ public:
    ~InBasketForm();
 
    void SetGTDTreeWidget(GTDTreeWidget* gtdTree);
+   GTDTextEdit* getGTDTextEdit();
+   GTDListWidget* getGTDListWidget();
+
    // GetSelectionOutOfGTDBasketList() copies all selected items from
    // InBasketListWidget into itemSelectionList and, iff move is true, moves
    // them into the move queue.
@@ -36,7 +40,6 @@ public:
    void MoveFromGTDBasketListToTree(const QString& itemNameStr,
                                     const QString& nodeNameStr);
    void ClearWorkspace();
-   bool LoadFromFile(const QString& jsonFileName);
    void SetFocusInTextEdit();
    void SetFocusInListWidget();
    void MinMaxInBasket();

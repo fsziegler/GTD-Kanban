@@ -20,7 +20,6 @@ public:
    // INFORMATIONAL
    bool IsBranchCollapsed(const QString& branchStr) const;
    bool IsValidGTDTreeCategory(EnumGTDCategory category) const;
-   bool IsDirty() const;
 
    // ACCESSORS
    QTreeWidgetItem* GetTreeWidgetItem(EnumGTDCategory category);
@@ -35,7 +34,6 @@ public:
    bool AddNode(const TreeNode& node, QTreeWidgetItem* twi);
    void addChild(QTreeWidgetItem* parent, QTreeWidgetItem* child, bool expand,
                  bool topLevelItem = false);
-   void ResetDirtyFlag();
 
 protected:
    bool AreTWIsEqual(const QTreeWidgetItem* lhs,
@@ -83,7 +81,6 @@ private:
    GTDTreeWidget();
 
    MainWindow*      mp_mainWindow;
-   bool             m_dirtyFlag;
    QTreeWidgetItem* mp_editItem;
    QString          m_editItemStr;
 

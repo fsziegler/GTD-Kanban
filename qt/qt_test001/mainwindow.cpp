@@ -18,6 +18,7 @@ const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
    : QMainWindow(parent),
      ui(new Ui::MainWindow),
+     m_dirtyFlag(false),
      m_gtdTextEditor(this),
      m_gtdTree(this),
      m_currentFileNameStr("[None]")
@@ -120,6 +121,16 @@ void MainWindow::MinMaxInBasket()
    mp_inBasketForm->MinMaxInBasket();
 }
 
+void MainWindow::setDirtyFlag(bool newState)
+{
+   m_dirtyFlag = newState;
+}
+
+bool MainWindow::isDirty() const
+{
+   return m_dirtyFlag;
+}
+
 QStringList& MainWindow::getDragStringList()
 {
    return m_dragStringList;
@@ -130,6 +141,49 @@ QStringList& MainWindow::getClipboardList()
    return m_clipboardList;
 }
 
+bool MainWindow::LoadFromFile(const QString& jsonFileName)
+{
+   if (!UserData::getInst().LoadFromJSONFile(
+            jsonFileName.toStdString(), false))
+   {
+      return false;
+   }
+   m_gtdTextEditor.clear();
+   mp_inBasketForm->getGTDListWidget()->clear();
+   for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
+   {
+      const QString nodeNameStr(
+         (*UserData::getInst().getGtdFixedCatMap().find(itr.first))
+         .second.c_str());
+      const TCatTreeNodeVectPair& pair = itr;
+
+      if (nodeNameStr == QString("In Basket"))
+      {
+         for(auto inBItr: pair.second.getChildren())
+         {
+            mp_inBasketForm->getGTDListWidget()->addItem(
+               QString(inBItr.getMpNodeNameStr().c_str()));
+         }
+      }
+      else if (nodeNameStr == QString("Kanban Ready"))
+      {
+      }
+      else if (nodeNameStr == QString("Kanban Doing"))
+      {
+      }
+      else if (nodeNameStr == QString("Kanban Done"))
+      {
+      }
+      else
+      {
+         QList<QTreeWidgetItem*> gtdTreeList = m_gtdTree.findItems(
+               nodeNameStr, Qt::MatchExactly | Qt::MatchRecursive, 0);
+         m_gtdTree.AddNode(itr.second, itr.first);
+      }
+   }
+   return true;
+}
+
 void MainWindow::OpenFile(const QString& fileName)
 {
    m_gtdTextEditor.clear();
@@ -137,7 +191,7 @@ void MainWindow::OpenFile(const QString& fileName)
    mp_inBasketForm->ClearWorkspace();
    mp_gtdCalendar->repaint();
 
-   if(mp_inBasketForm->LoadFromFile(fileName))
+   if(LoadFromFile(fileName))
    {
       QString titleStr("GTD-Kanban Prototype, by Fred Ziegler [");
       titleStr.append(fileName).append("]");
@@ -147,7 +201,7 @@ void MainWindow::OpenFile(const QString& fileName)
       statusBar()->showMessage(statusMsg, 5000);
       m_currentFileNameStr = fileName;
       AddToFileHistory(fileName);
-      m_gtdTree.ResetDirtyFlag();
+      setDirtyFlag(false);
    }
 }
 
@@ -252,7 +306,7 @@ void MainWindow::UpdateRecentFilesMenu()
 
 void MainWindow::CheckDirty(const QString& newTitle, const QString& newText)
 {
-   if(m_gtdTree.IsDirty())
+   if(isDirty())
    {
       ExitDialog exitDlg;
       exitDlg.setWindowTitle(newTitle);
@@ -347,7 +401,7 @@ void MainWindow::on_action_New_triggered()
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
    mp_gtdCalendar->repaint();
-   m_gtdTree.ResetDirtyFlag();
+   setDirtyFlag(false);
    mp_inBasketForm->SetFocusInTextEdit();
 }
 
@@ -366,7 +420,7 @@ void MainWindow::on_actionSave_triggered()
       UserData::getInst().DumpAllToJSONFile(
          m_currentFileNameStr.toStdString());
    }
-   m_gtdTree.ResetDirtyFlag();
+   setDirtyFlag(false);
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -396,7 +450,7 @@ void MainWindow::on_actionSave_As_triggered()
    {
       statusBar()->showMessage("File:Save As cancelled", 5000);
    }
-   m_gtdTree.ResetDirtyFlag();
+   setDirtyFlag(false);
 }
 
 void MainWindow::on_actionAbout_triggered()

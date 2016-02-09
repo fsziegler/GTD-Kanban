@@ -49,6 +49,9 @@ enum class EnumGTDCategory
    kProjectPlans,
    kNextActions,
    kTrash,
+   kKanbanReady,
+   kKanbanDoing,
+   kKanbanDone,
    kMoveQueue,
    kGTDCategoryUNKNOWN,
 };

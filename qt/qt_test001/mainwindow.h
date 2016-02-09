@@ -33,11 +33,14 @@ public:
    void SetFocusInListWidget();
    void SetFocusInGTDTreeWidget();
    void MinMaxInBasket();
+   void setDirtyFlag(bool newState);
+   bool isDirty() const;
 
    QStringList& getDragStringList();
    QStringList& getClipboardList();
 
 protected:
+   bool LoadFromFile(const QString& jsonFileName);
    void OpenFile(const QString& fileName);
    void AddToFileHistory(const QString& fileName);
    void UpdateRecentFilesMenu();
@@ -81,6 +84,7 @@ private:
 
    Ui::MainWindow*               ui;
    Qt::WindowStates              m_defaultWindowState;
+   bool                          m_dirtyFlag;
 
    QPointer<InBasketForm>        mp_inBasketForm;
    QPointer<QSplitter>           mp_gtdSplitter;

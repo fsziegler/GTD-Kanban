@@ -59,6 +59,16 @@ void InBasketForm::SetGTDTreeWidget(GTDTreeWidget* gtdTree)
    mp_gtdTree = gtdTree;
 }
 
+GTDTextEdit* InBasketForm::getGTDTextEdit()
+{
+   return mp_inBasketForm->inBasketTextEdit;
+}
+
+GTDListWidget* InBasketForm::getGTDListWidget()
+{
+   return mp_inBasketForm->inBasketListWidget;
+}
+
 void InBasketForm::GetSelectionOutOfGTDBasketList(
    QList<QListWidgetItem*>& itemSelectionList, bool move)
 {
@@ -166,40 +176,6 @@ void InBasketForm::ClearWorkspace()
    mp_inBasketForm->inBasketTextEdit->clear();
    mp_inBasketForm->inBasketListWidget->clear();
    UserData::getInst().Clear();
-}
-
-bool InBasketForm::LoadFromFile(const QString& jsonFileName)
-{
-   if (!UserData::getInst().LoadFromJSONFile(
-            jsonFileName.toStdString(), false))
-   {
-      return false;
-   }
-   mp_inBasketForm->inBasketTextEdit->clear();
-   mp_inBasketForm->inBasketListWidget->clear();
-   for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
-   {
-      const QString nodeNameStr(
-         (*UserData::getInst().getGtdFixedCatMap().find(itr.first))
-         .second.c_str());
-      const TCatTreeNodeVectPair& pair = itr;
-
-      if (nodeNameStr == QString("In Basket"))
-      {
-         for(auto inBItr: pair.second.getChildren())
-         {
-            mp_inBasketForm->inBasketListWidget->addItem(
-               QString(inBItr.getMpNodeNameStr().c_str()));
-         }
-      }
-      else
-      {
-         QList<QTreeWidgetItem*> gtdTreeList = mp_gtdTree->findItems(
-               nodeNameStr, Qt::MatchExactly | Qt::MatchRecursive, 0);
-         mp_gtdTree->AddNode(itr.second, itr.first);
-      }
-   }
-   return true;
 }
 
 void InBasketForm::SetFocusInTextEdit()
