@@ -8,8 +8,9 @@
 #include <QMenu>
 #include <QWindow>
 
-KanbanWidget::KanbanWidget(QWidget *parent)
-   : QWidget(parent),
+KanbanWidget::KanbanWidget(MainWindow* mainWindow)
+   : QWidget((QWidget*) mainWindow),
+     mp_mainWindow(mainWindow),
      UpdateTimer(this)
 {
    setAutoFillBackground(true);
@@ -136,10 +137,9 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
    {
       QAction* action = new QAction(actionTextPair[i].text, this);
       action->setData(actionTextPair[i].action);
-      if((kDelete == actionTextPair[i].action)
-            || (kCut == actionTextPair[i].action)
-            || (kCopy == actionTextPair[i].action)
-            || (kLink == actionTextPair[i].action)
+      if((kLink == actionTextPair[i].action)
+            || ((kPaste == actionTextPair[i].action)
+                && mp_mainWindow->getClipboardList().empty())
         )
       {
          action->setEnabled(false);
@@ -156,35 +156,99 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
    menu->popup(mapFromGlobal(QCursor::pos()) + pos0 - pos1);
 }
 
+bool KanbanWidget::DeleteFromList(QList<KanbanTask *>& kanbanList)
+{
+   int cnt(0);
+   for(auto itr: kanbanList)
+   {
+      if(itr->hasFocus())
+      {
+         itr->hide();
+         m_readyList.removeAt(cnt);
+         delete itr;
+         return true;
+      }
+      ++cnt;
+   }
+   return false;
+}
+
 void KanbanWidget::Delete()
 {
+   if(!DeleteFromList(m_readyList))
+   {
+      if(!DeleteFromList(m_doingList))
+      {
+         DeleteFromList(m_doneList);
+      }
+   }
+}
 
+bool KanbanWidget::CutFromList(QList<KanbanTask*>& kanbanList)
+{
+   int cnt(0);
+   for(auto itr: kanbanList)
+   {
+      if(itr->hasFocus())
+      {
+         mp_mainWindow->getClipboardList().append(itr->getText());
+         itr->hide();
+         kanbanList.removeAt(cnt);
+         delete itr;
+         return true;
+      }
+      ++cnt;
+   }
+   return false;
 }
 
 void KanbanWidget::Cut()
 {
+   if(!CutFromList(m_readyList))
+   {
+      if(!CutFromList(m_doingList))
+      {
+         CutFromList(m_doneList);
+      }
+   }
+}
 
+bool KanbanWidget::CopyFromList(QList<KanbanTask *>& kanbanList)
+{
+   for(auto itr: kanbanList)
+   {
+      if(itr->hasFocus())
+      {
+         mp_mainWindow->getClipboardList().append(itr->getText());
+         return true;
+      }
+   }
+   return false;
 }
 
 void KanbanWidget::Copy()
 {
-
+   if(!CopyFromList(m_readyList))
+   {
+      if(!CopyFromList(m_doingList))
+      {
+         CopyFromList(m_doneList);
+      }
+   }
 }
 
 void KanbanWidget::Paste()
 {
-   MainWindow * win = (MainWindow *) QApplication::activeWindow();
-   KanbanTask* testChild = m_readyList.front();
-   for(auto itr: win->getClipboardList())
+   for(auto itr: mp_mainWindow->getClipboardList())
    {
       KanbanTask* task = new KanbanTask(this);
       task->setText(itr);
       m_readyList.push_back(task);
-      m_readyList.back()->move(testChild->x() + 20, testChild->y() + 80);
+      m_readyList.back()->move(20, 80);
       m_readyList.back()->show();
       m_readyList.back()->setFocus();
    }
-   win->getClipboardList().clear();
+   mp_mainWindow->getClipboardList().clear();
 }
 
 void KanbanWidget::Link()

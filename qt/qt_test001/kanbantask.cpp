@@ -60,6 +60,7 @@ void KanbanTask::mousePressEvent(QMouseEvent* event)
    m_currPos = event->pos();
    m_initRegion = rect();
    m_currRegion = rect();
+   setFocus();
 }
 
 void KanbanTask::mouseReleaseEvent(QMouseEvent* event)
@@ -79,6 +80,7 @@ void KanbanTask::mouseReleaseEvent(QMouseEvent* event)
       m_initPos = event->pos();
       show();
    }
+   setFocus();
 }
 
 //    void KanbanTask::mouseDoubleClickEvent(QMouseEvent* event);
@@ -105,6 +107,7 @@ void KanbanTask::mouseMoveEvent(QMouseEvent* event)
       parentWidget()->repaint(repaintRegion);
       m_currPos = event->pos();
    }
+   setFocus();
 }
 
 void KanbanTask::paintEvent(QPaintEvent* pntEvent)
@@ -121,7 +124,14 @@ void KanbanTask::paintEvent(QPaintEvent* pntEvent)
    painter.setBackgroundMode(Qt::BGMode::OpaqueMode);
 
    QBrush lineBrush(Qt::black);
-   painter.setPen(QPen(lineBrush, 2, Qt::SolidLine, Qt::SquareCap));
+   if(hasFocus())
+   {
+      painter.setPen(QPen(lineBrush, 4, Qt::SolidLine, Qt::SquareCap));
+   }
+   else
+   {
+      painter.setPen(QPen(lineBrush, 2, Qt::SolidLine, Qt::SquareCap));
+   }
    painter.drawRect(rect);
 
    painter.restore();

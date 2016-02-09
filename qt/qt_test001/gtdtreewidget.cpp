@@ -593,6 +593,8 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
             || (kMoveDown == actionTextPair[i].action)
             || (kLink == actionTextPair[i].action)
             || (kMoveUpLevel == actionTextPair[i].action)
+            || ((kPaste == actionTextPair[i].action)
+                && mp_mainWindow->getClipboardList().empty())
         )
       {
          action->setEnabled(false);

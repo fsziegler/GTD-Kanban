@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
    mp_kanbanSplitter->setWindowTitle(QString("GTD Calendar"));
    mp_kanbanSplitter->addWidget(mp_gtdCalendar);
 
-   mp_kanbanWindow = new KanbanWidget;
+   mp_kanbanWindow = new KanbanWidget(this);
    mp_kanbanSplitter->addWidget(mp_kanbanWindow);
    QList<int> sizes = {1, 150};
    mp_kanbanSplitter->setSizes(sizes);
