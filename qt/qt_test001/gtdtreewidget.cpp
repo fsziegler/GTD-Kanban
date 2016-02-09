@@ -585,7 +585,7 @@ void GTDTreeWidget::dropEvent(QDropEvent* event)
 void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
 {
    QMenu* menu = new QMenu(this);
-   for (size_t i = 0; SActionTextPairLen > i; ++i)
+   for (size_t i = 0; (SActionTextPairLen - 1) > i; ++i)
    {
       QAction* action = new QAction(actionTextPair[i].text, this);
       action->setData(actionTextPair[i].action);
@@ -600,6 +600,14 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
          action->setEnabled(false);
       }
       menu->addAction(action);
+      if((kMoveToBottom == actionTextPair[i].action)
+            || (kSortDescending == actionTextPair[i].action)
+            || (kPaste == actionTextPair[i].action)
+            || (kLink == actionTextPair[i].action)
+            )
+      {
+         menu->addSeparator();
+      }
    }
    connect(menu, SIGNAL(triggered(QAction*)), this,
            SLOT(onMenuAction(QAction*)));

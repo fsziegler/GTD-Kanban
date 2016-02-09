@@ -17,6 +17,7 @@ enum EnumAction
    kMoveUpLevel,
    kExpandAll,
    kCollapseAll,
+   kAutoArrange,
 };
 
 struct SActionTextPair
@@ -25,7 +26,7 @@ struct SActionTextPair
    QString text;
 };
 
-const size_t SActionTextPairLen(14);
+const size_t SActionTextPairLen(15);
 const SActionTextPair actionTextPair[SActionTextPairLen] =
 {
    { kMoveUp, "Move Up" },
@@ -42,6 +43,7 @@ const SActionTextPair actionTextPair[SActionTextPairLen] =
    { kMoveUpLevel, "Move Up Level" },
    { kExpandAll, "Expand All" },
    { kCollapseAll, "Collapse All" },
+   { kAutoArrange, "Auto-Arrange" },
 };
 
 #endif // ACTIONMENUITEMS_H

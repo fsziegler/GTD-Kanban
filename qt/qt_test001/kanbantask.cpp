@@ -54,6 +54,13 @@ const QString& KanbanTask::getText() const
    return m_text;
 }
 
+void KanbanTask::Center(const QPoint& centerPoint)
+{
+   int deltaX = centerPoint.x() - rect().center().x();
+   int deltaY = centerPoint.y() - rect().center().y();
+   move(rect().x() + deltaX, rect().y() + deltaY);
+}
+
 void KanbanTask::mousePressEvent(QMouseEvent* event)
 {
    m_initPos = event->pos();

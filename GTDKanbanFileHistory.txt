@@ -1,6 +1,6 @@
+/home/fred/dev/GTD-Kanban Progress.json
 /home/fred/dev/Mon Feb 08 2016.json
 /home/fred/dev/test1.json
 /home/fred/dev/Holistic Progress.json
-/home/fred/dev/GTD-Kanban Progress.json
 /home/fred/dev/GTD-Kanban/test1.json
 /home/fred/dev/test2.json

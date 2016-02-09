@@ -43,9 +43,14 @@ protected:
    void Copy();
    void Paste();
    void Link();
+   void MoveTasks(QList<KanbanTask*>& srcList, QList<KanbanTask*>& destList);
+   void UpdateListRegions();
+   void AutoArrange(const QRegion& region, QList<KanbanTask*>& list);
+   void AutoArrange();
 
 private:
    void UpdateRegion(const QRect& inRect, QRegion& outRegion);
+   // UpdateRegions() determines each region's boundaries afresh.
    void UpdateRegions();
 
    QList<KanbanTask*> m_readyList;

@@ -13,6 +13,8 @@ public:
    void setText(const QString& newText);
    const QString& getText() const;
 
+   void Center(const QPoint& centerPoint);
+
 signals:
 
 public slots:

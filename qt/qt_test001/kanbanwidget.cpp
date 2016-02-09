@@ -64,6 +64,9 @@ void KanbanWidget::onMenuAction(QAction* action)
    case kLink:
       Link();
       break;
+   case kAutoArrange:
+      AutoArrange();
+      break;
    default:
       throw;
    }
@@ -145,7 +148,17 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
          action->setEnabled(false);
       }
       menu->addAction(action);
+      if(kPaste == actionTextPair[i].action)
+      {
+         menu->addSeparator();
+      }
    }
+   menu->addSeparator();
+   QAction* action =
+         new QAction(actionTextPair[SActionTextPairLen - 1].text, this);
+   action->setData(actionTextPair[SActionTextPairLen - 1].action);
+   menu->addAction(action);
+
    connect(menu, SIGNAL(triggered(QAction*)), this,
            SLOT(onMenuAction(QAction*)));
 
@@ -253,7 +266,106 @@ void KanbanWidget::Paste()
 
 void KanbanWidget::Link()
 {
+}
 
+void KanbanWidget::MoveTasks(QList<KanbanTask*>& srcList,
+                             QList<KanbanTask*>& destList)
+{
+   for(auto itr: srcList)
+   {
+      destList.push_back(itr);
+   }
+   srcList.clear();
+}
+
+void KanbanWidget::UpdateListRegions()
+{
+   UpdateRegions();
+   QList<KanbanTask*> tmpList;
+   MoveTasks(m_readyList, tmpList);
+   MoveTasks(m_doingList, tmpList);
+   MoveTasks(m_doneList, tmpList);
+   while(0 < tmpList.size())
+   {
+      KanbanTask* task = tmpList.front();
+      QPoint center(task->mapToParent(task->rect().center()));
+      if(m_readyRegion.boundingRect().y() < center.y())
+      {
+         center.setY(m_readyRegion.boundingRect().y());
+      }
+      if(m_readyRegion.contains(center))
+      {
+         m_readyList.push_back(tmpList.front());
+         tmpList.erase(tmpList.begin());
+      }
+      else if(m_doingRegion.contains(center))
+      {
+         m_doingList.push_back(tmpList.front());
+         tmpList.erase(tmpList.begin());
+      }
+      else if(m_doneRegion.contains(center))
+      {
+         m_doneList.push_back(tmpList.front());
+         tmpList.erase(tmpList.begin());
+      }
+      else
+      {
+         throw;
+      }
+   }
+}
+
+void KanbanWidget::AutoArrange(const QRegion& region, QList<KanbanTask*>& list)
+{
+   if(0 == list.size())
+   {
+      return;
+   }
+   // Center all items so horizontal position wiil not change
+   for(auto itr: list)
+   {
+      itr->Center(region.boundingRect().center());
+   }
+
+   int netSpacing(region.boundingRect().height());
+   for(auto itr: list)
+   {
+      netSpacing -= itr->height();
+   }
+
+   int factor(0);
+   if(0 <= netSpacing)
+   {
+      while(netSpacing > (factor * (list.size() + 1)))
+      {
+         ++factor;
+      }
+   }
+   else
+   {
+      while(netSpacing < (factor * (list.size() + 1)))
+      {
+         --factor;
+      }
+   }
+
+   int top(m_titleRegion.boundingRect().height());
+   for(auto itr: list)
+   {
+      top += factor;
+      QPoint pos = itr->pos();
+      pos.setY(top);
+      itr->move(pos);
+      top += itr->height();
+   }
+}
+
+void KanbanWidget::AutoArrange()
+{
+   UpdateListRegions();
+   AutoArrange(m_readyRegion, m_readyList);
+   AutoArrange(m_doingRegion, m_doingList);
+   AutoArrange(m_doneRegion, m_doneList);
 }
 
 void KanbanWidget::UpdateRegion(const QRect& inRect, QRegion& outRegion)
