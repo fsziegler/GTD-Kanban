@@ -3,6 +3,7 @@
 
 enum EnumAction
 {
+   kMoveToKanban,
    kMoveUp,
    kMoveDown,
    kMoveToTop,
@@ -26,9 +27,10 @@ struct SActionTextPair
    QString text;
 };
 
-const size_t SActionTextPairLen(15);
+const size_t SActionTextPairLen(16);
 const SActionTextPair actionTextPair[SActionTextPairLen] =
 {
+   { kMoveToKanban, "Move To Kanban" },
    { kMoveUp, "Move Up" },
    { kMoveDown, "Move Down" },
    { kMoveToTop, "Move To Top" },

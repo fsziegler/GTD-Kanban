@@ -39,6 +39,8 @@ public:
    QStringList& getDragStringList();
    QStringList& getClipboardList();
 
+   void PasteToKanban();
+
 protected:
    bool LoadFromFile(const QString& jsonFileName);
    void OpenFile(const QString& fileName);

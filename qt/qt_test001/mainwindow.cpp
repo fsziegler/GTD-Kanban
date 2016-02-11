@@ -18,13 +18,12 @@ const string GTDKanbanFileHistoryFileName("../../GTDKanbanFileHistory.txt");
 MainWindow::MainWindow(QWidget *parent)
    : QMainWindow(parent),
      ui(new Ui::MainWindow),
-     m_dirtyFlag(false),
      m_gtdTextEditor(this),
      m_gtdTree(this),
      m_currentFileNameStr("[None]")
 {
    ui->setupUi(this);
-   setWindowTitle(QString("GTD-Kanban Prototype, by Fred Ziegler"));
+   setWindowTitle(QString("GTD-Kanban PROTOTYPE, by Fred Ziegler"));
    setMouseTracking(true);
 
    // Set up In-Basket form
@@ -72,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
            SLOT(onCustomContextMenuRequested(const QPoint&)));
 
    setWindowIcon(QIcon("/home/fred/.kde/share/icons/GTD-Kanban.ico"));
+   setDirtyFlag(false);
 }
 
 MainWindow::~MainWindow()
@@ -139,6 +139,11 @@ QStringList& MainWindow::getDragStringList()
 QStringList& MainWindow::getClipboardList()
 {
    return m_clipboardList;
+}
+
+void MainWindow::PasteToKanban()
+{
+   mp_kanbanWindow->Paste();
 }
 
 bool MainWindow::LoadFromFile(const QString& jsonFileName)

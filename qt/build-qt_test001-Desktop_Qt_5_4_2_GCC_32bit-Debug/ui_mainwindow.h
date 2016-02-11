@@ -123,6 +123,7 @@ public:
         menuView->addAction(actionGTD);
         menuView->addAction(actionKanban);
         menuHelp->addAction(actionAbout);
+        menuHelp->addSeparator();
         menuHelp->addAction(actionMinimize);
         menuHelp->addAction(actionMaximize);
         menuHelp->addAction(actionRestore);

@@ -381,6 +381,12 @@ void GTDTreeWidget::ReplaceCategoryTree(EnumGTDCategory category,
    mp_mainWindow->setDirtyFlag(true);
 }
 
+void GTDTreeWidget::MoveToKanban()
+{
+   Cut();
+   mp_mainWindow->PasteToKanban();
+}
+
 void GTDTreeWidget::MoveUp()
 {
 }
@@ -611,6 +617,9 @@ void GTDTreeWidget::onMenuAction(QAction* action)
 {
    switch (action->data().toInt())
    {
+   case kMoveToKanban:
+      MoveToKanban();
+      break;
    case kMoveUp:
       MoveUp();
       break;

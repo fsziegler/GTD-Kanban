@@ -56,6 +56,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
     <addaction name="actionMinimize"/>
     <addaction name="actionMaximize"/>
     <addaction name="actionRestore"/>

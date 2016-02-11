@@ -18,13 +18,8 @@ KanbanWidget::KanbanWidget(MainWindow* mainWindow)
    Pal.setColor(QPalette::Background, QColor(64, 128, 64));
    setPalette(Pal);
 
-   m_readyList.append(new KanbanTask(this));
-   m_readyList.front()->setText("Kanban Task\n(I am draggable)");
-   m_readyList.front()->move(m_readyList.front()->x() + 10, m_readyList.front()->y() + 70);
-   m_readyList.front()->show();
-   m_readyList.front()->setFocus();
    connect(&UpdateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
-   UpdateTimer.start(100);
+   UpdateTimer.start(250);
 }
 
 void KanbanWidget::ClearList(QList<KanbanTask*>& list)
@@ -142,6 +137,11 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
    painter.setPen(Qt::lightGray);
    painter.setFont(QFont("Arial", 48));
    painter.drawText(rect, Qt::AlignCenter, "Kanban Board");
+   QFont font("Arial", 16);
+   font.setStyle(QFont::StyleItalic);
+   painter.setFont(font);
+   painter.drawText(rect, Qt::AlignHCenter | Qt::AlignBottom,
+                    "Visualize your work\nLimit your work in progress\n");
 
    painter.setPen(QColor(0, 49, 83));
    painter.setFont(QFont("Arial", 24, QFont::DemiBold));
@@ -197,7 +197,9 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
 void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
 {
    QMenu* menu = new QMenu(this);
-   for (size_t i = 6; 11 > i; ++i)
+   size_t first(kDelete);
+   size_t last(kLink);
+   for (size_t i = first; last >= i; ++i)
    {
       QAction* action = new QAction(actionTextPair[i].text, this);
       action->setData(actionTextPair[i].action);
@@ -216,8 +218,8 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
    }
    menu->addSeparator();
    QAction* action =
-      new QAction(actionTextPair[SActionTextPairLen - 1].text, this);
-   action->setData(actionTextPair[SActionTextPairLen - 1].action);
+      new QAction(actionTextPair[kAutoArrange].text, this);
+   action->setData(actionTextPair[kAutoArrange].action);
    menu->addAction(action);
 
    connect(menu, SIGNAL(triggered(QAction*)), this,

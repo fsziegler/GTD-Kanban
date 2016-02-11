@@ -54,6 +54,7 @@ protected:
    // the contents of treeWidgetItem.
    void ReplaceCategoryTree(EnumGTDCategory category,
                             QTreeWidgetItem& treeWidgetItem);
+   void MoveToKanban();
    void MoveUp();
    void MoveDown();
    void MoveToTop();

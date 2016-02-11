@@ -75,8 +75,6 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
    itemSelectionList = mp_inBasketForm->inBasketListWidget->selectedItems();
    if (move)
    {
-//      cout << "BEGIN InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
-//      mp_mainWindow->getUserData().DumpAllGTD();
       for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
             ++itr)
       {
@@ -92,8 +90,6 @@ void InBasketForm::GetSelectionOutOfGTDBasketList(
          UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
                EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
       }
-//      cout << "END InBasketForm::GetSelectionOutOfGTDBasketList()" << endl;
-//      mp_mainWindow->getUserData().DumpAllGTD();
    }
 }
 
@@ -116,8 +112,6 @@ void InBasketForm::MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
                                nodeNameStr.toStdString());
    UserData::getInst().MoveAllBetweenCategories(
       EnumGTDCategory::kMoveQueue, tgtCat);
-//   cout << "END InBasketForm::MoveFromListToTree()" << endl;
-//   mp_mainWindow->getUserData().DumpAllGTD();
 }
 
 void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
@@ -271,8 +265,6 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
    QString text(mp_inBasketForm->inBasketTextEdit->toPlainText());
    if ('\n' == text[text.size() - 1])
    {
-//      cout << "BEGIN InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
-//      mp_mainWindow->getUserData().DumpAllGTD();
       text.resize(text.size() - 1);
       // parse text & strip out all '\n's
       int start(0);
@@ -295,8 +287,7 @@ void InBasketForm::on_inBasketTextEdit_textChanged()
       while (text.size() > end);
       mp_inBasketForm->inBasketTextEdit->selectAll();
       mp_inBasketForm->inBasketTextEdit->cut();
-//      cout << "END InBasketForm::on_inBasketTextEdit_textChanged()" << endl;
-//      mp_mainWindow->getUserData().DumpAllGTD();
+      SetFocusInListWidget();
    }
 }
 
@@ -403,20 +394,6 @@ void InBasketForm::on_calendarButton_clicked()
             break;
          }
       }
-//      for (auto itr = removeItemList.begin(); removeItemList.end() != itr;
-//            ++itr)
-//      {
-//         for (auto itr2 = itemList.begin(); itemList.end() != itr2; ++itr2)
-//         {
-//            if ((*itr)->text() == (*itr2)->text())
-//            {
-//               itemList.erase(itr2);
-//               mp_ui->InBasketListWidget->takeItem(
-//                     mp_ui->InBasketListWidget->row((*itr2)));
-//               break;
-//            }
-//         }
-//      }
    }
 }
 

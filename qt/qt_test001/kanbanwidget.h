@@ -82,6 +82,8 @@ private:
    QRegion m_doingRegion;
    QRegion m_doneRegion;
    QTimer UpdateTimer;
+
+   friend class MainWindow;
 };
 
 #endif // KANBANWIDGET_H

@@ -16,7 +16,7 @@ KanbanTask::KanbanTask(QWidget* parent)
    connect(&UpdateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
    UpdateTimer.start(500);
 
-   setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void KanbanTask::setText(const QString& newText)
@@ -45,7 +45,7 @@ void KanbanTask::setText(const QString& newText)
          }
       }
    }
-   QSize newSize(maxLen * 11, lines * 20);
+   QSize newSize(25 + maxLen * 8, lines * 20);
    resize(newSize);
 }
 

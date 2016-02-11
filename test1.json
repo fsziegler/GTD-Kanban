@@ -5,7 +5,119 @@
       "time" : "not-a-date-time",
       "expand" : "true",
       "children" : {
-        "foo": {
+        "vacation Staff off-site retreat": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Publish book": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Finalize computer upgrades": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Update will": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Finalize budgets": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Finalize new product line": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Get comfortable with new contact-management software": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Get reprints of Fortune article": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Get a publicist": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Finish new orchard planting": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "R&D joint-venture video project": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Produce new training compact disk": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Establish next year’s seminar schedule": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Orchestrate a one-hour keynote presentation": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Get proficient with videoconferencing access": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Finalize employment agreements": {
+          "date" : "not-a-date-time",
+          "time" : "not-a-date-time",
+          "expand" : "true",
+          "children" : {
+          }
+        },
+        "Install new backyard lights": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
@@ -68,109 +180,39 @@
       "time" : "not-a-date-time",
       "expand" : "true",
       "children" : {
-        "Health": {
+        "Get new staff person on board August": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
           "children" : {
-            "Dentist": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            }
           }
         },
-        "Social": {
+        "Call Fred re tel. # for the garage he recommended.": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
           "children" : {
-            "email Greg": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            }
           }
         },
-        "Maintenance": {
+        "Draft thoughts for the budget-meeting agenda.": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
           "children" : {
-            "clean up": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            },
-            "get shirts": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            }
           }
         },
-        "Future": {
+        "Talk to Angela about the filing system we need to set up.": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
           "children" : {
-            "business plan": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            },
-            "Gary Evans": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            }
           }
         },
-        "Strategy": {
+        "Research database-management software on the Web.": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
           "children" : {
-            "Build long-term wealth": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            },
-            "patents": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            },
-            "savings": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            },
-            "start-up": {
-              "date" : "not-a-date-time",
-              "time" : "not-a-date-time",
-              "expand" : "true",
-              "children" : {
-              }
-            }
           }
         }
       }
@@ -187,7 +229,7 @@
       "time" : "not-a-date-time",
       "expand" : "true",
       "children" : {
-        "email Greg": {
+        "Kanban Task<CR>(I am draggable)": {
           "date" : "not-a-date-time",
           "time" : "not-a-date-time",
           "expand" : "true",
@@ -201,13 +243,6 @@
       "time" : "not-a-date-time",
       "expand" : "true",
       "children" : {
-        "get shirts": {
-          "date" : "not-a-date-time",
-          "time" : "not-a-date-time",
-          "expand" : "true",
-          "children" : {
-          }
-        }
       }
     },
     "Kanban Done": {
