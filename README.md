@@ -89,8 +89,9 @@ In order to **visualize your work**, ***tasks*** are tracked graphically on a **
 `--Kent Beck`
 
 #####Make It Work
-First, **make it work** by creating a prototype with end-to-end functionality that proves the concept is viable. This may be buggy and lack many refinements, but it has two advantages:
- - once complete, the risk of not being able to build the product drops dramatically, and
+First, **make it work** by creating a prototype with end-to-end functionality that proves the concept is viable. This may be buggy and lack many refinements, but it has three advantages:
+ - as you approach completion, the risk of not being able to build the product drops dramatically,
+ - customers can now visualize and believe in the product, and
  - you have a skeleton of functionality upon which to build.
 
 #####Make It Right
