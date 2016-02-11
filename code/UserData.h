@@ -130,14 +130,17 @@ public:
    // category to the tgtCat category, returning false if there is no n-th
    // item or it does not match itemStr.
    bool MoveNthStrBetweenCategories(const string& itemStr,
-         EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t n);
+         EnumGTDCategory srcCat, EnumGTDCategory tgtCat, size_t row);
    // MoveAllBetweenCategories() moves every item in srcCat to tgtCat.
    size_t MoveAllBetweenCategories(EnumGTDCategory srcCat,
-         EnumGTDCategory tgtCat);
+                                   EnumGTDCategory tgtCat);
    const TCatTreeNodeVectMap& getGtdNodeTree() const;
 
    // REMOVING ACTIONS
    void Clear();
+   bool RemoveNthStrInCategory(const string& itemStr,
+                               EnumGTDCategory category, size_t row);
+   size_t RemoveAllChildrenInCategory(EnumGTDCategory category);
 
 private:
    void PopulateGTDNodeTree();

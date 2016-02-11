@@ -2,8 +2,13 @@
 #define KANBANWIDGET_H
 
 #include "kanbantask.h"
+#include "../../code/UserData.h"
 #include <QWidget>
 #include <QTimer>
+
+using namespace ZiegGTDKanban;
+
+class MainWindow;
 
 enum EnumKanbanState
 {
@@ -12,8 +17,6 @@ enum EnumKanbanState
    kDone,
 };
 
-class MainWindow;
-
 class KanbanWidget : public QWidget
 {
 Q_OBJECT
@@ -21,7 +24,16 @@ Q_OBJECT
 public:
    explicit KanbanWidget(MainWindow* mainWindow);
 
+   void ClearList(QList<KanbanTask*>& list);
+   void Clear();
+   void CenterAllListItems(const QRegion& region, QList<KanbanTask*>& list);
+   void CenterAllItems();
+   void AutoArrange();
    const QRegion& GetKanbanStateRegion(EnumKanbanState state);
+
+   QList<KanbanTask*>& getReadyList();
+   QList<KanbanTask*>& getDoingList();
+   QList<KanbanTask*>& getDoneList();
 
 signals:
 
@@ -35,18 +47,23 @@ protected:
    virtual void contextMenuEvent(QContextMenuEvent* event);
 
 protected:
-   bool DeleteFromList(QList<KanbanTask *>& kanbanList);
+   void ReplaceCategoryTree(EnumGTDCategory category,
+                            QList<KanbanTask*>& taskList);
+   bool DeleteFromList(EnumGTDCategory category,
+                       QList<KanbanTask *>& kanbanList);
    void Delete();
-   bool CutFromList(QList<KanbanTask *>& kanbanList);
+   bool CutFromList(EnumGTDCategory category, QList<KanbanTask *>& kanbanList);
    void Cut();
    bool CopyFromList(QList<KanbanTask *>& kanbanList);
    void Copy();
    void Paste();
    void Link();
-   void MoveTasks(QList<KanbanTask*>& srcList, QList<KanbanTask*>& destList);
+   void MoveTasks(EnumGTDCategory srcCategory,
+                  QList<KanbanTask*>& srcList, QList<KanbanTask*>& destList);
+public:
    void UpdateListRegions();
+protected:
    void AutoArrange(const QRegion& region, QList<KanbanTask*>& list);
-   void AutoArrange();
 
 private:
    void UpdateRegion(const QRect& inRect, QRegion& outRegion);

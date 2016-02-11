@@ -19,13 +19,56 @@ KanbanWidget::KanbanWidget(MainWindow* mainWindow)
    setPalette(Pal);
 
    m_readyList.append(new KanbanTask(this));
-   KanbanTask* testChild = m_readyList.front();
-   testChild->setText("Kanban Task\n(I am draggable)\n(I am draggable)\n(I am draggable)");
-   m_readyList.front()->move(testChild->x() + 10, testChild->y() + 70);
+   m_readyList.front()->setText("Kanban Task\n(I am draggable)");
+   m_readyList.front()->move(m_readyList.front()->x() + 10, m_readyList.front()->y() + 70);
    m_readyList.front()->show();
    m_readyList.front()->setFocus();
    connect(&UpdateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
    UpdateTimer.start(100);
+}
+
+void KanbanWidget::ClearList(QList<KanbanTask*>& list)
+{
+   while(0 < list.size())
+   {
+      KanbanTask* task = list.back();
+      list.pop_back();
+      task->hide();
+      delete task;
+   }
+}
+
+void KanbanWidget::Clear()
+{
+   ClearList(m_readyList);
+   ClearList(m_doingList);
+   ClearList(m_doneList);
+}
+
+void KanbanWidget::CenterAllListItems(const QRegion& region,
+                                      QList<KanbanTask*>& list)
+{
+   QPoint center(region.boundingRect().center());
+   for(auto itr: list)
+   {
+      itr->Center(center);
+      itr->show();
+   }
+}
+
+void KanbanWidget::CenterAllItems()
+{
+   CenterAllListItems(m_readyRegion, m_readyList);
+   CenterAllListItems(m_doingRegion, m_doingList);
+   CenterAllListItems(m_doneRegion, m_doneList);
+}
+
+void KanbanWidget::AutoArrange()
+{
+   UpdateListRegions();
+   AutoArrange(m_readyRegion, m_readyList);
+   AutoArrange(m_doingRegion, m_doingList);
+   AutoArrange(m_doneRegion, m_doneList);
 }
 
 const QRegion& KanbanWidget::GetKanbanStateRegion(EnumKanbanState state)
@@ -43,6 +86,21 @@ const QRegion& KanbanWidget::GetKanbanStateRegion(EnumKanbanState state)
       break;
    }
    throw;
+}
+
+QList<KanbanTask*>& KanbanWidget::getReadyList()
+{
+   return m_readyList;
+}
+
+QList<KanbanTask*>& KanbanWidget::getDoingList()
+{
+   return m_doingList;
+}
+
+QList<KanbanTask*>& KanbanWidget::getDoneList()
+{
+   return m_doneList;
 }
 
 void KanbanWidget::onMenuAction(QAction* action)
@@ -80,7 +138,7 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
    painter.save();
    painter.setPen(Qt::lightGray);
    painter.setFont(QFont("Arial", 48));
-   painter.drawText(rect, Qt::AlignCenter, "Kanban Graph");
+   painter.drawText(rect, Qt::AlignCenter, "Kanban Board");
 
    painter.setPen(QColor(0, 49, 83));
    painter.setFont(QFont("Arial", 24, QFont::DemiBold));
@@ -155,7 +213,7 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
    }
    menu->addSeparator();
    QAction* action =
-         new QAction(actionTextPair[SActionTextPairLen - 1].text, this);
+      new QAction(actionTextPair[SActionTextPairLen - 1].text, this);
    action->setData(actionTextPair[SActionTextPairLen - 1].action);
    menu->addAction(action);
 
@@ -169,15 +227,37 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
    menu->popup(mapFromGlobal(QCursor::pos()) + pos0 - pos1);
 }
 
-bool KanbanWidget::DeleteFromList(QList<KanbanTask *>& kanbanList)
+void KanbanWidget::ReplaceCategoryTree(EnumGTDCategory category,
+                                       QList<KanbanTask*>& taskList)
+{
+   TreeNode node("temp");
+   for(auto itr: taskList)
+   {
+      TreeNode newNode(itr->getText().toStdString());
+      node.AddChildNode(newNode);
+   }
+//   PopulateChildren(treeWidgetItem, node);
+   UserData::getInst().ReplaceCategoryTree(category, node.getChildren());
+   UserData::getInst().DumpGTDCategory(category);
+   mp_mainWindow->setDirtyFlag(true);
+}
+
+bool KanbanWidget::DeleteFromList(EnumGTDCategory category,
+                                  QList<KanbanTask *>& kanbanList)
 {
    int cnt(0);
    for(auto itr: kanbanList)
    {
       if(itr->hasFocus())
       {
+         const QString& itemStr = itr->getText();
+         if(!UserData::getInst().RemoveNthStrInCategory(itemStr.toStdString(),
+                                                        category, cnt))
+         {
+            throw;
+         }
          itr->hide();
-         m_readyList.removeAt(cnt);
+         kanbanList.removeAt(cnt);
          delete itr;
          return true;
       }
@@ -188,16 +268,17 @@ bool KanbanWidget::DeleteFromList(QList<KanbanTask *>& kanbanList)
 
 void KanbanWidget::Delete()
 {
-   if(!DeleteFromList(m_readyList))
+   if(!DeleteFromList(EnumGTDCategory::kKanbanReady, m_readyList))
    {
-      if(!DeleteFromList(m_doingList))
+      if(!DeleteFromList(EnumGTDCategory::kKanbanDoing, m_doingList))
       {
-         DeleteFromList(m_doneList);
+         DeleteFromList(EnumGTDCategory::kKanbanDone, m_doneList);
       }
    }
 }
 
-bool KanbanWidget::CutFromList(QList<KanbanTask*>& kanbanList)
+bool KanbanWidget::CutFromList(EnumGTDCategory category,
+                               QList<KanbanTask*>& kanbanList)
 {
    int cnt(0);
    for(auto itr: kanbanList)
@@ -205,6 +286,12 @@ bool KanbanWidget::CutFromList(QList<KanbanTask*>& kanbanList)
       if(itr->hasFocus())
       {
          mp_mainWindow->getClipboardList().append(itr->getText());
+         const QString& itemStr = itr->getText();
+         if(!UserData::getInst().RemoveNthStrInCategory(itemStr.toStdString(),
+                                                        category, cnt))
+         {
+            throw;
+         }
          itr->hide();
          kanbanList.removeAt(cnt);
          delete itr;
@@ -217,11 +304,11 @@ bool KanbanWidget::CutFromList(QList<KanbanTask*>& kanbanList)
 
 void KanbanWidget::Cut()
 {
-   if(!CutFromList(m_readyList))
+   if(!CutFromList(EnumGTDCategory::kKanbanReady, m_readyList))
    {
-      if(!CutFromList(m_doingList))
+      if(!CutFromList(EnumGTDCategory::kKanbanDoing, m_doingList))
       {
-         CutFromList(m_doneList);
+         CutFromList(EnumGTDCategory::kKanbanDone, m_doneList);
       }
    }
 }
@@ -261,14 +348,21 @@ void KanbanWidget::Paste()
       m_readyList.back()->show();
       m_readyList.back()->setFocus();
    }
+//   QList<KanbanTask*> m_readyList;
+//   QList<KanbanTask*> m_doingList;
+//   QList<KanbanTask*> m_doneList;
+   ReplaceCategoryTree(EnumGTDCategory::kKanbanReady, m_readyList);
+   mp_mainWindow->setDirtyFlag(true);
    mp_mainWindow->getClipboardList().clear();
+   AutoArrange();
 }
 
 void KanbanWidget::Link()
 {
 }
 
-void KanbanWidget::MoveTasks(QList<KanbanTask*>& srcList,
+void KanbanWidget::MoveTasks(EnumGTDCategory srcCategory,
+                             QList<KanbanTask*>& srcList,
                              QList<KanbanTask*>& destList)
 {
    for(auto itr: srcList)
@@ -276,15 +370,23 @@ void KanbanWidget::MoveTasks(QList<KanbanTask*>& srcList,
       destList.push_back(itr);
    }
    srcList.clear();
+   UserData::getInst().RemoveAllChildrenInCategory(srcCategory);
 }
 
 void KanbanWidget::UpdateListRegions()
 {
    UpdateRegions();
+   if((0 == m_readyList.size())
+         && (0 == m_doingList.size())
+         && (0 == m_doneList.size())
+     )
+   {
+      return;
+   }
    QList<KanbanTask*> tmpList;
-   MoveTasks(m_readyList, tmpList);
-   MoveTasks(m_doingList, tmpList);
-   MoveTasks(m_doneList, tmpList);
+   MoveTasks(EnumGTDCategory::kKanbanReady, m_readyList, tmpList);
+   MoveTasks(EnumGTDCategory::kKanbanDoing, m_doingList, tmpList);
+   MoveTasks(EnumGTDCategory::kKanbanDone, m_doneList, tmpList);
    while(0 < tmpList.size())
    {
       KanbanTask* task = tmpList.front();
@@ -293,24 +395,32 @@ void KanbanWidget::UpdateListRegions()
       {
          center.setY(m_readyRegion.boundingRect().y());
       }
+      const string& newItemStr(tmpList.front()->getText().toStdString());
       if(m_readyRegion.contains(center))
       {
+         UserData::getInst().AddStrToCategory(newItemStr,
+                                              EnumGTDCategory::kKanbanReady);
          m_readyList.push_back(tmpList.front());
          tmpList.erase(tmpList.begin());
       }
       else if(m_doingRegion.contains(center))
       {
+         UserData::getInst().AddStrToCategory(newItemStr,
+                                              EnumGTDCategory::kKanbanDoing);
          m_doingList.push_back(tmpList.front());
          tmpList.erase(tmpList.begin());
       }
       else if(m_doneRegion.contains(center))
       {
+         UserData::getInst().AddStrToCategory(newItemStr,
+                                              EnumGTDCategory::kKanbanDone);
          m_doneList.push_back(tmpList.front());
          tmpList.erase(tmpList.begin());
       }
       else
       {
-         throw;
+         return;
+//         throw;
       }
    }
 }
@@ -358,14 +468,6 @@ void KanbanWidget::AutoArrange(const QRegion& region, QList<KanbanTask*>& list)
       itr->move(pos);
       top += itr->height();
    }
-}
-
-void KanbanWidget::AutoArrange()
-{
-   UpdateListRegions();
-   AutoArrange(m_readyRegion, m_readyList);
-   AutoArrange(m_doingRegion, m_doingList);
-   AutoArrange(m_doneRegion, m_doneList);
 }
 
 void KanbanWidget::UpdateRegion(const QRect& inRect, QRegion& outRegion)

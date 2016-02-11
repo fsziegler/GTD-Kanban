@@ -596,7 +596,7 @@ void GTDTreeWidget::onCustomContextMenuRequested(const QPoint& pos)
             || (kSortDescending == actionTextPair[i].action)
             || (kPaste == actionTextPair[i].action)
             || (kLink == actionTextPair[i].action)
-            )
+        )
       {
          menu->addSeparator();
       }

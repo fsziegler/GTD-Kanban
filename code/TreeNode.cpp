@@ -461,11 +461,24 @@ void TreeNode::FormatWithBackslash(const string& inputStr,
    for(size_t i = 0; inputStr.size() > i; ++i)
    {
       if(('"' == inputStr[i])
-              || ('\\' == inputStr[i]))
+              || ('\\' == inputStr[i])
+            )
       {
          outputStr += '\\';
+         outputStr += inputStr[i];
       }
-      outputStr += inputStr[i];
+      else if('\n' == inputStr[i])
+      {
+         outputStr += "<CR>";
+      }
+      else if('\t' == inputStr[i])
+      {
+         outputStr += "<TAB>";
+      }
+      else
+      {
+         outputStr += inputStr[i];
+      }
    }
 }
 

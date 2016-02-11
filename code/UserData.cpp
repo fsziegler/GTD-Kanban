@@ -279,6 +279,26 @@ void UserData::Clear()
    PopulateGTDNodeTree();
 }
 
+bool UserData::RemoveNthStrInCategory(const string& itemStr,
+                                      EnumGTDCategory category, size_t row)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   if (!TreeNode::IsStrInSystem(itemStr))
+   {
+      return false;
+   }
+   // row is incremented here because the initial node is the root node
+   return GetTreeNode(category).RemoveNodeAtRow(itemStr, row + 1);
+}
+
+size_t UserData::RemoveAllChildrenInCategory(EnumGTDCategory category)
+{
+   lock_guard<recursive_mutex> guard(m_mutex);
+   const size_t retval(GetTreeNode(category).getChildren().size());
+   GetTreeNode(category).ClearAllChildren();
+   return retval;
+}
+
 void UserData::PopulateGTDNodeTree()
 {
    for (auto itr : ms_gtdFixedCatMap)

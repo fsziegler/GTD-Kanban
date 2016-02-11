@@ -45,7 +45,7 @@ void KanbanTask::setText(const QString& newText)
          }
       }
    }
-   QSize newSize(maxLen * 12, lines * 20);
+   QSize newSize(maxLen * 11, lines * 20);
    resize(newSize);
 }
 

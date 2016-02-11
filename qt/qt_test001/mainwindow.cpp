@@ -150,6 +150,12 @@ bool MainWindow::LoadFromFile(const QString& jsonFileName)
    }
    m_gtdTextEditor.clear();
    mp_inBasketForm->getGTDListWidget()->clear();
+   mp_kanbanWindow->Clear();
+
+   QList<KanbanTask*>& readyList = mp_kanbanWindow->getReadyList();
+   QList<KanbanTask*>& doingList = mp_kanbanWindow->getDoingList();
+   QList<KanbanTask*>& doneList = mp_kanbanWindow->getDoneList();
+
    for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
    {
       const QString nodeNameStr(
@@ -167,12 +173,30 @@ bool MainWindow::LoadFromFile(const QString& jsonFileName)
       }
       else if (nodeNameStr == QString("Kanban Ready"))
       {
+         for(auto inBItr: pair.second.getChildren())
+         {
+            KanbanTask* newTask = new KanbanTask(mp_kanbanWindow);
+            newTask->setText(QString(inBItr.getMpNodeNameStr().c_str()));
+            mp_kanbanWindow->getReadyList().append(newTask);
+         }
       }
       else if (nodeNameStr == QString("Kanban Doing"))
       {
+         for(auto inBItr: pair.second.getChildren())
+         {
+            KanbanTask* newTask = new KanbanTask(mp_kanbanWindow);
+            newTask->setText(QString(inBItr.getMpNodeNameStr().c_str()));
+            mp_kanbanWindow->getDoingList().append(newTask);
+         }
       }
       else if (nodeNameStr == QString("Kanban Done"))
       {
+         for(auto inBItr: pair.second.getChildren())
+         {
+            KanbanTask* newTask = new KanbanTask(mp_kanbanWindow);
+            newTask->setText(QString(inBItr.getMpNodeNameStr().c_str()));
+            mp_kanbanWindow->getDoneList().append(newTask);
+         }
       }
       else
       {
@@ -181,6 +205,8 @@ bool MainWindow::LoadFromFile(const QString& jsonFileName)
          m_gtdTree.AddNode(itr.second, itr.first);
       }
    }
+   mp_kanbanWindow->CenterAllItems();
+   mp_kanbanWindow->AutoArrange();
    return true;
 }
 
@@ -400,6 +426,7 @@ void MainWindow::on_action_New_triggered()
    m_gtdTextEditor.clear();
    m_gtdTree.ClearTree();
    mp_inBasketForm->ClearWorkspace();
+   mp_kanbanWindow->Clear();
    mp_gtdCalendar->repaint();
    setDirtyFlag(false);
    mp_inBasketForm->SetFocusInTextEdit();
