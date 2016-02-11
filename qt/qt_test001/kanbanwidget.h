@@ -53,6 +53,8 @@ protected:
                             QList<KanbanTask*>& taskList);
    bool DeleteFromList(EnumGTDCategory category,
                        QList<KanbanTask *>& kanbanList);
+   void EditItem();
+   bool EditItem(EnumGTDCategory category, QList<KanbanTask *>& kanbanList);
    void Delete();
    bool CutFromList(EnumGTDCategory category, QList<KanbanTask *>& kanbanList);
    void Cut();

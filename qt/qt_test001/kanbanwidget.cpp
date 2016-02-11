@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QWindow>
+#include <QInputDialog>
 
 KanbanWidget::KanbanWidget(MainWindow* mainWindow)
    : QWidget((QWidget*) mainWindow),
@@ -105,6 +106,9 @@ void KanbanWidget::onMenuAction(QAction* action)
 {
    switch (action->data().toInt())
    {
+   case kEditItem:
+      EditItem();
+      break;
    case kDelete:
       Delete();
       break;
@@ -197,7 +201,7 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
 void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
 {
    QMenu* menu = new QMenu(this);
-   size_t first(kDelete);
+   size_t first(kEditItem);
    size_t last(kLink);
    for (size_t i = first; last >= i; ++i)
    {
@@ -287,13 +291,61 @@ bool KanbanWidget::DeleteFromList(EnumGTDCategory category,
       {
          const QString& itemStr = itr->getText();
          if(!UserData::getInst().RemoveNthStrInCategory(itemStr.toStdString(),
-                                                        category, cnt))
+               category, cnt))
          {
             throw;
          }
          itr->hide();
          kanbanList.removeAt(cnt);
          delete itr;
+         return true;
+      }
+      ++cnt;
+   }
+   return false;
+}
+
+void KanbanWidget::EditItem()
+{
+   if(!EditItem(EnumGTDCategory::kKanbanReady, m_readyList))
+   {
+      if(!EditItem(EnumGTDCategory::kKanbanDoing, m_doingList))
+      {
+         EditItem(EnumGTDCategory::kKanbanDone, m_doneList);
+      }
+   }
+}
+
+bool KanbanWidget::EditItem(EnumGTDCategory category,
+                            QList<KanbanTask *>& kanbanList)
+{
+   int cnt(0);
+   for(auto itr: kanbanList)
+   {
+      if(itr->hasFocus())
+      {
+         string itemStr;
+         UserData::getInst().GetNthCategoryStr(category, cnt, itemStr);
+//         QInputDialog* inputDialog = new QInputDialog();
+         QInputDialog inputDialog;// = new QInputDialog();
+         inputDialog.setOptions(QInputDialog::NoButtons);
+
+         bool ok;
+         QString origText(itemStr.c_str());
+         QString text =  inputDialog.getText(NULL ,"Edit Task",
+                                             "Task name:", QLineEdit::Normal,
+                                             origText, &ok);
+         if (ok && !text.isEmpty())
+         {
+            UserData::getInst().RemoveNthStrInCategory(itemStr, category, cnt);
+            UserData::getInst().AddStrToCategory(text.toStdString(), category);
+            itr->setText(text);
+//            kanbanList.removeAt(cnt);
+//            KanbanTask* newTask = new KanbanTask(this);
+//            newTask->setText(text);
+//            kanbanList.push_back(newTask);
+            AutoArrange();
+         }
          return true;
       }
       ++cnt;
@@ -323,7 +375,7 @@ bool KanbanWidget::CutFromList(EnumGTDCategory category,
          mp_mainWindow->getClipboardList().append(itr->getText());
          const QString& itemStr = itr->getText();
          if(!UserData::getInst().RemoveNthStrInCategory(itemStr.toStdString(),
-                                                        category, cnt))
+               category, cnt))
          {
             throw;
          }

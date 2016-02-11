@@ -10,6 +10,7 @@ enum EnumAction
    kMoveToBottom,
    kSortAscending,
    kSortDescending,
+   kEditItem,
    kDelete,
    kCut,
    kCopy,
@@ -27,7 +28,7 @@ struct SActionTextPair
    QString text;
 };
 
-const size_t SActionTextPairLen(16);
+const size_t SActionTextPairLen(17);
 const SActionTextPair actionTextPair[SActionTextPairLen] =
 {
    { kMoveToKanban, "Move To Kanban" },
@@ -37,6 +38,7 @@ const SActionTextPair actionTextPair[SActionTextPairLen] =
    { kMoveToBottom, "Move To Bottom" },
    { kSortAscending, "Sort Ascending" },
    { kSortDescending, "Sort Descending" },
+   { kEditItem, "Edit current task" },
    { kDelete, "Delete" },
    { kCut, "Cut" },
    { kCopy, "Copy" },
