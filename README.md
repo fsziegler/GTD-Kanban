@@ -47,7 +47,7 @@ Once you have processed your issues, you will have the following lists stored in
 - your **Someday Maybe** list
 - your **Reference** list
 - **Trash**
-- your **DoIt!** list
+- your **Do It!** list
 - your **Waiting for Another Person** list
 - tasks in your **Calendar** on specific dates
 - your **Next Actions** list
@@ -75,12 +75,12 @@ Your **Project Plans** and **Next Actions** lists are where the GTD-Kanban syste
   - **Visualize your work**, and
   - **Limit your work in progress**
 
-In order to **visualize your work**, ***tasks*** are tracked graphically on a **board**. This could be a whiteboard, piece of paper, or software UI. Generally, ***projects*** are too large to focus on, so you move ***tasks*** first from the **Project Plans** list to the **Next Actions** list, and then onto the **board**. There are three columns to show the progress of a ***task***:
+In order to **visualize your work**, ***tasks*** are tracked graphically on a **Kanban board**, shown as the green "Kanban Graph" window in the lower right of the UI. Generally, ***projects*** are too large to focus on, so you move ***tasks*** first from the **Project Plans** list to the **Next Actions** list, and then onto the **Kanban board**. There are three columns to show the progress of a ***task***:
   - *Ready*
   - *Doing*
   - *Done*
 
-***Tasks*** are depicted on a moveable medium (e.g., a Post-It for whiteboards and paper, a draggable window in a software UI). As a task progresses, you move it from one column to the next. Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on - the authors of "Personal Kanban" recommend starting with three. Move these tasks onto the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. This keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once you have completed one ***task*** (moved it to *Done*), remove it from the board, and move another one into the *Ready* column.
+***Tasks*** are depicted in yellow draggable windows . As a task progresses, you move it from one column to the next. Using GTD, you will likely have a large backlog of ***tasks*** and ***projects***. In order to **limit your work in progress**, it is important to identify only a few of these that you can realistically be working on - the authors of "Personal Kanban" recommend starting with three. Move these tasks onto the Kanban board; these will be the rows that cross the *Ready, Doing, Done* columns. This keeps you focused on a manageable subset of ***tasks*** until they are complete *before* starting in on another one. Once you have completed one ***task*** (moved it to *Done*), remove it from the board, and move another one into the *Ready* column.
 
 ### 1.3 Executing Engineering Projects
 ####Make It Work, Make It Right, Make It Fast
