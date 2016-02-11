@@ -28,7 +28,7 @@ public:
    void Clear();
    void CenterAllListItems(const QRegion& region, QList<KanbanTask*>& list);
    void CenterAllItems();
-   void AutoArrange();
+   void AutoArrange(bool retainLists = false);
    const QRegion& GetKanbanStateRegion(EnumKanbanState state);
 
    QList<KanbanTask*>& getReadyList();
@@ -45,6 +45,8 @@ protected:
    // Event handlers
    virtual void paintEvent(QPaintEvent* event);
    virtual void contextMenuEvent(QContextMenuEvent* event);
+   virtual void keyPressEvent(QKeyEvent *event);
+   virtual void resizeEvent(QResizeEvent *event);
 
 protected:
    void ReplaceCategoryTree(EnumGTDCategory category,

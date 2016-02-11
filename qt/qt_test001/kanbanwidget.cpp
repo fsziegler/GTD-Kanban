@@ -63,9 +63,12 @@ void KanbanWidget::CenterAllItems()
    CenterAllListItems(m_doneRegion, m_doneList);
 }
 
-void KanbanWidget::AutoArrange()
+void KanbanWidget::AutoArrange(bool retainLists)
 {
-   UpdateListRegions();
+   if(!retainLists)
+   {
+      UpdateListRegions();
+   }
    AutoArrange(m_readyRegion, m_readyList);
    AutoArrange(m_doingRegion, m_doingList);
    AutoArrange(m_doneRegion, m_doneList);
@@ -225,6 +228,36 @@ void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
                 QStyle::PM_TitleBarHeight));
    QPoint pos1(mapFromGlobal(QApplication::activeWindow()->pos()));
    menu->popup(mapFromGlobal(QCursor::pos()) + pos0 - pos1);
+}
+
+void KanbanWidget::keyPressEvent(QKeyEvent *event)
+{
+   if((event->key() == Qt::Key_X) && (event->modifiers() == Qt::CTRL))
+   {
+      Cut();
+   }
+   else if((event->key() == Qt::Key_C) && (event->modifiers() == Qt::CTRL))
+   {
+      Copy();
+   }
+   else if((event->key() == Qt::Key_V) && (event->modifiers() == Qt::CTRL))
+   {
+      Paste();
+   }
+   else if(event->key() == Qt::Key_Delete)
+   {
+      Delete();
+   }
+   else
+   {
+      QWidget::keyPressEvent(event);
+   }
+}
+
+void KanbanWidget::resizeEvent(QResizeEvent *event)
+{
+   QWidget::resizeEvent(event);
+   AutoArrange(true);
 }
 
 void KanbanWidget::ReplaceCategoryTree(EnumGTDCategory category,
