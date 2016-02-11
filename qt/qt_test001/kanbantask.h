@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QTimer>
 
+class KanbanWidget;
+
 class KanbanTask : public QWidget
 {
    Q_OBJECT
@@ -30,12 +32,13 @@ protected:
    virtual void paintEvent(QPaintEvent* pntEvent);
 
 private:
-   QPoint m_initPos;
-   QPoint m_currPos;
-   QRegion m_initRegion;
-   QRegion m_currRegion;
-   QString m_text;
-   QTimer UpdateTimer;
+   QPoint         m_initPos;
+   QPoint         m_currPos;
+   QRegion        m_initRegion;
+   QRegion        m_currRegion;
+   QString        m_text;
+   QTimer         m_updateTimer;
+   KanbanWidget*  mp_kanbanParent;
 };
 
 #endif // KANBANTASK_H

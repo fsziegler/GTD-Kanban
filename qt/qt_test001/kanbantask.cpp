@@ -7,14 +7,15 @@
 using namespace std;
 
 KanbanTask::KanbanTask(QWidget* parent)
-   : QWidget(parent)
+   : QWidget(parent),
+     mp_kanbanParent((KanbanWidget*) parent)
 {
    setAutoFillBackground(true);
    QPalette Pal(palette());
    Pal.setColor(QPalette::Background, QColor(255, 255, 128));
    setPalette(Pal);
-   connect(&UpdateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
-   UpdateTimer.start(500);
+   connect(&m_updateTimer, SIGNAL(timeout()), this, SLOT(repaint()));
+   m_updateTimer.start(500);
 
    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
@@ -88,6 +89,7 @@ void KanbanTask::mouseReleaseEvent(QMouseEvent* event)
       show();
    }
    setFocus();
+   mp_kanbanParent->AutoArrange();
 }
 
 //    void KanbanTask::mouseDoubleClickEvent(QMouseEvent* event);
