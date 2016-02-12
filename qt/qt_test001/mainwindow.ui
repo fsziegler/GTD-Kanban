@@ -45,6 +45,9 @@
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuView">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>&amp;View</string>
     </property>
@@ -62,11 +65,17 @@
     <addaction name="actionRestore"/>
    </widget>
    <widget class="QMenu" name="menuWizard">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Wi&amp;zard</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuStats">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>S&amp;tats</string>
     </property>

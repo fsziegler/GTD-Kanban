@@ -326,7 +326,6 @@ bool KanbanWidget::EditItem(EnumGTDCategory category,
       {
          string itemStr;
          UserData::getInst().GetNthCategoryStr(category, cnt, itemStr);
-//         QInputDialog* inputDialog = new QInputDialog();
          QInputDialog inputDialog;// = new QInputDialog();
          inputDialog.setOptions(QInputDialog::NoButtons);
 
@@ -340,10 +339,7 @@ bool KanbanWidget::EditItem(EnumGTDCategory category,
             UserData::getInst().RemoveNthStrInCategory(itemStr, category, cnt);
             UserData::getInst().AddStrToCategory(text.toStdString(), category);
             itr->setText(text);
-//            kanbanList.removeAt(cnt);
-//            KanbanTask* newTask = new KanbanTask(this);
-//            newTask->setText(text);
-//            kanbanList.push_back(newTask);
+            mp_mainWindow->setDirtyFlag(true);
             AutoArrange();
          }
          return true;

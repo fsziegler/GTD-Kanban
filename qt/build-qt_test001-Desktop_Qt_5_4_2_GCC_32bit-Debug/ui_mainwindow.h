@@ -90,12 +90,15 @@ public:
         menuRecent_Files->setObjectName(QStringLiteral("menuRecent_Files"));
         menuView = new QMenu(menuBar);
         menuView->setObjectName(QStringLiteral("menuView"));
+        menuView->setEnabled(false);
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuWizard = new QMenu(menuBar);
         menuWizard->setObjectName(QStringLiteral("menuWizard"));
+        menuWizard->setEnabled(false);
         menuStats = new QMenu(menuBar);
         menuStats->setObjectName(QStringLiteral("menuStats"));
+        menuStats->setEnabled(false);
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
