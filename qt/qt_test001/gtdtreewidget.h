@@ -89,6 +89,7 @@ private:
    QTreeWidgetItem  m_SomedayMaybeTWI;
    QTreeWidgetItem  m_ReferenceTWI;
    QTreeWidgetItem  m_TrashTWI;
+   QTreeWidgetItem  m_ClipboardTWI;
 
    QTreeWidgetItem  m_actionableTWI;
    QTreeWidgetItem  m_tasksTWI;

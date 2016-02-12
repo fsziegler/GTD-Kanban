@@ -117,6 +117,8 @@ QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
       return &m_NextActionsTWI;
    case EnumGTDCategory::kTrash:
       return &m_TrashTWI;
+   case EnumGTDCategory::kClipboard:
+      return &m_ClipboardTWI;
    case EnumGTDCategory::kMoveQueue:
    default:
       throw;
