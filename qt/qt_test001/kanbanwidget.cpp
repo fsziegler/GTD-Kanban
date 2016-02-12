@@ -9,6 +9,8 @@
 #include <QWindow>
 #include <QInputDialog>
 
+bool KanbanWidget::mb_reSized(false);
+
 KanbanWidget::KanbanWidget(MainWindow* mainWindow)
    : QWidget((QWidget*) mainWindow),
      mp_mainWindow(mainWindow),
@@ -68,6 +70,11 @@ void KanbanWidget::AutoArrange(bool retainLists)
    AutoArrange(m_readyRegion, m_readyList);
    AutoArrange(m_doingRegion, m_doingList);
    AutoArrange(m_doneRegion, m_doneList);
+}
+
+void KanbanWidget::SetResized()
+{
+   mb_reSized = true;
 }
 
 const QRegion& KanbanWidget::GetKanbanStateRegion(EnumKanbanState state)
@@ -196,6 +203,11 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
 
    painter.restore();
    QWidget::paintEvent(pntEvent);
+   if(mb_reSized)
+   {
+      AutoArrange(true);
+      mb_reSized = false;
+   }
 }
 
 void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)

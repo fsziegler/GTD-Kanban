@@ -29,6 +29,7 @@ public:
    void CenterAllListItems(const QRegion& region, QList<KanbanTask*>& list);
    void CenterAllItems();
    void AutoArrange(bool retainLists = false);
+   void SetResized();
    const QRegion& GetKanbanStateRegion(EnumKanbanState state);
 
    QList<KanbanTask*>& getReadyList();
@@ -78,6 +79,7 @@ private:
    QList<KanbanTask*> m_doingList;
    QList<KanbanTask*> m_doneList;
    MainWindow*        mp_mainWindow;
+   static bool        mb_reSized;
 
    QRegion m_titleRegion;
    QRegion m_readyRegion;

@@ -570,14 +570,17 @@ void MainWindow::OpenRecentFile9()
 void MainWindow::on_actionMinimize_triggered()
 {
    setWindowState(Qt::WindowMinimized);
+   mp_kanbanWindow->SetResized();
 }
 
 void MainWindow::on_actionMaximize_triggered()
 {
    setWindowState(Qt::WindowMaximized);
+   mp_kanbanWindow->SetResized();
 }
 
 void MainWindow::on_actionRestore_triggered()
 {
    setWindowState(m_defaultWindowState);
+   mp_kanbanWindow->SetResized();
 }
