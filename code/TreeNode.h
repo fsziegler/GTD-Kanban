@@ -51,6 +51,7 @@ namespace ZiegGTDKanban
 // Typedefs
 typedef set<string> TStrSet;
 typedef set<const string*> TCStrPtrSet;
+typedef vector<string> TStrVect;
 
 class TreeNode;
 typedef vector<TreeNode> TTreeNodeVect;
@@ -110,6 +111,7 @@ public:
    void SetDateTime(date& newDate, ptime& newTime,
          EnumTargetNode node = kParentNode);
    void SetExpandState(bool expand);
+   void AddLinkStr(const string& newLinkStr);
 
    // ACCESSORS
    bool ReadStrAtRow(size_t row, string& rowStr) const;
@@ -118,6 +120,7 @@ public:
    const ptime& getTime() const;
    bool getExpandState() const;
    unsigned long getUniqueID() const;
+   const TStrVect& getlinksVect() const;
    const string* getMpNodeNameStrPtr() const;
    const string& getMpNodeNameStr() const;
    static const TStrSet& getMsItemRepoSet();
@@ -139,7 +142,8 @@ private:
    ptime                   m_time;
    bool                    m_expanded;
    unsigned long           m_uniqueID;
-   TTreeNodeVect           m_children;
+   TStrVect                m_linksVect;
+   TTreeNodeVect           m_childrenVect;
 };
 
 } /* namespace ZiegGTDKanban */

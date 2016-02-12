@@ -85,20 +85,20 @@ TreeNode& TreeNode::operator[](size_t index)
       return NonExistentTreeNode;
    }
    size_t tmpIndex(index - 1);
-   for(size_t i = 0; m_children.size() > i; ++i)
+   for(size_t i = 0; m_childrenVect.size() > i; ++i)
    {
       if(0 == tmpIndex)
       {
-         TreeNode& retNode = m_children[i];
+         TreeNode& retNode = m_childrenVect[i];
          return retNode;
       }
       --tmpIndex;
-      if(m_children[i].CalcNestedChildCount() > tmpIndex)
+      if(m_childrenVect[i].CalcNestedChildCount() > tmpIndex)
       {
-         TreeNode& retNode = m_children[i][tmpIndex];
+         TreeNode& retNode = m_childrenVect[i][tmpIndex];
          return retNode;
       }
-      tmpIndex -= m_children[i].CalcNestedChildCount();
+      tmpIndex -= m_childrenVect[i].CalcNestedChildCount();
    }
    // We should never reach this point
    return NonExistentTreeNode;
@@ -133,10 +133,10 @@ unsigned int TreeNode::GetNumInstancesOfItemStr(const string& itemStr,
       lastIndexDeque.push_back(0);
    }
 
-   for(size_t i = 0; m_children.size() > i; ++i)
+   for(size_t i = 0; m_childrenVect.size() > i; ++i)
    {
       lastIndexDeque.push_back(i);
-      if(m_children[i].GetNumInstancesOfItemStr(itemStr, lastIndexDeque))
+      if(m_childrenVect[i].GetNumInstancesOfItemStr(itemStr, lastIndexDeque))
       {
          ++cnt;
       }
@@ -150,8 +150,8 @@ unsigned int TreeNode::GetNumInstancesOfItemStr(const string& itemStr,
 
 size_t TreeNode::CalcNestedChildCount() const
 {
-   size_t childCnt(m_children.size());
-   for(auto itr: m_children)
+   size_t childCnt(m_childrenVect.size());
+   for(auto itr: m_childrenVect)
    {
       childCnt += itr.CalcNestedChildCount();
    }
@@ -188,10 +188,15 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
             << "\"," << endl;
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"uniqueID\" : \"" << m_uniqueID << "\"," << endl;
+      for(auto itr: m_linksVect)
+      {
+         IndentJSONFile(indent + 2, jsonOutFile);
+         jsonOutFile << "\"link\" : \"" << itr << "\"," << endl;
+      }
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"children\" : {";
       bool first(true);
-      for(auto itr: m_children)
+      for(auto itr: m_childrenVect)
       {
          jsonOutFile << (first ? "" : ",");
          jsonOutFile << endl;
@@ -208,8 +213,8 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
 
 TreeNode& TreeNode::AddChildNode(TreeNode& childNode)
 {
-   m_children.push_back(childNode);
-   return m_children.back();
+   m_childrenVect.push_back(childNode);
+   return m_childrenVect.back();
 }
 
 void TreeNode::AppendChildren(const TTreeNodeVect& children)
@@ -236,7 +241,7 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
    // This would be better with a list, but we need random access
    TTreeNodeVect& childVect =
          (nullptr != remNode->mp_parentNode ?
-               remNode->mp_parentNode->m_children : m_children);
+               remNode->mp_parentNode->m_childrenVect : m_childrenVect);
    TTreeNodeVect newVect;
    for(auto itr: childVect)
    {
@@ -246,25 +251,26 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
       }
       else
       {
-         for(auto itr2: remNode->m_children)
+         for(auto itr2: remNode->m_childrenVect)
          {
             newVect.push_back(itr2);
          }
       }
    }
-   m_children = newVect;
+   m_childrenVect = newVect;
    return true;
 }
 
 void TreeNode::ClearAllChildren()
 {
-   m_children.clear();
+   m_childrenVect.clear();
 }
 
 const string kDateStr("date");
 const string kTimeStr("time");
 const string kExpandStr("expand");
 const string kUniqueIDStr("uniqueID");
+const string kLinkStr("link");
 const string kTrueStr("true");
 const string kFalseStr("false");
 const string kNotADateTimeStr("not-a-date-time");
@@ -327,7 +333,12 @@ bool TreeNode::LoadPTree(ptree& pTree)
          {
             unsigned long tmp = strtoul(value.c_str(), NULL, 0);
             m_uniqueID = strtoul(value.c_str(), NULL, 0);
-            m_maxUniqueID = (m_maxUniqueID > m_uniqueID ? m_maxUniqueID : m_uniqueID + 1);
+            m_maxUniqueID = (
+                  m_maxUniqueID > m_uniqueID ? m_maxUniqueID : m_uniqueID + 1);
+         }
+         else if(str == kLinkStr)
+         {
+            m_linksVect.push_back(value);
          }
          else
          {
@@ -346,7 +357,7 @@ bool TreeNode::LoadPTree(ptree& pTree)
             TreeNode node(objItr.first, this);
             ptree& pt = objItr.second;
             node.LoadPTree(pt);
-            m_children.push_back(node);
+            m_childrenVect.push_back(node);
          }
       }
    }
@@ -361,7 +372,7 @@ void TreeNode::SetDate(date& newDate, EnumTargetNode node)
       m_date = newDate;
       break;
    case kLastChildNode:
-      m_children.back().m_date = newDate;
+      m_childrenVect.back().m_date = newDate;
       break;
    default:
       throw;
@@ -376,7 +387,7 @@ void TreeNode::SetTime(ptime& newTime, EnumTargetNode node)
       m_time = newTime;
       break;
    case kLastChildNode:
-      m_children.back().m_time = newTime;
+      m_childrenVect.back().m_time = newTime;
       break;
    default:
       throw;
@@ -392,8 +403,8 @@ void TreeNode::SetDateTime(date& newDate, ptime& newTime, EnumTargetNode node)
       m_time = newTime;
       break;
    case kLastChildNode:
-      m_children.back().m_date = newDate;
-      m_children.back().m_time = newTime;
+      m_childrenVect.back().m_date = newDate;
+      m_childrenVect.back().m_time = newTime;
       break;
    default:
       throw;
@@ -405,6 +416,11 @@ void TreeNode::SetExpandState(bool expand)
    m_expanded = expand;
 }
 
+void TreeNode::AddLinkStr(const string& newLinkStr)
+{
+   m_linksVect.push_back(newLinkStr);
+}
+
 bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
 {
    size_t rowCnt(row);
@@ -414,7 +430,7 @@ bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
       return true;
    }
    --rowCnt;
-   for(auto itr: m_children)
+   for(auto itr: m_childrenVect)
    {
       if (0 == rowCnt)
       {
@@ -438,7 +454,7 @@ bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
 
 const TTreeNodeVect& TreeNode::getChildren() const
 {
-   return m_children;
+   return m_childrenVect;
 }
 
 const date& TreeNode::getDate() const
@@ -459,6 +475,11 @@ bool TreeNode::getExpandState() const
 unsigned long TreeNode::getUniqueID() const
 {
    return m_uniqueID;
+}
+
+const TStrVect& TreeNode::getlinksVect() const
+{
+   return m_linksVect;
 }
 
 const string* TreeNode::getMpNodeNameStrPtr() const
@@ -507,20 +528,28 @@ void TreeNode::SetEqualTo(const TreeNode& rhs)
    m_time            = rhs.m_time;
    m_expanded        = rhs.m_expanded;
    m_uniqueID        = rhs.m_uniqueID;
-   m_children        = rhs.m_children;
+   m_linksVect       = rhs.m_linksVect;
+   m_childrenVect    = rhs.m_childrenVect;
 }
 
 bool TreeNode::IsEqualTo(const TreeNode& rhs) const
 {
-   bool rslt(rhs.m_children.size() == m_children.size());
+   bool rslt(
+         (rhs.m_linksVect.size() == m_linksVect.size())
+               && (rhs.m_childrenVect.size() == m_childrenVect.size()));
    if(!rslt)
    {
       return false;
    }
-   for(size_t i = 0; m_children.size() > i; ++i)
+   for(size_t i = 0; m_linksVect.size() > i; ++i)
    {
-      rslt &= (rhs.m_children[i].IsEqualTo(m_children[i]));
+      rslt &= (rhs.m_linksVect[i] == m_linksVect[i]);
    }
+   for(size_t i = 0; m_childrenVect.size() > i; ++i)
+   {
+      rslt &= (rhs.m_childrenVect[i].IsEqualTo(m_childrenVect[i]));
+   }
+
    return (rslt
          && (rhs.mp_parentNode == mp_parentNode)
          && (rhs.mp_nodeNameStrPtr == mp_nodeNameStrPtr)

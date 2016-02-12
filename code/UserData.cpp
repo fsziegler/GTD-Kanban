@@ -74,6 +74,8 @@ UserData::UserData()
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kTrash, "(Trash)"));
       ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kClipboard, "(Clipboard)"));
+      ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kKanbanReady, "Kanban Ready"));
             ms_gtdFixedCatMap.insert(
                   TGTDCategoryPair(EnumGTDCategory::kKanbanDoing,
