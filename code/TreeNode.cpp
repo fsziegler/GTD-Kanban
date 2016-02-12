@@ -35,6 +35,7 @@ namespace ZiegGTDKanban
 
 TStrSet           TreeNode::ms_itemRepoSet;
 recursive_mutex   TreeNode::m_mutex;
+unsigned long     TreeNode::m_maxUniqueID(0);
 
 TreeNode NonExistentTreeNode("NonExistentTreeNode");
 
@@ -43,7 +44,8 @@ TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode)
   mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
   m_date(special_values::not_a_date_time),
   m_time(special_values::not_a_date_time),
-  m_expanded(true)
+  m_expanded(true),
+  m_uniqueID(++m_maxUniqueID)
 {
 }
 
@@ -182,7 +184,10 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"time\" : \"" << m_time << "\"," << endl;
       IndentJSONFile(indent + 2, jsonOutFile);
-      jsonOutFile << "\"expand\" : \"" << (m_expanded ? "true" : "false") << "\"," << endl;
+      jsonOutFile << "\"expand\" : \"" << (m_expanded ? "true" : "false")
+            << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"uniqueID\" : \"" << m_uniqueID << "\"," << endl;
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"children\" : {";
       bool first(true);
@@ -259,6 +264,7 @@ void TreeNode::ClearAllChildren()
 const string kDateStr("date");
 const string kTimeStr("time");
 const string kExpandStr("expand");
+const string kUniqueIDStr("uniqueID");
 const string kTrueStr("true");
 const string kFalseStr("false");
 const string kNotADateTimeStr("not-a-date-time");
@@ -316,6 +322,12 @@ bool TreeNode::LoadPTree(ptree& pTree)
              {
                 throw;
              }
+         }
+         else if(str == kUniqueIDStr)
+         {
+            unsigned long tmp = strtoul(value.c_str(), NULL, 0);
+            m_uniqueID = strtoul(value.c_str(), NULL, 0);
+            m_maxUniqueID = (m_maxUniqueID > m_uniqueID ? m_maxUniqueID : m_uniqueID + 1);
          }
          else
          {
@@ -444,6 +456,11 @@ bool TreeNode::getExpandState() const
    return m_expanded;
 }
 
+unsigned long TreeNode::getUniqueID() const
+{
+   return m_uniqueID;
+}
+
 const string* TreeNode::getMpNodeNameStrPtr() const
 {
    return mp_nodeNameStrPtr;
@@ -489,6 +506,7 @@ void TreeNode::SetEqualTo(const TreeNode& rhs)
    m_date            = rhs.m_date;
    m_time            = rhs.m_time;
    m_expanded        = rhs.m_expanded;
+   m_uniqueID        = rhs.m_uniqueID;
    m_children        = rhs.m_children;
 }
 
@@ -508,7 +526,8 @@ bool TreeNode::IsEqualTo(const TreeNode& rhs) const
          && (rhs.mp_nodeNameStrPtr == mp_nodeNameStrPtr)
          && (rhs.m_date == m_date)
          && (rhs.m_time == m_time)
-         && (rhs.m_expanded == m_expanded));
+         && (rhs.m_expanded == m_expanded)
+         && (rhs.m_uniqueID == m_uniqueID));
 }
 
 const TStrSet& TreeNode::getMsItemRepoSet()

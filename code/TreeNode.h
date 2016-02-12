@@ -117,6 +117,7 @@ public:
    const date& getDate() const;
    const ptime& getTime() const;
    bool getExpandState() const;
+   unsigned long getUniqueID() const;
    const string* getMpNodeNameStrPtr() const;
    const string& getMpNodeNameStr() const;
    static const TStrSet& getMsItemRepoSet();
@@ -131,11 +132,13 @@ private:
 
    static TStrSet          ms_itemRepoSet;   // Set of all added user item names
    static recursive_mutex  m_mutex;          // Mutex to keep class thread safe
+   static unsigned long    m_maxUniqueID;
    TreeNode*               mp_parentNode;
    const string*           mp_nodeNameStrPtr;
    date                    m_date;
    ptime                   m_time;
    bool                    m_expanded;
+   unsigned long           m_uniqueID;
    TTreeNodeVect           m_children;
 };
 
