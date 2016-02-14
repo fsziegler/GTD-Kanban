@@ -21,6 +21,11 @@ One thesis in "Getting Things Done" ("GTD") is that if your mind has more than o
 A useful open-source brain-storming software tool for initially collecting all these issues is [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page), which runs on Windows, Mac, and Linux.
 
 ####GTD Workflow
+
+`“If money is your hope for independence you will never have it. The only real security that a man will have in this world is a reserve of knowledge, experience, and ability.”`
+
+`--Henry Ford`
+
 In GTD, you start by identifying and classifying all of your issues. You initially create these in your **In-basket** and work through them one by one.
 
 ![Screenshot](GTD-Kanban Screenshot - GTD in-basket.png)
