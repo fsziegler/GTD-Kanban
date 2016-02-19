@@ -3600,7 +3600,11 @@ kanbanwidget.o: ../qt_test001/kanbanwidget.cpp ../qt_test001/kanbanwidget.h \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QMargins \
 		/opt/Qt5.4.2/5.4/gcc/include/QtCore/QRect \
 		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qsurface.h \
-		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qsurfaceformat.h
+		/opt/Qt5.4.2/5.4/gcc/include/QtGui/qsurfaceformat.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/QInputDialog \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qinputdialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qdialog.h \
+		/opt/Qt5.4.2/5.4/gcc/include/QtWidgets/qlineedit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o kanbanwidget.o ../qt_test001/kanbanwidget.cpp
 
 exitdialog.o: ../qt_test001/exitdialog.cpp ../qt_test001/exitdialog.h \

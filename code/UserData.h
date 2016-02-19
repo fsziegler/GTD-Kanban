@@ -40,11 +40,15 @@ namespace ZiegGTDKanban
 enum class EnumGTDCategory
 {
    kInBasket,
+   kNonActionable,
    kSomedayMaybe,
    kReference,
+   kActionable,
+   kTasks,
    kDoIt,
    kWaitingForAnotherPerson,
    kCalendar,
+   kProjects,
    kProjectsToPlan,
    kProjectPlans,
    kNextActions,

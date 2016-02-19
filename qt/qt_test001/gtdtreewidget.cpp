@@ -99,16 +99,24 @@ QTreeWidgetItem* GTDTreeWidget::GetTreeWidgetItem(EnumGTDCategory category)
    switch (category)
    {
 //    case EnumGTDCategory::kInBasket:
+   case EnumGTDCategory::kNonActionable:
+      return &m_nonActionableTWI;
    case EnumGTDCategory::kSomedayMaybe:
       return &m_SomedayMaybeTWI;
    case EnumGTDCategory::kReference:
       return &m_ReferenceTWI;
+   case EnumGTDCategory::kActionable:
+      return &m_actionableTWI;
+   case EnumGTDCategory::kTasks:
+      return &m_tasksTWI;
    case EnumGTDCategory::kDoIt:
       return &m_DoItTWI;
    case EnumGTDCategory::kWaitingForAnotherPerson:
       return &m_WaitingOnSomeoneTWI;
    case EnumGTDCategory::kCalendar:
       return &m_CalendarTWI;
+   case EnumGTDCategory::kProjects:
+      return &m_projectsTWI;
    case EnumGTDCategory::kProjectsToPlan:
       return &m_projectsToPlanTWI;
    case EnumGTDCategory::kProjectPlans:

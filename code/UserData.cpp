@@ -54,9 +54,16 @@ UserData::UserData()
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kInBasket, "In Basket"));
       ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kNonActionable,
+                  "Non-Actionable"));
+      ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kSomedayMaybe, "Someday Maybe"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kReference, "Reference"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kActionable, "Actionable"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kTasks, "Tasks"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kDoIt, "Do It!"));
       ms_gtdFixedCatMap.insert(
@@ -64,6 +71,8 @@ UserData::UserData()
                   "Waiting for Another Person"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kCalendar, "Calendar"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kProjects, "Projects"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kProjectsToPlan,
                   "Projects-to-Plan"));
@@ -77,12 +86,10 @@ UserData::UserData()
             TGTDCategoryPair(EnumGTDCategory::kClipboard, "(Clipboard)"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kKanbanReady, "Kanban Ready"));
-            ms_gtdFixedCatMap.insert(
-                  TGTDCategoryPair(EnumGTDCategory::kKanbanDoing,
-                                   "Kanban Doing"));
-            ms_gtdFixedCatMap.insert(
-                  TGTDCategoryPair(EnumGTDCategory::kKanbanDone,
-                                   "Kanban Done"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kKanbanDoing, "Kanban Doing"));
+      ms_gtdFixedCatMap.insert(
+            TGTDCategoryPair(EnumGTDCategory::kKanbanDone, "Kanban Done"));
       ms_gtdFixedCatMap.insert(
             TGTDCategoryPair(EnumGTDCategory::kMoveQueue, "(Move Queue)"));
       ms_gtdFixedCatMap.insert(

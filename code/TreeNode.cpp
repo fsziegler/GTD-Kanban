@@ -232,26 +232,26 @@ bool TreeNode::RemoveNodeAtRow(const string& rowStr, size_t row)
       throw;
       return false;
    }
-   TreeNode* remNode = &(*this)[row];
-   if(rowStr != *(remNode->mp_nodeNameStrPtr))
+   TreeNode* removeNode = &(*this)[row];
+   if(rowStr != *(removeNode->mp_nodeNameStrPtr))
    {
       return false;
    }
 //   TreeNode* parentNode = remNode->mp_parentNode;
    // This would be better with a list, but we need random access
    TTreeNodeVect& childVect =
-         (nullptr != remNode->mp_parentNode ?
-               remNode->mp_parentNode->m_childrenVect : m_childrenVect);
+         (nullptr != removeNode->mp_parentNode ?
+               removeNode->mp_parentNode->m_childrenVect : m_childrenVect);
    TTreeNodeVect newVect;
    for(auto itr: childVect)
    {
-      if(remNode->mp_nodeNameStrPtr != itr.mp_nodeNameStrPtr)
+      if(removeNode->mp_nodeNameStrPtr != itr.mp_nodeNameStrPtr)
       {
          newVect.push_back(itr);
       }
       else
       {
-         for(auto itr2: remNode->m_childrenVect)
+         for(auto itr2: removeNode->m_childrenVect)
          {
             newVect.push_back(itr2);
          }
@@ -527,7 +527,7 @@ void TreeNode::SetEqualTo(const TreeNode& rhs)
    m_date            = rhs.m_date;
    m_time            = rhs.m_time;
    m_expanded        = rhs.m_expanded;
-   m_uniqueID        = rhs.m_uniqueID;
+   m_uniqueID        = m_maxUniqueID++;
    m_linksVect       = rhs.m_linksVect;
    m_childrenVect    = rhs.m_childrenVect;
 }
@@ -556,7 +556,8 @@ bool TreeNode::IsEqualTo(const TreeNode& rhs) const
          && (rhs.m_date == m_date)
          && (rhs.m_time == m_time)
          && (rhs.m_expanded == m_expanded)
-         && (rhs.m_uniqueID == m_uniqueID));
+//         && (rhs.m_uniqueID == m_uniqueID)
+           );
 }
 
 const TStrSet& TreeNode::getMsItemRepoSet()
