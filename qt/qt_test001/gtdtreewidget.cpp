@@ -348,7 +348,8 @@ void GTDTreeWidget::PopulateChildren(QTreeWidgetItem& treeWidgetItem,
    {
       QTreeWidgetItem* child = treeWidgetItem.child(cnt);
       cout << "GTD tree item: " << child->text(0).toStdString() << endl;
-      TreeNode newNode(child->text(0).toStdString(), &node);
+      unsigned long index(indexFromItem(child).internalId());
+      TreeNode newNode(child->text(0).toStdString(), &node, index);
       TreeNode& childNode = node.AddChildNode(newNode);
       if (0 < child->childCount())
       {

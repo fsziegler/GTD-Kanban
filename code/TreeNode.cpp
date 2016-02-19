@@ -39,13 +39,16 @@ unsigned long     TreeNode::m_maxUniqueID(0);
 
 TreeNode NonExistentTreeNode("NonExistentTreeNode");
 
-TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode)
+TreeNode::TreeNode(const string& newItemStr, TreeNode* parentNode,
+                   unsigned long uniqueID)
 : mp_parentNode(parentNode),
   mp_nodeNameStrPtr(GetRepoSetStrPtr(newItemStr)),
   m_date(special_values::not_a_date_time),
   m_time(special_values::not_a_date_time),
   m_expanded(true),
-  m_uniqueID(++m_maxUniqueID)
+  m_uniqueID(0 == uniqueID ? ++m_maxUniqueID : uniqueID),
+  m_extUniqueID(0 < uniqueID),
+  m_dupCnt(0)
 {
 }
 
@@ -188,6 +191,11 @@ void TreeNode::DumpAllToJSONFile(size_t indent, ofstream& jsonOutFile) const
             << "\"," << endl;
       IndentJSONFile(indent + 2, jsonOutFile);
       jsonOutFile << "\"uniqueID\" : \"" << m_uniqueID << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"extUniqueID\" : \"" <<
+                     (m_extUniqueID ? "true" : "false") << "\"," << endl;
+      IndentJSONFile(indent + 2, jsonOutFile);
+      jsonOutFile << "\"dupCnt\" : \"" << m_dupCnt << "\"," << endl;
       for(auto itr: m_linksVect)
       {
          IndentJSONFile(indent + 2, jsonOutFile);
@@ -270,6 +278,8 @@ const string kDateStr("date");
 const string kTimeStr("time");
 const string kExpandStr("expand");
 const string kUniqueIDStr("uniqueID");
+const string kExtUniqueID("extUniqueID");
+const string kDupCnt("dupCnt");
 const string kLinkStr("link");
 const string kTrueStr("true");
 const string kFalseStr("false");
@@ -333,6 +343,14 @@ bool TreeNode::LoadPTree(ptree& pTree)
             m_uniqueID = strtoul(value.c_str(), NULL, 0);
             m_maxUniqueID = (
                   m_maxUniqueID > m_uniqueID ? m_maxUniqueID : m_uniqueID + 1);
+         }
+         else if(str == kExtUniqueID)
+         {
+            m_extUniqueID = false;
+         }
+         else if(str == kDupCnt)
+         {
+            m_dupCnt = strtoul(value.c_str(), NULL, 0);
          }
          else if(str == kLinkStr)
          {
@@ -417,6 +435,13 @@ void TreeNode::SetExpandState(bool expand)
 void TreeNode::AddLinkStr(const string& newLinkStr)
 {
    m_linksVect.push_back(newLinkStr);
+}
+
+void TreeNode::SetUniqueID(unsigned long uniqueID)
+{
+   m_uniqueID = uniqueID;
+   m_extUniqueID = true;
+   m_dupCnt = 0;
 }
 
 bool TreeNode::ReadStrAtRow(size_t row, string& rowStr) const
@@ -525,7 +550,9 @@ void TreeNode::SetEqualTo(const TreeNode& rhs)
    m_date            = rhs.m_date;
    m_time            = rhs.m_time;
    m_expanded        = rhs.m_expanded;
-   m_uniqueID        = m_maxUniqueID++;
+   m_uniqueID        = rhs.m_uniqueID;
+   m_extUniqueID     = rhs.m_extUniqueID;
+   m_dupCnt          = rhs.m_dupCnt + 1;
    m_linksVect       = rhs.m_linksVect;
    m_childrenVect    = rhs.m_childrenVect;
 }

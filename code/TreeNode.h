@@ -67,7 +67,8 @@ typedef deque<size_t> TNodeLocationDeque;
 class TreeNode
 {
 public:
-   TreeNode(const string& newItemStr, TreeNode* parentNode = nullptr);
+   TreeNode(const string& newItemStr, TreeNode* parentNode = nullptr,
+            unsigned long uniqueID = 0);
    virtual ~TreeNode();
    TreeNode(const TreeNode& rhs);
    TreeNode& operator=(const TreeNode& rhs);
@@ -112,6 +113,7 @@ public:
          EnumTargetNode node = kParentNode);
    void SetExpandState(bool expand);
    void AddLinkStr(const string& newLinkStr);
+   void SetUniqueID(unsigned long uniqueID);
 
    // ACCESSORS
    bool ReadStrAtRow(size_t row, string& rowStr) const;
@@ -142,6 +144,8 @@ private:
    ptime                   m_time;
    bool                    m_expanded;
    unsigned long           m_uniqueID;
+   bool                    m_extUniqueID;    // true iff uID set externally
+   unsigned int            m_dupCnt;
    TStrVect                m_linksVect;
    TTreeNodeVect           m_childrenVect;
 };
