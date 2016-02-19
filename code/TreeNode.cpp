@@ -285,7 +285,6 @@ bool TreeNode::LoadPTree(ptree& pTree)
       bool childName(0 < objItr.second.data().size());
       bool children(0 < objItr.second.size());
 
-      const string& firstStr = objItr.first;
       if(first && childName && !children)
       {
          const string str(objItr.first);
@@ -331,7 +330,6 @@ bool TreeNode::LoadPTree(ptree& pTree)
          }
          else if(str == kUniqueIDStr)
          {
-            unsigned long tmp = strtoul(value.c_str(), NULL, 0);
             m_uniqueID = strtoul(value.c_str(), NULL, 0);
             m_maxUniqueID = (
                   m_maxUniqueID > m_uniqueID ? m_maxUniqueID : m_uniqueID + 1);

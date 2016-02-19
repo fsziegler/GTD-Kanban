@@ -45,7 +45,7 @@ Q_SIGNALS:
 protected:
    // Event handlers
    virtual void paintEvent(QPaintEvent* event);
-   virtual void contextMenuEvent(QContextMenuEvent* event);
+   virtual void contextMenuEvent(QContextMenuEvent*);
    virtual void keyPressEvent(QKeyEvent *event);
    virtual void resizeEvent(QResizeEvent *event);
 

@@ -37,8 +37,6 @@ public:
    void MoveFromListToTree(QList<QListWidgetItem*> itemSelectionList,
                            const QString& nodeNameStr);
    void MoveFromGTDBasketListToTree(const QString& nodeNameStr);
-   void MoveFromGTDBasketListToTree(const QString& itemNameStr,
-                                    const QString& nodeNameStr);
    void ClearWorkspace();
    void SetFocusInTextEdit();
    void SetFocusInListWidget();

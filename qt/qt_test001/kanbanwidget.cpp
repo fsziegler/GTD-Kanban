@@ -210,7 +210,7 @@ void KanbanWidget::paintEvent(QPaintEvent *pntEvent)
    }
 }
 
-void KanbanWidget::contextMenuEvent(QContextMenuEvent* event)
+void KanbanWidget::contextMenuEvent(QContextMenuEvent*)
 {
    QMenu* menu = new QMenu(this);
    size_t first(kEditItem);

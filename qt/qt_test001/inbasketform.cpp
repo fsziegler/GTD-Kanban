@@ -140,31 +140,6 @@ void InBasketForm::MoveFromGTDBasketListToTree(const QString& nodeNameStr)
    MoveFromListToTree(itemSelectionList, nodeNameStr);
 }
 
-void InBasketForm::MoveFromGTDBasketListToTree(const QString& itemNameStr,
-      const QString& nodeNameStr)
-{
-   QList<QListWidgetItem*> itemSelectionList = mp_inBasketForm
-         ->inBasketListWidget->selectedItems();
-   for (auto itr = itemSelectionList.begin(); itr != itemSelectionList.end();
-         ++itr)
-   {
-      // Store and pass back the row so it can be used to ID the node to move
-      const QString rowStr((*itr)->text());
-      if (rowStr == itemNameStr)
-      {
-         const int row = mp_inBasketForm->inBasketListWidget->row((*itr));
-         string stdRowStr;
-         UserData::getInst().ReadStrAtRow(EnumGTDCategory::kInBasket,
-                                          row, stdRowStr);
-         assert(stdRowStr == rowStr.toStdString());
-         mp_inBasketForm->inBasketListWidget->takeItem(
-            mp_inBasketForm->inBasketListWidget->row((*itr)));
-         UserData::getInst().MoveNthStrBetweenCategories(stdRowStr,
-               EnumGTDCategory::kInBasket, EnumGTDCategory::kMoveQueue, row);
-      }
-   }
-}
-
 void InBasketForm::ClearWorkspace()
 {
    mp_inBasketForm->inBasketTextEdit->clear();

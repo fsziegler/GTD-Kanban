@@ -50,7 +50,7 @@ void KanbanCalendarDialog::RemoveSelectedItem(QListWidgetItem* itemToRemove)
       if (itemToRemove->text() == (*itr)->text())
       {
          int row = ui->listWidget->row((*itr));
-         QListWidgetItem* itemRemoved = ui->listWidget->takeItem(row);
+         ui->listWidget->takeItem(row);
          return;
       }
    }

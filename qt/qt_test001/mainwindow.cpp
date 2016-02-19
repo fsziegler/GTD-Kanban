@@ -157,10 +157,6 @@ bool MainWindow::LoadFromFile(const QString& jsonFileName)
    mp_inBasketForm->getGTDListWidget()->clear();
    mp_kanbanWindow->Clear();
 
-   QList<KanbanTask*>& readyList = mp_kanbanWindow->getReadyList();
-   QList<KanbanTask*>& doingList = mp_kanbanWindow->getDoingList();
-   QList<KanbanTask*>& doneList = mp_kanbanWindow->getDoneList();
-
    for (auto itr : UserData::getInst().getGtdNodeTree()) //Possible race condition here
    {
       const QString nodeNameStr(
@@ -346,7 +342,6 @@ void MainWindow::CheckDirty(const QString& newTitle, const QString& newText)
          exitDlg.SetLabelText(newText);
       }
       exitDlg.exec();
-      QDialogButtonBox::StandardButton btn = exitDlg.ReadButton();
       switch(exitDlg.ReadButton())
       {
       case QDialogButtonBox::Yes:

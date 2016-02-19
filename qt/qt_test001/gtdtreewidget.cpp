@@ -219,28 +219,6 @@ bool GTDTreeWidget::AreTWIsEqual(const QTreeWidgetItem* lhs,
    return (visualItemRect(lhs) == visualItemRect(rhs));
 }
 
-void GTDTreeWidget::mousePressEvent(QMouseEvent* event)
-{
-   if (event->button() == Qt::LeftButton)
-//        && mp_inBasketForm->inBasketTextEdit->geometry().contains(event->pos())) {
-   {
-      QPoint pos = event->pos();
-      const QTreeWidgetItem& item = *itemAt(pos.x(), pos.y());
-//        const QString itemStr = item.text(0);
-
-      QDrag* drag = new QDrag(this);
-      QMimeData* mimeData = new QMimeData;
-
-//        mimeData->setText(commentEdit->toPlainText());
-      drag->setMimeData(mimeData);
-//        drag->setPixmap(iconPixmap);
-
-//        Qt::DropAction dropAction = drag->exec();
-//        ...
-   }
-   QTreeWidget::mousePressEvent(event);
-}
-
 void GTDTreeWidget::keyPressEvent(QKeyEvent* event)
 {
    if(nullptr != mp_editItem)

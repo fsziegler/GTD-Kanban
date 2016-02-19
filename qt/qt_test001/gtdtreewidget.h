@@ -42,7 +42,6 @@ protected:
 Q_SIGNALS:
 protected:
    // Event handlers
-   virtual void mousePressEvent(QMouseEvent* event);
    virtual void keyPressEvent(QKeyEvent* event);
 protected:
    // SetTreeItemProperties() sets the flags, foreground, and font of treeItem.
