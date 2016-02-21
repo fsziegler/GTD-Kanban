@@ -113,9 +113,9 @@ Third, **make it fast** by
 You may iterate through the second and third phases any number of times as your refine your product.
 
 ####Reliable, Maintainable, Scalable
-`"Rational behavior requires theory. Reactive behavior requires only reflex action"`
+`“Build to a standard, not a price.”`
 
-`--W. Edwards Deming`
+`--Henry E. Steinway`
 
 Endeavour to make your products reliable, maintainable, and scalable. All three of these will result naturally from the following good design practices.
 
